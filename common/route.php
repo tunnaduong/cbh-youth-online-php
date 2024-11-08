@@ -1,7 +1,8 @@
 <?php
 
-use Phroute\Phroute\RouteCollector;
+use App\Controllers\HomeController;
 use App\Controllers\AuthController;
+use Phroute\Phroute\RouteCollector;
 
 $url = !isset($_GET['url']) ? "/" : $_GET['url'];
 try {
@@ -19,6 +20,7 @@ try {
     // khu vực cần quan tâm -----------
     $router->any('/login', [AuthController::class, 'login']);
     $router->get('/logout', [AuthController::class, 'logout']);
+    $router->get('/', [HomeController::class, 'index']);
     # NB. You can cache the return value from $router->getData() so you don't have to create the routes each request - massive speed gains
     $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 
