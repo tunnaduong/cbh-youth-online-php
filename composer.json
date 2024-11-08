@@ -1,0 +1,18 @@
+{
+  "name": "tunnaduong/cbhyouthonline",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Team 3 - WD19301",
+      "email": "cbhyouthonline@gmail.com"
+    }
+  ],
+  "require": {
+    "phroute/phroute": "^2.2",
+    "eftec/bladeone": "^4.13"
+  }
+}
