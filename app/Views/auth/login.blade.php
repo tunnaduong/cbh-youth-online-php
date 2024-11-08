@@ -1,11 +1,11 @@
-<body class="bg-[#F8F8F8]">
+@extends('layouts.index')
+
+@section('content')
     <div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
         <div class="rounded-xl border bg-card text-card-foreground shadow w-full max-w-md">
             <div class="flex flex-col p-6 space-y-4 text-center">
-                <div class="flex gap-x-1 items-center justify-center"><img alt="CYO's Logo" loading="lazy" width="120"
-                        height="120" decoding="async" data-nimg="1" class="w-12 h-12" style="color:transparent"
-                        srcset="/_next/image?url=%2Fimages%2Flogo.png&amp;w=128&amp;q=75 1x, /_next/image?url=%2Fimages%2Flogo.png&amp;w=256&amp;q=75 2x"
-                        src="/_next/image?url=%2Fimages%2Flogo.png&amp;w=256&amp;q=75">
+                <div class="flex gap-x-1 items-center justify-center">
+                    <img alt="CYO's Logo" width="50" src="/assets/images/logo.png">
                     <div class="text-[18px] text-left font-light text-[#319527] leading-5">
                         <h1 class="font-light">Thanh niên</h1>
                         <h1 class="font-bold">Chuyên Biên Hòa Online</h1>
@@ -15,7 +15,7 @@
             <div class="p-6 pt-0">
                 <!-- if error then show -->
                 @unless (empty($error))
-                    <div class="alert alert-danger mt-4" role="alert">
+                    <div class="alert alert-danger text-sm" role="alert">
                         {{ $error }}
                     </div>
                 @endunless
@@ -64,4 +64,4 @@
             </div>
         </div>
     </div>
-</body>
+@endsection

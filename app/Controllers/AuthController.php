@@ -9,6 +9,11 @@ class AuthController extends BaseController
 {
     public function login()
     {
+        if (isset($_SESSION['user'])) {
+            header("Location: /");
+            exit;
+        }
+
         $error = "";
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $username = $_POST['username'];
@@ -22,7 +27,7 @@ class AuthController extends BaseController
                 header("Location: /");
                 exit;
             } else {
-                $error = "Login failed";
+                $error = "Tên đăng nhập hoặc mật khẩu sai!";
             }
         }
 
@@ -31,7 +36,7 @@ class AuthController extends BaseController
 
     public function register()
     {
-        if (isset($_POST['register'])) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $username = $_POST['username'];
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $email = $_POST['email'];
@@ -59,7 +64,7 @@ class AuthController extends BaseController
     public function logout()
     {
         unset($_SESSION['user']);
-        header("Location: /");
+        header("Location: /login");
         exit;
     }
 }

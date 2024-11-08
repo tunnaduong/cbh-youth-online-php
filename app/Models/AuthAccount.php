@@ -13,11 +13,11 @@ class AuthAccount extends BaseModel
         parent::__construct();
     }
 
-    public function checkLogin($username, $password)
+    public function checkLogin($usernameOrEmail, $password)
     {
-        // Retrieve the user record based on the username
-        $this->setQuery("SELECT * FROM $this->table WHERE username = ?");
-        $user = $this->loadRow([$username]);
+        // Retrieve the user record based on the username or email
+        $this->setQuery("SELECT * FROM $this->table WHERE username = ? OR email = ?");
+        $user = $this->loadRow([$usernameOrEmail, $usernameOrEmail]);
 
         // Check if user exists and verify the password
         if ($user && password_verify($password, $user->password)) {
