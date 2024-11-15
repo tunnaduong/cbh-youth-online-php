@@ -3,4 +3,4 @@
 @section('content')
 @endsection
 
-@section('communityActive', 'nav-active')
+@section('lookupActive', 'nav-active')

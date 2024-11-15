@@ -7,7 +7,10 @@
 
 <body>
     @include('includes.navbar')
-    @yield('content')
+    <div class="flex flex-row">
+        @include('includes.leftSidebar')
+        @yield('content')
+    </div>
     <script src="/assets/js/script.js"></script>
 </body>
 

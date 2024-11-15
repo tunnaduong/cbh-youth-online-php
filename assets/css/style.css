@@ -30,6 +30,7 @@ nav {
 .nav-item > a {
   transition: color 200ms;
   color: #4b5563;
+  border-bottom: 3px solid transparent;
 }
 
 .nav-item > a:hover {
@@ -37,7 +38,7 @@ nav {
 }
 
 .nav-active {
-  border-bottom: 3px solid #319527;
+  border-bottom: 3px solid #319527 !important;
   color: #319527 !important;
 }
 
@@ -104,4 +105,8 @@ input:disabled {
 
 .dropdown-item:active {
   background-color: #319527 !important;
+}
+
+*:focus {
+  outline: none;
 }

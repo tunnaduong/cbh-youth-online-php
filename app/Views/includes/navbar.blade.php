@@ -34,13 +34,13 @@
     </div>
     <div class="flex items-center gap-x-5">
         <div class="h-full items-center flex flex-row gap-x-3 relative nav-item">
-            <a class="lg:flex px-3 py-2 mr-5 hidden h-full items-center min-w-max text-center text-sm font-medium transition-colors duration-200 nav-active"
+            <a class="lg:flex px-3 py-2 mr-5 hidden h-full items-center min-w-max text-center text-sm font-medium transition-colors duration-200 @yield('communityActive')"
                 href="/">Cộng đồng</a>
-            <a class="lg:flex px-3 py-2 mr-5 hidden h-full items-center min-w-max text-center text-sm font-medium transition-colors duration-200"
+            <a class="lg:flex px-3 py-2 mr-5 hidden h-full items-center min-w-max text-center text-sm font-medium transition-colors duration-200 @yield('reportActive')"
                 href="/reports">Báo cáo</a>
-            <a class="lg:flex px-3 py-2 mr-5 hidden h-full items-center min-w-max text-center text-sm font-medium transition-colors duration-200"
+            <a class="lg:flex px-3 py-2 mr-5 hidden h-full items-center min-w-max text-center text-sm font-medium transition-colors duration-200 @yield('lookupActive')"
                 href="/lookup">Tra cứu</a>
-            <a class="lg:flex px-3 py-2 mr-5 hidden h-full items-center min-w-max text-center text-sm font-medium transition-colors duration-200"
+            <a class="lg:flex px-3 py-2 mr-5 hidden h-full items-center min-w-max text-center text-sm font-medium transition-colors duration-200 @yield('exploreActive')"
                 href="/explore">Khám phá</a>
         </div>
         @if (!isset($_SESSION['user']))
