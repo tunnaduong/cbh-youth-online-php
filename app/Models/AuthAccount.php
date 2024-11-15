@@ -53,18 +53,6 @@ class AuthAccount extends BaseModel
         return $this->execute([$password, $id]);
     }
 
-    public function changeRole($id, $role)
-    {
-        $this->setQuery("UPDATE $this->table SET role = ? WHERE id = ?");
-        return $this->execute([$role, $id]);
-    }
-
-    public function changeStatus($id, $status)
-    {
-        $this->setQuery("UPDATE $this->table SET status = ? WHERE id = ?");
-        return $this->execute([$status, $id]);
-    }
-
     public function getAll()
     {
         $this->setQuery("SELECT * FROM $this->table");
