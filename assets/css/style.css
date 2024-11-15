@@ -110,3 +110,15 @@ input:disabled {
 *:focus {
   outline: none;
 }
+
+.menu-border {
+  border: 2px solid #ececec !important;
+}
+
+input:placeholder-shown {
+  text-overflow: ellipsis;
+}
+
+a:hover {
+  color: inherit;
+}
