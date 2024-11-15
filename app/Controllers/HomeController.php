@@ -2,13 +2,22 @@
 
 namespace App\Controllers;
 
+use App\Models\Post;
 use App\Controllers\BaseController;
 
 class HomeController extends BaseController
 {
+    public $post;
+
+    public function __construct()
+    {
+        $this->post = new Post();
+    }
+
     public function index()
     {
-        return $this->render('home.index');
+        $posts = $this->post->newsfeed();
+        return $this->render('home.index', compact('posts'));
     }
 
     public function report()
