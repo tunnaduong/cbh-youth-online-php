@@ -71,10 +71,10 @@ class AuthAccount extends BaseModel
         return $this->execute();
     }
 
-    public function getById($id)
+    public function getByUsername($username)
     {
-        $this->setQuery("SELECT * FROM $this->table WHERE id = ?");
-        return $this->execute([$id]);
+        $this->setQuery("SELECT * FROM cyo_user_profiles WHERE profile_username = ?");
+        return $this->loadRow([$username]);
     }
 
     public function delete($id)

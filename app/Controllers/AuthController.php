@@ -23,6 +23,7 @@ class AuthController extends BaseController
             $user = $authAccount->checkLogin($username, $password);
 
             if ($user) {
+                $user->additional_info = $authAccount->getByUsername($user->username);
                 $_SESSION['user'] = $user;
                 header("Location: /");
                 exit;

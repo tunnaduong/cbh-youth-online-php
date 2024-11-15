@@ -97,3 +97,11 @@ nav {
 input:disabled {
   background-color: #fff;
 }
+
+.dropdown-item {
+  padding: 8px !important; /* Adjust padding as needed */
+}
+
+.dropdown-item:active {
+  background-color: #319527 !important;
+}
