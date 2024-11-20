@@ -45,11 +45,11 @@
                             tuần
                             trước</span>
                         <div class="flex flex-1 flex-row-reverse items-center text-gray-500">
-                            <span>381</span>
+                            <span>{{ $post->post_views }}</span>
                             <ion-icon class="text-xl mr-1 ml-2" name="eye-outline"></ion-icon>
                             <a class="flex flex-row-reverse items-center"
                                 href="/{{ $post->username }}/posts/{{ $post->post_id }}">
-                                <span>15+</span>
+                                <span>{{ $post->post_comments }}</span>
                                 <ion-icon class="text-xl mr-1" name="chatbox-outline"></ion-icon>
                             </a>
                         </div>
