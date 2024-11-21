@@ -46,7 +46,7 @@
         @if (!isset($_SESSION['user']))
             <div class="flex flex-row items-center gap-x-5 mr-4">
                 <a href="/login" class="hover:text-black">
-                    <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full" type="button"
+                    <span class="relative flex h-10 w-10 shrink-0 overflow-hidden border rounded-full" type="button"
                         id="radix-:R1qbtb:" aria-haspopup="menu" aria-expanded="false" data-state="closed">
                         <span class="flex h-full w-full items-center justify-center rounded-full bg-muted">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -94,8 +94,8 @@
                     <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full cursor-pointer"
                         type="button" id="radix-:rc:" aria-haspopup="menu" aria-expanded="false"
                         data-state="closed">
-                        <img class="aspect-square h-full w-full" alt="User"
-                            src="https://api.chuyenbienhoa.com/v1.0/users/{{ $_SESSION['user']->username }}/avatar">
+                        <img class="aspect-square h-full w-full border rounded-full" alt="User"
+                            src="{{ !empty($_SESSION['user']->additional_info->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $_SESSION['user']->username . '/avatar' : '/assets/images/placeholder-user.jpg' }}">
                     </span>
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">

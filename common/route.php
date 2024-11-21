@@ -1,9 +1,10 @@
 <?php
 
-use App\Controllers\HomeController;
 use App\Controllers\AuthController;
+use App\Controllers\HomeController;
 use App\Controllers\PostController;
 use Phroute\Phroute\RouteCollector;
+use App\Controllers\PostVoteController;
 
 $url = !isset($_GET['url']) ? "/" : $_GET['url'];
 try {
@@ -26,6 +27,7 @@ try {
     $router->get('/reports', [HomeController::class, 'report']);
     $router->get('/lookup', [HomeController::class, 'lookup']);
     $router->get('/explore', [HomeController::class, 'explore']);
+    $router->get('/api/vote', [PostVoteController::class, 'handleVote']);
     # NB. You can cache the return value from $router->getData() so you don't have to create the routes each request - massive speed gains
     $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 

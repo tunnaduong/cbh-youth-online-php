@@ -45,3 +45,108 @@ $(document).ready(function () {
   // Attach input event listeners to title and description fields
   $("#postTitle, #postDescription").on("input", toggleCreateButton);
 });
+
+// Select all elements you want to adjust
+const postContainers = document.querySelectorAll(".post-container"); // Replace with your actual selector
+
+function adjustMaxWidth() {
+  // Get the current window width
+  const windowWidth = window.innerWidth;
+
+  // Loop through each selected element and apply max-width based on the window width
+  postContainers.forEach((postContainer) => {
+    if (windowWidth < 768) {
+      postContainer.style.maxWidth = `${windowWidth - 45}px`;
+    } else {
+      postContainer.style.maxWidth = "679px";
+    }
+  });
+}
+
+// Initial check when the page loads
+adjustMaxWidth();
+
+// Listen for the resize event
+window.addEventListener("resize", adjustMaxWidth);
+
+// Select all upvote and downvote buttons
+const upvoteButtons = document.querySelectorAll(".upvote-button"); // Replace with your selector
+const downvoteButtons = document.querySelectorAll(".downvote-button"); // Replace with your selector
+
+// Function to handle voting
+async function handleVote(postId, voteType, currentUserVote) {
+  // Update UI immediately
+  //   if (voteType === "upvote") {
+  //     updateVoteUI(postId, 1, "upvote");
+  //   } else if (voteType === "downvote") {
+  //     updateVoteUI(postId, -1, "downvote");
+  //   }
+  try {
+    // If the user is clicking the same button they previously clicked, cancel the vote
+    if (currentUserVote === voteType) {
+      voteType = "none"; // Remove vote (un-vote)
+    }
+
+    // Call the API to update the vote count
+    const response = await fetch(
+      `/api/vote?post_id=${postId}&vote_type=${voteType}`
+    );
+
+    const result = await response.json();
+
+    if (response.ok) {
+      // Update UI based on response
+      updateVoteUI(postId, result.newVoteCount, result.userVote);
+    } else {
+      console.error(result.message);
+    }
+  } catch (error) {
+    console.error("Error voting:", error);
+  }
+}
+
+// Function to update the UI
+function updateVoteUI(postId, newVoteCount, userVote) {
+  // Find the elements for the specific post
+  const postElement = document.querySelector(`[data-post-id="${postId}"]`);
+  const voteCountElement = postElement.querySelector(".vote-count");
+  const upvoteButton = postElement.querySelector(".upvote-button");
+  const downvoteButton = postElement.querySelector(".downvote-button");
+
+  // Update the vote count display
+  voteCountElement.textContent = newVoteCount;
+
+  // Update the button styles based on the user's vote
+  if (userVote === "upvote") {
+    upvoteButton.classList.add("text-green-500");
+    downvoteButton.classList.remove("text-red-500");
+  } else if (userVote === "downvote") {
+    downvoteButton.classList.add("text-red-500");
+    upvoteButton.classList.remove("text-green-500");
+  } else {
+    // Clear styles if no vote
+    upvoteButton.classList.remove("text-green-500");
+    downvoteButton.classList.remove("text-red-500");
+  }
+}
+
+// Add event listeners to upvote and downvote buttons
+upvoteButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const postId = button.closest("[data-post-id]").dataset.postId;
+    const currentUserVote = button.classList.contains("text-green-500")
+      ? "upvote"
+      : "none";
+    handleVote(postId, "upvote", currentUserVote);
+  });
+});
+
+downvoteButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const postId = button.closest("[data-post-id]").dataset.postId;
+    const currentUserVote = button.classList.contains("text-red-500")
+      ? "downvote"
+      : "none";
+    handleVote(postId, "downvote", currentUserVote);
+  });
+});
