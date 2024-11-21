@@ -2,6 +2,12 @@
   font-family: "Inter", sans-serif;
 }
 
+* {
+  --shadow-1: rgba(0, 0, 0, 0.1);
+  --shadow-2: rgba(0, 0, 0, 0.2);
+  --shadow-inset: rgba(255, 255, 255, 0.5);
+}
+
 .search-btn {
   transition: background-color 200ms;
   border: #f0f0f0 solid 2px;
@@ -75,7 +81,7 @@ nav {
 
 .modal-content {
   background-color: #fefefe;
-  max-width: 350px;
+  max-width: 450px;
   width: 100%;
   border-radius: 10px;
   box-shadow: 0 12px 28px 0 var(--shadow-2), 0 2px 4px 0 var(--shadow-1),

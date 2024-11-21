@@ -1,13 +1,24 @@
+@php
+    use Carbon\Carbon;
+@endphp
+
 @extends('layouts.home')
 
 @section('content')
     <div class="flex flex-col items-center w-full flex-1 p-2 pt-4">
         @foreach ($posts as $post)
+            @php
+                // Create a Carbon instance from the given datetime
+                $date = Carbon::createFromFormat('Y-m-d H:i:s', $post->post_created_at);
+
+                // Set the locale to Vietnamese (for "1 tuần trước")
+                Carbon::setLocale('vi');
+            @endphp
             <div data-post-id="{{ $post->post_id }}"
                 class="w-full mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row md:max-w-[679px]">
                 <div class="min-w-[84px] items-center mt-1 flex-col flex ml-[-20px] text-[13px] font-semibold text-gray-400">
                     <ion-icon name="arrow-up-outline" class="text-3xl cursor-pointer"></ion-icon>
-                    <span class="select-none text-lg">3</span>
+                    <span class="select-none text-lg">{{ $post->post_votes }}</span>
                     <ion-icon name="arrow-down-outline" class="text-3xl cursor-pointer"></ion-icon>
                     <div
                         class="bg-[#EAEAEA] cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
@@ -38,18 +49,15 @@
                         </a>
                         <span class="text-gray-500 hidden md:block ml-2">Đăng bởi</span>
                         <a class="ml-2 md:ml-1 text-[#319527] hover:text-[#319527] font-bold"
-                            href="/{{ $post->username }}">Tùng A
-                            Dính</a>
+                            href="/{{ $post->username }}">{{ $post->profile_name }}</a>
                         <span class="mb-2 ml-0.5 text-sm text-gray-500">.</span>
-                        <span class="ml-0.5 text-gray-500">1
-                            tuần
-                            trước</span>
+                        <span class="ml-0.5 text-gray-500">{{ $date->diffForHumans() }}</span>
                         <div class="flex flex-1 flex-row-reverse items-center text-gray-500">
-                            <span>381</span>
+                            <span>{{ $post->post_views }}</span>
                             <ion-icon class="text-xl mr-1 ml-2" name="eye-outline"></ion-icon>
                             <a class="flex flex-row-reverse items-center"
                                 href="/{{ $post->username }}/posts/{{ $post->post_id }}">
-                                <span>15+</span>
+                                <span>{{ $post->post_comments }}</span>
                                 <ion-icon class="text-xl mr-1" name="chatbox-outline"></ion-icon>
                             </a>
                         </div>

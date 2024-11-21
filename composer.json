@@ -13,6 +13,7 @@
   ],
   "require": {
     "phroute/phroute": "^2.2",
-    "eftec/bladeone": "^4.13"
+    "eftec/bladeone": "^4.13",
+    "nesbot/carbon": "^3.8"
   }
 }

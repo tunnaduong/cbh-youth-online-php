@@ -2,6 +2,7 @@
 
 use App\Controllers\HomeController;
 use App\Controllers\AuthController;
+use App\Controllers\PostController;
 use Phroute\Phroute\RouteCollector;
 
 $url = !isset($_GET['url']) ? "/" : $_GET['url'];
@@ -21,6 +22,7 @@ try {
     $router->any('/login', [AuthController::class, 'login']);
     $router->get('/logout', [AuthController::class, 'logout']);
     $router->get('/', [HomeController::class, 'index']);
+    $router->post('/', [PostController::class, 'addNewPost']);
     $router->get('/reports', [HomeController::class, 'report']);
     $router->get('/lookup', [HomeController::class, 'lookup']);
     $router->get('/explore', [HomeController::class, 'explore']);

@@ -14,6 +14,10 @@
         </div>
         @include('includes.rightSidebar')
     </div>
+    @include('includes.createPostModal')
+    <script>
+        var isLoggedIn = {{ isset($_SESSION['user']) ? 'true' : 'false' }};
+    </script>
     <script src="/assets/js/script.js"></script>
 </body>
 
