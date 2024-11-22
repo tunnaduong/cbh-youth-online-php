@@ -60,14 +60,35 @@
                         <h1 class="text-xl font-semibold mb-1 max-w-[600px] truncate">{{ $post->title }}</h1>
                     </a>
                     <div class="text-base max-w-[600px] overflow-wrap">
-                        <div id="truncated" style="display: block;">
-                            <span>{!! nl2br(truncateText($post->description, 500)) !!}</span>
-                            @if (strlen($post->description) > 500)
-                                <a class="text-black cursor-pointer hover:underline font-medium" onclick="toggleText()">Xem
+                        <div id="truncated{{ $post->post_id }}" style="display: block;">
+                            <span>{!! nl2br(truncateText($post->description, 330)) !!}</span>
+                            @if (strlen($post->description) > 330)
+                                <a class="text-black cursor-pointer hover:underline font-medium"
+                                    onclick="toggleText{{ $post->post_id }}()">Xem
                                     thêm</a>
                             @endif
                         </div>
+                        <div id="fullText{{ $post->post_id }}" style="display: none;">
+                            <span>{!! nl2br($post->description) !!} </span>
+                            <a class="text-black cursor-pointer hover:underline font-medium"
+                                onclick="toggleText{{ $post->post_id }}()">Thu
+                                gọn</a>
+                        </div>
                     </div>
+                    <script>
+                        function toggleText{{ $post->post_id }}() {
+                            const truncated = document.getElementById('truncated{{ $post->post_id }}');
+                            const fullText = document.getElementById('fullText{{ $post->post_id }}');
+
+                            if (truncated.style.display === "none") {
+                                truncated.style.display = "block";
+                                fullText.style.display = "none";
+                            } else {
+                                truncated.style.display = "none";
+                                fullText.style.display = "block";
+                            }
+                        }
+                    </script>
                     @unless (!isset($post->cdn_image_id))
                         <div
                             class="rounded-md bg-[#E4EEE3] border overflow-hidden !mt-4 max-h-[34rem] flex items-center justify-center">

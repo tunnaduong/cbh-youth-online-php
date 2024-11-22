@@ -25,11 +25,11 @@ function openModal() {
   });
 }
 
+var createButton = $("#createPostButton");
 // Enable/disable the create button based on input values
 function toggleCreateButton() {
   var title = $("#postTitle").val().trim();
   var description = $("#postDescription").val().trim();
-  var createButton = $("#createPostButton");
 
   if (title && description) {
     createButton.prop("disabled", false);
@@ -256,6 +256,9 @@ document
     const imageFile = document.getElementById("fileInput").files[0];
 
     try {
+      createButton.prop("disabled", true);
+      createButton.text("Đang đăng bài viết...");
+
       // Step 1: Upload the image and get the image path
       // check if image file is selected
       if (imageFile) {

@@ -32,4 +32,11 @@ class PostController extends BaseController
             echo json_encode(["status" => "error", "message" => "Failed to increment view count."]);
         }
     }
+
+    public function postDetail($username, $postId)
+    {
+        $post = $this->post->getPostDetail($postId);
+        $comments = $this->post->getComments($postId);
+        return $this->render('post.index', compact('post', 'comments'));
+    }
 }
