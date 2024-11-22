@@ -23,4 +23,11 @@ class Post extends BaseModel
             date('Y-m-d H:i:s')
         ]);
     }
+
+    public function incrementViewCount($postId)
+    {
+        // Increment the view count for the specific post
+        $this->setQuery("INSERT INTO cyo_topic_views (topic_id, user_id, created_at) VALUES (?, ?, ?)");
+        return $this->execute([$postId, $_SESSION['user']->id, date('Y-m-d H:i:s')]);
+    }
 }

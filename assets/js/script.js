@@ -94,6 +94,10 @@ async function handleVote(postId, voteType, currentUserVote) {
 
     const result = await response.json();
 
+    if (response.status === 401) {
+      window.location.href = "/login";
+    }
+
     if (response.ok) {
       // Update UI based on response
       updateVoteUI(postId, result.newVoteCount, result.userVote);
@@ -120,13 +124,19 @@ function updateVoteUI(postId, newVoteCount, userVote) {
   if (userVote === "upvote") {
     upvoteButton.classList.add("text-green-500");
     downvoteButton.classList.remove("text-red-500");
+    voteCountElement.classList.add("text-green-500");
+    voteCountElement.classList.remove("text-red-500");
   } else if (userVote === "downvote") {
     downvoteButton.classList.add("text-red-500");
     upvoteButton.classList.remove("text-green-500");
+    voteCountElement.classList.add("text-red-500");
+    voteCountElement.classList.remove("text-green-500");
   } else {
     // Clear styles if no vote
     upvoteButton.classList.remove("text-green-500");
     downvoteButton.classList.remove("text-red-500");
+    voteCountElement.classList.remove("text-green-500");
+    voteCountElement.classList.remove("text-red-500");
   }
 }
 
@@ -148,5 +158,65 @@ downvoteButtons.forEach((button) => {
       ? "downvote"
       : "none";
     handleVote(postId, "downvote", currentUserVote);
+  });
+});
+
+document.querySelectorAll(".save-post-button").forEach((button) => {
+  button.addEventListener("click", async () => {
+    if (!isLoggedIn) {
+      window.location.href = "/login";
+    }
+
+    const postId = button.closest("[data-post-id]").dataset.postId;
+
+    try {
+      const response = await fetch(`/api/posts/${postId}/toggle-save`);
+
+      const result = await response.json();
+      if (result.status === "saved") {
+        button.classList.add("bg-[#CDEBCA]");
+        button.querySelector("ion-icon").classList.add("text-green-500");
+        button.classList.remove("bg-[#EAEAEA]");
+        button.querySelector("ion-icon").classList.remove("text-gray-400");
+      } else {
+        button.classList.remove("bg-[#CDEBCA]");
+        button.querySelector("ion-icon").classList.remove("text-green-500");
+        button.classList.add("bg-[#EAEAEA]");
+        button.querySelector("ion-icon").classList.add("text-gray-400");
+      }
+    } catch (error) {
+      console.error("Error toggling save status:", error);
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const posts = document.querySelectorAll(".post-container");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const postId = entry.target.getAttribute("data-post-id");
+          fetch(`/api/posts/${postId}/increment-view`)
+            .then((response) => {
+              if (!response.ok) {
+                console.error("Failed to increment post view");
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.5,
+    }
+  );
+
+  posts.forEach((post) => {
+    observer.observe(post);
   });
 });

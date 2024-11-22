@@ -18,6 +18,18 @@ class PostController extends BaseController
     {
         $this->post->addNewPost();
         $posts = $this->post->newsfeed();
+        header('Location: /');
         return $this->render('home.index', compact('posts'));
+    }
+
+    public function incrementView($postId)
+    {
+        $success = $this->post->incrementViewCount($postId);
+
+        if ($success) {
+            echo json_encode(["status" => "success", "message" => "View count incremented."]);
+        } else {
+            echo json_encode(["status" => "error", "message" => "Failed to increment view count."]);
+        }
     }
 }
