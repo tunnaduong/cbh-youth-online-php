@@ -24,20 +24,22 @@
                     </button>
                 </div>
             </div>
-            <form action="" method="POST" class="space-y-4 px-3 pb-3">
+            <form action="" id="createPostForm" method="POST" class="space-y-4 px-3 pb-3">
                 <input id="postTitle"
                     class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 focus-visible:ring-0"
                     placeholder="Tiêu đề bài viết" name="title" type="text" value="">
                 <textarea id="postDescription"
                     class="flex w-full rounded-md border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 min-h-[120px] border focus-visible:ring-0"
                     name="content" placeholder="Nội dung bài viết"></textarea>
+                <img id="imagePreview" alt="Preview" class="border rounded-md hidden"
+                    style="width: 100px; height: 100px; object-fit: cover" />
                 <div class="flex flex-row items-center rounded-lg border bg-card text-card-foreground p-3">
                     <p class="text-sm font-medium flex-1">Thêm ảnh vào bài viết của bạn</p>
-                    <input accept="image/*" type="file" style="display: none;">
+                    <input id="fileInput" accept="image/*" type="file" style="display: none;">
                     <div class="flex gap-1">
                         <button
                             class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-9 w-9 shrink-0 rounded-full"
-                            type="button">
+                            type="button" id="selectImage">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-image h-5 w-5 text-emerald-500">

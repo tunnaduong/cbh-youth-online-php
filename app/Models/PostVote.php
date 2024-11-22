@@ -23,8 +23,8 @@ class PostVote extends BaseModel
             return $this->execute([$voteType == "upvote" ? 1 : -1, $postId, $userId]);
         } else {
             // Insert new vote
-            $this->setQuery("INSERT INTO cyo_topic_votes (topic_id, user_id, vote_value) VALUES (?, ?, ?)");
-            return $this->execute([$postId, $userId, $voteType == "upvote" ? 1 : -1]);
+            $this->setQuery("INSERT INTO cyo_topic_votes (topic_id, user_id, vote_value, created_at, updated_at) VALUES (?, ?, ?, ?, ?)");
+            return $this->execute([$postId, $userId, $voteType == "upvote" ? 1 : -1, date('Y-m-d H:i:s'), date('Y-m-d H:i:s')]);
         }
     }
 

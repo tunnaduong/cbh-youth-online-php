@@ -1,5 +1,26 @@
 @php
     use Carbon\Carbon;
+
+    // Define a truncation function using mb_substr for multibyte encoding support
+    function truncateText($text, $length = 500)
+    {
+        // Ensure UTF-8 encoding is used for the substr operation
+        if (strlen($text) <= $length) {
+            return $text;
+        }
+        return mb_substr($text, 0, $length, 'UTF-8') . '...';
+    }
+
+    function roundToNearestFive($count)
+    {
+        if ($count <= 5) {
+            // If count is less than or equal to 5, format it with leading zero
+            return str_pad($count, 2, '0', STR_PAD_LEFT);
+        } else {
+            // Round down to the nearest multiple of 5 and pad to 2 digits
+            return str_pad(floor($count / 5) * 5, 2, '0', STR_PAD_LEFT);
+        }
+    }
 @endphp
 
 @extends('layouts.home')
@@ -39,7 +60,13 @@
                         <h1 class="text-xl font-semibold mb-1 max-w-[600px] truncate">{{ $post->title }}</h1>
                     </a>
                     <div class="text-base max-w-[600px] overflow-wrap">
-                        <div>{!! nl2br($post->description) !!}</div>
+                        <div id="truncated" style="display: block;">
+                            <span>{!! nl2br(truncateText($post->description, 500)) !!}</span>
+                            @if (strlen($post->description) > 500)
+                                <a class="text-black cursor-pointer hover:underline font-medium" onclick="toggleText()">Xem
+                                    thêm</a>
+                            @endif
+                        </div>
                     </div>
                     @unless (!isset($post->cdn_image_id))
                         <div
@@ -58,8 +85,18 @@
                             </span>
                         </a>
                         <span class="text-gray-500 hidden md:block ml-2">Đăng bởi</span>
-                        <a class="ml-2 md:ml-1 text-[#319527] hover:text-[#319527] font-bold"
-                            href="/{{ $post->username }}">{{ $post->profile_name }}</a>
+                        <a class="flex flex-row items-center ml-2 md:ml-1 text-[#319527] hover:text-[#319527] font-bold"
+                            href="/{{ $post->username }}">{{ $post->profile_name }}
+                            @if ($post->verified == 1)
+                                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20"
+                                    aria-hidden="true" class="text-base leading-5 ml-0.5" height="1em" width="1em"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            @endif
+                        </a>
                         <span class="mb-2 ml-0.5 text-sm text-gray-500">.</span>
                         <span class="ml-0.5 text-gray-500">{{ $date->diffForHumans() }}</span>
                         <div class="flex flex-1 flex-row-reverse items-center text-gray-500">
@@ -67,7 +104,7 @@
                             <ion-icon class="text-xl mr-1 ml-2" name="eye-outline"></ion-icon>
                             <a class="flex flex-row-reverse items-center"
                                 href="/{{ $post->username }}/posts/{{ $post->post_id }}">
-                                <span>{{ $post->post_comments }}</span>
+                                <span>{{ roundToNearestFive($post->post_comments) }}+</span>
                                 <ion-icon class="text-xl mr-1" name="chatbox-outline"></ion-icon>
                             </a>
                         </div>

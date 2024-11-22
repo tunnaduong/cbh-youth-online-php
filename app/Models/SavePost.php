@@ -16,8 +16,8 @@ class SavePost extends BaseModel
     // Save a post
     public function savePost($postId, $userId)
     {
-        $this->setQuery("INSERT INTO cyo_user_saved_topics (topic_id, user_id) VALUES (?, ?)");
-        return $this->execute([$postId, $userId]);
+        $this->setQuery("INSERT INTO cyo_user_saved_topics (topic_id, user_id, created_at, updated_at) VALUES (?, ?, ?, ?)");
+        return $this->execute([$postId, $userId, date('Y-m-d H:i:s'), date('Y-m-d H:i:s')]);
     }
 
     // Unsave a post

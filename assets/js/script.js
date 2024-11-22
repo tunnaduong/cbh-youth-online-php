@@ -220,3 +220,92 @@ document.addEventListener("DOMContentLoaded", function () {
     observer.observe(post);
   });
 });
+
+// Lấy các phần tử
+const customDiv = document.getElementById("selectImage");
+const fileInput = document.getElementById("fileInput");
+
+// Thêm sự kiện click vào div
+customDiv.addEventListener("click", function () {
+  // Kích hoạt sự kiện click của input file
+  fileInput.click();
+});
+
+// Thêm sự kiện để xử lý khi người dùng chọn tệp
+fileInput.addEventListener("change", function (e) {
+  console.log("File selected:", e.target.files[0]);
+  const file = e.target.files[0];
+  if (file) {
+    // Generate image preview
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      document.getElementById("imagePreview").src = reader.result;
+      document.getElementById("imagePreview").classList.remove("hidden");
+    }; // Set preview URL to file reader result
+    reader.readAsDataURL(file); // Read file as a data URL
+  }
+});
+
+document
+  .getElementById("createPostForm")
+  .addEventListener("submit", async function (event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+
+    const title = document.getElementById("postTitle").value;
+    const content = document.getElementById("postDescription").value;
+    const imageFile = document.getElementById("fileInput").files[0];
+
+    try {
+      // Step 1: Upload the image and get the image path
+      // check if image file is selected
+      if (imageFile) {
+        var imageId = await uploadImage(imageFile);
+      } else {
+        imageId = null;
+      }
+
+      // Step 2: Create the post with the uploaded image's path
+      await createPost(title, content, imageId);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+async function uploadImage(imageFile) {
+  const formData = new FormData();
+  formData.append("uid", uid);
+  formData.append("file", imageFile);
+
+  const response = await fetch("https://api.chuyenbienhoa.com/v1.0/upload", {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error("Image upload failed");
+  }
+
+  const data = await response.json();
+  return data.id;
+}
+
+async function createPost(title, content, imageId) {
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("content", content);
+  if (imageId) formData.append("imageId", imageId);
+
+  const response = await fetch("/", {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error("Post creation failed");
+  } else {
+    // Reload the page to see the new post
+    window.location.reload();
+  }
+
+  return true;
+}
