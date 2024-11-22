@@ -150,8 +150,40 @@
                                 <path d="m21.854 2.147-10.94 10.939"></path>
                             </svg>Gửi bình luận</button>
                     </form>
-                    <center class="text-sm text-gray-400">Không có bình luận nào cho bài viết này.<br>Hãy là người đầu tiên
-                        để lại ý kiến của bạn!</center>
+                    @if (count($comments) > 0)
+                        @foreach ($comments as $comment)
+                            <div class="gap-y-4 flex flex-col">
+                                <div class="flex space-x-4" style="zoom: 0.7;"><a href="/tunganh"><span
+                                            class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full"><img
+                                                src="/assets/images/placeholder-user.jpg"
+                                                class="flex h-full w-full items-center justify-center rounded-full bg-muted" /></span></a>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between"><a href="/tunganh">
+                                                <h4 class="text-sm font-semibold">Tun.</h4>
+                                            </a><span class="text-xs text-gray-500">2 tuần trước</span></div>
+                                        <p class="mt-1 text-sm text-gray-700">@tùng a dính</p>
+                                        <div class="mt-2 flex items-center space-x-2 text-gray-400"><svg
+                                                stroke="currentColor" fill="currentColor" stroke-width="0"
+                                                viewBox="0 0 512 512" class="cursor-pointer" height="1em"
+                                                width="1em" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="48" d="m112 244 144-144 144 144M256 120v292"></path>
+                                            </svg><span class="select-none text-sm font-semibold">0</span><svg
+                                                stroke="currentColor" fill="currentColor" stroke-width="0"
+                                                viewBox="0 0 512 512" class="cursor-pointer" height="1em"
+                                                width="1em" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="48" d="m112 268 144 144 144-144M256 392V100"></path>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        <center class="text-sm text-gray-400">Không có bình luận nào cho bài viết này.<br>Hãy là người đầu
+                            tiên
+                            để lại ý kiến của bạn!</center>
+                    @endif
                 </div>
             </div>
         </div>
