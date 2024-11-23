@@ -107,4 +107,10 @@ class AuthAccount extends BaseModel
         $this->setQuery("SELECT email_verified_at FROM cyo_auth_accounts WHERE id = ?");
         return $this->loadRow([$userId])->email_verified_at !== null;
     }
+
+    public function savePasswordResetToken($email, $token)
+    {
+        $this->setQuery("INSERT INTO password_reset_tokens (email, token, created_at) VALUES (?, ?, ?)");
+        return $this->execute([$email, $token, date('Y-m-d H:i:s')]);
+    }
 }

@@ -37,6 +37,8 @@ try {
     $router->get('/api/posts/{postId}/toggle-save', [SavePostController::class, 'toggleSavePost']);
     $router->get('/api/posts/{postId}/increment-view', [PostController::class, 'incrementView']);
     $router->get('/email/verify/{token}', [AuthController::class, 'verifyEmail']);
+    // $router->get('/email/resend', [AuthController::class, 'resendVerificationEmail']);
+    $router->any('/password/reset', [AuthController::class, 'forgotPassword']);
     // $router->get('/test/{email}/{token}', [AuthController::class, 'sendVerificationEmail']);
     # NB. You can cache the return value from $router->getData() so you don't have to create the routes each request - massive speed gains
     $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());

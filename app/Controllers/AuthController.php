@@ -101,7 +101,7 @@ class AuthController extends BaseController
 
                     $this->authAccount->saveVerificationToken($user->id, $token);
 
-                    $this->sendVerificationEmail($user->email, $token);
+                    $this->sendEmail($user->email, $token);
 
                     if ($user) {
                         $user->additional_info = $this->authAccount->getByUsername($user->username);
@@ -118,9 +118,13 @@ class AuthController extends BaseController
         return $this->render('auth.register', compact('error'));
     }
 
-    private function sendVerificationEmail($email, $token)
+    private function sendEmail($email, $token, $type = 'verify')
     {
-        $verificationLink = BASE_URL . "email/verify/" . $token;
+        if ($type == 'verify') {
+            $verificationLink = BASE_URL . "email/verify/" . $token;
+        } else {
+            $verificationLink = BASE_URL . "password/reset/" . $token;
+        }
 
         $mail = new PHPMailer(true);
         try {
@@ -148,9 +152,13 @@ class AuthController extends BaseController
 
             // Content
             $mail->isHTML(true);
-            $mail->Subject = 'Xác minh địa chỉ email của bạn';
-            $mail->Body    = 'Bấm vào <a href="' . $verificationLink . '">đây</a> để xác minh địa chỉ email của bạn. Đường liên kết này sẽ hết hạn trong 1 tiếng nữa nếu bạn không xác minh.<br /><br />Trân trọng,<br />Đội ngũ CBH Youth Online';
-
+            if ($type == 'verify') {
+                $mail->Subject = 'Xác minh địa chỉ email của bạn';
+                $mail->Body    = 'Bấm vào <a href="' . $verificationLink . '">đây</a> để xác minh địa chỉ email của bạn. Đường liên kết này sẽ hết hạn trong 1 tiếng nữa nếu bạn không xác minh.<br /><br />Trân trọng,<br />Đội ngũ CBH Youth Online';
+            } else {
+                $mail->Subject = 'Khôi phục mật khẩu';
+                $mail->Body    = 'Bấm vào <a href="' . $verificationLink . '">đây</a> để khôi phục mật khẩu của bạn. Đường liên kết này sẽ hết hạn trong 1 tiếng nữa nếu bạn không thực hiện.<br /><br />Trân trọng,<br />Đội ngũ CBH Youth Online';
+            }
             $mail->send();
         } catch (Exception $e) {
             echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -174,6 +182,40 @@ class AuthController extends BaseController
         } else {
             return $this->render('errors.verifyEmailFailed');
         }
+    }
+
+    public function forgotPassword()
+    {
+        $error = "";
+        $error_type = "danger";
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $email = $_POST['email'];
+
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $error = "Email không hợp lệ";
+                return $this->render('auth.forgotPassword', compact('error', 'error_type'));
+            }
+
+            $user = $this->authAccount->checkExistEmail($email);
+
+            if (!$user) {
+                $error = "Không tìm thấy tài khoản nào với địa chỉ email này";
+                return $this->render('auth.forgotPassword', compact('error', 'error_type'));
+            }
+
+            $token = bin2hex(random_bytes(32));
+
+            $this->authAccount->savePasswordResetToken($user->email, $token);
+
+            $this->sendEmail($user->email, $token, "reset");
+
+            $error_type = "success";
+            $error = "Một email đã được gửi đến địa chỉ email của bạn. Vui lòng kiểm tra hộp thư đến hoặc thư rác.";
+
+            return $this->render('auth.forgotPassword', compact('error', 'error_type'));
+        }
+
+        return $this->render('auth.forgotPassword', compact('error'));
     }
 
     public function logout()
