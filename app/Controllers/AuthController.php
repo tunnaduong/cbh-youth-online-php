@@ -143,7 +143,7 @@ class AuthController extends BaseController
             $mail->Encoding = 'base64';
 
             //Recipients
-            $mail->setFrom('noreply@chuyenbienhoa.com', 'Thanh niên Chuyên Biên Hòa Online');
+            $mail->setFrom(MAIL_USERNAME, 'Thanh niên Chuyên Biên Hòa Online');
             $mail->addAddress($email);
 
             // Content
