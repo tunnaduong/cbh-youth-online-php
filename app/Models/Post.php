@@ -44,7 +44,7 @@ class Post extends BaseModel
     public function getComments($postId)
     {
         $uid = $_SESSION['user']->id ?? 0;
-        $this->setQuery("SELECT ctc.created_at AS comment_created_at, ctc.*, ua.*, up.profile_name, up.verified, cup.profile_picture, COALESCE(vo.vote_sum, 0) AS comment_votes, CASE WHEN tcv.vote_value = 1 THEN 'upvote' WHEN tcv.vote_value = -1 THEN 'downvote' ELSE 'none' END AS user_vote FROM cyo_topic_comments ctc INNER JOIN cyo_auth_accounts ua ON ctc.user_id = ua.id INNER JOIN cyo_user_profiles up ON ua.id = up.auth_account_id LEFT JOIN cyo_user_profiles cup ON ua.id = cup.auth_account_id LEFT JOIN cyo_topic_comment_votes tcv ON ctc.id = tcv.comment_id AND tcv.user_id = $uid LEFT JOIN ( SELECT comment_id, SUM(vote_value) AS vote_sum FROM cyo_topic_comment_votes GROUP BY comment_id ) vo ON ctc.id = vo.comment_id WHERE ctc.topic_id = ? ORDER BY ctc.created_at DESC");
+        $this->setQuery("SELECT ctc.created_at AS comment_created_at, ctc.id AS comment_id, ctc.*, ua.*, up.profile_name, up.verified, cup.profile_picture, COALESCE(vo.vote_sum, 0) AS comment_votes, CASE WHEN tcv.vote_value = 1 THEN 'upvote' WHEN tcv.vote_value = -1 THEN 'downvote' ELSE 'none' END AS user_vote FROM cyo_topic_comments ctc INNER JOIN cyo_auth_accounts ua ON ctc.user_id = ua.id INNER JOIN cyo_user_profiles up ON ua.id = up.auth_account_id LEFT JOIN cyo_user_profiles cup ON ua.id = cup.auth_account_id LEFT JOIN cyo_topic_comment_votes tcv ON ctc.id = tcv.comment_id AND tcv.user_id = $uid LEFT JOIN ( SELECT comment_id, SUM(vote_value) AS vote_sum FROM cyo_topic_comment_votes GROUP BY comment_id ) vo ON ctc.id = vo.comment_id WHERE ctc.topic_id = ? ORDER BY ctc.created_at DESC");
         return $this->loadAllRows([$postId]);
     }
 

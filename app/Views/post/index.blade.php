@@ -133,23 +133,28 @@
                 <div
                     class="flex flex-col space-y-1.5 p-6 text-xl -mb-4 font-semibold max-w-sm overflow-hidden whitespace-nowrap overflow-ellipsis">
                     Bình luận</div>
-                <div class="p-6 pt-0">
-                    <form action="" method="POST" class="space-y-4 mb-7">
-                        <textarea
-                            class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                            name="comment" placeholder="Viết bình luận của bạn..."></textarea>
-                        <button
-                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 text-primary-foreground shadow h-9 px-4 py-2 w-full bg-green-600 hover:bg-green-700 text-white"
-                            type="submit">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-send mr-2 h-4 w-4">
-                                <path
-                                    d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z">
-                                </path>
-                                <path d="m21.854 2.147-10.94 10.939"></path>
-                            </svg>Gửi bình luận</button>
-                    </form>
+                <div class="p-6 pt-2">
+                    @if (isset($_SESSION['user']))
+                        <form action="" method="POST" class="space-y-4 mb-7">
+                            <textarea
+                                class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                                name="comment" required placeholder="Viết bình luận của bạn..."></textarea>
+                            <button
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 text-primary-foreground shadow h-9 px-4 py-2 w-full bg-green-600 hover:bg-green-700 text-white"
+                                type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-send mr-2 h-4 w-4">
+                                    <path
+                                        d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z">
+                                    </path>
+                                    <path d="m21.854 2.147-10.94 10.939"></path>
+                                </svg>Gửi bình luận</button>
+                        </form>
+                    @else
+                        <div class="text-base !mb-8"><a class="text-green-600" href="/login">Đăng nhập</a> để bình luận và
+                            tham gia thảo luận cùng cộng đồng.</div>
+                    @endif
                     @if (count($comments) > 0)
                         <div class="gap-y-4 flex flex-col">
                             @foreach ($comments as $comment)
@@ -160,29 +165,94 @@
                                     // Set the locale to Vietnamese (for "1 tuần trước")
                                     Carbon::setLocale('vi');
                                 @endphp
-                                <div class="flex space-x-4">
-                                    <a href="/tunganh">
+                                <div data-comment-id="{{ $comment->comment_id }}" class="flex space-x-4">
+                                    <a href="/{{ $comment->username }}">
                                         <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
                                             <img src="{{ !empty($comment->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $comment->username . '/avatar' : '/assets/images/placeholder-user.jpg' }}"
                                                 class="flex h-full w-full items-center justify-center rounded-full border" />
                                         </span>
                                     </a>
                                     <div class="flex-1">
-                                        <div class="flex items-center justify-between"><a href="/tunganh">
+                                        <div class="flex items-center justify-between"><a href="/{{ $comment->username }}">
                                                 <h4 class="text-sm font-semibold">{{ $comment->profile_name }}</h4>
                                             </a><span class="text-xs text-gray-500">{{ $date->diffForHumans() }}</span>
                                         </div>
                                         <p class="mt-1 text-sm text-gray-700">{{ $comment->comment }}</p>
                                         <div class="mt-2 flex items-center space-x-2 text-gray-400">
                                             <ion-icon name="arrow-up-outline"
-                                                class="upvote-button cursor-pointer {{ $comment->user_vote === 'upvote' ? 'text-green-500' : '' }}"></ion-icon>
+                                                class="comment-upvote-button cursor-pointer {{ $comment->user_vote === 'upvote' ? 'text-green-500' : '' }}"></ion-icon>
                                             <span
-                                                class="select-none text-sm font-semibold {{ $comment->user_vote == 'upvote' ? 'text-green-500' : ($comment->user_vote == 'downvote' ? 'text-red-500' : '') }}">{{ $comment->comment_votes }}</span>
+                                                class="vote-count select-none text-sm font-semibold {{ $comment->user_vote == 'upvote' ? 'text-green-500' : ($comment->user_vote == 'downvote' ? 'text-red-500' : '') }}">{{ $comment->comment_votes }}</span>
                                             <ion-icon name="arrow-down-outline"
-                                                class="downvote-button cursor-pointer {{ $comment->user_vote === 'downvote' ? 'text-red-500' : '' }}"></ion-icon>
+                                                class="comment-downvote-button cursor-pointer {{ $comment->user_vote === 'downvote' ? 'text-red-500' : '' }}"></ion-icon>
                                             <span>·</span>
-                                            <span class="cursor-pointer text-sm font-semibold">Trả lời</span>
+                                            <span class="reply-comment cursor-pointer text-sm font-semibold">Trả lời</span>
                                         </div>
+                                        <form action="" method="POST" class="reply-box hidden mt-2">
+                                            <textarea
+                                                class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                                                name="comment" required placeholder="Viết phản hồi của bạn..."></textarea>
+                                            <input type="hidden" name="replyingTo" value="{{ $comment->comment_id }}">
+                                            <button
+                                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 text-primary-foreground shadow h-9 px-4 py-2 w-full bg-green-600 hover:bg-green-700 text-white mt-2"
+                                                type="submit">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="lucide lucide-send mr-2 h-4 w-4">
+                                                    <path
+                                                        d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z">
+                                                    </path>
+                                                    <path d="m21.854 2.147-10.94 10.939"></path>
+                                                </svg>Gửi phản hồi</button>
+                                        </form>
+                                        @if (count($comment->replies) > 0)
+                                            <div class="mt-4 space-y-4 reply-container">
+                                                @foreach ($comment->replies as $reply)
+                                                    @php
+                                                        $replyDate = Carbon::createFromFormat(
+                                                            'Y-m-d H:i:s',
+                                                            $reply->comment_created_at,
+                                                        );
+                                                        Carbon::setLocale('vi');
+                                                    @endphp
+                                                    <div data-comment-id="{{ $reply->comment_id }}"
+                                                        class="flex space-x-4">
+                                                        <a href="/{{ $reply->username }}">
+                                                            <span
+                                                                class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-full">
+                                                                <img src="{{ !empty($reply->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $reply->username . '/avatar' : '/assets/images/placeholder-user.jpg' }}"
+                                                                    class="flex h-full w-full items-center justify-center rounded-full border" />
+                                                            </span>
+                                                        </a>
+                                                        <div class="flex-1">
+                                                            <div class="flex items-center justify-between">
+                                                                <a href="/{{ $reply->username }}">
+                                                                    <h4 class="text-sm font-semibold">
+                                                                        {{ $reply->profile_name }}</h4>
+                                                                </a>
+                                                                <span
+                                                                    class="text-xs text-gray-500">{{ $replyDate->diffForHumans() }}</span>
+                                                            </div>
+                                                            <p class="mt-1 text-sm text-gray-700">{{ $reply->comment }}
+                                                            </p>
+                                                            <div class="mt-2 flex items-center space-x-2 text-gray-400">
+                                                                <ion-icon name="arrow-up-outline"
+                                                                    class="comment-upvote-button cursor-pointer {{ $reply->user_vote === 'upvote' ? 'text-green-500' : '' }}">
+                                                                </ion-icon>
+                                                                <span
+                                                                    class="vote-count select-none text-sm font-semibold {{ $reply->user_vote == 'upvote' ? 'text-green-500' : ($reply->user_vote == 'downvote' ? 'text-red-500' : '') }}">
+                                                                    {{ $reply->comment_votes }}
+                                                                </span>
+                                                                <ion-icon name="arrow-down-outline"
+                                                                    class="comment-downvote-button cursor-pointer {{ $reply->user_vote === 'downvote' ? 'text-red-500' : '' }}">
+                                                                </ion-icon>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             @endforeach

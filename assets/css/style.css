@@ -129,3 +129,8 @@ input:placeholder-shown {
 a:hover {
   color: inherit;
 }
+
+.reply-container {
+  border-left: 3px solid #e4eee3;
+  padding-left: 15px;
+}

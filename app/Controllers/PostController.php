@@ -36,7 +36,57 @@ class PostController extends BaseController
     public function postDetail($username, $postId)
     {
         $post = $this->post->getPostDetail($postId);
-        $comments = $this->post->getComments($postId);
+        $cmt = $this->post->getComments($postId);
+        function organizeComments($comments, $maxDepth = 2)
+        {
+            // Step 1: Create a lookup array for direct access by comment ID
+            $commentsById = [];
+            foreach ($comments as $comment) {
+                $comment->replies = [];
+                $comment->depth = 0; // Initialize depth for each comment
+                $commentsById[$comment->comment_id] = $comment;
+            }
+
+            // Step 2: Create a new array for top-level comments
+            $nestedComments = [];
+            foreach ($comments as $comment) {
+                if ($comment->replying_to) {
+                    // If it's a reply, find the parent comment
+                    if (isset($commentsById[$comment->replying_to])) {
+                        $parentComment = $commentsById[$comment->replying_to];
+
+                        // If the parent comment's depth is less than maxDepth, add as a reply
+                        if ($parentComment->depth < $maxDepth) {
+                            $comment->depth = $parentComment->depth + 1; // Increment depth for child
+                            $parentComment->replies[] = $comment; // Add to the parent's replies
+                        } else {
+                            // If depth exceeds maxDepth, add to the replies of the deepest allowed level (level 2)
+                            $comment->depth = $maxDepth; // Set it to max depth
+                            // Add the comment to the replies of the last valid level (level 2 replies)
+                            $deepestValidReplies = $nestedComments;
+                            while (!empty($deepestValidReplies) && isset($deepestValidReplies[0]->replies)) {
+                                $deepestValidReplies = $deepestValidReplies[0]->replies;
+                            }
+                            $deepestValidReplies[] = $comment; // Add to deepest replies
+                        }
+                    }
+                } else {
+                    // If it's a top-level comment, add it to the top-level array
+                    $nestedComments[] = $comment;
+                }
+            }
+
+            return $nestedComments;
+        }
+
+        // Sample data
+        $comments = organizeComments($cmt);
+
+        // Output to verify structure
+        // echo '<pre>';
+        // print_r($organizedComments);
+        // echo '</pre>';
+        // die();
         return $this->render('post.index', compact('post', 'comments'));
     }
 

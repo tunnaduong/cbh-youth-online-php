@@ -312,3 +312,112 @@ async function createPost(title, content, imageId) {
 
   return true;
 }
+
+// Select all upvote and downvote buttons
+const commentUpvoteButtons = document.querySelectorAll(
+  ".comment-upvote-button"
+); // Replace with your selector
+const commentDownvoteButtons = document.querySelectorAll(
+  ".comment-downvote-button"
+); // Replace with your selector
+
+// Function to handle voting
+async function handleCommentVote(commentId, voteType, currentUserVote) {
+  // Update UI immediately
+  //   if (voteType === "upvote") {
+  //     updateVoteUI(postId, 1, "upvote");
+  //   } else if (voteType === "downvote") {
+  //     updateVoteUI(postId, -1, "downvote");
+  //   }
+  try {
+    // If the user is clicking the same button they previously clicked, cancel the vote
+    if (currentUserVote === voteType) {
+      voteType = "none"; // Remove vote (un-vote)
+    }
+
+    // Call the API to update the vote count
+    const response = await fetch(
+      `/api/comment/vote?comment_id=${commentId}&vote_type=${voteType}`
+    );
+
+    const result = await response.json();
+
+    if (response.status === 401) {
+      window.location.href = "/login";
+    }
+
+    if (response.ok) {
+      // Update UI based on response
+      updateCommentVoteUI(commentId, result.newVoteCount, result.userVote);
+    } else {
+      console.error(result.message);
+    }
+  } catch (error) {
+    console.error("Error voting:", error);
+  }
+}
+
+// Function to update the UI
+function updateCommentVoteUI(commentId, newVoteCount, userVote) {
+  // Find the elements for the specific post
+  const commentElement = document.querySelector(
+    `[data-comment-id="${commentId}"]`
+  );
+  const voteCountElement = commentElement.querySelector(".vote-count");
+  const upvoteButton = commentElement.querySelector(".comment-upvote-button");
+  const downvoteButton = commentElement.querySelector(
+    ".comment-downvote-button"
+  );
+
+  // Update the vote count display
+  voteCountElement.textContent = newVoteCount;
+
+  // Update the button styles based on the user's vote
+  if (userVote === "upvote") {
+    upvoteButton.classList.add("text-green-500");
+    downvoteButton.classList.remove("text-red-500");
+    voteCountElement.classList.add("text-green-500");
+    voteCountElement.classList.remove("text-red-500");
+  } else if (userVote === "downvote") {
+    downvoteButton.classList.add("text-red-500");
+    upvoteButton.classList.remove("text-green-500");
+    voteCountElement.classList.add("text-red-500");
+    voteCountElement.classList.remove("text-green-500");
+  } else {
+    // Clear styles if no vote
+    upvoteButton.classList.remove("text-green-500");
+    downvoteButton.classList.remove("text-red-500");
+    voteCountElement.classList.remove("text-green-500");
+    voteCountElement.classList.remove("text-red-500");
+  }
+}
+
+// Add event listeners to upvote and downvote buttons
+commentUpvoteButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const commentId = button.closest("[data-comment-id]").dataset.commentId;
+    const currentUserVote = button.classList.contains("text-green-500")
+      ? "upvote"
+      : "none";
+    handleCommentVote(commentId, "upvote", currentUserVote);
+  });
+});
+
+commentDownvoteButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const commentId = button.closest("[data-comment-id]").dataset.commentId;
+    const currentUserVote = button.classList.contains("text-red-500")
+      ? "downvote"
+      : "none";
+    handleCommentVote(commentId, "downvote", currentUserVote);
+  });
+});
+
+document.querySelectorAll(".reply-comment").forEach((button) => {
+  button.addEventListener("click", () => {
+    const replyBox = button
+      .closest(".flex.space-x-4")
+      .querySelector(".reply-box");
+    replyBox.classList.toggle("hidden");
+  });
+});
