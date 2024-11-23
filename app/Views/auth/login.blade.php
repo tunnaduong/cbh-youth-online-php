@@ -23,10 +23,10 @@
                     @csrf
                     <div class="space-y-2"><input type="text"
                             class="flex h-9 border-input bg-transparent text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 w-full px-3 py-2 border rounded-md"
-                            placeholder="Tên người dùng hoặc email" name="username"></div>
+                            placeholder="Tên người dùng hoặc email" name="username" value="{{ $_POST['username'] }}"></div>
                     <div class="space-y-2"><input type="password"
                             class="flex h-9 border-input bg-transparent text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 w-full px-3 py-2 border rounded-md"
-                            placeholder="Mật khẩu" name="password"></div><button
+                            placeholder="Mật khẩu" name="password" value="{{ $_POST['password'] }}"></div><button
                         class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 shadow h-9 px-4 w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700"
                         type="submit">Đăng nhập</button>
                     <div class="flex justify-between text-sm"><a class="text-green-600 hover:text-green-600 hover:underline"
