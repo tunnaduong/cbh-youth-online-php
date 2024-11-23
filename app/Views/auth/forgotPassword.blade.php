@@ -15,7 +15,7 @@
                         {{ $error }}
                     </div>
                 @endunless
-                @unless ($error_type ?? 'danger' == 'success')
+                @unless ($error_type == 'success')
                     <form action="" method="POST">
                         <div class="space-y-4">
                             <div class="space-y-2">

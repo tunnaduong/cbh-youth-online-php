@@ -425,3 +425,16 @@ document.querySelectorAll(".reply-comment").forEach((button) => {
     replyBox.classList.toggle("hidden");
   });
 });
+
+function togglePassword(inputId, button) {
+  const input = document.getElementById(inputId);
+  const icon = button.querySelector("ion-icon");
+
+  if (input.type === "password") {
+    input.type = "text";
+    icon.setAttribute("name", "eye-off-outline");
+  } else {
+    input.type = "password";
+    icon.setAttribute("name", "eye-outline");
+  }
+}

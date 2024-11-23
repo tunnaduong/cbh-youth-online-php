@@ -215,7 +215,49 @@ class AuthController extends BaseController
             return $this->render('auth.forgotPassword', compact('error', 'error_type'));
         }
 
-        return $this->render('auth.forgotPassword', compact('error'));
+        return $this->render('auth.forgotPassword', compact('error', 'error_type'));
+    }
+
+    public function resetPassword($token)
+    {
+        $error = "";
+        $error_type = "danger";
+        $userId = $this->authAccount->getUserIdByEmailAndToken($token);
+
+        if (!$userId) {
+            $error = "Đường dẫn không hợp lệ";
+            return $this->render('auth.resetPassword', compact('error', 'error_type'));
+        }
+
+        // Check if the token is expired
+        $tokenCreatedAt = $this->authAccount->getTokenCreatedAt($token);
+        if (strtotime($tokenCreatedAt) < strtotime('-1 hour')) {
+            $error = "Đường dẫn đã hết hạn";
+            return $this->render('auth.resetPassword', compact('error', 'error_type'));
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (empty($_POST['newPassword']) || empty($_POST['confirmPassword'])) {
+                $error = "Mật khẩu và xác nhận mật khẩu không được để trống";
+                return $this->render('auth.resetPassword', compact('error', 'error_type'));
+            }
+
+            if ($_POST['newPassword'] != $_POST['confirmPassword']) {
+                $error = "Mật khẩu và xác nhận mật khẩu không khớp";
+                return $this->render('auth.resetPassword', compact('error', 'error_type'));
+            }
+
+            $password = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
+
+            $this->authAccount->changePassword($userId, $password);
+
+            $error_type = "success";
+            $error = "Mật khẩu đã được thay đổi thành công";
+
+            return $this->render('auth.resetPassword', compact('error', 'error_type'));
+        }
+
+        return $this->render('auth.resetPassword', compact('error', 'error_type'));
     }
 
     public function logout()

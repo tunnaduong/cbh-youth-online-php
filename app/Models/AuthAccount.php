@@ -96,6 +96,12 @@ class AuthAccount extends BaseModel
         return $this->loadRow([$token])->user_id ?? null;
     }
 
+    public function getUserIdByEmailAndToken($token)
+    {
+        $this->setQuery("SELECT * FROM cyo_auth_accounts WHERE email = (SELECT email FROM password_reset_tokens WHERE token = ?)");
+        return $this->loadRow([$token])->id ?? null;
+    }
+
     public function markAsVerified($userId)
     {
         $this->setQuery("UPDATE cyo_auth_accounts SET email_verified_at = NOW() WHERE id = ?");
@@ -112,5 +118,11 @@ class AuthAccount extends BaseModel
     {
         $this->setQuery("INSERT INTO password_reset_tokens (email, token, created_at) VALUES (?, ?, ?)");
         return $this->execute([$email, $token, date('Y-m-d H:i:s')]);
+    }
+
+    public function getTokenCreatedAt($token)
+    {
+        $this->setQuery("SELECT created_at FROM password_reset_tokens WHERE token = ?");
+        return $this->loadRow([$token])->created_at ?? null;
     }
 }
