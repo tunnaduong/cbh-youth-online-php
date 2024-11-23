@@ -415,6 +415,10 @@ commentDownvoteButtons.forEach((button) => {
 
 document.querySelectorAll(".reply-comment").forEach((button) => {
   button.addEventListener("click", () => {
+    if (!isLoggedIn) {
+      window.location.href = "/login";
+      return;
+    }
     const replyBox = button
       .closest(".flex.space-x-4")
       .querySelector(".reply-box");

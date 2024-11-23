@@ -152,8 +152,11 @@
                                 </svg>Gửi bình luận</button>
                         </form>
                     @else
-                        <div class="text-base !mb-8"><a class="text-green-600" href="/login">Đăng nhập</a> để bình luận và
-                            tham gia thảo luận cùng cộng đồng.</div>
+                        <div class="text-base !mb-8">
+                            <a class="text-green-600 hover:text-green-600" href="/login">Đăng
+                                nhập</a> để bình luận và
+                            tham gia thảo luận cùng cộng đồng.
+                        </div>
                     @endif
                     @if (count($comments) > 0)
                         <div class="gap-y-4 flex flex-col">
