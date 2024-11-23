@@ -43,7 +43,7 @@ class AuthController extends BaseController
         return $this->render('auth.login', compact('error'));
     }
 
-    public function validateUsername($username)
+    private function validateUsername($username)
     {
         // Define the regular expression pattern
         $pattern = '/^[a-zA-Z0-9_]{3,20}$/';
