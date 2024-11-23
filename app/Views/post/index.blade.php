@@ -134,10 +134,10 @@
                     class="flex flex-col space-y-1.5 p-6 text-xl -mb-4 font-semibold max-w-sm overflow-hidden whitespace-nowrap overflow-ellipsis">
                     Bình luận</div>
                 <div class="p-6 pt-0">
-                    <form class="space-y-4 mb-7">
+                    <form action="" method="POST" class="space-y-4 mb-7">
                         <textarea
                             class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                            placeholder="Viết bình luận của bạn..."></textarea>
+                            name="comment" placeholder="Viết bình luận của bạn..."></textarea>
                         <button
                             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 text-primary-foreground shadow h-9 px-4 py-2 w-full bg-green-600 hover:bg-green-700 text-white"
                             type="submit">
@@ -151,34 +151,41 @@
                             </svg>Gửi bình luận</button>
                     </form>
                     @if (count($comments) > 0)
-                        @foreach ($comments as $comment)
-                            <div class="gap-y-4 flex flex-col">
-                                <div class="flex space-x-4" style="zoom: 0.7;"><a href="/tunganh"><span
-                                            class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full"><img
-                                                src="/assets/images/placeholder-user.jpg"
-                                                class="flex h-full w-full items-center justify-center rounded-full bg-muted" /></span></a>
+                        <div class="gap-y-4 flex flex-col">
+                            @foreach ($comments as $comment)
+                                @php
+                                    // Create a Carbon instance from the given datetime
+                                    $date = Carbon::createFromFormat('Y-m-d H:i:s', $comment->comment_created_at);
+
+                                    // Set the locale to Vietnamese (for "1 tuần trước")
+                                    Carbon::setLocale('vi');
+                                @endphp
+                                <div class="flex space-x-4">
+                                    <a href="/tunganh">
+                                        <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
+                                            <img src="{{ !empty($comment->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $comment->username . '/avatar' : '/assets/images/placeholder-user.jpg' }}"
+                                                class="flex h-full w-full items-center justify-center rounded-full border" />
+                                        </span>
+                                    </a>
                                     <div class="flex-1">
                                         <div class="flex items-center justify-between"><a href="/tunganh">
-                                                <h4 class="text-sm font-semibold">Tun.</h4>
-                                            </a><span class="text-xs text-gray-500">2 tuần trước</span></div>
-                                        <p class="mt-1 text-sm text-gray-700">@tùng a dính</p>
-                                        <div class="mt-2 flex items-center space-x-2 text-gray-400"><svg
-                                                stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                viewBox="0 0 512 512" class="cursor-pointer" height="1em"
-                                                width="1em" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="48" d="m112 244 144-144 144 144M256 120v292"></path>
-                                            </svg><span class="select-none text-sm font-semibold">0</span><svg
-                                                stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                viewBox="0 0 512 512" class="cursor-pointer" height="1em"
-                                                width="1em" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="48" d="m112 268 144 144 144-144M256 392V100"></path>
-                                            </svg></div>
+                                                <h4 class="text-sm font-semibold">{{ $comment->profile_name }}</h4>
+                                            </a><span class="text-xs text-gray-500">{{ $date->diffForHumans() }}</span>
+                                        </div>
+                                        <p class="mt-1 text-sm text-gray-700">{{ $comment->comment }}</p>
+                                        <div class="mt-2 flex items-center space-x-2 text-gray-400">
+                                            <ion-icon name="arrow-up-outline"
+                                                class="upvote-button cursor-pointer"></ion-icon>
+                                            <span class="select-none text-sm font-semibold">0</span>
+                                            <ion-icon name="arrow-down-outline"
+                                                class="downvote-button cursor-pointer"></ion-icon>
+                                            <span>·</span>
+                                            <span class="cursor-pointer text-sm font-semibold">Trả lời</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     @else
                         <center class="text-sm text-gray-400">Không có bình luận nào cho bài viết này.<br>Hãy là người đầu
                             tiên

@@ -25,6 +25,7 @@ try {
     $router->get('/logout', [AuthController::class, 'logout']);
     $router->get('/', [HomeController::class, 'index']);
     $router->get('/{username}/posts/{postId}', [PostController::class, 'postDetail']);
+    $router->post('/{username}/posts/{postId}', [PostController::class, 'addNewComment']);
     $router->post('/', [PostController::class, 'addNewPost']);
     $router->get('/reports', [HomeController::class, 'report']);
     $router->get('/lookup', [HomeController::class, 'lookup']);

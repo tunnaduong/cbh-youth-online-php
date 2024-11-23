@@ -43,7 +43,20 @@ class Post extends BaseModel
 
     public function getComments($postId)
     {
-        $this->setQuery("SELECT ctc.*, ua.*, up.profile_name, up.verified, cup.profile_picture FROM cyo_topic_comments ctc INNER JOIN cyo_auth_accounts ua ON ctc.user_id = ua.id INNER JOIN cyo_user_profiles up ON ua.id = up.auth_account_id LEFT JOIN cyo_user_profiles cup ON ua.id = cup.auth_account_id WHERE ctc.topic_id = ? ORDER BY ctc.created_at DESC");
+        $this->setQuery("SELECT ctc.created_at AS comment_created_at, ctc.*, ua.*, up.profile_name, up.verified, cup.profile_picture FROM cyo_topic_comments ctc INNER JOIN cyo_auth_accounts ua ON ctc.user_id = ua.id INNER JOIN cyo_user_profiles up ON ua.id = up.auth_account_id LEFT JOIN cyo_user_profiles cup ON ua.id = cup.auth_account_id WHERE ctc.topic_id = ? ORDER BY ctc.created_at DESC");
         return $this->loadAllRows([$postId]);
+    }
+
+    public function addNewComment($postId)
+    {
+        $this->setQuery("INSERT INTO cyo_topic_comments (replying_to, topic_id, user_id, comment, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)");
+        $this->execute([
+            $_POST['replyingTo'] ?? null,
+            $postId,
+            $_SESSION['user']->id,
+            $_POST['comment'],
+            date('Y-m-d H:i:s'),
+            date('Y-m-d H:i:s')
+        ]);
     }
 }

@@ -39,4 +39,10 @@ class PostController extends BaseController
         $comments = $this->post->getComments($postId);
         return $this->render('post.index', compact('post', 'comments'));
     }
+
+    public function addNewComment($username, $postId)
+    {
+        $this->post->addNewComment($postId);
+        header("Location: /$username/posts/$postId");
+    }
 }
