@@ -35,8 +35,8 @@ class HomeController extends BaseController
         return $this->render('explore.index');
     }
 
-    public function error404()
+    public function error404($error)
     {
-        return $this->render('errors.404');
+        return $this->render('errors.404', compact('error'));
     }
 }

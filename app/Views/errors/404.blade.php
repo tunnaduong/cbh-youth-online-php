@@ -14,4 +14,7 @@
                 class="text-[#319528] cursor-pointer text-[12px] mt-2 inline-block font-semibold">Quay lại</div>
         </center>
     </div>
+    <script>
+        console.error("Error from PHP: {{ $error }}");
+    </script>
 @endsection

@@ -23,6 +23,7 @@ try {
 
     // khu vực cần quan tâm -----------
     $router->any('/login', [AuthController::class, 'login']);
+    $router->any('/register', [AuthController::class, 'register']);
     $router->get('/logout', [AuthController::class, 'logout']);
     $router->get('/', [HomeController::class, 'index']);
     $router->get('/{username}/posts/{postId}', [PostController::class, 'postDetail']);
@@ -44,6 +45,6 @@ try {
     echo $response;
 } catch (Exception $e) {
     // var_dump($e->getMessage());
-    return (new HomeController())->error404();
+    return (new HomeController())->error404($e->getMessage());
     // die;
 }
