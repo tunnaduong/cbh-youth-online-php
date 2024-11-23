@@ -43,6 +43,7 @@ try {
     // Print out the value returned from the dispatched function
     echo $response;
 } catch (Exception $e) {
-    var_dump($e->getMessage());
-    die;
+    // var_dump($e->getMessage());
+    return (new HomeController())->error404();
+    // die;
 }
