@@ -175,10 +175,11 @@
                                         <p class="mt-1 text-sm text-gray-700">{{ $comment->comment }}</p>
                                         <div class="mt-2 flex items-center space-x-2 text-gray-400">
                                             <ion-icon name="arrow-up-outline"
-                                                class="upvote-button cursor-pointer"></ion-icon>
-                                            <span class="select-none text-sm font-semibold">0</span>
+                                                class="upvote-button cursor-pointer {{ $comment->user_vote === 'upvote' ? 'text-green-500' : '' }}"></ion-icon>
+                                            <span
+                                                class="select-none text-sm font-semibold {{ $comment->user_vote == 'upvote' ? 'text-green-500' : ($comment->user_vote == 'downvote' ? 'text-red-500' : '') }}">{{ $comment->comment_votes }}</span>
                                             <ion-icon name="arrow-down-outline"
-                                                class="downvote-button cursor-pointer"></ion-icon>
+                                                class="downvote-button cursor-pointer {{ $comment->user_vote === 'downvote' ? 'text-red-500' : '' }}"></ion-icon>
                                             <span>·</span>
                                             <span class="cursor-pointer text-sm font-semibold">Trả lời</span>
                                         </div>
