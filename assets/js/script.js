@@ -55,8 +55,8 @@ function adjustMaxWidth() {
 
   // Loop through each selected element and apply max-width based on the window width
   postContainers.forEach((postContainer) => {
-    if (windowWidth < 768) {
-      postContainer.style.maxWidth = `${windowWidth - 5}px`;
+    if (windowWidth < 769) {
+      postContainer.style.maxWidth = `${windowWidth + 75}px`;
     } else {
       postContainer.style.maxWidth = "679px";
     }
