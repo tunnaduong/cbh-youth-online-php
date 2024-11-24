@@ -37,7 +37,8 @@
             @endphp
             <div data-post-id="{{ $post->post_id }}"
                 class="post-container w-full mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row md:max-w-[679px]">
-                <div class="min-w-[84px] items-center mt-1 flex-col flex ml-[-20px] text-[13px] font-semibold text-gray-400">
+                <div
+                    class="min-w-[84px] items-center mt-1 flex-col hidden md:flex ml-[-20px] text-[13px] font-semibold text-gray-400">
                     <ion-icon name="arrow-up-outline"
                         class="upvote-button text-2xl cursor-pointer {{ $post->user_vote === 'upvote' ? 'text-green-500' : '' }}"></ion-icon>
                     <span
@@ -129,6 +130,26 @@
                                 <ion-icon class="text-xl mr-1" name="chatbox-outline"></ion-icon>
                             </a>
                         </div>
+                    </div>
+                    <div
+                        class="min-w-[84px] mt-3 flex md:hidden items-center gap-x-3 flex-row text-[13px] font-semibold text-gray-400">
+                        <ion-icon name="arrow-up-outline"
+                            class="upvote-button text-2xl cursor-pointer {{ $post->user_vote === 'upvote' ? 'text-green-500' : '' }}"></ion-icon>
+                        <span
+                            class="select-none text-lg vote-count {{ $post->user_vote == 'upvote' ? 'text-green-500' : ($post->user_vote == 'downvote' ? 'text-red-500' : '') }}">{{ $post->post_votes }}</span>
+                        <ion-icon name="arrow-down-outline"
+                            class="downvote-button text-2xl cursor-pointer {{ $post->user_vote === 'downvote' ? 'text-red-500' : '' }}"></ion-icon>
+                        @if ($post->is_saved)
+                            <div
+                                class="save-post-button bg-[#CDEBCA] cursor-pointer rounded-lg w-[33.6px] h-[33.6px] flex items-center justify-center">
+                                <ion-icon name="bookmark" class="text-[#319527] text-xl"></ion-icon>
+                            </div>
+                        @else
+                            <div
+                                class="save-post-button bg-[#EAEAEA] cursor-pointer rounded-lg w-[33.6px] h-[33.6px] flex items-center justify-center">
+                                <ion-icon name="bookmark" class="text-gray-400 text-xl"></ion-icon>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

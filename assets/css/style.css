@@ -134,3 +134,10 @@ a:hover {
   border-left: 3px solid #e4eee3;
   padding-left: 15px;
 }
+
+/* media less than 768px */
+@media (max-width: 768px) {
+  .post-container {
+    zoom: 0.9;
+  }
+}
