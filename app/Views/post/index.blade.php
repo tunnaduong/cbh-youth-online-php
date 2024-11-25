@@ -96,7 +96,7 @@
                     </div>
                 @endunless
                 <hr class="!my-5 border-t-2">
-                <div class="flex-row flex text-[13px] items-center"><a href="/{{ $post->username }}"><span
+                <div class="flex-row flex-wrap flex text-[13px] items-center"><a href="/{{ $post->username }}"><span
                             class="relative flex shrink-0 overflow-hidden rounded-full w-8 h-8">
                             <img class="border rounded-full aspect-square h-full w-full" alt="{{ $post->username }} avatar"
                                 src="{{ !empty($post->oauth_profile_picture) ? $post->oauth_profile_picture : (!empty($post->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $post->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}">
