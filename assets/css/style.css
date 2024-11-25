@@ -138,6 +138,6 @@ a:hover {
 /* media less than 768px */
 @media (max-width: 769px) {
   .post-container {
-    zoom: 0.9;
+    zoom: 0.75;
   }
 }
