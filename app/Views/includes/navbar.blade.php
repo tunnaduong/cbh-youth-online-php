@@ -95,7 +95,7 @@
                         type="button" id="radix-:rc:" aria-haspopup="menu" aria-expanded="false"
                         data-state="closed">
                         <img class="aspect-square h-full w-full border rounded-full" alt="User"
-                            src="{{ !empty($_SESSION['user']->additional_info->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $_SESSION['user']->username . '/avatar' : '/assets/images/placeholder-user.jpg' }}">
+                            src="{{ isset($_SESSION['user']->additional_info->oauth_profile_picture) ? $_SESSION['user']->additional_info->oauth_profile_picture : (!empty($_SESSION['user']->additional_info->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $_SESSION['user']->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}">
                     </span>
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -115,3 +115,6 @@
         @endif
     </div>
 </nav>
+<script>
+    console.log("SESSION data: {{ json_encode($_SESSION) }}");
+</script>
