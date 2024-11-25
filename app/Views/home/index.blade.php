@@ -119,7 +119,7 @@
                                 </svg>
                             @endif
                         </a>
-                        <span class="mb-2 ml-0.5 text-sm text-gray-500">.</span>
+                        <span class="ml-0.5 text-sm text-gray-500">·</span>
                         <span class="ml-0.5 text-gray-500">{{ $date->diffForHumans() }}</span>
                         <div class="flex flex-1 flex-row-reverse items-center text-gray-500">
                             <span>{{ $post->post_views }}</span>
