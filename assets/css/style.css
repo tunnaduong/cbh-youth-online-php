@@ -139,10 +139,10 @@ a:hover {
 @media (max-width: 769px) {
   .post-container {
     /* transform: scale(0.75); */
-    zoom: 0.9;
+    zoom: 0.85;
   }
 
   .post-container * {
-    zoom: 1;
+    zoom: 0.98;
   }
 }

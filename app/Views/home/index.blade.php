@@ -99,7 +99,7 @@
                         </div>
                     @endunless
                     <hr class="!my-5 border-t-2">
-                    <div class="flex-row flex text-[13px] items-center"><a href="/{{ $post->username }}"><span
+                    <div class="flex-wrap flex-row flex text-[13px] items-center"><a href="/{{ $post->username }}"><span
                                 class="relative flex shrink-0 overflow-hidden rounded-full w-8 h-8">
                                 <img class="border rounded-full aspect-square h-full w-full" loading="lazy"
                                     alt="{{ $post->username }} avatar"
