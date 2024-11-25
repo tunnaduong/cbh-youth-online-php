@@ -140,4 +140,8 @@ a:hover {
   .post-container {
     zoom: 0.75;
   }
+
+  .post-container > * {
+    zoom: 0.8;
+  }
 }
