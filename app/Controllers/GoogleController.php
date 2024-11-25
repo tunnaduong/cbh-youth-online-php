@@ -2,12 +2,16 @@
 
 namespace App\Controllers;
 
-use League\OAuth2\Client\Provider\Google;
 use Exception;
+use App\Models\OAuth;
+use App\Models\AuthAccount;
+use League\OAuth2\Client\Provider\Google;
 
 class GoogleController extends BaseController
 {
     protected $provider;
+    protected $oauth;
+    protected $authAccount;
 
     public function __construct()
     {
@@ -17,6 +21,8 @@ class GoogleController extends BaseController
             'clientSecret' => $config['google']['clientSecret'],
             'redirectUri'  => $config['google']['redirectUri'],
         ]);
+        $this->oauth = new OAuth();
+        $this->authAccount = new AuthAccount();
     }
 
     public function redirectToProvider()
@@ -61,8 +67,26 @@ class GoogleController extends BaseController
     {
         // Save user to database and log them in
         // Redirect or show appropriate response
-        echo "<pre>";
-        var_dump($userData);
-        echo "</pre>";
+        $user = $this->oauth->login('google', $userData['email']);
+        if ($user) {
+            $_SESSION['user'] = $user;
+            header('Location: /');
+            exit;
+        } else {
+            // Check for duplicate email
+            $duplicate = $this->oauth->checkForEmailDuplicate($userData['email']);
+            if ($duplicate) {
+                $error = 'Email đã tồn tại trong hệ thống. Vui lòng sử dụng email khác hoặc đăng nhập bằng email này.';
+                return $this->render('auth.login', compact('error'));
+            }
+
+            // Register the user
+            $this->oauth->register('google', $userData['sub'], $userData['email'], $userData['name'], $userData['picture']);
+            $user = $this->oauth->login('google', $userData['email']);
+            $user->additional_info = $this->authAccount->getByUsername($user->username);
+            $_SESSION['user'] = $user;
+            header('Location: /');
+            exit;
+        }
     }
 }
