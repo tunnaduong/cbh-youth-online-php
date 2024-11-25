@@ -12,7 +12,7 @@
             </div>
             <hr>
             <div class="p-3 flex flex-row items-center">
-                <img src="{{ !empty($_SESSION['user']->additional_info->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $_SESSION['user']->username . '/avatar' : '/assets/images/placeholder-user.jpg' }}"
+                <img src="{{ isset($_SESSION['user']->additional_info->oauth_profile_picture) ? $_SESSION['user']->additional_info->oauth_profile_picture : (!empty($_SESSION['user']->additional_info->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $_SESSION['user']->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
                     alt="{{ $_SESSION['user']->username }}'s avatar" class="border w-11 h-11 rounded-full">
                 <div class="flex flex-col ml-2">
                     <span

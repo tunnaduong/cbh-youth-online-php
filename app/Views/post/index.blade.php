@@ -99,7 +99,7 @@
                 <div class="flex-row flex text-[13px] items-center"><a href="/{{ $post->username }}"><span
                             class="relative flex shrink-0 overflow-hidden rounded-full w-8 h-8">
                             <img class="border rounded-full aspect-square h-full w-full" alt="{{ $post->username }} avatar"
-                                src="{{ !empty($post->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $post->username . '/avatar' : '/assets/images/placeholder-user.jpg' }}">
+                                src="{{ !empty($post->oauth_profile_picture) ? $post->oauth_profile_picture : (!empty($post->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $post->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}">
                         </span>
                     </a>
                     <span class="text-gray-500 hidden md:block ml-2">Đăng bởi</span>
@@ -171,7 +171,7 @@
                                 <div data-comment-id="{{ $comment->comment_id }}" class="flex space-x-4">
                                     <a href="/{{ $comment->username }}">
                                         <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
-                                            <img src="{{ !empty($comment->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $comment->username . '/avatar' : '/assets/images/placeholder-user.jpg' }}"
+                                            <img src="{{ !empty($post->oauth_profile_picture) ? $post->oauth_profile_picture : (!empty($post->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $post->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
                                                 class="flex h-full w-full items-center justify-center rounded-full border" />
                                         </span>
                                     </a>
@@ -224,7 +224,7 @@
                                                         <a href="/{{ $reply->username }}">
                                                             <span
                                                                 class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-full">
-                                                                <img src="{{ !empty($reply->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $reply->username . '/avatar' : '/assets/images/placeholder-user.jpg' }}"
+                                                                <img src="{{ !empty($post->oauth_profile_picture) ? $post->oauth_profile_picture : (!empty($post->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $post->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
                                                                     class="flex h-full w-full items-center justify-center rounded-full border" />
                                                             </span>
                                                         </a>

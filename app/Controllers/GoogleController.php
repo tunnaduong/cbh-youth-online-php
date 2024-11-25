@@ -85,6 +85,7 @@ class GoogleController extends BaseController
             $user = $this->oauth->login('google', $userData['email']);
             $user->additional_info = $this->authAccount->getByUsername($user->username);
             $_SESSION['user'] = $user;
+            // die(var_dump($user));
             header('Location: /');
             exit;
         }

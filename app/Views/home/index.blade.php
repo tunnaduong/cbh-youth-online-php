@@ -103,7 +103,7 @@
                                 class="relative flex shrink-0 overflow-hidden rounded-full w-8 h-8">
                                 <img class="border rounded-full aspect-square h-full w-full" loading="lazy"
                                     alt="{{ $post->username }} avatar"
-                                    src="{{ !empty($post->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $post->username . '/avatar' : '/assets/images/placeholder-user.jpg' }}">
+                                    src="{{ !empty($post->oauth_profile_picture) ? $post->oauth_profile_picture : (!empty($post->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $post->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}">
                             </span>
                         </a>
                         <span class="text-gray-500 hidden md:block ml-2">Đăng bởi</span>

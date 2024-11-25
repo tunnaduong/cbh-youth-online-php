@@ -116,5 +116,5 @@
     </div>
 </nav>
 <script>
-    console.log("SESSION data: {{ json_encode($_SESSION) }}");
+    console.log(`SESSION data: {!! json_encode($_SESSION) !!}`);
 </script>
