@@ -26,6 +26,16 @@
 @extends('layouts.home')
 
 @section('content')
+    <div class="mt-4 !px-4 flex justify-between items-center">
+        <h1 class="text-xl font-semibold flex md:hidden items-center cursor-pointer">Bảng tin <ion-icon
+                name="chevron-down-outline" class="ml-1"></ion-icon>
+        </h1>
+        <button id="openModalBtn"
+            class="flex md:hidden text-base font-semibold bg-[#319527] items-center justify-center w-full max-w-[180px] text-left leading-3 text-white rounded-xl !p-2.5">
+            <ion-icon name="add-outline" class="text-xl mr-1"></ion-icon>
+            Tạo bài viết mới
+        </button>
+    </div>
     <div class="flex flex-col items-center w-full flex-1 p-2 pt-4">
         @foreach ($posts as $post)
             @php
