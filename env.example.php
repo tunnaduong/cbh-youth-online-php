@@ -9,3 +9,6 @@ const MAIL_HOST = "";
 const MAIL_PORT = 587;
 const MAIL_USERNAME = "";
 const MAIL_PASSWORD = "";
+const GOOGLE_CLIENT_ID = "";
+const GOOGLE_CLIENT_SECRET = "";
+const GOOGLE_REDIRECT_URI = "";

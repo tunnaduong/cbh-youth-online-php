@@ -7,6 +7,7 @@ use Phroute\Phroute\RouteCollector;
 use App\Controllers\PostVoteController;
 use App\Controllers\SavePostController;
 use App\Controllers\CommentVoteController;
+use App\Controllers\GoogleController;
 
 $url = !isset($_GET['url']) ? "/" : $_GET['url'];
 try {
@@ -40,6 +41,8 @@ try {
     // $router->get('/email/resend', [AuthController::class, 'resendVerificationEmail']);
     $router->any('/password/reset', [AuthController::class, 'forgotPassword']);
     $router->any('/password/reset/{token}', [AuthController::class, 'resetPassword']);
+    $router->get('/login/google', [GoogleController::class, 'redirectToProvider']);
+    $router->get('/login/google/callback', [GoogleController::class, 'handleProviderCallback']);
     // $router->get('/test/{email}/{token}', [AuthController::class, 'sendVerificationEmail']);
     # NB. You can cache the return value from $router->getData() so you don't have to create the routes each request - massive speed gains
     $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
