@@ -141,7 +141,7 @@ a:hover {
     zoom: 0.75;
   }
 
-  .post-container > * {
+  .post-container * {
     zoom: 0.8;
   }
 }
