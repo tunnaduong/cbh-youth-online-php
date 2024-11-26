@@ -155,3 +155,23 @@ a:hover {
     zoom: 1.002;
   }
 }
+
+@media (max-width: 1279px) {
+  #bottom-sidebar {
+    display: block;
+  }
+
+  #root {
+    flex-direction: column;
+  }
+
+  #top-users {
+    max-width: 679px;
+  }
+
+  #top-bar {
+    display: flex;
+    max-width: 679px;
+    margin: 0 auto;
+  }
+}

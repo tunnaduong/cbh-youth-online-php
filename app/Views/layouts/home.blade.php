@@ -7,7 +7,7 @@
 
 <body class="bg-[#F8F8F8] mt-[4.3rem]">
     @include('includes.navbar')
-    <div class="flex md:flex-row flex-col">
+    <div id="root" class="flex md:flex-row flex-col">
         @include('includes.leftSidebar')
         <div class="flex-1">
             @yield('content')

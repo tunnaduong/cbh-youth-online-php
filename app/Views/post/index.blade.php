@@ -26,6 +26,7 @@
 @extends('layouts.home')
 
 @section('content')
+    @include('includes.topBar')
     <div class="flex flex-col items-center w-full flex-1 p-2 pt-4">
         @php
             // Create a Carbon instance from the given datetime
@@ -153,7 +154,7 @@
             </div>
         </div>
         <div class="px-1.5 md:!px-0 md:max-w-[679px] w-[100%]">
-            <div class="shadow !mb-5 long-shadow h-min rounded-lg bg-white">
+            <div class="shadow !mb-4 long-shadow h-min rounded-lg bg-white">
                 <div
                     class="flex flex-col space-y-1.5 p-6 text-xl -mb-4 font-semibold max-w-sm overflow-hidden whitespace-nowrap overflow-ellipsis">
                     Bình luận</div>
