@@ -154,6 +154,10 @@ a:hover {
   .post-container-post * {
     zoom: 1.002;
   }
+
+  #error-404 {
+    zoom: 1.6 !important;
+  }
 }
 
 @media (max-width: 1279px) {
