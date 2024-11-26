@@ -2,12 +2,16 @@
 
 namespace App\Controllers;
 
-use League\OAuth2\Client\Provider\Facebook;
 use Exception;
+use App\Models\OAuth;
+use App\Models\AuthAccount;
+use League\OAuth2\Client\Provider\Facebook;
 
-class FacebookController
+class FacebookController extends BaseController
 {
     protected $provider;
+    protected $oauth;
+    protected $authAccount;
 
     public function __construct()
     {
@@ -18,6 +22,8 @@ class FacebookController
             'redirectUri'       => $config['facebook']['redirectUri'],
             'graphApiVersion'   => $config['facebook']['graphApiVersion'],
         ]);
+        $this->oauth = new OAuth();
+        $this->authAccount = new AuthAccount();
     }
 
     public function redirectToProvider()
@@ -30,14 +36,20 @@ class FacebookController
 
     public function handleProviderCallback()
     {
+        if (isset($_GET['error'])) {
+            $error = 'Error: ' . $_GET['error'];
+            return $this->render('errors.404', compact('error'));
+        }
+
         if (empty($_GET['state']) || ($_GET['state'] !== $_SESSION['oauth2state'])) {
             unset($_SESSION['oauth2state']);
-            exit('Invalid state');
+            $error = 'Error: Invalid state';
+            return $this->render('errors.404', compact('error'));
         }
 
         try {
             $token = $this->provider->getAccessToken('authorization_code', [
-                'code' => $_GET['code']
+                'code' => $_GET['code'] ?? null
             ]);
 
             // Get user details
@@ -47,7 +59,8 @@ class FacebookController
             // Process and save the user data
             $this->loginOrCreateUser($userData);
         } catch (Exception $e) {
-            exit('Failed to get access token: ' . $e->getMessage());
+            $error = 'Failed to get access token: ' . $e->getMessage();
+            return $this->render('errors.404', compact('error'));
         }
     }
 
@@ -55,8 +68,27 @@ class FacebookController
     {
         // Save user to database and log them in
         // Redirect or show appropriate response
-        echo "<pre>";
-        print_r($userData);
-        echo "</pre>";
+        $user = $this->oauth->login('facebook', $userData['email'] ?? $userData['id']);
+        if ($user) {
+            $user->additional_info = $this->authAccount->getByUsername($user->username);
+            $_SESSION['user'] = $user;
+            header('Location: /');
+            exit;
+        } else {
+            // Check for duplicate email
+            $duplicate = $this->oauth->checkForEmailDuplicate($userData['email'] ?? null);
+            if ($duplicate) {
+                $error = 'Email đã tồn tại trong hệ thống. Vui lòng sử dụng email khác hoặc đăng nhập bằng email này.';
+                return $this->render('auth.login', compact('error'));
+            }
+
+            // Register the user
+            $this->oauth->register('facebook', $userData['id'], $userData['email'] ?? null, $userData['name'], $userData['picture_url']);
+            $user = $this->oauth->login('facebook',  $userData['email'] ?? $userData['id']);
+            $user->additional_info = $this->authAccount->getByUsername($user->username);
+            $_SESSION['user'] = $user;
+            header('Location: /');
+            exit;
+        }
     }
 }

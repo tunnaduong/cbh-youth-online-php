@@ -3,7 +3,7 @@
 @section('content')
     <div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
         <div class="rounded-xl border bg-card text-card-foreground shadow w-full bg-white max-w-md">
-            <div class="flex flex-col p-6 space-y-4 text-center">
+            <div class="flex flex-col p-6 -mb-3 space-y-4 text-center">
                 <div class="flex gap-x-1 items-center justify-center">
                     <img alt="CYO's Logo" width="50" src="/assets/images/logo.png">
                     <div class="text-[18px] text-left font-light text-[#319527] leading-5">
