@@ -111,7 +111,7 @@ input:disabled {
 }
 
 .dropdown-item:active {
-  background-color: #319527 !important;
+  background-color: #319527;
 }
 
 *:focus {

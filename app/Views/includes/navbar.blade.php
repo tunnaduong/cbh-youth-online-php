@@ -98,17 +98,19 @@
                             src="{{ isset($_SESSION['user']->additional_info->oauth_profile_picture) ? $_SESSION['user']->additional_info->oauth_profile_picture : (!empty($_SESSION['user']->additional_info->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $_SESSION['user']->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}">
                     </span>
                 </div>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <ul class="dropdown-menu rounded-lg" aria-labelledby="dropdownMenuLink">
                     <li><a class="dropdown-item" href="/{{ $_SESSION['user']->username }}"><i
-                                class="bi bi-person"></i>
+                                class="bi bi-person mr-1"></i>
                             Trang cá nhân</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Cài đặt</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle"></i> Trợ giúp</a>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear mr-1"></i> Cài đặt</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle mr-1"></i> Trợ
+                            giúp</a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a>
+                    <li><a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-right mr-1"></i> Đăng
+                            xuất</a>
                     </li>
                 </ul>
             </div>
