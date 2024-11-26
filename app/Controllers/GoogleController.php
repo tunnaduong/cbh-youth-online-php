@@ -40,7 +40,7 @@ class GoogleController extends BaseController
             return $this->render('errors.404', compact('error'));
         }
 
-        if (empty($_GET['state']) || ($_GET['state'] !== $_SESSION['oauth2state'])) {
+        if (empty($_GET['state']) || ($_GET['state'] !== $_SESSION['oauth2state'] ?? null)) {
             unset($_SESSION['oauth2state']);
             $error = 'Error: Invalid state';
             return $this->render('errors.404', compact('error'));
