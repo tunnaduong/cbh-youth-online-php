@@ -62,7 +62,7 @@
                     <h1 class="text-xl font-semibold mb-1 max-w-[600px] truncate">{{ $post->title }}</h1>
                     <div class="text-base max-w-[600px] overflow-wrap">
                         <div id="truncated{{ $post->post_id }}" style="display: block;">
-                            <span>{!! nl2br(truncateText($post->description, 330)) !!}</span>
+                            <span>{!! nl2br(htmlspecialchars(truncateText($post->description, 330))) !!}</span>
                             @if (strlen($post->description) > 330)
                                 <a class="text-black cursor-pointer hover:underline font-medium"
                                     onclick="toggleText{{ $post->post_id }}()">Xem
@@ -70,7 +70,7 @@
                             @endif
                         </div>
                         <div id="fullText{{ $post->post_id }}" style="display: none;">
-                            <span>{!! nl2br($post->description) !!} </span>
+                            <span>{!! nl2br(htmlspecialchars($post->description)) !!} </span>
                             <a class="text-black cursor-pointer hover:underline font-medium"
                                 onclick="toggleText{{ $post->post_id }}()">Thu
                                 gọn</a>
