@@ -4,6 +4,14 @@
             class="ml-1"></ion-icon>
     </h1>
     <div class="dropdown-menu min-w-[200px] rounded-lg" aria-labelledby="dropdownMenuButton">
+        <a href="/"
+            class="dropdown-item text-base font-semibold flex items-center w-[100%] text-left text-[#CACACA] hover:text-[#CACACA] hover:bg-slate-100 focus:bg-slate-100 focus:text-[#CACACA] active:bg-slate-200 p-2">
+            <div
+                class="text-lg rounded-lg w-[30px] h-[30px] mr-3 border-[#ECECEC] menu-border flex items-center justify-center">
+                <ion-icon name="home"></ion-icon>
+            </div>
+            <div class="text-[#6B6B6B]">Bảng tin</div>
+        </a>
         <a href="/forum"
             class="dropdown-item text-base font-semibold flex items-center w-[100%] text-left text-[#CACACA] hover:text-[#CACACA] hover:bg-slate-100 focus:bg-slate-100 focus:text-[#CACACA] active:bg-slate-200 p-2">
             <div
