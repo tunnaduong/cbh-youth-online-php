@@ -60,7 +60,7 @@
                 <div class="w-full space-y-2">
                     <div class="text-center text-sm text-gray-600">Đăng ký bằng</div>
                     <div class="flex justify-center space-x-4">
-                        <button
+                        <a href="/login/facebook"
                             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background shadow-sm hover:bg-[#eeeeee] hover:text-accent-foreground w-10 h-10">
                             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
                                 class="w-5 h-5 text-blue-600" height="1em" width="1em"
@@ -70,7 +70,7 @@
                                 </path>
                             </svg>
                             <span class="sr-only">Facebook</span>
-                        </button>
+                        </a>
                         <a href="/login/google"
                             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background shadow-sm hover:bg-[#eee] hover:text-accent-foreground w-10 h-10">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="w-5 h-5">

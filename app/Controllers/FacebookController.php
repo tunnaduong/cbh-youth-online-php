@@ -55,5 +55,8 @@ class FacebookController
     {
         // Save user to database and log them in
         // Redirect or show appropriate response
+        echo "<pre>";
+        print_r($userData);
+        echo "</pre>";
     }
 }
