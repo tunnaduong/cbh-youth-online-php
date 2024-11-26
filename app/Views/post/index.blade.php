@@ -153,7 +153,7 @@
                 </div>
             </div>
         </div>
-        <div class="px-1.5 md:!px-0 md:max-w-[679px] w-[100%]">
+        <div class="px-1.5 md:!px-0 md:max-w-[679px] w-[100%] -mb-5">
             <div class="shadow !mb-4 long-shadow h-min rounded-lg bg-white">
                 <div
                     class="flex flex-col space-y-1.5 p-6 text-xl -mb-4 font-semibold max-w-sm overflow-hidden whitespace-nowrap overflow-ellipsis">

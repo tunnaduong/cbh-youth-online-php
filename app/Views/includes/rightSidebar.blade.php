@@ -83,7 +83,7 @@
 </div>
 
 <!-- Bottom bar for smaller screens -->
-<div class="hidden max-md:block !px-3 pt-0 pb-6 -mt-1" id="bottom-sidebar">
+<div class="hidden max-md:block !px-3 pt-0 pb-6 mt-3" id="bottom-sidebar">
     <center>
         <div class="bg-white text-sm p-3 rounded-xl long-shadow" id="top-users">
             <span class="font-bold text-[#6B6B6B] block text-base text-left">Top thành viên tháng</span>
