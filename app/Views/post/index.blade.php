@@ -195,7 +195,7 @@
                                 <div data-comment-id="{{ $comment->comment_id }}" class="flex space-x-4">
                                     <a href="/{{ $comment->username }}">
                                         <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
-                                            <img src="{{ !empty($post->oauth_profile_picture) ? $post->oauth_profile_picture : (!empty($post->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $post->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
+                                            <img src="{{ !empty($comment->oauth_profile_picture) ? $comment->oauth_profile_picture : (!empty($comment->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $comment->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
                                                 class="flex h-full w-full items-center justify-center rounded-full border" />
                                         </span>
                                     </a>
@@ -249,7 +249,7 @@
                                                         <a href="/{{ $reply->username }}">
                                                             <span
                                                                 class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-full">
-                                                                <img src="{{ !empty($post->oauth_profile_picture) ? $post->oauth_profile_picture : (!empty($post->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $post->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
+                                                                <img src="{{ !empty($reply->oauth_profile_picture) ? $reply->oauth_profile_picture : (!empty($reply->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $reply->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
                                                                     class="flex h-full w-full items-center justify-center rounded-full border" />
                                                             </span>
                                                         </a>

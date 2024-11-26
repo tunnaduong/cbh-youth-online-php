@@ -1,9 +1,9 @@
 <?php
 return [
     'facebook' => [
-        'clientId' => 'YOUR_FACEBOOK_APP_ID',
-        'clientSecret' => 'YOUR_FACEBOOK_APP_SECRET',
-        'redirectUri' => 'YOUR_FACEBOOK_REDIRECT_URI',
+        'clientId' => FACEBOOK_APP_ID,
+        'clientSecret' => FACEBOOK_APP_SECRET,
+        'redirectUri' => FACEBOOK_REDIRECT_URI,
         'graphApiVersion' => 'v10.0',
     ],
     'google' => [
