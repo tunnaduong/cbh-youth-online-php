@@ -1,0 +1,69 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Models\ReportModel;
+
+class ReportController extends BaseController
+{
+    protected $reportModel;
+
+    public function __construct()
+    {
+        // Khởi tạo model
+        $this->reportModel = new ReportModel();
+    }
+
+    // Hiển thị form báo cáo
+    public function showReportForm()
+    {
+        $classes = $this->reportModel->getAllClasses(); // Lấy danh sách các lớp
+        $mistakes = $this->reportModel->getAllMistakes(); // Lấy danh sách các lỗi vi phạm
+        $this->render('report_form', [
+            'classes' => $classes,
+            'mistakes' => $mistakes
+        ]);
+    }
+
+    // Xác nhận báo cáo
+    public function confirmReport()
+    {
+        // Thu thập dữ liệu từ POST
+        $data = [
+            'class_id' => $_POST['class_id'],
+            'report_time' => $_POST['report_time'],
+            'absent' => $_POST['absent'],
+            'cleanliness' => $_POST['cleanliness'],
+            'uniform' => $_POST['uniform'],
+            'mistake_id' => $_POST['mistake_id'],
+            'note' => $_POST['note'],
+        ];
+
+        // Lấy thông tin bổ sung từ database để hiển thị
+        $data['class_name'] = $this->reportModel->getClassNameById($data['class_id']);
+        $data['mistake_name'] = $this->reportModel->getMistakeNameById($data['mistake_id']);
+
+        $this->render('confirm_report', ['report' => $data]);
+    }
+
+    // Gửi báo cáo
+    public function submitReport()
+    {
+        // Thu thập dữ liệu từ POST
+        $data = [
+            'class_id' => $_POST['class_id'],
+            'report_time' => $_POST['report_time'],
+            'absent' => $_POST['absent'],
+            'cleanliness' => $_POST['cleanliness'],
+            'uniform' => $_POST['uniform'],
+            'mistake_id' => $_POST['mistake_id'],
+            'note' => $_POST['note'],
+        ];
+
+        // Thêm báo cáo vào cơ sở dữ liệu
+        $this->reportModel->createReport($data);
+
+        // Hiển thị thông báo thành công
+        $this->render('report_success');
+    }
+}
