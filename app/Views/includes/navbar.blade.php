@@ -1,9 +1,10 @@
 <nav class="fixed w-[100%] top-0 bg-white shadow-md leading-[0] flex justify-between">
-    <div class="flex flex-row px-6 py-3.5"><button
+    <div class="flex flex-row px-6 py-3.5">
+        <button
             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 w-9 lg:hidden mr-3 min-w-[36px]"
-            type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:R5btb:"
-            data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="lucide lucide-menu h-6 w-6">
                 <line x1="4" x2="20" y1="12" y2="12"></line>
                 <line x1="4" x2="20" y1="6" y2="6"></line>
@@ -115,6 +116,30 @@
                 </ul>
             </div>
         @endif
+        <div class="offcanvas offcanvas-start max-w-72" tabindex="-1" id="offcanvasMenu"
+            aria-labelledby="offcanvasMenuLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body px-0 pt-0">
+                <nav>
+                    <a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
+                        href="/">
+                        <span class="mr-3">👥</span>Cộng đồng </a>
+                    <a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
+                        href="/reports">
+                        <span class="mr-3">📊</span>Báo cáo </a>
+                    <a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
+                        href="/lookup">
+                        <span class="mr-3">🔍</span>Tra cứu </a>
+                    <a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
+                        href="/explore">
+                        <span class="mr-3">🌟</span>Khám phá </a>
+                </nav>
+            </div>
+        </div>
     </div>
 </nav>
 <script>
