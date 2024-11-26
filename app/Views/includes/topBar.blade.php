@@ -1,6 +1,6 @@
 <div id="top-bar" class="mt-4 xl:hidden !px-4 flex justify-between items-center">
     <h1 class="text-xl font-semibold flex xl:hidden items-center cursor-pointer" role="button" id="dropdownMenuButton"
-        data-bs-toggle="dropdown" aria-expanded="false">Bảng tin <ion-icon name="chevron-down-outline"
+        data-bs-toggle="dropdown" aria-expanded="false">@yield('menu-label', 'Bảng tin') <ion-icon name="chevron-down-outline"
             class="ml-1"></ion-icon>
     </h1>
     <div class="dropdown-menu min-w-[200px] rounded-lg" aria-labelledby="dropdownMenuButton">

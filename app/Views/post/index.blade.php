@@ -59,7 +59,7 @@
                     @endif
                 </div>
                 <div class="flex-1 overflow-hidden break-words">
-                    <h1 class="text-xl font-semibold mb-1 max-w-[600px] truncate">{{ $post->title }}</h1>
+                    <h1 class="text-xl font-semibold mb-1">{{ $post->title }}</h1>
                     <div class="text-base max-w-[600px] overflow-wrap">
                         <div id="truncated{{ $post->post_id }}" style="display: block;">
                             <span>{!! nl2br(htmlspecialchars(truncateText($post->description, 330))) !!}</span>

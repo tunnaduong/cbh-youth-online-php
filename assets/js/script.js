@@ -56,27 +56,27 @@ $(document).ready(function () {
 });
 
 // Select all elements you want to adjust
-const postContainers = document.querySelectorAll(".post-container"); // Replace with your actual selector
+// const postContainers = document.querySelectorAll(".post-container"); // Replace with your actual selector
 
-function adjustMaxWidth() {
-  // Get the current window width
-  const windowWidth = window.innerWidth;
+// function adjustMaxWidth() {
+//   // Get the current window width
+//   const windowWidth = window.innerWidth;
 
-  // Loop through each selected element and apply max-width based on the window width
-  postContainers.forEach((postContainer) => {
-    if (windowWidth < 769) {
-      postContainer.style.maxWidth = `${windowWidth + 25}px`;
-    } else {
-      postContainer.style.maxWidth = "679px";
-    }
-  });
-}
+//   // Loop through each selected element and apply max-width based on the window width
+//   postContainers.forEach((postContainer) => {
+//     if (windowWidth < 769) {
+//       postContainer.style.maxWidth = `${windowWidth + 25}px`;
+//     } else {
+//       postContainer.style.maxWidth = "679px";
+//     }
+//   });
+// }
 
-// Initial check when the page loads
-adjustMaxWidth();
+// // Initial check when the page loads
+// adjustMaxWidth();
 
-// Listen for the resize event
-window.addEventListener("resize", adjustMaxWidth);
+// // Listen for the resize event
+// window.addEventListener("resize", adjustMaxWidth);
 
 // Select all upvote and downvote buttons
 const upvoteButtons = document.querySelectorAll(".upvote-button"); // Replace with your selector
