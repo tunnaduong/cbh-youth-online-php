@@ -3,19 +3,21 @@
 @section('content')
     <div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
         <div class="rounded-xl border bg-card text-card-foreground shadow w-full bg-white max-w-md">
-            <div class="flex flex-col p-6 -mb-3 space-y-4 text-center">
-                <div class="flex gap-x-1 items-center justify-center">
-                    <img alt="CYO's Logo" width="50" src="/assets/images/logo.png">
-                    <div class="text-[18px] text-left font-light text-[#319527] leading-5">
-                        <h1 class="font-light">Thanh niên</h1>
-                        <h1 class="font-bold">Chuyên Biên Hòa Online</h1>
-                    </div>
+            <div class="flex flex-col p-6 -mb-5 space-y-4 text-center">
+                <div class="flex justify-center">
+                    <a class="flex gap-x-1 items-center" href="/">
+                        <img alt="CYO's Logo" width="50" src="/assets/images/logo.png">
+                        <div class="text-[18px] text-left font-light text-[#319527] leading-5">
+                            <h1 class="font-light">Thanh niên</h1>
+                            <h1 class="font-bold">Chuyên Biên Hòa Online</h1>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="p-6 pt-0">
                 <!-- if error then show -->
                 @unless (empty($error))
-                    <div class="alert alert-danger text-sm" role="alert">
+                    <div class="alert alert-danger text-sm mt-2" role="alert">
                         {{ $error }}
                     </div>
                 @endunless

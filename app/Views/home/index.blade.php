@@ -92,12 +92,15 @@
                         }
                     </script>
                     @unless (!isset($post->cdn_image_id))
-                        <div
-                            class="rounded-md bg-[#E4EEE3] border overflow-hidden !mt-4 max-h-[34rem] flex items-center justify-center">
-                            <img alt="Ảnh bài viết" width="700" height="700" loading="lazy"
-                                class="object-contain max-h-[34rem] text-[11px]"
-                                src="https://api.chuyenbienhoa.com/storage/{{ $post->file_path }}" style="color: transparent;">
-                        </div>
+                        <a href="/{{ $post->username }}/posts/{{ $post->post_id }}">
+                            <div
+                                class="rounded-md bg-[#E4EEE3] border overflow-hidden !mt-4 max-h-[34rem] flex items-center justify-center">
+                                <img alt="Ảnh bài viết" width="700" height="700" loading="lazy"
+                                    class="object-contain max-h-[34rem] text-[11px]"
+                                    src="https://api.chuyenbienhoa.com/storage/{{ $post->file_path }}"
+                                    style="color: transparent;">
+                            </div>
+                        </a>
                     @endunless
                     <hr class="!my-5 border-t-2">
                     <div class="flex-wrap flex-row flex text-[13px] items-center"><a href="/{{ $post->username }}"><span
