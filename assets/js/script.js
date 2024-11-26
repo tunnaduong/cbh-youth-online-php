@@ -1,10 +1,19 @@
 function openModal() {
   var modal = $("#myModal");
   var btn = $("#openModalBtn");
+  var btn2 = $("#openModalBtn2");
   var closeBtn = $(".close");
 
   // When the user clicks the button, open the modal
   btn.click(function () {
+    if (!isLoggedIn) {
+      window.location.href = "/login";
+    } else {
+      modal.css("display", "block");
+    }
+  });
+
+  btn2.click(function () {
     if (!isLoggedIn) {
       window.location.href = "/login";
     } else {
