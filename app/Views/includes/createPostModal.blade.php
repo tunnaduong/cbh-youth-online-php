@@ -16,7 +16,17 @@
                     alt="{{ $_SESSION['user']->username }}'s avatar" class="border w-11 h-11 rounded-full">
                 <div class="flex flex-col ml-2">
                     <span
-                        class="text-base font-semibold mb-0.5">{{ $_SESSION['user']->additional_info->profile_name }}</span>
+                        class="text-base font-semibold mb-0.5 flex items-center">{{ $_SESSION['user']->additional_info->profile_name }}
+                        @if ($_SESSION['user']->additional_info->verified == 1)
+                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20"
+                                aria-hidden="true" class="text-base ml-0.5 text-green-600 mt-0.5" height="1em"
+                                width="1em" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        @endif
+                    </span>
                     <button class="flex items-center bg-gray-200 rounded-md px-1.5 py-0.5 cursor-pointer w-max">
                         <ion-icon name="earth" class="text-base mt-[1px] mr-0.5"></ion-icon>
                         <span class="text-sm font-semibold">Công khai</span>
