@@ -37,7 +37,7 @@
         // Set the locale to Vietnamese (for "1 tuần trước")
         Carbon::setLocale('vi');
     @endphp
-    <div class="bg-gray-300 w-full h-72"></div>
+    <div class="bg-gray-300 w-full h-56"></div>
     <div class="bg-white w-full h-16 shadow-md">
         <div class="mx-auto max-w-[959px] h-full flex">
             <img class="w-[170px] h-[170px] rounded-full absolute"
