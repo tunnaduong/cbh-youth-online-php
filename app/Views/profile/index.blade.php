@@ -71,8 +71,8 @@
                 </div>
             </div>
             <div class="flex-1 flex justify-end items-center">
-                <button type="button" {{ $_SESSION['user']->username == $profile->username ? 'disabled' : '' }}
-                    {!! $_SESSION['user']->username == $profile->username
+                <button type="button" {{ $_SESSION['user']->username ?? null == $profile->username ? 'disabled' : '' }}
+                    {!! $_SESSION['user']->username ?? null == $profile->username
                         ? ' data-bs-placement="right" data-bs-html="true" data-bs-toggle="tooltip" data-bs-container="body" data-bs-original-title="Bạn không thể tự theo dõi chính mình"'
                         : '' !!} class="btn btn-outline-success rounded-full px-4">Theo dõi</button>
             </div>
