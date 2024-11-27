@@ -27,10 +27,6 @@
 
 @section('content')
     @php
-        // Ensure the server locale is set to Vietnamese
-        setlocale(LC_TIME, 'vi_VN.UTF-8');
-        putenv('LC_ALL=vi_VN.UTF-8');
-
         // Create a Carbon instance from the given datetime
         $joinedDate = Carbon::createFromFormat('Y-m-d H:i:s', $profile->joined_from);
 
