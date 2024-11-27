@@ -71,10 +71,15 @@
                 </div>
             </div>
             <div class="flex-1 flex justify-end items-center">
-                <button type="button" {{ $_SESSION['user']->username ?? null == $profile->username ? 'disabled' : '' }}
-                    {!! $_SESSION['user']->username ?? null == $profile->username
-                        ? ' data-bs-placement="right" data-bs-html="true" data-bs-toggle="tooltip" data-bs-container="body" data-bs-original-title="Bạn không thể tự theo dõi chính mình"'
-                        : '' !!} class="btn btn-outline-success rounded-full px-4">Theo dõi</button>
+                @if (($_SESSION['user']->username ?? null) == $profile->username)
+                    <a href="/{{ $profile->username }}/edit" class="btn btn-outline-secondary rounded-full px-4"><i
+                            class="bi bi-gear-fill"></i> Sửa
+                        hồ sơ</a>
+                @else
+                    <button type="button"
+                        class="btn btn-outline-success rounded-full px-4 hover:bg-green-600 border-green-600 hover:border-green-600 text-green-600">Theo
+                        dõi</button>
+                @endif
             </div>
         </div>
         <div class="mx-auto max-w-[959px] flex">
@@ -94,7 +99,7 @@
                     @if (!empty($profile->birthday))
                         <div class="flex items-center -ml-0.5 gap-x-1 text-gray-500">
                             <ion-icon name="gift-outline" class="text-lg"></ion-icon>
-                            <span class="text-sm">Sinh ngày
+                            <span class="text-sm">Sinh vào
                                 {{ (function () use ($profile) {$fmt = new IntlDateFormatter('vi_VN', IntlDateFormatter::LONG, IntlDateFormatter::NONE);$fmt->setPattern("d 'Tháng' M yyyy");return $fmt->format(new DateTime($profile->birthday));})() }}</span>
                         </div>
                     @endif
