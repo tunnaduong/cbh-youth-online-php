@@ -55,29 +55,6 @@ $(document).ready(function () {
   $("#postTitle, #postDescription").on("input", toggleCreateButton);
 });
 
-// Select all elements you want to adjust
-// const postContainers = document.querySelectorAll(".post-container"); // Replace with your actual selector
-
-// function adjustMaxWidth() {
-//   // Get the current window width
-//   const windowWidth = window.innerWidth;
-
-//   // Loop through each selected element and apply max-width based on the window width
-//   postContainers.forEach((postContainer) => {
-//     if (windowWidth < 769) {
-//       postContainer.style.maxWidth = `${windowWidth + 25}px`;
-//     } else {
-//       postContainer.style.maxWidth = "679px";
-//     }
-//   });
-// }
-
-// // Initial check when the page loads
-// adjustMaxWidth();
-
-// // Listen for the resize event
-// window.addEventListener("resize", adjustMaxWidth);
-
 // Select all upvote and downvote buttons
 const upvoteButtons = document.querySelectorAll(".upvote-button"); // Replace with your selector
 const downvoteButtons = document.querySelectorAll(".downvote-button"); // Replace with your selector
@@ -415,6 +392,7 @@ function updateCommentVoteUI(commentId, newVoteCount, userVote) {
     voteCountElement.classList.remove("text-red-500");
   }
 }
+var isProcessing = false;
 
 // Add event listeners to upvote and downvote buttons
 commentUpvoteButtons.forEach((button) => {
@@ -461,4 +439,75 @@ function togglePassword(inputId, button) {
     input.type = "password";
     icon.setAttribute("name", "eye-outline");
   }
+}
+
+function handleFollowClick(uid, isFollow) {
+  if (isProcessing) return;
+  isProcessing = true;
+
+  if (isFollow) {
+    follow(uid);
+  } else {
+    unfollow(uid);
+  }
+}
+
+function follow(userId) {
+  if (!isLoggedIn) {
+    window.location.href = "/login";
+    return;
+  }
+
+  fetch(`/api/follow?followed_id=${userId}`)
+    .then((response) => response.json())
+    .then((result) => {
+      if (result.status === "success") {
+        // change the button class
+        document
+          .getElementById("followBtn")
+          .classList.remove("btn-outline-success");
+        document
+          .getElementById("followBtn")
+          .classList.remove("hover:bg-green-600");
+        document.getElementById("followBtn").classList.remove("text-green-600");
+        document.getElementById("followBtn").classList.add("btn-success");
+        document.getElementById("followBtn").classList.add("bg-green-600");
+        // change the button text
+        document.getElementById("followBtn").textContent = "Đang theo dõi";
+      }
+    })
+    .catch((error) => {
+      console.error("Error following user:", error);
+    });
+  isProcessing = false;
+}
+
+function unfollow(userId) {
+  if (!isLoggedIn) {
+    window.location.href = "/login";
+    return;
+  }
+
+  fetch(`/api/unfollow?followed_id=${userId}`)
+    .then((response) => response.json())
+    .then((result) => {
+      if (result.status === "success") {
+        // change the button class
+        document.getElementById("followBtn").classList.remove("btn-success");
+        document.getElementById("followBtn").classList.remove("bg-green-600");
+        document
+          .getElementById("followBtn")
+          .classList.add("btn-outline-success");
+        document
+          .getElementById("followBtn")
+          .classList.add("hover:bg-green-600");
+        document.getElementById("followBtn").classList.add("text-green-600");
+        // change the button text
+        document.getElementById("followBtn").textContent = "Theo dõi";
+      }
+    })
+    .catch((error) => {
+      console.error("Error unfollowing user:", error);
+    });
+  isProcessing = false;
 }

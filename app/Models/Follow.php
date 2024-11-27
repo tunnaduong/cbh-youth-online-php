@@ -6,7 +6,7 @@ class Follow extends BaseModel
 {
     public function follow($followerId, $followedId)
     {
-        $this->setQuery("INSERT INTO cyo_user_followers (follower_id, followed_id, created_at) VALUES (?, ?, ?, ?)");
+        $this->setQuery("INSERT INTO cyo_user_followers (follower_id, followed_id, created_at) VALUES (?, ?, ?)");
         return $this->execute([$followerId, $followedId, date('Y-m-d H:i:s')]);
     }
 
