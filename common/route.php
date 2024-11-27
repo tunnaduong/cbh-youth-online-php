@@ -40,8 +40,7 @@ try {
     $router->get('/api/comment/vote', [CommentVoteController::class, 'handleVote']);
     $router->get('/api/posts/{postId}/toggle-save', [SavePostController::class, 'toggleSavePost']);
     $router->get('/api/posts/{postId}/increment-view', [PostController::class, 'incrementView']);
-    $router->get('/api/follow', [FollowController::class, 'handleFollow']);
-    $router->get('/api/unfollow', [FollowController::class, 'handleUnfollow']);
+    $router->get('/api/toggle-follow', [FollowController::class, 'handleToggleFollowAndUnfollow']);
     $router->get('/email/verify/{token}', [AuthController::class, 'verifyEmail']);
     // $router->get('/email/resend', [AuthController::class, 'resendVerificationEmail']);
     $router->any('/password/reset', [AuthController::class, 'forgotPassword']);

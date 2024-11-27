@@ -14,10 +14,9 @@ class FollowController extends BaseController
         $this->followModel = new Follow();
     }
 
-    public function handleFollow()
+    public function handleToggleFollowAndUnfollow()
     {
         if (!isset($_SESSION['user'])) {
-            // header("Location: /login");
             echo json_encode(['status' => 'unauthorized']);
             exit;
         }
@@ -25,24 +24,13 @@ class FollowController extends BaseController
         $followerId = $_SESSION['user']->id;
         $followedId = $_GET['followed_id'] ?? null;
 
-        $this->followModel->follow($followerId, $followedId);
-        // return json response
-        echo json_encode(['status' => 'success']);
-    }
-
-    public function handleUnfollow()
-    {
-        if (!isset($_SESSION['user'])) {
-            // header("Location: /login");
-            echo json_encode(['status' => 'unauthorized']);
-            exit;
+        $isFollowing = $this->followModel->isFollowing($followerId, $followedId);
+        if ($isFollowing) {
+            $this->followModel->unfollow($followerId, $followedId);
+            echo json_encode(['status' => 'unfollowed']);
+        } else {
+            $this->followModel->follow($followerId, $followedId);
+            echo json_encode(['status' => 'followed']);
         }
-
-        $followerId = $_SESSION['user']->id;
-        $followedId = $_GET['followed_id'] ?? null;
-
-        $this->followModel->unfollow($followerId, $followedId);
-        // return json response
-        echo json_encode(['status' => 'success']);
     }
 }

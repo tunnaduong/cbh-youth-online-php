@@ -452,16 +452,16 @@ function handleFollowClick(uid, isFollow) {
   }
 }
 
-function follow(userId) {
+function toggleFollow(userId) {
   if (!isLoggedIn) {
     window.location.href = "/login";
     return;
   }
 
-  fetch(`/api/follow?followed_id=${userId}`)
+  fetch(`/api/toggle-follow?followed_id=${userId}`)
     .then((response) => response.json())
     .then((result) => {
-      if (result.status === "success") {
+      if (result.status === "followed") {
         // change the button class
         document
           .getElementById("followBtn")
@@ -474,24 +474,9 @@ function follow(userId) {
         document.getElementById("followBtn").classList.add("bg-green-600");
         // change the button text
         document.getElementById("followBtn").textContent = "Đang theo dõi";
-      }
-    })
-    .catch((error) => {
-      console.error("Error following user:", error);
-    });
-  isProcessing = false;
-}
-
-function unfollow(userId) {
-  if (!isLoggedIn) {
-    window.location.href = "/login";
-    return;
-  }
-
-  fetch(`/api/unfollow?followed_id=${userId}`)
-    .then((response) => response.json())
-    .then((result) => {
-      if (result.status === "success") {
+        document.querySelector("#follower_count").textContent =
+          parseInt(document.querySelector("#follower_count").textContent) + 1;
+      } else {
         // change the button class
         document.getElementById("followBtn").classList.remove("btn-success");
         document.getElementById("followBtn").classList.remove("bg-green-600");
@@ -504,10 +489,12 @@ function unfollow(userId) {
         document.getElementById("followBtn").classList.add("text-green-600");
         // change the button text
         document.getElementById("followBtn").textContent = "Theo dõi";
+        document.querySelector("#follower_count").textContent =
+          parseInt(document.querySelector("#follower_count").textContent) - 1;
       }
     })
     .catch((error) => {
-      console.error("Error unfollowing user:", error);
+      console.error("Error following user:", error);
     });
   isProcessing = false;
 }
