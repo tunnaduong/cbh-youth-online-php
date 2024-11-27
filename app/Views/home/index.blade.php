@@ -27,7 +27,7 @@
 
 @section('content')
     @include('includes.topBar')
-    <div class="flex flex-col items-center w-full flex-1 !p-3 pt-4 -mb-7">
+    <div class="flex flex-col items-center w-full flex-1 p-3 pt-4 -mb-7">
         @foreach ($posts as $post)
             @php
                 // Create a Carbon instance from the given datetime
