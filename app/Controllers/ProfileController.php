@@ -19,7 +19,7 @@ class ProfileController extends BaseController
     public function index($username)
     {
         $profile = $this->profileModel->getProfile($username);
-        $posts = $this->postModel->getPostsByUser($profile->uid);
+        $posts = $this->postModel->getPostsByUser($profile->uid ?? null);
         return $this->render('profile.index', compact('profile', 'posts'));
     }
 }
