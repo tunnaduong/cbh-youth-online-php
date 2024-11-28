@@ -61,62 +61,29 @@
     <center>
         <div class="bg-white text-sm p-3 rounded-xl long-shadow" id="top-users">
             <span class="font-bold text-[#6B6B6B] block text-base text-left">Top thành viên tháng</span>
-            <div class="flex flex-row items-center mt-2">
-                <span class="w-8 h-8 text-white bg-gray-300 rounded-full flex items-center justify-center">D</span>
-                <span class="ml-1.5 font-semibold flex-1 truncate text-left">Dương Tùng Anh</span>
-                <span class="mr-1.5 text-[#C1C1C1]">112 điểm</span>
-                <span class="text-green-500 font-bold">#1</span>
-            </div>
-            <!-- Add other members here -->
-            <div class="flex flex-row items-center mt-2">
-                <span class="w-8 h-8 text-white bg-gray-300 rounded-full flex items-center justify-center">H</span>
-                <span class="ml-1.5 font-semibold flex-1 truncate text-left">Hoàng Phát</span>
-                <span class="mr-1.5 text-[#C1C1C1]">89 điểm</span>
-                <span class="text-green-500 font-bold">#2</span>
-            </div>
-            <div class="flex flex-row items-center mt-2">
-                <span class="w-8 h-8 text-white bg-gray-300 rounded-full flex items-center justify-center">D</span>
-                <span class="ml-1.5 font-semibold flex-1 truncate text-left">Trần Thị Diệu Huyền</span>
-                <span class="mr-1.5 text-[#C1C1C1]">78 điểm</span>
-                <span class="text-green-500 font-bold">#3</span>
-            </div>
-            <div class="flex flex-row items-center mt-2">
-                <span class="w-8 h-8 text-white bg-gray-300 rounded-full flex items-center justify-center">N</span>
-                <span class="ml-1.5 font-semibold flex-1 truncate text-left">Ngọc Hoàn</span>
-                <span class="mr-1.5 text-[#C1C1C1]">74 điểm</span>
-                <span class="text-green-500 font-bold">#4</span>
-            </div>
-            <div class="flex flex-row items-center mt-2">
-                <span class="w-8 h-8 text-white bg-gray-300 rounded-full flex items-center justify-center">P</span>
-                <span class="ml-1.5 font-semibold flex-1 truncate text-left">Phạm Linh Chi</span>
-                <span class="mr-1.5 text-[#C1C1C1]">67 điểm</span>
-                <span class="text-green-500 font-bold">#5</span>
-            </div>
-            <div class="flex flex-row items-center mt-2">
-                <span class="w-8 h-8 text-white bg-gray-300 rounded-full flex items-center justify-center">P</span>
-                <span class="ml-1.5 font-semibold flex-1 truncate text-left">Phạm Xuân Đào</span>
-                <span class="mr-1.5 text-[#C1C1C1]">43 điểm</span>
-                <span class="text-green-500 font-bold">#6</span>
-            </div>
-            <div class="flex flex-row items-center mt-2">
-                <span class="w-8 h-8 text-white bg-gray-300 rounded-full flex items-center justify-center">L</span>
-                <span class="ml-1.5 font-semibold flex-1 truncate text-left">Long</span>
-                <span class="mr-1.5 text-[#C1C1C1]">14 điểm</span>
-                <span class="text-green-500 font-bold">#7</span>
-            </div>
-            <div class="flex flex-row items-center mt-2">
-                <span class="w-8 h-8 text-white bg-gray-300 rounded-full flex items-center justify-center">H</span>
-                <span class="ml-1.5 font-semibold flex-1 truncate text-left">H. Tuấn Anh</span>
-                <span class="mr-1.5 text-[#C1C1C1]">13 điểm</span>
-                <span class="text-green-500 font-bold">#8</span>
-            </div>
-            <hr class="my-2" />
-            <div class="flex flex-row items-center">
-                <span class="w-8 h-8 text-white bg-gray-300 rounded-full flex items-center justify-center">T</span>
-                <span class="ml-1.5 font-semibold flex-1 truncate text-left">Bạn</span>
-                <span class="mr-1.5 text-[#C1C1C1]">1 điểm</span>
-                <span class="text-green-500 font-bold">#34</span>
-            </div>
+            @foreach ($top_users as $user)
+                <div class="flex flex-row items-center mt-2">
+                    <a href="/{{ $user->username }}">
+                        <img src="{{ !empty($user->oauth_profile_picture) ? $user->oauth_profile_picture : (!empty($user->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $user->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
+                            class="w-8 h-8 bg-gray-300 rounded-full border"></img></a>
+                    <a href="/{{ $user->username }}"
+                        class="ml-1.5 font-semibold flex-1 truncate text-left">{{ $user->profile_name }}</a>
+                    <span class="mr-1.5 text-[#C1C1C1]">{{ $user->total_points }} điểm</span>
+                    <span class="text-green-500 font-bold">#{{ $loop->index + 1 }}</span>
+                </div>
+            @endforeach
+            @if (isset($_SESSION['user']))
+                <hr class="my-2" />
+                <div class="flex flex-row items-center">
+                    <a href="/{{ $user->username }}">
+                        <img src="{{ isset($_SESSION['user']->additional_info->oauth_profile_picture) ? $_SESSION['user']->additional_info->oauth_profile_picture : (!empty($_SESSION['user']->additional_info->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $_SESSION['user']->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
+                            class="w-8 h-8 bg-gray-300 rounded-full border"></img>
+                    </a>
+                    <span class="ml-1.5 font-semibold flex-1 truncate text-left">Bạn</span>
+                    <span class="mr-1.5 text-[#C1C1C1]">{{ $current_user->total_points }} điểm</span>
+                    <span class="text-green-500 font-bold">#{{ $current_user->current_rank }}</span>
+                </div>
+            @endif
         </div>
     </center>
     <center>
