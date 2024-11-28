@@ -146,7 +146,7 @@
         </div>
     </center>
     <center>
-        <div class="flex flex-row text-sm font-semibold p-3 text-[#BCBCBC] max-w-[290px]">
+        <div class="flex flex-row text-sm font-semibold p-3 text-[#BCBCBC] max-w-[290px] text-left">
             <div class="flex flex-1 flex-col gap-y-0.5">
                 <a href="#" class="w-fit">Hỗ trợ</a>
                 <a href="#" class="w-fit">Liên hệ</a>
