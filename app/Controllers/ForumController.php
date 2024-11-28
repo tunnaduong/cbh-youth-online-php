@@ -2,18 +2,24 @@
 
 namespace App\Controllers;
 
-use App\Models\MainCategory;
+use App\Models\Forum;
 use App\Models\Subforum;
+use App\Models\MainCategory;
 
 class ForumController extends BaseController
 {
+    protected $forumModel;
+
+    public function __construct()
+    {
+        $this->forumModel = new Forum();
+    }
 
     //Hiển thị danh sách các danh mục chính.
     public function index()
     {
         // Gọi model để lấy dữ liệu từ bảng main_categories
-        $mainCategoryModel = new MainCategory();
-        $mainCategories = $mainCategoryModel->getAllCategories();
+        $mainCategories = $this->forumModel->getCategories();
 
         // Gửi dữ liệu qua view
         $this->render('forum.index', ['mainCategories' => $mainCategories]);
@@ -23,8 +29,7 @@ class ForumController extends BaseController
     public function category($mainCategoryId)
     {
         // Gọi model để lấy danh mục chính
-        $mainCategoryModel = new MainCategory();
-        $mainCategory = $mainCategoryModel->getCategoryById($mainCategoryId);
+        $mainCategory = $this->forumModel->getCategoryById($mainCategoryId);
 
         if (!$mainCategory) {
             echo "Danh mục không tồn tại.";
@@ -32,8 +37,7 @@ class ForumController extends BaseController
         }
 
         // Lấy danh sách các subforum thuộc danh mục chính
-        $subforumModel = new Subforum();
-        $subforums = $subforumModel->getSubforumsByMainCategoryId($mainCategoryId);
+        $subforums = $this->forumModel->getSubforumsByMainCategoryId($mainCategoryId);
 
         // Gửi dữ liệu qua view
         $this->render('forum.category', [
@@ -46,8 +50,7 @@ class ForumController extends BaseController
     public function subforum($subforumId)
     {
         // Gọi model để lấy subforum
-        $subforumModel = new Subforum();
-        $subforum = $subforumModel->getSubforumById($subforumId);
+        $subforum = $this->forumModel->getSubforumById($subforumId);
 
         if (!$subforum) {
             echo "Subforum không tồn tại.";

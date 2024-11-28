@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use PDO;
@@ -26,6 +27,13 @@ class Forum extends BaseModel
         return $this->loadRow([$id]);
     }
 
+    public function getSubforumsByMainCategoryId($categoryId)
+    {
+        $this->setQuery("SELECT s.*, c.name as category_name FROM subforums sINNER JOIN categories  ON s.category_id = c.id WHERE s.category_id = ?");
+
+        return $this->loadAllRows([$categoryId]);
+    }
+
     // Lấy danh sách tất cả diễn đàn con
     public function getSubforums()
     {
@@ -50,14 +58,7 @@ class Forum extends BaseModel
     // Lấy bài viết mới nhất trong một danh mục
     public function getLatestPost($categoryId)
     {
-        $this->setQuery("
-            SELECT * 
-            FROM posts 
-            WHERE category_id = ? 
-            ORDER BY created_at DESC 
-            LIMIT 1
-        ");
+        $this->setQuery("SELECT * FROM posts WHERE category_id = ? ORDER BY created_at DESC LIMIT 1");
         return $this->loadRow([$categoryId]);
     }
 }
-?>
