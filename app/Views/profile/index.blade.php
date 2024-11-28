@@ -37,7 +37,7 @@
     <div class="bg-white w-full h-16 shadow-md">
         <div class="mx-auto max-w-[959px] h-full flex">
             <img class="w-[170px] h-[170px] rounded-full absolute"
-                style="border: 4px solid #fff; transform: translateY(-45%);"
+                style="border: 4px solid #eeeeee; transform: translateY(-45%);"
                 src="{{ !empty($profile->oauth_profile_picture) ? $profile->oauth_profile_picture : (!empty($profile->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $profile->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
                 alt="avatar">
             <div class="flex-1 min-w-[280px]"></div>
