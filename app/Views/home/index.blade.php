@@ -26,17 +26,8 @@
 @extends('layouts.home')
 
 @section('content')
-    <div class="mt-4 !px-4 flex justify-between items-center">
-        <h1 class="text-xl font-semibold flex md:hidden items-center cursor-pointer">Bảng tin <ion-icon
-                name="chevron-down-outline" class="ml-1"></ion-icon>
-        </h1>
-        <button id="openModalBtn"
-            class="flex md:hidden text-base font-semibold bg-[#319527] items-center justify-center w-full max-w-[180px] text-left leading-3 text-white rounded-xl !p-2.5">
-            <ion-icon name="add-outline" class="text-xl mr-1"></ion-icon>
-            Tạo bài viết mới
-        </button>
-    </div>
-    <div class="flex flex-col items-center w-full flex-1 p-2 pt-4">
+    @include('includes.topBar')
+    <div class="flex flex-col items-center w-full flex-1 p-3 pt-4 -mb-7">
         @foreach ($posts as $post)
             @php
                 // Create a Carbon instance from the given datetime
@@ -72,7 +63,7 @@
                     </a>
                     <div class="text-base max-w-[600px] overflow-wrap">
                         <div id="truncated{{ $post->post_id }}" style="display: block;">
-                            <span>{!! nl2br(truncateText($post->description, 330)) !!}</span>
+                            <span>{!! nl2br(htmlspecialchars(truncateText($post->description, 330))) !!}</span>
                             @if (strlen($post->description) > 330)
                                 <a class="text-black cursor-pointer hover:underline font-medium"
                                     onclick="toggleText{{ $post->post_id }}()">Xem
@@ -80,7 +71,7 @@
                             @endif
                         </div>
                         <div id="fullText{{ $post->post_id }}" style="display: none;">
-                            <span>{!! nl2br($post->description) !!} </span>
+                            <span>{!! nl2br(htmlspecialchars($post->description)) !!} </span>
                             <a class="text-black cursor-pointer hover:underline font-medium"
                                 onclick="toggleText{{ $post->post_id }}()">Thu
                                 gọn</a>
@@ -101,12 +92,15 @@
                         }
                     </script>
                     @unless (!isset($post->cdn_image_id))
-                        <div
-                            class="rounded-md bg-[#E4EEE3] border overflow-hidden !mt-4 max-h-[34rem] flex items-center justify-center">
-                            <img alt="Ảnh bài viết" width="700" height="700" loading="lazy"
-                                class="object-contain max-h-[34rem] text-[11px]"
-                                src="https://api.chuyenbienhoa.com/storage/{{ $post->file_path }}" style="color: transparent;">
-                        </div>
+                        <a href="/{{ $post->username }}/posts/{{ $post->post_id }}">
+                            <div
+                                class="rounded-md bg-[#E4EEE3] border overflow-hidden !mt-4 max-h-[34rem] flex items-center justify-center">
+                                <img alt="Ảnh bài viết" width="700" height="700" loading="lazy"
+                                    class="object-contain max-h-[34rem] text-[11px]"
+                                    src="https://api.chuyenbienhoa.com/storage/{{ $post->file_path }}"
+                                    style="color: transparent;">
+                            </div>
+                        </a>
                     @endunless
                     <hr class="!my-5 border-t-2">
                     <div class="flex-wrap flex-row flex text-[13px] items-center"><a href="/{{ $post->username }}"><span

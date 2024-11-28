@@ -26,4 +26,28 @@ class Report extends BaseModel
         // Trả về ID của bản ghi vừa được thêm
         return $this->getLastId();
     }
+    
+      // Lấy tất cả các lớp
+      public function getAllClasses() {
+        $this->setQuery("SELECT * FROM classes");
+        return $this->loadAllRows();
+    }
+
+    // Lấy tất cả lỗi
+    public function getAllMistakes() {
+        $this->setQuery("SELECT * FROM mistakes");
+        return $this->loadAllRows();
+    }
+
+    // Lấy tên lớp theo ID
+    public function getClassNameById($class_id) {
+        $this->setQuery("SELECT name FROM classes WHERE id = ?");
+        return $this->loadRow([$class_id])->name ?? null;
+    }
+
+    // Lấy tên lỗi theo ID
+    public function getMistakeNameById($mistake_id) {
+        $this->setQuery("SELECT name FROM mistakes WHERE id = ?");
+        return $this->loadRow([$mistake_id])->name ?? null;
+    }
 }

@@ -5,9 +5,9 @@ namespace App\Controllers;
 use Exception;
 use App\Models\OAuth;
 use App\Models\AuthAccount;
-use League\OAuth2\Client\Provider\Google;
+use League\OAuth2\Client\Provider\Facebook;
 
-class GoogleController extends BaseController
+class FacebookController extends BaseController
 {
     protected $provider;
     protected $oauth;
@@ -16,10 +16,11 @@ class GoogleController extends BaseController
     public function __construct()
     {
         $config = require 'config/oauth.php';
-        $this->provider = new Google([
-            'clientId'     => $config['google']['clientId'],
-            'clientSecret' => $config['google']['clientSecret'],
-            'redirectUri'  => $config['google']['redirectUri'],
+        $this->provider = new Facebook([
+            'clientId'          => $config['facebook']['clientId'],
+            'clientSecret'      => $config['facebook']['clientSecret'],
+            'redirectUri'       => $config['facebook']['redirectUri'],
+            'graphApiVersion'   => $config['facebook']['graphApiVersion'],
         ]);
         $this->oauth = new OAuth();
         $this->authAccount = new AuthAccount();
@@ -52,8 +53,8 @@ class GoogleController extends BaseController
             ]);
 
             // Get user details
-            $googleUser = $this->provider->getResourceOwner($token);
-            $userData = $googleUser->toArray();
+            $facebookUser = $this->provider->getResourceOwner($token);
+            $userData = $facebookUser->toArray();
 
             // Process and save the user data
             $this->loginOrCreateUser($userData);
@@ -67,7 +68,7 @@ class GoogleController extends BaseController
     {
         // Save user to database and log them in
         // Redirect or show appropriate response
-        $user = $this->oauth->login('google', $userData['email']);
+        $user = $this->oauth->login('facebook', $userData['email'] ?? $userData['id']);
         if ($user) {
             $user->additional_info = $this->authAccount->getByUsername($user->username);
             $_SESSION['user'] = $user;
@@ -75,15 +76,15 @@ class GoogleController extends BaseController
             exit;
         } else {
             // Check for duplicate email
-            $duplicate = $this->oauth->checkForEmailDuplicate($userData['email']);
+            $duplicate = $this->oauth->checkForEmailDuplicate($userData['email'] ?? null);
             if ($duplicate) {
                 $error = 'Email đã tồn tại trong hệ thống. Vui lòng sử dụng email khác hoặc đăng nhập bằng email này.';
                 return $this->render('auth.login', compact('error'));
             }
 
             // Register the user
-            $this->oauth->register('google', $userData['sub'], $userData['email'], $userData['name'], $userData['picture']);
-            $user = $this->oauth->login('google', $userData['email']);
+            $this->oauth->register('facebook', $userData['id'], $userData['email'] ?? null, $userData['name'], $userData['picture_url']);
+            $user = $this->oauth->login('facebook',  $userData['email'] ?? $userData['id']);
             $user->additional_info = $this->authAccount->getByUsername($user->username);
             $_SESSION['user'] = $user;
             header('Location: /');

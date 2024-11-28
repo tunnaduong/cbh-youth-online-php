@@ -9,7 +9,7 @@ class OAuth extends BaseModel
     public function register($provider, $username, $email, $name, $profile_picture)
     {
         $this->setQuery("INSERT INTO cyo_auth_accounts (username, email, provider, created_at, updated_at, email_verified_at) VALUES (?, ?, ?, ?, ?, ?)");
-        $this->execute([$username, $email, $provider, date('Y-m-d H:i:s'), date('Y-m-d H:i:s'), date('Y-m-d H:i:s')]);
+        $this->execute([$username, $email, $provider, date('Y-m-d H:i:s'), date('Y-m-d H:i:s'), $email == null ? null : date('Y-m-d H:i:s')]);
 
         // Get the last inserted ID
         $authAccountId = $this->getLastId();

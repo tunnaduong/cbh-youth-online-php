@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\ReportModel;
+use App\Models\Report;
 
 class ReportController extends BaseController
 {
@@ -11,7 +11,7 @@ class ReportController extends BaseController
     public function __construct()
     {
         // Khởi tạo model
-        $this->reportModel = new ReportModel();
+        $this->reportModel = new Report();
     }
 
     // Hiển thị form báo cáo
@@ -49,19 +49,8 @@ class ReportController extends BaseController
     // Gửi báo cáo
     public function submitReport()
     {
-        // Thu thập dữ liệu từ POST
-        $data = [
-            'class_id' => $_POST['class_id'],
-            'report_time' => $_POST['report_time'],
-            'absent' => $_POST['absent'],
-            'cleanliness' => $_POST['cleanliness'],
-            'uniform' => $_POST['uniform'],
-            'mistake_id' => $_POST['mistake_id'],
-            'note' => $_POST['note'],
-        ];
-
         // Thêm báo cáo vào cơ sở dữ liệu
-        $this->reportModel->createReport($data);
+        $this->reportModel->saveReport($_POST['class_id'], $_POST['report_time'], $_POST['absent'], $_POST['cleanliness'], $_POST['uniform'], $_POST['mistake_id'], $_POST['note']);
 
         // Hiển thị thông báo thành công
         $this->render('report_success');

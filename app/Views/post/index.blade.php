@@ -26,6 +26,7 @@
 @extends('layouts.home')
 
 @section('content')
+    @include('includes.topBar')
     <div class="flex flex-col items-center w-full flex-1 p-2 pt-4">
         @php
             // Create a Carbon instance from the given datetime
@@ -58,10 +59,10 @@
                     @endif
                 </div>
                 <div class="flex-1 overflow-hidden break-words">
-                    <h1 class="text-xl font-semibold mb-1 max-w-[600px] truncate">{{ $post->title }}</h1>
+                    <h1 class="text-xl font-semibold mb-1">{{ $post->title }}</h1>
                     <div class="text-base max-w-[600px] overflow-wrap">
                         <div id="truncated{{ $post->post_id }}" style="display: block;">
-                            <span>{!! nl2br(truncateText($post->description, 330)) !!}</span>
+                            <span>{!! nl2br(htmlspecialchars(truncateText($post->description, 330))) !!}</span>
                             @if (strlen($post->description) > 330)
                                 <a class="text-black cursor-pointer hover:underline font-medium"
                                     onclick="toggleText{{ $post->post_id }}()">Xem
@@ -69,7 +70,7 @@
                             @endif
                         </div>
                         <div id="fullText{{ $post->post_id }}" style="display: none;">
-                            <span>{!! nl2br($post->description) !!} </span>
+                            <span>{!! nl2br(htmlspecialchars($post->description)) !!} </span>
                             <a class="text-black cursor-pointer hover:underline font-medium"
                                 onclick="toggleText{{ $post->post_id }}()">Thu
                                 gọn</a>
@@ -152,8 +153,8 @@
                 </div>
             </div>
         </div>
-        <div class="px-1.5 md:!px-0 md:max-w-[679px] w-[100%]">
-            <div class="shadow !mb-5 long-shadow h-min rounded-lg bg-white">
+        <div class="px-1.5 md:!px-0 md:max-w-[679px] w-[100%] -mb-5">
+            <div class="shadow !mb-4 long-shadow h-min rounded-lg bg-white">
                 <div
                     class="flex flex-col space-y-1.5 p-6 text-xl -mb-4 font-semibold max-w-sm overflow-hidden whitespace-nowrap overflow-ellipsis">
                     Bình luận</div>
@@ -195,7 +196,7 @@
                                 <div data-comment-id="{{ $comment->comment_id }}" class="flex space-x-4">
                                     <a href="/{{ $comment->username }}">
                                         <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
-                                            <img src="{{ !empty($post->oauth_profile_picture) ? $post->oauth_profile_picture : (!empty($post->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $post->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
+                                            <img src="{{ !empty($comment->oauth_profile_picture) ? $comment->oauth_profile_picture : (!empty($comment->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $comment->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
                                                 class="flex h-full w-full items-center justify-center rounded-full border" />
                                         </span>
                                     </a>
@@ -249,7 +250,7 @@
                                                         <a href="/{{ $reply->username }}">
                                                             <span
                                                                 class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-full">
-                                                                <img src="{{ !empty($post->oauth_profile_picture) ? $post->oauth_profile_picture : (!empty($post->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $post->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
+                                                                <img src="{{ !empty($reply->oauth_profile_picture) ? $reply->oauth_profile_picture : (!empty($reply->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $reply->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
                                                                     class="flex h-full w-full items-center justify-center rounded-full border" />
                                                             </span>
                                                         </a>

@@ -12,3 +12,6 @@ const MAIL_PASSWORD = "";
 const GOOGLE_CLIENT_ID = "";
 const GOOGLE_CLIENT_SECRET = "";
 const GOOGLE_REDIRECT_URI = "";
+const FACEBOOK_APP_ID = "";
+const FACEBOOK_APP_SECRET = "";
+const FACEBOOK_REDIRECT_URI = "";
