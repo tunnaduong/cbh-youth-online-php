@@ -9,27 +9,27 @@ class Forum extends BaseModel
     // Lấy thông tin chi tiết danh mục dựa trên ID
     public function getCategoryById($id)
     {
-        $this->setQuery("SELECT * FROM categories WHERE id = ?");
+        $this->setQuery("SELECT * FROM cyo_forum_main_categories WHERE id = ?");
         return $this->loadRow([$id]);
     }
 
     // Lấy danh sách tất cả danh mục
     public function getCategories()
     {
-        $this->setQuery("SELECT * FROM categories");
+        $this->setQuery("SELECT * FROM cyo_forum_main_categories");
         return $this->loadAllRows();
     }
 
     // Lấy thông tin diễn đàn con (subforum) dựa trên ID
     public function getSubforumById($id)
     {
-        $this->setQuery("SELECT * FROM subforums WHERE id = ?");
+        $this->setQuery("SELECT * FROM cyo_forum_subforums WHERE id = ?");
         return $this->loadRow([$id]);
     }
 
     public function getSubforumsByMainCategoryId($categoryId)
     {
-        $this->setQuery("SELECT s.*, c.name as category_name FROM subforums sINNER JOIN categories  ON s.category_id = c.id WHERE s.category_id = ?");
+        $this->setQuery("SELECT s.*, c.name as category_name FROM cyo_forum_subforums s INNER JOIN cyo_forum_main_categories c ON s.main_category_id = c.id WHERE s.main_category_id = ?");
 
         return $this->loadAllRows([$categoryId]);
     }
@@ -37,28 +37,28 @@ class Forum extends BaseModel
     // Lấy danh sách tất cả diễn đàn con
     public function getSubforums()
     {
-        $this->setQuery("SELECT * FROM subforums");
+        $this->setQuery("SELECT * FROM cyo_forum_subforums");
         return $this->loadAllRows();
     }
 
     // Đếm số bài viết trong một danh mục
-    public function getPostCount($categoryId)
+    public function getPostCount($subforumId)
     {
-        $this->setQuery("SELECT COUNT(*) FROM posts WHERE category_id = ?");
-        return $this->loadRecord([$categoryId]);
+        $this->setQuery("SELECT COUNT(*) FROM cyo_topics WHERE subforum_id = ?");
+        return $this->loadRecord([$subforumId]);
     }
 
     // Đếm số bình luận trong một danh mục
-    public function getCommentCount($categoryId)
+    public function getCommentCount($subforumId)
     {
-        $this->setQuery("SELECT COUNT(*) FROM comments WHERE category_id = ?");
-        return $this->loadRecord([$categoryId]);
+        $this->setQuery("SELECT COUNT(*) FROM cyo_topic_comments WHERE topic_id IN (SELECT id FROM cyo_topics WHERE subforum_id = ?)");
+        return $this->loadRecord([$subforumId]);
     }
 
     // Lấy bài viết mới nhất trong một danh mục
-    public function getLatestPost($categoryId)
+    public function getLatestPost($subforumId)
     {
-        $this->setQuery("SELECT * FROM posts WHERE category_id = ? ORDER BY created_at DESC LIMIT 1");
-        return $this->loadRow([$categoryId]);
+        $this->setQuery("SELECT *, ct.created_at AS post_created_at, ct.id AS post_id FROM cyo_topics ct LEFT JOIN cyo_auth_accounts ca ON ct.user_id = ca.id LEFT JOIN cyo_user_profiles cu ON ca.username = cu.profile_username WHERE subforum_id = ? ORDER BY ct.created_at DESC LIMIT 1");
+        return $this->loadRow([$subforumId]);
     }
 }

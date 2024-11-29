@@ -3,8 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\Forum;
-use App\Models\Subforum;
-use App\Models\MainCategory;
 
 class ForumController extends BaseController
 {
@@ -21,8 +19,20 @@ class ForumController extends BaseController
         // Gọi model để lấy dữ liệu từ bảng main_categories
         $mainCategories = $this->forumModel->getCategories();
 
+        // Lấy danh sách các subforum thuộc tất cả các danh mục chính
+        foreach ($mainCategories as $category) {
+            $category->subforums = $this->forumModel->getSubforumsByMainCategoryId($category->id);
+            foreach ($category->subforums as $subforum) {
+                $subforum->posts_count = $this->forumModel->getPostCount($subforum->id);
+                $subforum->comments_count = $this->forumModel->getCommentCount($subforum->id);
+                $subforum->latest_post = $this->forumModel->getLatestPost($subforum->id);
+            }
+        }
+
         // Gửi dữ liệu qua view
-        $this->render('forum.index', ['mainCategories' => $mainCategories]);
+        return $this->render('forum.index', [
+            'mainCategories' => $mainCategories,
+        ]);
     }
 
     //Hiển thị danh sách các subforum thuộc danh mục chính.
