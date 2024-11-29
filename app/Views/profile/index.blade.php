@@ -92,7 +92,17 @@
         <div class="mx-auto max-w-[959px] flex">
             <div class="max-w-[280px] flex-1 !mt-10 pr-6 flex flex-col gap-y-3">
                 <div>
-                    <h1 class="font-bold text-xl">{{ $profile->profile_name }}</h1>
+                    <h1 class="font-bold text-xl flex items-center">{{ $profile->profile_name }}
+                        @if ($profile->verified == 1)
+                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20"
+                                aria-hidden="true" class="text-xl leading-5 ml-0.5 text-green-600" height="1em"
+                                width="1em" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        @endif
+                    </h1>
                     <p class="text-sm text-gray-500"><span>@</span>{{ $profile->username }}</p>
                 </div>
                 <p>{{ $profile->bio }}</p>

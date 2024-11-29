@@ -9,8 +9,9 @@
         @foreach ($mainCategories as $mainCategory)
             <!-- Section 1 -->
             <div class="max-w-[679px] w-[100%] mb-6">
-                <p class="text-lg font-semibold px-4 mb-2 uppercase">{{ $mainCategory->name }}</p>
-                <div class="bg-white long-shadow rounded-lg">
+                <a href="/forum/{{ $mainCategory->id }}"
+                    class="text-lg font-semibold px-4 uppercase">{{ $mainCategory->name }}</a>
+                <div class="bg-white long-shadow rounded-lg mt-2">
                     @foreach ($mainCategory->subforums as $subforum)
                         <div class="flex flex-row items-center min-h-[78px]">
                             <ion-icon name="chatbubbles" class="text-[#319528] text-3xl p-4"></ion-icon>
