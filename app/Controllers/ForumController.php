@@ -49,6 +49,12 @@ class ForumController extends BaseController
         // Lấy danh sách các subforum thuộc danh mục chính
         $subforums = $this->forumModel->getSubforumsByMainCategoryId($mainCategoryId);
 
+        foreach ($subforums as $subforum) {
+            $subforum->posts_count = $this->forumModel->getPostCount($subforum->id);
+            $subforum->comments_count = $this->forumModel->getCommentCount($subforum->id);
+            $subforum->latest_post = $this->forumModel->getLatestPost($subforum->id);
+        }
+
         // Gửi dữ liệu qua view
         $this->render('forum.category', [
             'mainCategory' => $mainCategory,
