@@ -72,5 +72,4 @@ class AdminController extends BaseController
         $this->render('admin.comments', ['comments' => $comments]);
     }
 }
-
 ?>
