@@ -2,38 +2,57 @@
 
 namespace App\Controllers;
 
-use App\Models\MainCategory;
-use App\Models\Subforum;
+use App\Models\Forum;
 
 class ForumController extends BaseController
 {
+    protected $forumModel;
+
+    public function __construct()
+    {
+        $this->forumModel = new Forum();
+    }
 
     //Hiển thị danh sách các danh mục chính.
     public function index()
     {
         // Gọi model để lấy dữ liệu từ bảng main_categories
-        $mainCategoryModel = new MainCategory();
-        $mainCategories = $mainCategoryModel->getAllCategories();
+        $mainCategories = $this->forumModel->getCategories();
+
+        // Lấy danh sách các subforum thuộc tất cả các danh mục chính
+        foreach ($mainCategories as $category) {
+            $category->subforums = $this->forumModel->getSubforumsByMainCategoryId($category->id);
+            foreach ($category->subforums as $subforum) {
+                $subforum->posts_count = $this->forumModel->getPostCount($subforum->id);
+                $subforum->comments_count = $this->forumModel->getCommentCount($subforum->id);
+                $subforum->latest_post = $this->forumModel->getLatestPost($subforum->id);
+            }
+        }
 
         // Gửi dữ liệu qua view
-        $this->render('forum.index', ['mainCategories' => $mainCategories]);
+        return $this->render('forum.index', [
+            'mainCategories' => $mainCategories,
+        ]);
     }
 
     //Hiển thị danh sách các subforum thuộc danh mục chính.
-    public function category($mainCategoryId)
+    public function category($mainCategorySlug)
     {
         // Gọi model để lấy danh mục chính
-        $mainCategoryModel = new MainCategory();
-        $mainCategory = $mainCategoryModel->getCategoryById($mainCategoryId);
+        $mainCategory = $this->forumModel->getCategoryBySlug($mainCategorySlug);
 
         if (!$mainCategory) {
-            echo "Danh mục không tồn tại.";
-            return;
+            return $this->render('errors.404', ['error' => "Danh mục không tồn tại."]);
         }
 
         // Lấy danh sách các subforum thuộc danh mục chính
-        $subforumModel = new Subforum();
-        $subforums = $subforumModel->getSubforumsByMainCategoryId($mainCategoryId);
+        $subforums = $this->forumModel->getSubforumsByMainCategorySlug($mainCategorySlug);
+
+        foreach ($subforums as $subforum) {
+            $subforum->posts_count = $this->forumModel->getPostCount($subforum->id);
+            $subforum->comments_count = $this->forumModel->getCommentCount($subforum->id);
+            $subforum->latest_post = $this->forumModel->getLatestPost($subforum->id);
+        }
 
         // Gửi dữ liệu qua view
         $this->render('forum.category', [
@@ -43,11 +62,10 @@ class ForumController extends BaseController
     }
 
     //Hiển thị thông tin chi tiết của subforum.
-    public function subforum($subforumId)
+    public function subforum($subforumSlug)
     {
         // Gọi model để lấy subforum
-        $subforumModel = new Subforum();
-        $subforum = $subforumModel->getSubforumById($subforumId);
+        $subforum = $this->forumModel->getSubforumBySlug($subforumSlug);
 
         if (!$subforum) {
             echo "Subforum không tồn tại.";

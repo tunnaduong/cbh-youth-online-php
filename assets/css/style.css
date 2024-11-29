@@ -173,3 +173,17 @@ a:hover {
     margin: 0 auto;
   }
 }
+
+hr {
+  /* border-top: 2px solid #d3d3d3; */
+  background-color: #aaaaaa;
+}
+
+.blur-effect {
+  -webkit-filter: blur(100px);
+  filter: blur(100px);
+  opacity: 0.3;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}

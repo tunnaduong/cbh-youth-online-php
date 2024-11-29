@@ -111,7 +111,7 @@
                             </span>
                         </a>
                         <span class="text-gray-500 hidden md:block ml-2">Đăng bởi</span>
-                        <a class="flex flex-row items-center ml-2 md:ml-1 text-[#319527] hover:text-[#319527] font-bold"
+                        <a class="flex flex-row items-center ml-2 md:ml-1 text-[#319527] hover:text-[#319527] font-bold hover:underline"
                             href="/{{ $post->username }}">{{ $post->profile_name }}
                             @if ($post->verified == 1)
                                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20"

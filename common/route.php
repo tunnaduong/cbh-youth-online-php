@@ -9,8 +9,10 @@ use App\Controllers\SavePostController;
 use App\Controllers\CommentVoteController;
 use App\Controllers\FacebookController;
 use App\Controllers\FollowController;
+use App\Controllers\ForumController;
 use App\Controllers\GoogleController;
 use App\Controllers\ProfileController;
+use App\Controllers\RecordingController;
 
 $url = !isset($_GET['url']) ? "/" : $_GET['url'];
 try {
@@ -49,6 +51,9 @@ try {
     $router->get('/login/google/callback', [GoogleController::class, 'handleProviderCallback']);
     $router->get('/login/facebook', [FacebookController::class, 'redirectToProvider']);
     $router->get('/login/facebook/callback', [FacebookController::class, 'handleProviderCallback']);
+    $router->get('/forum', [ForumController::class, 'index']);
+    $router->get('/forum/{mainCategorySlug}', [ForumController::class, 'category']);
+    $router->get('/recordings', [RecordingController::class, 'index']);
     $router->get('/{username}', [ProfileController::class, 'index']);
     // $router->get('/test/{email}/{token}', [AuthController::class, 'sendVerificationEmail']);
     # NB. You can cache the return value from $router->getData() so you don't have to create the routes each request - massive speed gains
