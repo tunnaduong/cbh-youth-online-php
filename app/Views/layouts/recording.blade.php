@@ -14,9 +14,13 @@
         <div class="flex-1">
             @yield('content')
         </div>
-        @include('includes.rightSidebar')
+        @include('includes.rightSidebar', [
+            'recordings' => true,
+        ])
     </div>
-    @include('includes.createPostModal')
+    @include('includes.createPostModal', [
+        'recordings' => true,
+    ])
     <script>
         var isLoggedIn = {{ isset($_SESSION['user']) ? 'true' : 'false' }};
         var uid = {{ isset($_SESSION['user']) ? $_SESSION['user']->id : 'null' }};

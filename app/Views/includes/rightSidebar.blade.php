@@ -8,8 +8,13 @@
 <div class="hidden xl:block w-[340px] !p-6 h-min sticky top-[69px]" id="right-sidebar">
     <button id="openModalBtn"
         class="mb-1.5 hidden md:flex text-base font-semibold bg-[#319527] items-center justify-center w-[100%] text-left leading-3 text-white rounded-xl !p-2.5">
-        <ion-icon name="add-outline" class="text-xl mr-1"></ion-icon>
-        Tạo bài viết mới
+        @if ($recordings ?? false)
+            <ion-icon name="mic" class="text-xl mr-1"></ion-icon>
+            Đăng ghi âm mới
+        @else
+            <ion-icon name="add-outline" class="text-xl mr-1"></ion-icon>
+            Tạo bài viết mới
+        @endif
     </button>
     <div class="bg-white text-sm p-3 mt-4 rounded-xl long-shadow">
         <span class="font-bold text-[#6B6B6B] block text-base">Top thành viên tháng</span>
