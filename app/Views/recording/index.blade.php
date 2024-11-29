@@ -36,3 +36,5 @@
         @endforeach
     </div>
 @endsection
+
+@section('communityActive', 'nav-active')
