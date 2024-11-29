@@ -33,7 +33,8 @@
         // Set the locale to Vietnamese (for "1 tuần trước")
         Carbon::setLocale('vi');
     @endphp
-    <div class="bg-gray-300 w-full h-56"></div>
+    <div style="background-image: url({{ !empty($profile->oauth_profile_picture) ? $profile->oauth_profile_picture : (!empty($profile->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $profile->username . '/avatar' : '/assets/images/placeholder-user.jpg') }})"
+        class="bg-gray-300 w-full h-56 blur-effect"></div>
     <div class="bg-white w-full h-16 shadow-md">
         <div class="mx-auto max-w-[959px] h-full flex">
             <img class="w-[170px] h-[170px] rounded-full absolute"

@@ -13,7 +13,8 @@
     <!-- Section 1 -->
     <div class="max-w-[679px] w-[100%] mb-6">
         <div class="bg-white long-shadow rounded-lg mt-2 p-4">
-            <a href="/forum/{{ $mainCategory->id }}" class="text-lg font-semibold uppercase">{{ $mainCategory->name }}</a>
+            <a href="/forum/{{ $mainCategory->slug }}"
+                class="text-lg font-semibold uppercase">{{ $mainCategory->name }}</a>
             <p class="!mt-3 text-base">{{ $mainCategory->description }}</p>
         </div>
         <div class="bg-white long-shadow rounded-lg !mt-5">
@@ -21,7 +22,7 @@
                 <div class="flex flex-row items-center min-h-[78px]">
                     <ion-icon name="chatbubbles" class="text-[#319528] text-3xl p-4"></ion-icon>
                     <div class="flex flex-col flex-1">
-                        <a href="/forum/{{ $mainCategory->id }}/sub/{{ $subforum->id }}"
+                        <a href="/forum/{{ $mainCategory->slug }}/{{ $subforum->slug }}"
                             class="text-[#319528] hover:text-[#319528] text-base font-bold w-fit">{{ $subforum->name }}</a>
                         <span class="text-sm text-gray-500">Bài viết: <span
                                 class="mr-1 font-semibold text-black">{{ $subforum->posts_count }}</span>
