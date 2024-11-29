@@ -9,7 +9,7 @@
     @include('includes.navbar')
     <div id="root" class="flex md:flex-row flex-col">
         @include('includes.leftSidebar', [
-            'feed' => true,
+            'forum' => true,
         ])
         <div class="flex-1">
             @yield('content')
