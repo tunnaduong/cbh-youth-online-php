@@ -7,10 +7,10 @@ use PDO;
 class Forum extends BaseModel
 {
     // Lấy thông tin chi tiết danh mục dựa trên ID
-    public function getCategoryById($id)
+    public function getCategoryBySlug($slug)
     {
-        $this->setQuery("SELECT * FROM cyo_forum_main_categories WHERE id = ?");
-        return $this->loadRow([$id]);
+        $this->setQuery("SELECT * FROM cyo_forum_main_categories WHERE slug = ?");
+        return $this->loadRow([$slug]);
     }
 
     // Lấy danh sách tất cả danh mục
@@ -21,10 +21,10 @@ class Forum extends BaseModel
     }
 
     // Lấy thông tin diễn đàn con (subforum) dựa trên ID
-    public function getSubforumById($id)
+    public function getSubforumBySlug($slug)
     {
-        $this->setQuery("SELECT * FROM cyo_forum_subforums WHERE id = ?");
-        return $this->loadRow([$id]);
+        $this->setQuery("SELECT * FROM cyo_forum_subforums WHERE slug = ?");
+        return $this->loadRow([$slug]);
     }
 
     public function getSubforumsByMainCategoryId($categoryId)
@@ -32,6 +32,13 @@ class Forum extends BaseModel
         $this->setQuery("SELECT s.*, c.name as category_name FROM cyo_forum_subforums s INNER JOIN cyo_forum_main_categories c ON s.main_category_id = c.id WHERE s.main_category_id = ?");
 
         return $this->loadAllRows([$categoryId]);
+    }
+
+    public function getSubforumsByMainCategorySlug($slug)
+    {
+        $this->setQuery("SELECT s.*, c.name as category_name FROM cyo_forum_subforums s INNER JOIN cyo_forum_main_categories c ON s.main_category_id = c.id WHERE c.slug = ?");
+
+        return $this->loadAllRows([$slug]);
     }
 
     // Lấy danh sách tất cả diễn đàn con

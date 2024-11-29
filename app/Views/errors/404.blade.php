@@ -3,8 +3,8 @@
 @section('content')
     <div class="flex flex-1 items-center justify-center w-full px-3"
         style="display:block;position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%)">
-        <center><img src="/assets/images/404.svg" alt="404" class="w-[120px] h-[120px] mb-2"
-                id="error-404">
+        <center>
+            <img src="/assets/images/404.svg" alt="404" class="w-[120px] h-[120px] mb-2" id="error-404">
             <h4 class="font-bold text-gray-500 text-lg">Bạn hiện không xem được nội dung này</h4>
             <p class="text-base text-gray-500 max-w-[450px]">Lỗi này thường do chủ sở hữu chỉ chia sẻ nội dung với một nhóm
                 nhỏ,
@@ -18,6 +18,6 @@
         </center>
     </div>
     <script>
-        console.error("Error from PHP: {{ $error }}");
+        console.error("Error from PHP: {{ html_entity_decode($error) }}");
     </script>
 @endsection
