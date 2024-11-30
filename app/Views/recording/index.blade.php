@@ -5,21 +5,23 @@
         <!-- Recordings -->
         @foreach ($recordings as $recording)
             <div class="max-w-[679px] w-full long-shadow mb-4 flex flex-row rounded-lg overflow-hidden bg-white">
-                <div class="flex items-center justify-center mr-3 shrink-0">
+                <a href="/recordings/{{ $recording->id }}" class="flex items-center justify-center mr-3 shrink-0">
                     <img src="{{ isset($recording->preview_path) ? 'https://api.chuyenbienhoa.com/storage/' . $recording->preview_path : '/assets/images/soundwaves.png' }}"
                         alt="{{ $recording->title }}" class="w-24 h-24">
                     <img class="absolute w-9" src="/assets/images/play.png" alt="Play button">
-                </div>
+                </a>
                 <div class="flex flex-col flex-1">
                     <div class="flex flex-row flex-1 items-center mt-[2px]">
-                        <a href="/recordings/{{ $recording->id }}">
-                            <h1 class="flex-1 font-semibold text-xl max-w-[520px] truncate">{{ $recording->title }}</h1>
+                        <a class="flex-1" href="/recordings/{{ $recording->id }}">
+                            <h1 class="font-semibold text-xl max-w-[510px] truncate">{{ $recording->title }}</h1>
                         </a>
                         <span class="text-sm mr-3 text-gray-500">{{ $recording->audio_length }}</span>
                     </div>
                     <div class="flex flex-1 items-center text-[13px] text-gray-500">
-                        <img src="{{ !empty($recording->oauth_profile_picture) ? $recording->oauth_profile_picture : (!empty($recording->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $recording->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
-                            alt="{{ $recording->username }} avatar" class="mr-1.5 w-7 h-7 rounded-full border">
+                        <a href="/{{ $recording->username }}">
+                            <img src="{{ !empty($recording->oauth_profile_picture) ? $recording->oauth_profile_picture : (!empty($recording->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $recording->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
+                                alt="{{ $recording->username }} avatar" class="mr-1.5 w-7 h-7 rounded-full border">
+                        </a>
                         <span>Đăng bởi <a href="/{{ $recording->username }}"
                                 class="font-semibold text-[#319527] hover:text-[#319527] hover:underline">{{ $recording->profile_name }}</a>
                         </span>
