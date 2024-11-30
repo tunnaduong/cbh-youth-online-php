@@ -36,7 +36,7 @@ try {
     $router->get('/{username}/posts/{postId}', [PostController::class, 'postDetail']);
     $router->post('/{username}/posts/{postId}', [PostController::class, 'addNewComment']);
     $router->post('/', [PostController::class, 'addNewPost']);
-    $router->get('/report', [ReportController::class, 'showReportForm']);
+    $router->get('/report', [HomeController::class, 'report']);
     $router->get('/report/class/success', [ReportController::class, 'submitReport']);
     $router->get('/report/class/confirm', [ReportController::class, 'confirmReport']);
     $router->get('/report/class', [ReportController::class, 'showReportForm']);
