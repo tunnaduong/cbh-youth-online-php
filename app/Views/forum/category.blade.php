@@ -10,8 +10,16 @@
 @include('includes.topBar')
 
 <div class="flex flex-1 !p-6 !px-2.5 items-center flex-col -mb-8">
-    <!-- Section 1 -->
     <div class="max-w-[679px] w-[100%] mb-6">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/forum" class=" flex items-center">Diễn đàn</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a
+                        href="/forum/{{ $mainCategory->slug }}">{{ $mainCategory->name }}</a>
+                </li>
+            </ol>
+        </nav>
         <div class="bg-white long-shadow rounded-lg mt-2 p-4">
             <a href="/forum/{{ $mainCategory->slug }}"
                 class="text-lg font-semibold uppercase">{{ $mainCategory->name }}</a>

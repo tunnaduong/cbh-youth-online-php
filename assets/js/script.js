@@ -498,3 +498,20 @@ function toggleFollow(userId) {
     });
   isProcessing = false;
 }
+
+function adjustColspan() {
+  const td = document.getElementById("responsive-td");
+  const smBreakpoint = 640; // Tailwind's sm breakpoint in pixels
+
+  if (window.innerWidth < smBreakpoint) {
+    td.setAttribute("colspan", "2");
+  } else {
+    td.removeAttribute("colspan");
+  }
+}
+
+// Run on page load
+adjustColspan();
+
+// Add event listener for screen resizing
+window.addEventListener("resize", adjustColspan);

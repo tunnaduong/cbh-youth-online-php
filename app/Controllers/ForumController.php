@@ -62,17 +62,22 @@ class ForumController extends BaseController
     }
 
     //Hiển thị thông tin chi tiết của subforum.
-    public function subforum($subforumSlug)
+    public function subforum($mainCategorySlug, $subforumSlug)
     {
         // Gọi model để lấy subforum
         $subforum = $this->forumModel->getSubforumBySlug($subforumSlug);
 
+        $mainCategory = $this->forumModel->getCategoryBySlug($mainCategorySlug);
+
+        if (!$mainCategory) {
+            return $this->render('errors.404', ['error' => "Danh mục không tồn tại."]);
+        }
+
         if (!$subforum) {
-            echo "Subforum không tồn tại.";
-            return;
+            return $this->render('errors.404', ['error' => "Subforum không tồn tại."]);
         }
 
         // Gửi dữ liệu qua view
-        $this->render('forum.subforum', ['subforum' => $subforum]);
+        $this->render('forum.subforum', ['subforum' => $subforum, 'mainCategory' => $mainCategory]);
     }
 }
