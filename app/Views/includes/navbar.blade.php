@@ -38,7 +38,7 @@
             <a class="lg:flex px-3 py-2 mr-5 hidden h-full items-center min-w-max text-center text-sm font-medium transition-colors duration-200 @yield('communityActive')"
                 href="/">Cộng đồng</a>
             <a class="lg:flex px-3 py-2 mr-5 hidden h-full items-center min-w-max text-center text-sm font-medium transition-colors duration-200 @yield('reportActive')"
-                href="/reports">Báo cáo</a>
+                href="/report">Báo cáo</a>
             <a class="lg:flex px-3 py-2 mr-5 hidden h-full items-center min-w-max text-center text-sm font-medium transition-colors duration-200 @yield('lookupActive')"
                 href="/lookup">Tra cứu</a>
             <a class="lg:flex px-3 py-2 mr-5 hidden h-full items-center min-w-max text-center text-sm font-medium transition-colors duration-200 @yield('exploreActive')"
@@ -129,7 +129,7 @@
                         href="/">
                         <span class="mr-3">👥</span>Cộng đồng </a>
                     <a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
-                        href="/reports">
+                        href="/report">
                         <span class="mr-3">📊</span>Báo cáo </a>
                     <a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
                         href="/lookup">

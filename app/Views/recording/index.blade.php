@@ -31,8 +31,10 @@
                         <div class="flex items-center flex-1 flex-row-reverse mr-2.5">
                             <span>46</span>
                             <ion-icon class="text-xl mr-1 ml-2" name="eye-outline"></ion-icon>
-                            <span>05+</span>
-                            <ion-icon class="text-xl mr-1" name="chatbox-outline"></ion-icon>
+                            <a class="flex items-center flex-row-reverse" href="/recordings/{{ $recording->id }}">
+                                <span>05+</span>
+                                <ion-icon class="text-xl mr-1" name="chatbox-outline"></ion-icon>
+                            </a>
                         </div>
                     </div>
                 </div>
