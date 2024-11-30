@@ -46,26 +46,21 @@
                     class="flex w-full rounded-md border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 min-h-[120px] border focus-visible:ring-0"
                     name="content" placeholder="Nội dung bài viết"></textarea>
                 <uk-select name="subforum" uk-cloak placeholder="Chọn chuyên mục phù hợp">
-                    <optgroup label="Letter A">
-                        <option value="apple">Apple</option>
-                        <option value="apricot">Apricot</option>
-                        <option value="avocado">Avocado</option>
-                        <option value="ackee">Ackee</option>
-                        <option value="asian_pear">Asian Pear</option>
-                        <option value="abiu">Abiu</option>
-                        <option value="ambarella">Ambarella</option>
-                    </optgroup>
-
-                    <optgroup label="Letter B">
-                        <option value="banana">Banana</option>
-                        <option value="blackberry">Blackberry</option>
-                        <option value="blueberry">Blueberry</option>
-                        <option value="boysenberry">Boysenberry</option>
-                        <option value="breadfruit">Breadfruit</option>
-                        <option value="bilberry">Bilberry</option>
-                        <option value="bael">Bael</option>
-                        <option value="black_sapote">Black Sapote</option>
-                    </optgroup>
+                    @php
+                        $categories = (new \App\Models\Forum())->getCategories();
+                        foreach ($categories as $category) {
+                            $category->subforums = (new \App\Models\Forum())->getSubforumsByMainCategoryId(
+                                $category->id,
+                            );
+                        }
+                    @endphp
+                    @foreach ($categories as $category)
+                        <optgroup label="{{ $category->name }}">
+                            @foreach ($category->subforums as $subforum)
+                                <option value="{{ $subforum->slug }}">{{ $subforum->name }}</option>
+                            @endforeach
+                        </optgroup>
+                    @endforeach
                 </uk-select>
                 @if ($recordings ?? false)
                     <div class="flex flex-row items-center rounded-lg border bg-card text-card-foreground p-3">
