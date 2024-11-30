@@ -87,10 +87,14 @@
                                 $formattedDate = $date->translatedFormat('d/m/y'); // Day/Month/2-digit year
                             }
 
-                            $commentDate = Carbon::createFromFormat(
-                                'Y-m-d H:i:s',
-                                $post->latest_comment->comment_created_at,
-                            );
+                            if (!empty($post->latest_comment)) {
+                                $commentDate = Carbon::createFromFormat(
+                                    'Y-m-d H:i:s',
+                                    $post->latest_comment->comment_created_at,
+                                );
+                            } else {
+                                $commentDate = Carbon::createFromFormat('Y-m-d H:i:s', $post->post_created_at);
+                            }
 
                             // Set the locale to Vietnamese (for "1 tuần trước")
                             Carbon::setLocale('vi');
@@ -128,7 +132,11 @@
                                                 Trả lời: <span class="text-black">{{ $post->comments_count }}</span> ·
                                                 Xem: <span class="text-black">{{ $post->views_count }}</span>
                                             </div>
-                                            <div>{{ $commentDate->diffForHumans() }}</div>
+                                            @if (!empty($post->latest_comment))
+                                                <div>{{ $commentDate->diffForHumans() }}</div>
+                                            @else
+                                                <div>{{ $formattedDate }}</div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -138,9 +146,15 @@
                             <td class="!p-3 text-center text-sm text-gray-500 hidden sm:table-cell">
                                 {{ $post->views_count }}</td>
                             <td class="!p-3 text-right text-sm text-gray-500 hidden sm:table-cell">
-                                <a href="/{{ $post->latest_comment->username }}"
-                                    class="hidden sm:block"><span>@</span>{{ $post->latest_comment->username }}</a>
-                                <div>{{ $commentDate->diffForHumans() }}</div>
+                                @if (!empty($post->latest_comment))
+                                    <a href="/{{ $post->latest_comment->username }}"
+                                        class="hidden sm:inline"><span>@</span>{{ $post->latest_comment->username }}</a>
+                                    <div>{{ $commentDate->diffForHumans() }}</div>
+                                @else
+                                    <a href="/{{ $post->username }}"
+                                        class="hidden sm:inline"><span>@</span>{{ $post->username }}</a>
+                                    <div>{{ $formattedDate }}</div>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
