@@ -18,6 +18,6 @@
         </center>
     </div>
     <script>
-        console.error("Error from PHP: {{ html_entity_decode($error) }}");
+        console.error("Error from PHP: {!! $error !!}");
     </script>
 @endsection

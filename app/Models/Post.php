@@ -19,7 +19,7 @@ class Post extends BaseModel
         // die(var_dump($_POST));
         $this->execute([
             $_SESSION['user']->id,
-            $_POST['subforumId'] ?? null,
+            $_POST['subforumId'],
             $_POST['title'],
             $_POST['content'],
             date('Y-m-d H:i:s'),

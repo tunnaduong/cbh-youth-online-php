@@ -247,6 +247,29 @@ fileInput.addEventListener("change", function (e) {
   }
 });
 
+// Function to get the selected value or ID from uk-select
+function getSelectedIdFromUkSelect() {
+  // Select the placeholder button showing the current selection
+  const selectedElement = document.querySelector(
+    "#subforumId .uk-input-fake span"
+  );
+
+  if (selectedElement) {
+    const selectedText = selectedElement.textContent.trim(); // Get the visible text
+    console.log("Selected Text:", selectedText);
+
+    // Map the text to an ID if needed (you can maintain a mapping in a separate object)
+
+    const selectedId = subforum[selectedText] || null; // Get ID from mapping
+    console.log("Selected ID:", selectedId);
+
+    return selectedId;
+  } else {
+    console.error("No selection found");
+    return null;
+  }
+}
+
 document
   .getElementById("createPostForm")
   .addEventListener("submit", async function (event) {
@@ -254,7 +277,7 @@ document
 
     const title = document.getElementById("postTitle").value;
     const content = document.getElementById("postDescription").value;
-    const subforumId = document.getElementById("subforumId").value;
+    const subforumId = getSelectedIdFromUkSelect(); // Get the selected subforum ID
     const imageFile = document.getElementById("fileInput").files[0];
 
     try {
