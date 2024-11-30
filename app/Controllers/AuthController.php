@@ -174,7 +174,7 @@ class AuthController extends BaseController
             // Mark the user as verified by setting verified_at timestamp
             $this->authAccount->markAsVerified($userId);
 
-            if ($this->authAccount->checkVerified($userId)) {
+            if (!$this->authAccount->checkVerified($userId)) {
                 return $this->render('errors.verifyEmailFailed');
             }
 
