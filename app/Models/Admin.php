@@ -43,7 +43,7 @@ class Admin extends BaseModel
     // Lấy tất cả bài viết
     public function getAllPosts()
     {
-        $this->setQuery("SELECT * FROM posts");
+        $this->setQuery("SELECT * FROM cyo_topics");
         return $this->loadAllRows();
     }
 
@@ -95,6 +95,11 @@ class Admin extends BaseModel
         $this->setQuery("DELETE FROM subforums WHERE id = ?");
         return $this->execute([$id]);
     }
-}
 
-?>
+    // Lấy dữ liệu người dùng
+    public function getAllUsers()
+    {
+        $this->setQuery("SELECT * FROM cyo_auth_accounts");
+        return $this->loadAllRows();
+    }
+}

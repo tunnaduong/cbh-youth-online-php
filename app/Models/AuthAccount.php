@@ -20,8 +20,12 @@ class AuthAccount extends BaseModel
         $user = $this->loadRow([$usernameOrEmail, $usernameOrEmail]);
 
         // Check if user exists and verify the password
-        if ($user && password_verify($password, $user->password)) {
-            return $user; // Password is correct, return user data
+        if (!empty($password) && !empty($user->password)) {
+            if ($user && password_verify($password, $user->password)) {
+                return $user; // Password is correct, return user data
+            }
+        } else {
+            return false; // Password is incorrect or user does not exist
         }
 
         return false; // Password is incorrect or user does not exist

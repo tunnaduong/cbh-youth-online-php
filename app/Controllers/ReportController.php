@@ -17,9 +17,24 @@ class ReportController extends BaseController
     // Hiển thị form báo cáo
     public function showReportForm()
     {
+        if (!isset($_SESSION['user'])) {
+            header('Location: /login');
+            exit;
+        }
+
+        if ($_SESSION['user']->role != 'volunteer' && $_SESSION['user']->role != 'admin') {
+            return $this->render('errors.forbiddenReport');
+        }
+
+        // nếu url không phải là /report/class thì chuyển hướng về /report/class
+        if ($_SERVER['REQUEST_URI'] != '/report/class') {
+            header('Location: /report/class');
+            exit;
+        }
+
         $classes = $this->reportModel->getAllClasses(); // Lấy danh sách các lớp
         $mistakes = $this->reportModel->getAllMistakes(); // Lấy danh sách các lỗi vi phạm
-        $this->render('report_form', [
+        $this->render('report.index', [
             'classes' => $classes,
             'mistakes' => $mistakes
         ]);

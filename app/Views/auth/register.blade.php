@@ -48,6 +48,7 @@
                             placeholder="Nhập lại mật khẩu" type="password" name="confirm_password"
                             value="{{ $_POST['confirm_password'] }}">
                     </div>
+                    <div class="g-recaptcha" data-sitekey="6Lf9QY4qAAAAAJuc1teb4_VpVRzrQj6HAf9GESU9"></div>
                     <button
                         class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 shadow h-9 px-4 w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700"
                         type="submit">Đăng ký</button>

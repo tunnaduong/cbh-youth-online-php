@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\AdminController;
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
 use App\Controllers\PostController;
@@ -36,7 +37,7 @@ try {
     $router->get('/{username}/posts/{postId}', [PostController::class, 'postDetail']);
     $router->post('/{username}/posts/{postId}', [PostController::class, 'addNewComment']);
     $router->post('/', [PostController::class, 'addNewPost']);
-    $router->get('/report', [HomeController::class, 'report']);
+    $router->get('/report', [ReportController::class, 'showReportForm']);
     $router->get('/report/class/success', [ReportController::class, 'submitReport']);
     $router->get('/report/class/confirm', [ReportController::class, 'confirmReport']);
     $router->get('/report/class', [ReportController::class, 'showReportForm']);
@@ -59,6 +60,7 @@ try {
     $router->get('/forum', [ForumController::class, 'index']);
     $router->get('/forum/{mainCategorySlug}', [ForumController::class, 'category']);
     $router->get('/recordings', [RecordingController::class, 'index']);
+    $router->get("/admin", [AdminController::class, 'index']);
     $router->get('/{username}', [ProfileController::class, 'index']);
     // $router->get('/test/{email}/{token}', [AuthController::class, 'sendVerificationEmail']);
     # NB. You can cache the return value from $router->getData() so you don't have to create the routes each request - massive speed gains

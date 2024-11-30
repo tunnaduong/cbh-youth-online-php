@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex flex-1 pt-4 px-2.5 -mb-3 items-center flex-col">
         <!-- Main form -->
-        <div class="max-w-[679px] w-[100%] long-shadow mb-4 rounded-md bg-white !p-2">
+        <div class="max-w-[679px] w-[100%] long-shadow mb-4 rounded-md bg-white !p-0 sm:!p-2">
             <h1 class="text-center font-semibold my-3 text-[22px]">Báo cáo vi phạm tập thể lớp</h1>
             <div class="flex flex-row justify-center items-center mb-7">
                 <div class="flex flex-col items-center">
