@@ -15,15 +15,16 @@ class Post extends BaseModel
 
     public function addNewPost()
     {
-        $this->setQuery("INSERT INTO cyo_topics (user_id, title, description, created_at, updated_at, cdn_image_id) VALUES (?, ?, ?, ?, ?, ?)");
+        $this->setQuery("INSERT INTO cyo_topics (user_id, subforum_id, title, description, created_at, updated_at, cdn_image_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
         // die(var_dump($_POST));
         $this->execute([
             $_SESSION['user']->id,
+            $_POST['subforumId'] ?? null,
             $_POST['title'],
             $_POST['content'],
             date('Y-m-d H:i:s'),
             date('Y-m-d H:i:s'),
-            $_POST['imageId']
+            $_POST['imageId'] ?? null
         ]);
     }
 

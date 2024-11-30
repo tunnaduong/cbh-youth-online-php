@@ -254,6 +254,7 @@ document
 
     const title = document.getElementById("postTitle").value;
     const content = document.getElementById("postDescription").value;
+    const subforumId = document.getElementById("subforumId").value;
     const imageFile = document.getElementById("fileInput").files[0];
 
     try {
@@ -269,7 +270,7 @@ document
       }
 
       // Step 2: Create the post with the uploaded image's path
-      await createPost(title, content, imageId);
+      await createPost(title, content, imageId, subforumId);
     } catch (error) {
       console.log(error);
     }
@@ -293,10 +294,11 @@ async function uploadImage(imageFile) {
   return data.id;
 }
 
-async function createPost(title, content, imageId) {
+async function createPost(title, content, imageId, subforumId) {
   const formData = new FormData();
   formData.append("title", title);
   formData.append("content", content);
+  if (subforumId) formData.append("subforumId", subforumId);
   if (imageId) formData.append("imageId", imageId);
 
   const response = await fetch("/", {

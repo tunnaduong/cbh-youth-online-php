@@ -45,7 +45,7 @@
                 <textarea id="postDescription"
                     class="flex w-full rounded-md border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 min-h-[120px] border focus-visible:ring-0"
                     name="content" placeholder="Nội dung bài viết"></textarea>
-                <uk-select name="subforum" uk-cloak placeholder="Chọn chuyên mục phù hợp">
+                <uk-select id="subforumId" uk-cloak placeholder="Chọn chuyên mục phù hợp">
                     @php
                         $categories = (new \App\Models\Forum())->getCategories();
                         foreach ($categories as $category) {
@@ -57,7 +57,7 @@
                     @foreach ($categories as $category)
                         <optgroup label="{{ $category->name }}">
                             @foreach ($category->subforums as $subforum)
-                                <option value="{{ $subforum->slug }}">{{ $subforum->name }}</option>
+                                <option value="{{ $subforum->id }}">{{ $subforum->name }}</option>
                             @endforeach
                         </optgroup>
                     @endforeach
