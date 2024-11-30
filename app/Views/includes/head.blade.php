@@ -41,3 +41,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-- Bộ mã Google Recaptcha -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<!-- Bộ mã Franken UI -->
+<link rel="stylesheet" href="https://unpkg.com/franken-ui@1.1.0/dist/css/core.min.css" />
+<script src="https://unpkg.com/franken-ui@1.1.0/dist/js/core.iife.js" type="module"></script>
+<script src="https://unpkg.com/franken-ui@1.1.0/dist/js/icon.iife.js" type="module"></script>

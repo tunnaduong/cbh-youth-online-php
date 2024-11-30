@@ -38,13 +38,35 @@
                     </button>
                 </div>
             </div>
-            <form action="/" id="createPostForm" method="POST" class="space-y-4 px-3 pb-3">
+            <form action="/" id="createPostForm" method="POST" class="flex flex-col space-y-4 px-3 pb-3">
                 <input id="postTitle"
                     class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 focus-visible:ring-0"
                     placeholder="Tiêu đề bài viết" name="title" type="text" value="">
                 <textarea id="postDescription"
                     class="flex w-full rounded-md border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 min-h-[120px] border focus-visible:ring-0"
                     name="content" placeholder="Nội dung bài viết"></textarea>
+                <uk-select name="subforum" uk-cloak placeholder="Chọn chuyên mục phù hợp">
+                    <optgroup label="Letter A">
+                        <option value="apple">Apple</option>
+                        <option value="apricot">Apricot</option>
+                        <option value="avocado">Avocado</option>
+                        <option value="ackee">Ackee</option>
+                        <option value="asian_pear">Asian Pear</option>
+                        <option value="abiu">Abiu</option>
+                        <option value="ambarella">Ambarella</option>
+                    </optgroup>
+
+                    <optgroup label="Letter B">
+                        <option value="banana">Banana</option>
+                        <option value="blackberry">Blackberry</option>
+                        <option value="blueberry">Blueberry</option>
+                        <option value="boysenberry">Boysenberry</option>
+                        <option value="breadfruit">Breadfruit</option>
+                        <option value="bilberry">Bilberry</option>
+                        <option value="bael">Bael</option>
+                        <option value="black_sapote">Black Sapote</option>
+                    </optgroup>
+                </uk-select>
                 @if ($recordings ?? false)
                     <div class="flex flex-row items-center rounded-lg border bg-card text-card-foreground p-3">
                         <p class="text-sm font-medium flex-1">Thêm file âm thanh vào bài viết của bạn</p>

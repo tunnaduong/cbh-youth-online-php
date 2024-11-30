@@ -37,7 +37,7 @@
         @endphp
         <div class="px-1.5 md:px-0 md:max-w-[679px] w-full">
             <div data-post-id="{{ $post->post_id }}"
-                class="post-container-post mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row">
+                class="post-container-post post-container mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row">
                 <div
                     class="min-w-[84px] items-center mt-1 flex-col hidden md:flex ml-[-20px] text-[13px] font-semibold text-gray-400">
                     <ion-icon name="arrow-up-outline"

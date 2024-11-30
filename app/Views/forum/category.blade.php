@@ -13,7 +13,7 @@
     <div class="max-w-[679px] w-[100%] mb-6">
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
+            <ol class="breadcrumb px-1.5">
                 <li class="breadcrumb-item"><a href="/forum" class=" flex items-center">Diễn đàn</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a
                         href="/forum/{{ $mainCategory->slug }}">{{ $mainCategory->name }}</a>

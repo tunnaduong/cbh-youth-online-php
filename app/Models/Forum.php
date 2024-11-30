@@ -75,4 +75,25 @@ class Forum extends BaseModel
         $this->setQuery("SELECT *, ct.created_at AS post_created_at, ct.id AS post_id FROM cyo_topics ct LEFT JOIN cyo_auth_accounts ca ON ct.user_id = ca.id LEFT JOIN cyo_user_profiles cu ON ca.username = cu.profile_username WHERE subforum_id = ? ORDER BY ct.created_at DESC");
         return $this->loadAllRows([$subforumId]);
     }
+
+    // Đếm số bình luận trong một bài viết
+    public function getCommentCountByTopicId($topicId)
+    {
+        $this->setQuery("SELECT COUNT(*) FROM cyo_topic_comments WHERE topic_id = ?");
+        return $this->loadRecord([$topicId]);
+    }
+
+    // Đếm số lượt xem của một bài viết qua bảng cyo_topic_views
+    public function getViewsCountByTopicId($topicId)
+    {
+        $this->setQuery("SELECT COUNT(*) FROM cyo_topic_views WHERE topic_id = ?");
+        return $this->loadRecord([$topicId]);
+    }
+
+    // Lấy bình luận mới nhất trong một bài viết
+    public function getLatestCommentByTopicId($topicId)
+    {
+        $this->setQuery("SELECT *, ctc.created_at AS comment_created_at FROM cyo_topic_comments ctc LEFT JOIN cyo_auth_accounts ca ON ctc.user_id = ca.id LEFT JOIN cyo_user_profiles cu ON ca.username = cu.profile_username WHERE topic_id = ? ORDER BY ctc.created_at DESC LIMIT 1");
+        return $this->loadRow([$topicId]);
+    }
 }

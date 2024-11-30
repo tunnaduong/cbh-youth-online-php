@@ -71,6 +71,12 @@ class ForumController extends BaseController
 
         $posts = $this->forumModel->getTopicsBySubforumId($subforum->id);
 
+        foreach ($posts as $post) {
+            $post->comments_count = $this->forumModel->getCommentCountByTopicId($post->post_id);
+            $post->latest_comment = $this->forumModel->getLatestCommentByTopicId($post->post_id);
+            $post->views_count = $this->forumModel->getViewsCountByTopicId($post->post_id);
+        }
+
         if (!$mainCategory) {
             return $this->render('errors.404', ['error' => "Danh mục không tồn tại."]);
         }

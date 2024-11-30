@@ -8,6 +8,12 @@
   --shadow-inset: rgba(255, 255, 255, 0.5);
 }
 
+:root {
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 47.4% 11.2%;
+  --input: 210 14% 89%;
+}
+
 .search-btn {
   transition: background-color 200ms;
   border: #f0f0f0 solid 2px;

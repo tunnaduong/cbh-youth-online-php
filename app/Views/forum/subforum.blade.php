@@ -24,7 +24,8 @@
         <!-- Forum Header -->
         <div class="max-w-[679px] w-full mb-6">
             <div class="bg-white long-shadow rounded-lg mt-2 p-4">
-                <a href="/forum/{{ $subforum->slug }}" class="text-lg font-semibold uppercase">{{ $subforum->name }}</a>
+                <a href="/forum/{{ $mainCategory->slug }}/{{ $subforum->slug }}"
+                    class="text-lg font-semibold uppercase">{{ $subforum->name }}</a>
                 <p class="!mt-3 text-base">{{ $subforum->description }}</p>
             </div>
         </div>
@@ -74,46 +75,72 @@
                         </tr>
                     @endif
                     @foreach ($posts as $post)
+                        @php
+                            // Create a Carbon instance from the given datetime
+                            $date = Carbon::createFromFormat('Y-m-d H:i:s', $post->post_created_at);
+                            // Determine if the date is today or yesterday
+                            if ($date->isToday()) {
+                                $formattedDate = $date->translatedFormat('H:i') . ' hôm nay';
+                            } elseif ($date->isYesterday()) {
+                                $formattedDate = $date->translatedFormat('H:i') . ' hôm qua';
+                            } else {
+                                $formattedDate = $date->translatedFormat('d/m/y'); // Day/Month/2-digit year
+                            }
+
+                            $commentDate = Carbon::createFromFormat(
+                                'Y-m-d H:i:s',
+                                $post->latest_comment->comment_created_at,
+                            );
+
+                            // Set the locale to Vietnamese (for "1 tuần trước")
+                            Carbon::setLocale('vi');
+                        @endphp
                         <tr class="hover:bg-gray-50">
                             <td class="!p-3 max-w-96" id="responsive-td">
                                 <div class="flex items-center">
                                     <div class="flex gap-y-2 flex-col flex-1">
                                         <div class="text-sm font-medium">
-                                            <a href="#"
+                                            <a href="/{{ $post->username }}/posts/{{ $post->post_id }}"
                                                 class="text-green-600 hover:text-green-800">{{ $post->title }}</a>
                                         </div>
                                         <div class="text-sm text-gray-500 flex gap-x-2 items-center">
-                                            <img class="h-6 w-6 rounded-full border"
-                                                src="{{ !empty($post->oauth_profile_picture) ? $post->oauth_profile_picture : (!empty($post->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $post->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
-                                                alt="Avatar">
-                                            {{ $post->profile_name }}
-                                            @if ($post->verified == 1)
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                    viewBox="0 0 20 20" aria-hidden="true"
-                                                    class="text-base leading-5 -ml-1.5 text-green-600" height="1em"
-                                                    width="1em" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                        d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                            @endif
-                                            <span class="-ml-1"> · 12:23 hôm qua</span>
+                                            <a class="flex items-center gap-x-2" href="/{{ $post->username }}">
+                                                <img class="h-6 w-6 rounded-full border"
+                                                    src="{{ !empty($post->oauth_profile_picture) ? $post->oauth_profile_picture : (!empty($post->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $post->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
+                                                    alt="Avatar">
+                                                {{ $post->profile_name }}
+                                                @if ($post->verified == 1)
+                                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                                        viewBox="0 0 20 20" aria-hidden="true"
+                                                        class="text-base leading-5 -ml-1.5 text-green-600"
+                                                        height="1em" width="1em"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd"
+                                                            d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                            clip-rule="evenodd"></path>
+                                                    </svg>
+                                                @endif
+                                            </a>
+                                            <span class="-ml-1"> · {{ $formattedDate }}</span>
                                         </div>
                                         <div class="text-sm text-gray-500 flex sm:hidden">
                                             <div class="flex-1">
-                                                Trả lời: <span class="text-black">114</span> · Xem: <span
-                                                    class="text-black">4.315</span>
+                                                Trả lời: <span class="text-black">{{ $post->comments_count }}</span> ·
+                                                Xem: <span class="text-black">{{ $post->views_count }}</span>
                                             </div>
-                                            <div>16 phút trước</div>
+                                            <div>{{ $commentDate->diffForHumans() }}</div>
                                         </div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="!p-3 text-center text-sm text-gray-500 hidden sm:table-cell">114</td>
-                            <td class="!p-3 text-center text-sm text-gray-500 hidden sm:table-cell">4.315</td>
+                            <td class="!p-3 text-center text-sm text-gray-500 hidden sm:table-cell">
+                                {{ $post->comments_count }}</td>
+                            <td class="!p-3 text-center text-sm text-gray-500 hidden sm:table-cell">
+                                {{ $post->views_count }}</td>
                             <td class="!p-3 text-right text-sm text-gray-500 hidden sm:table-cell">
-                                <div class=" hidden sm:block">@hoangphat</div>
-                                <div>16 phút trước</div>
+                                <a href="/{{ $post->latest_comment->username }}"
+                                    class="hidden sm:block"><span>@</span>{{ $post->latest_comment->username }}</a>
+                                <div>{{ $commentDate->diffForHumans() }}</div>
                             </td>
                         </tr>
                     @endforeach
