@@ -121,7 +121,7 @@
                         </a>
                         <span class="mb-2 ml-0.5 text-sm text-gray-500">.</span>
                         <span class="ml-0.5 text-gray-500">{{ $date->diffForHumans() }}</span>
-                        <div class="flex flex-1 flex-row-reverse items-center text-gray-500">
+                        <div class="flex-1 flex-row-reverse items-center text-gray-500 hidden sm:flex">
                             <span>{{ $post->post_views }}</span>
                             <ion-icon class="text-xl mr-1 ml-2" name="eye-outline"></ion-icon>
                             <span class="flex flex-row-reverse items-center">
@@ -149,6 +149,14 @@
                                 <ion-icon name="bookmark" class="text-gray-400 text-xl"></ion-icon>
                             </div>
                         @endif
+                        <div class="flex flex-1 flex-row-reverse items-center text-gray-500 sm:hidden">
+                            <span>{{ $post->post_views }}</span>
+                            <ion-icon class="text-xl mr-1 ml-2" name="eye-outline"></ion-icon>
+                            <span class="flex flex-row-reverse items-center">
+                                <span>{{ roundToNearestFive($post->post_comments) }}+</span>
+                                <ion-icon class="text-xl mr-1" name="chatbox-outline"></ion-icon>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

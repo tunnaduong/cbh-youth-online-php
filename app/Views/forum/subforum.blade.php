@@ -100,7 +100,7 @@
                             Carbon::setLocale('vi');
                         @endphp
                         <tr class="hover:bg-gray-50">
-                            <td class="!p-3 max-w-96" id="responsive-td">
+                            <td class="!p-3 max-w-96 responsive-td">
                                 <div class="flex items-center">
                                     <div class="flex gap-y-2 flex-col flex-1">
                                         <div class="text-sm font-medium">
@@ -135,7 +135,7 @@
                                             @if (!empty($post->latest_comment))
                                                 <div>{{ $commentDate->diffForHumans() }}</div>
                                             @else
-                                                <div>{{ $formattedDate }}</div>
+                                                <div>{{ $date->diffForHumans() }}</div>
                                             @endif
                                         </div>
                                     </div>
@@ -153,7 +153,7 @@
                                 @else
                                     <a href="/{{ $post->username }}"
                                         class="hidden sm:inline"><span>@</span>{{ $post->username }}</a>
-                                    <div>{{ $formattedDate }}</div>
+                                    <div>{{ $date->diffForHumans() }}</div>
                                 @endif
                             </td>
                         </tr>

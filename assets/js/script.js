@@ -525,13 +525,14 @@ function toggleFollow(userId) {
 }
 
 function adjustColspan() {
-  const td = document.getElementById("responsive-td");
+  const tds = document.getElementsByClassName("responsive-td");
   const smBreakpoint = 640; // Tailwind's sm breakpoint in pixels
-
-  if (window.innerWidth < smBreakpoint) {
-    td.setAttribute("colspan", "2");
-  } else {
-    td.removeAttribute("colspan");
+  for (let td of tds) {
+    if (window.innerWidth < smBreakpoint) {
+      td.setAttribute("colspan", "2");
+    } else {
+      td.removeAttribute("colspan");
+    }
   }
 }
 
