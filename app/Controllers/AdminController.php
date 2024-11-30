@@ -3,7 +3,7 @@
 
 namespace App\Controllers;
 
-use App\Models\ForumModel;
+use App\Models\Forum;
 
 class AdminController extends BaseController
 {
@@ -11,7 +11,7 @@ class AdminController extends BaseController
 
     public function __construct()
     {
-        $this->forumModel = new ForumModel();
+        $this->forumModel = new Forum();
     }
 
     // Trang chính của Admin
