@@ -69,6 +69,8 @@ class ForumController extends BaseController
 
         $mainCategory = $this->forumModel->getCategoryBySlug($mainCategorySlug);
 
+        $posts = $this->forumModel->getTopicsBySubforumId($subforum->id);
+
         if (!$mainCategory) {
             return $this->render('errors.404', ['error' => "Danh mục không tồn tại."]);
         }
@@ -78,6 +80,6 @@ class ForumController extends BaseController
         }
 
         // Gửi dữ liệu qua view
-        $this->render('forum.subforum', ['subforum' => $subforum, 'mainCategory' => $mainCategory]);
+        $this->render('forum.subforum', ['subforum' => $subforum, 'mainCategory' => $mainCategory, 'posts' => $posts]);
     }
 }

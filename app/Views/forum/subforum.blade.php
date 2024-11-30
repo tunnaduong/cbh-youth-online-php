@@ -62,45 +62,61 @@
                             Xem
                         </th>
                         <th
-                            class="sm:!p-3 pr-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider min-w-[115px]">
+                            class="sm:!p-3 pr-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider min-w-[115px] max-w-[200px]">
                             Bài
                             viết cuối</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
-                    <!-- Topic Row -->
-                    <tr class="hover:bg-gray-50">
-                        <td class="!p-3 max-w-96" id="responsive-td">
-                            <div class="flex items-center">
-                                <div class="flex gap-y-2 flex-col">
-                                    <div class="text-sm font-medium">
-                                        <a href="#" class="text-green-600 hover:text-green-800">Mời anh em chia sẻ
-                                            hình Shot on iPhone trong năm qua, TRÚNG VÍ
-                                            SEN hit pắc pắc</a>
-                                    </div>
-                                    <div class="text-sm text-gray-500 flex gap-x-2">
-                                        <img class="h-6 w-6 rounded-full border"
-                                            src="/assets/images/placeholder-user.jpg" alt="Avatar">
-                                        Anh Tú, 12:23 hôm qua
-                                    </div>
-                                    <div class="text-sm text-gray-500 flex sm:hidden">
-                                        <div class="flex-1">
-                                            Trả lời: <span class="text-black">114</span> · Xem: <span
-                                                class="text-black">4.315</span>
+                    @if (count($posts) == 0)
+                        <tr>
+                            <td class="!p-3 text-center" colspan="4">Không có bài viết nào trong diễn đàn này.</td>
+                        </tr>
+                    @endif
+                    @foreach ($posts as $post)
+                        <tr class="hover:bg-gray-50">
+                            <td class="!p-3 max-w-96" id="responsive-td">
+                                <div class="flex items-center">
+                                    <div class="flex gap-y-2 flex-col flex-1">
+                                        <div class="text-sm font-medium">
+                                            <a href="#"
+                                                class="text-green-600 hover:text-green-800">{{ $post->title }}</a>
                                         </div>
-                                        <div>16 phút trước</div>
+                                        <div class="text-sm text-gray-500 flex gap-x-2 items-center">
+                                            <img class="h-6 w-6 rounded-full border"
+                                                src="{{ !empty($post->oauth_profile_picture) ? $post->oauth_profile_picture : (!empty($post->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $post->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
+                                                alt="Avatar">
+                                            {{ $post->profile_name }}
+                                            @if ($post->verified == 1)
+                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                                    viewBox="0 0 20 20" aria-hidden="true"
+                                                    class="text-base leading-5 -ml-1.5 text-green-600" height="1em"
+                                                    width="1em" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
+                                            @endif
+                                            <span class="-ml-1"> · 12:23 hôm qua</span>
+                                        </div>
+                                        <div class="text-sm text-gray-500 flex sm:hidden">
+                                            <div class="flex-1">
+                                                Trả lời: <span class="text-black">114</span> · Xem: <span
+                                                    class="text-black">4.315</span>
+                                            </div>
+                                            <div>16 phút trước</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="!p-3 text-center text-sm text-gray-500 hidden sm:table-cell">114</td>
-                        <td class="!p-3 text-center text-sm text-gray-500 hidden sm:table-cell">4.315</td>
-                        <td class="!p-3 text-right text-sm text-gray-500 hidden sm:table-cell">
-                            <div class=" hidden sm:block">@hoangphat</div>
-                            <div>16 phút trước</div>
-                        </td>
-                    </tr>
-                    <!-- Additional topic rows would go here -->
+                            </td>
+                            <td class="!p-3 text-center text-sm text-gray-500 hidden sm:table-cell">114</td>
+                            <td class="!p-3 text-center text-sm text-gray-500 hidden sm:table-cell">4.315</td>
+                            <td class="!p-3 text-right text-sm text-gray-500 hidden sm:table-cell">
+                                <div class=" hidden sm:block">@hoangphat</div>
+                                <div>16 phút trước</div>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

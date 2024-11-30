@@ -68,4 +68,11 @@ class Forum extends BaseModel
         $this->setQuery("SELECT *, ct.created_at AS post_created_at, ct.id AS post_id FROM cyo_topics ct LEFT JOIN cyo_auth_accounts ca ON ct.user_id = ca.id LEFT JOIN cyo_user_profiles cu ON ca.username = cu.profile_username WHERE subforum_id = ? ORDER BY ct.created_at DESC LIMIT 1");
         return $this->loadRow([$subforumId]);
     }
+
+    // Lấy toàn bộ bài viết từ một subforum bằng ID
+    public function getTopicsBySubforumId($subforumId)
+    {
+        $this->setQuery("SELECT *, ct.created_at AS post_created_at, ct.id AS post_id FROM cyo_topics ct LEFT JOIN cyo_auth_accounts ca ON ct.user_id = ca.id LEFT JOIN cyo_user_profiles cu ON ca.username = cu.profile_username WHERE subforum_id = ? ORDER BY ct.created_at DESC");
+        return $this->loadAllRows([$subforumId]);
+    }
 }
