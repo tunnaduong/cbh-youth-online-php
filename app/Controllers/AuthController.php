@@ -58,7 +58,7 @@ class AuthController extends BaseController
         $error = "";
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $recaptchaResponse = $_POST['g-recaptcha-response'];
-            $secretKey = '6Lf9QY4qAAAAAKqYV_lRFEWiqJCkXksGFpEJSOjA'; // Replace with your secret key
+            $secretKey = RECAPTCHA_KEY;
 
             $verifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
             $response = file_get_contents($verifyUrl . '?secret=' . $secretKey . '&response=' . $recaptchaResponse . '&remoteip=' . $_SERVER['REMOTE_ADDR']);

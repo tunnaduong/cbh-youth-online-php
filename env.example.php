@@ -15,3 +15,4 @@ const GOOGLE_REDIRECT_URI = "";
 const FACEBOOK_APP_ID = "";
 const FACEBOOK_APP_SECRET = "";
 const FACEBOOK_REDIRECT_URI = "";
+const RECAPTCHA_KEY = "";
