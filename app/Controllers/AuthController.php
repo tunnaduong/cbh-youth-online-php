@@ -57,6 +57,19 @@ class AuthController extends BaseController
     {
         $error = "";
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $recaptchaResponse = $_POST['g-recaptcha-response'];
+            $secretKey = '6Lf9QY4qAAAAAKqYV_lRFEWiqJCkXksGFpEJSOjA'; // Replace with your secret key
+
+            $verifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
+            $response = file_get_contents($verifyUrl . '?secret=' . $secretKey . '&response=' . $recaptchaResponse . '&remoteip=' . $_SERVER['REMOTE_ADDR']);
+            $responseKeys = json_decode($response, true);
+
+            if (!$responseKeys['success']) {
+                // Validation failed
+                $error = "Vui lòng xác minh bạn không phải là robot";
+                // Show error or redirect
+                return $this->render('auth.register', compact('error'));
+            }
             // if username or password or email is empty then return error
             if (empty($_POST['username']) || empty($_POST['name']) || empty($_POST['password']) || empty($_POST['email'])) {
                 $error = "Tên đăng nhập, họ và tên, mật khẩu và email không được để trống";
