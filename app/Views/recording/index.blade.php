@@ -12,7 +12,9 @@
                 </div>
                 <div class="flex flex-col flex-1">
                     <div class="flex flex-row flex-1 items-center mt-[2px]">
-                        <h1 class="flex-1 font-semibold text-xl max-w-[520px] truncate">{{ $recording->title }}</h1>
+                        <a href="/recordings/{{ $recording->id }}">
+                            <h1 class="flex-1 font-semibold text-xl max-w-[520px] truncate">{{ $recording->title }}</h1>
+                        </a>
                         <span class="text-sm mr-3 text-gray-500">{{ $recording->audio_length }}</span>
                     </div>
                     <div class="flex flex-1 items-center text-[13px] text-gray-500">
