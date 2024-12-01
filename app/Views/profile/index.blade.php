@@ -230,7 +230,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex-1 !mt-6 px-3 flex flex-col items-center md:max-w-[679px]">
+            <div class="flex flex-col items-center w-full flex-1 p-3 pt-4">
                 @foreach ($posts as $post)
                     @php
                         // Create a Carbon instance from the given datetime
@@ -240,7 +240,7 @@
                         Carbon::setLocale('vi');
                     @endphp
                     <div data-post-id="{{ $post->post_id }}"
-                        class="post-container-post post-container w-full mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row">
+                        class="post-container w-full mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row md:max-w-[679px]">
                         <div
                             class="min-w-[84px] items-center mt-1 flex-col hidden md:flex ml-[-20px] text-[13px] font-semibold text-gray-400">
                             <ion-icon name="arrow-up-outline"
@@ -316,7 +316,7 @@
                                     </span>
                                 </a>
                                 <span class="text-gray-500 hidden md:block ml-2">Đăng bởi</span>
-                                <a class="flex flex-row items-center ml-2 md:ml-1 text-[#319527] hover:text-[#319527] font-bold"
+                                <a class="flex flex-row items-center ml-2 md:ml-1 text-[#319527] hover:text-[#319527] font-bold hover:underline"
                                     href="/{{ $post->username }}">{{ $post->profile_name }}
                                     @if ($post->verified == 1)
                                         <svg stroke="currentColor" fill="currentColor" stroke-width="0"
@@ -330,7 +330,7 @@
                                 </a>
                                 <span class="ml-0.5 text-sm text-gray-500">·</span>
                                 <span class="ml-0.5 text-gray-500">{{ $date->diffForHumans() }}</span>
-                                <div class="hidden sm:flex flex-1 flex-row-reverse items-center text-gray-500">
+                                <div class="flex-1 flex-row-reverse items-center text-gray-500 hidden sm:flex">
                                     <span>{{ $post->post_views }}</span>
                                     <ion-icon class="text-xl mr-1 ml-2" name="eye-outline"></ion-icon>
                                     <a class="flex flex-row-reverse items-center"
