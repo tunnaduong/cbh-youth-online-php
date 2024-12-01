@@ -1,5 +1,6 @@
 @php
     use Carbon\Carbon;
+    use Michelf\Markdown;
 
     // Define a truncation function using mb_substr for multibyte encoding support
     function truncateText($text, $length = 500)
@@ -58,11 +59,42 @@
                         </div>
                     @endif
                 </div>
+                <style>
+                    .prose h1 {
+                        font-size: 1.8rem;
+                        font-weight: 700;
+                    }
+
+                    .prose h2 {
+                        font-size: 1.5rem;
+                        font-weight: 700;
+                    }
+
+                    .prose h3 {
+                        font-size: 1.2rem;
+                        font-weight: 700;
+                    }
+
+                    .prose h4 {
+                        font-size: 1rem;
+                        font-weight: 700;
+                    }
+
+                    .prose h5 {
+                        font-size: 0.8rem;
+                        font-weight: 700;
+                    }
+
+                    .prose h6 {
+                        font-size: 0.5rem;
+                        font-weight: 700;
+                    }
+                </style>
                 <div class="flex-1 overflow-hidden break-words">
                     <h1 class="text-xl font-semibold mb-1">{{ $post->title }}</h1>
                     <div class="text-base max-w-[600px] overflow-wrap">
                         <div id="truncated{{ $post->post_id }}" style="display: block;">
-                            <span>{!! nl2br(htmlspecialchars(truncateText($post->description, 330))) !!}</span>
+                            <span class="prose">{!! Markdown::defaultTransform(nl2br(truncateText($post->description, 330))) !!}</span>
                             @if (strlen($post->description) > 330)
                                 <a class="text-black cursor-pointer hover:underline font-medium"
                                     onclick="toggleText{{ $post->post_id }}()">Xem
@@ -70,7 +102,7 @@
                             @endif
                         </div>
                         <div id="fullText{{ $post->post_id }}" style="display: none;">
-                            <span>{!! nl2br(htmlspecialchars($post->description)) !!} </span>
+                            <span class="prose">{!! Markdown::defaultTransform(nl2br($post->description)) !!} </span>
                             <a class="text-black cursor-pointer hover:underline font-medium"
                                 onclick="toggleText{{ $post->post_id }}()">Thu
                                 gọn</a>

@@ -42,9 +42,16 @@
                 <input id="postTitle"
                     class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 focus-visible:ring-0"
                     placeholder="Tiêu đề bài viết" name="title" type="text" value="">
-                <textarea id="postDescription"
-                    class="flex w-full rounded-md border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 min-h-[120px] border focus-visible:ring-0"
-                    name="content" placeholder="Nội dung bài viết"></textarea>
+                <div class="rounded-md border shadow-sm pb-1 bg-gray-100">
+                    <textarea id="postDescription"
+                        class="-ml-[1px] -mt-[1px] !mb-1 flex w-full rounded-md border-input bg-white px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 min-h-[120px] border focus-visible:ring-0"
+                        name="content" placeholder="Nội dung bài viết" style="width: calc(100% + 2px);"></textarea>
+                    <a href="#" class="-mt-1.5 text-xs font-bold px-3">
+                        <i class="fa-brands fa-markdown mr-1"></i>
+                        Hỗ trợ
+                        Markdown
+                    </a>
+                </div>
                 <uk-select id="subforumId" name="subforumId" uk-cloak placeholder="Chọn chuyên mục phù hợp">
                     @php
                         // nếu người dùng hiện tại là admin thì lấy tất cả các chuyên mục

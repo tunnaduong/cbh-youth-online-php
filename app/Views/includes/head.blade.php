@@ -22,6 +22,7 @@
 <link href="/assets/css/style.css" rel="stylesheet">
 <!-- Bộ mã TailwindCSS -->
 <script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.5.0/dist/typography.min.css" rel="stylesheet">
 <!-- Bộ mã Font Awesome -->
 <script src="https://kit.fontawesome.com/5468db3c8c.js" crossorigin="anonymous"></script>
 <!-- Bộ mã Ionicons -->

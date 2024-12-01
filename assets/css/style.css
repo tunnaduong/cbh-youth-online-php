@@ -204,3 +204,7 @@ hr {
   background-position: center center;
   background-size: cover;
 }
+
+.prose h1 {
+  font-size: larger !important;
+}

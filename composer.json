@@ -18,6 +18,7 @@
     "phpmailer/phpmailer": "^6.9",
     "league/oauth2-client": "^2.7",
     "league/oauth2-google": "^4.0",
-    "league/oauth2-facebook": "^2.2"
+    "league/oauth2-facebook": "^2.2",
+    "michelf/php-markdown": "^2.0"
   }
 }
