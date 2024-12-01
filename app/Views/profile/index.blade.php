@@ -230,7 +230,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex-1 !mt-6 px-3 flex flex-col items-center">
+            <div class="flex-1 !mt-6 px-3 flex flex-col items-center md:max-w-[679px]">
                 @foreach ($posts as $post)
                     @php
                         // Create a Carbon instance from the given datetime
@@ -240,7 +240,7 @@
                         Carbon::setLocale('vi');
                     @endphp
                     <div data-post-id="{{ $post->post_id }}"
-                        class="post-container w-full mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row max-w-sm md:max-w-[679px]">
+                        class="post-container-post post-container w-full mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row">
                         <div
                             class="min-w-[84px] items-center mt-1 flex-col hidden md:flex ml-[-20px] text-[13px] font-semibold text-gray-400">
                             <ion-icon name="arrow-up-outline"
