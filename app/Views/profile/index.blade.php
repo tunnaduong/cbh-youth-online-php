@@ -361,10 +361,11 @@
                                 <div class="flex flex-1 flex-row-reverse items-center text-gray-500 sm:hidden">
                                     <span>{{ $post->post_views }}</span>
                                     <ion-icon class="text-xl mr-1 ml-2" name="eye-outline"></ion-icon>
-                                    <span class="flex flex-row-reverse items-center">
+                                    <a class="flex flex-row-reverse items-center"
+                                        href="/{{ $post->username }}/posts/{{ $post->post_id }}">
                                         <span>{{ roundToNearestFive($post->post_comments) }}+</span>
                                         <ion-icon class="text-xl mr-1" name="chatbox-outline"></ion-icon>
-                                    </span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
