@@ -33,7 +33,7 @@
         // Set the locale to Vietnamese (for "1 tuần trước")
         Carbon::setLocale('vi');
     @endphp
-    <div class="relative h-[450px] lg:h-56 overflow-hidden px-2.5 py-8">
+    <div class="relative h-min max-h-[500px] lg:h-56 overflow-hidden px-2.5 py-8">
         <div style="background-image: url({{ !empty($profile->oauth_profile_picture) ? $profile->oauth_profile_picture : (!empty($profile->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $profile->username . '/avatar' : '/assets/images/placeholder-user.jpg') }})"
             class="bg-gray-300 w-full h-[450px] lg:h-56 blur-effect"></div>
         <div class="lg:hidden flex flex-col items-center gap-y-2">
@@ -61,6 +61,33 @@
                 </h1>
                 <p class="text-sm text-gray-500"><span>@</span>{{ $profile->username }}</p>
             </div>
+            <div class="flex flex-col items-center gap-y-1">
+                <div class="flex">
+                    <div class="border-right px-3">
+                        <span class="text-gray-500">Bài đã đăng: </span>
+                        <span class="font-bold">{{ $profile->posts_count }}</span>
+                    </div>
+
+                    <div class="px-3">
+                        <span class="text-gray-500">Điểm: </span>
+                        <span class="font-bold">{{ $profile->total_points }}</span>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="border-right px-3">
+                        <span class="text-gray-500">Đang theo dõi: </span>
+                        <span class="font-bold">{{ $profile->total_following }}</span>
+                    </div>
+                    <div class="border-right px-3">
+                        <span class="text-gray-500">Người theo dõi: </span>
+                        <span class="font-bold">{{ $profile->total_followers }}</span>
+                    </div>
+                    <div class="px-3">
+                        <span class="text-gray-500">Lượt like: </span>
+                        <span class="font-bold">{{ $profile->total_likes }}</span>
+                    </div>
+                </div>
+            </div>
             <p>{{ $profile->bio }}</p>
             <div class="flex flex-col gap-y-2">
                 @if (!empty($profile->location))
@@ -81,6 +108,24 @@
                     <span class="text-sm">Đã tham gia
                         {{ (function () use ($profile) {$fmt = new IntlDateFormatter('vi_VN', IntlDateFormatter::LONG, IntlDateFormatter::NONE);$fmt->setPattern("'Tháng' M yyyy");return $fmt->format(new DateTime($profile->joined_from));})() }}</span>
                 </div>
+            </div>
+            <div class="flex-1 flex justify-end items-center mt-3">
+                @if (($_SESSION['user']->username ?? null) == $profile->username)
+                    <a href="/{{ $profile->username }}/edit" class="btn btn-outline-secondary rounded-full px-4"><i
+                            class="bi bi-gear-fill"></i> Sửa
+                        hồ sơ</a>
+                @else
+                    @if ($profile->followed == 0)
+                        <button type="button" id="followBtn" onclick="toggleFollow({{ $profile->uid }}, true)"
+                            class="btn btn-outline-success rounded-full px-4 hover:bg-green-600 border-green-600 hover:border-green-600 text-green-600">Theo
+                            dõi</button>
+                    @else
+                        <button type="button" id="followBtn" onclick="toggleFollow({{ $profile->uid }}, false)"
+                            class="btn btn-success rounded-full px-4 bg-green-600 border-green-600 hover:border-green-600">Đang
+                            theo
+                            dõi</button>
+                    @endif
+                @endif
             </div>
         </div>
     </div>
@@ -150,8 +195,9 @@
                             @if ($profile->verified == 1)
                                 <span>
                                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20"
-                                        aria-hidden="true" class="relative inline shrink-0 text-xl leading-5 text-green-600"
-                                        height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                        aria-hidden="true"
+                                        class="relative inline shrink-0 text-xl leading-5 text-green-600" height="1em"
+                                        width="1em" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
                                             d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                             clip-rule="evenodd"></path>
