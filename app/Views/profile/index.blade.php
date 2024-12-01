@@ -33,10 +33,59 @@
         // Set the locale to Vietnamese (for "1 tuần trước")
         Carbon::setLocale('vi');
     @endphp
-    <div style="background-image: url({{ !empty($profile->oauth_profile_picture) ? $profile->oauth_profile_picture : (!empty($profile->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $profile->username . '/avatar' : '/assets/images/placeholder-user.jpg') }})"
-        class="bg-gray-300 w-full h-56 blur-effect"></div>
-    <div class="bg-white w-full h-16 shadow-md">
-        <div class="mx-auto max-w-[959px] h-full flex">
+    <div class="relative h-[450px] lg:h-56 overflow-hidden px-2.5 py-8">
+        <div style="background-image: url({{ !empty($profile->oauth_profile_picture) ? $profile->oauth_profile_picture : (!empty($profile->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $profile->username . '/avatar' : '/assets/images/placeholder-user.jpg') }})"
+            class="bg-gray-300 w-full h-[450px] lg:h-56 blur-effect"></div>
+        <div class="lg:hidden flex flex-col items-center gap-y-2">
+            <a
+                href="{{ !empty($profile->oauth_profile_picture) ? $profile->oauth_profile_picture : (!empty($profile->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $profile->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}">
+                <img class="w-32 h-32 rounded-full" style="border: 4px solid #eeeeee;"
+                    src="{{ !empty($profile->oauth_profile_picture) ? $profile->oauth_profile_picture : (!empty($profile->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $profile->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
+                    alt="avatar">
+            </a>
+            <div class="flex flex-col items-center">
+                <h1 class="font-bold text-xl mt-2">
+                    <span>{{ $profile->profile_name }}
+                        @if ($profile->verified == 1)
+                            <span>
+                                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20"
+                                    aria-hidden="true" class="relative inline shrink-0 text-xl leading-5 text-green-600"
+                                    height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </span>
+                        @endif
+                    </span>
+                </h1>
+                <p class="text-sm text-gray-500"><span>@</span>{{ $profile->username }}</p>
+            </div>
+            <p>{{ $profile->bio }}</p>
+            <div class="flex flex-col gap-y-2">
+                @if (!empty($profile->location))
+                    <div class="flex items-center -ml-0.5 gap-x-1 text-gray-500">
+                        <ion-icon name="location-outline" class="text-lg"></ion-icon>
+                        <span class="text-sm">{{ $profile->location }}</span>
+                    </div>
+                @endif
+                @if (!empty($profile->birthday))
+                    <div class="flex items-center -ml-0.5 gap-x-1 text-gray-500">
+                        <ion-icon name="gift-outline" class="text-lg"></ion-icon>
+                        <span class="text-sm">Sinh vào
+                            {{ (function () use ($profile) {$fmt = new IntlDateFormatter('vi_VN', IntlDateFormatter::LONG, IntlDateFormatter::NONE);$fmt->setPattern("d 'Tháng' M yyyy");return $fmt->format(new DateTime($profile->birthday));})() }}</span>
+                    </div>
+                @endif
+                <div class="flex items-center -ml-0.5 gap-x-1 text-gray-500">
+                    <ion-icon name="calendar-outline" class="text-lg"></ion-icon>
+                    <span class="text-sm">Đã tham gia
+                        {{ (function () use ($profile) {$fmt = new IntlDateFormatter('vi_VN', IntlDateFormatter::LONG, IntlDateFormatter::NONE);$fmt->setPattern("'Tháng' M yyyy");return $fmt->format(new DateTime($profile->joined_from));})() }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="lg:bg-white w-full h-16 lg:shadow-md">
+        <div class="mx-auto max-w-[959px] h-full lg:flex hidden">
             <a
                 href="{{ !empty($profile->oauth_profile_picture) ? $profile->oauth_profile_picture : (!empty($profile->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $profile->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}">
                 <img class="w-[170px] h-[170px] rounded-full absolute"
@@ -94,7 +143,7 @@
             </div>
         </div>
         <div class="mx-auto max-w-[959px] flex">
-            <div class="max-w-[280px] flex-1 !mt-10 pr-6 flex flex-col gap-y-3">
+            <div class="max-w-[280px] flex-1 !mt-10 pr-6 hidden lg:flex flex-col gap-y-3">
                 <div>
                     <h1 class="font-bold text-xl">
                         <span>{{ $profile->profile_name }}
@@ -135,7 +184,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex-1 !mt-6">
+            <div class="flex-1 !mt-6 px-3 flex flex-col items-center">
                 @foreach ($posts as $post)
                     @php
                         // Create a Carbon instance from the given datetime
@@ -145,7 +194,7 @@
                         Carbon::setLocale('vi');
                     @endphp
                     <div data-post-id="{{ $post->post_id }}"
-                        class="post-container w-full mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row md:max-w-[679px]">
+                        class="post-container w-full mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row max-w-md md:max-w-[679px]">
                         <div
                             class="min-w-[84px] items-center mt-1 flex-col hidden md:flex ml-[-20px] text-[13px] font-semibold text-gray-400">
                             <ion-icon name="arrow-up-outline"
@@ -235,7 +284,7 @@
                                 </a>
                                 <span class="ml-0.5 text-sm text-gray-500">·</span>
                                 <span class="ml-0.5 text-gray-500">{{ $date->diffForHumans() }}</span>
-                                <div class="flex flex-1 flex-row-reverse items-center text-gray-500">
+                                <div class="hidden sm:flex flex-1 flex-row-reverse items-center text-gray-500">
                                     <span>{{ $post->post_views }}</span>
                                     <ion-icon class="text-xl mr-1 ml-2" name="eye-outline"></ion-icon>
                                     <a class="flex flex-row-reverse items-center"
@@ -264,6 +313,14 @@
                                         <ion-icon name="bookmark" class="text-gray-400 text-xl"></ion-icon>
                                     </div>
                                 @endif
+                                <div class="flex flex-1 flex-row-reverse items-center text-gray-500 sm:hidden">
+                                    <span>{{ $post->post_views }}</span>
+                                    <ion-icon class="text-xl mr-1 ml-2" name="eye-outline"></ion-icon>
+                                    <span class="flex flex-row-reverse items-center">
+                                        <span>{{ roundToNearestFive($post->post_comments) }}+</span>
+                                        <ion-icon class="text-xl mr-1" name="chatbox-outline"></ion-icon>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
