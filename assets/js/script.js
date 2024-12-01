@@ -499,8 +499,9 @@ function toggleFollow(userId) {
         document.getElementById("followBtn").classList.add("bg-green-600");
         // change the button text
         document.getElementById("followBtn").textContent = "Đang theo dõi";
-        document.querySelector("#follower_count").textContent =
-          parseInt(document.querySelector("#follower_count").textContent) + 1;
+        document.querySelectorAll(".follower_count").forEach((element) => {
+          element.textContent = parseInt(element.textContent) + 1;
+        });
       } else {
         // change the button class
         document.getElementById("followBtn").classList.remove("btn-success");
@@ -514,8 +515,9 @@ function toggleFollow(userId) {
         document.getElementById("followBtn").classList.add("text-green-600");
         // change the button text
         document.getElementById("followBtn").textContent = "Theo dõi";
-        document.querySelector("#follower_count").textContent =
-          parseInt(document.querySelector("#follower_count").textContent) - 1;
+        document.querySelectorAll(".follower_count").forEach((element) => {
+          element.textContent = parseInt(element.textContent) - 1;
+        });
       }
     })
     .catch((error) => {

@@ -79,7 +79,7 @@
                     </div>
                     <div class="px-3">
                         <span class="text-gray-500">Người theo dõi: </span>
-                        <span class="font-bold">{{ $profile->total_followers }}</span>
+                        <span class="font-bold follower_count">{{ $profile->total_followers }}</span>
                     </div>
                     <div class="px-3">
                         <span class="text-gray-500">Lượt like: </span>
@@ -154,7 +154,7 @@
                     class="select-none h-full flex flex-col items-center justify-center px-3 box-border min-w-max"
                     style="border-bottom: 3px solid transparent">
                     <p class="font-semibold text-sm text-slate-600">Người theo dõi</p>
-                    <p class="font-bold text-xl text-green-600" id="follower_count">{{ $profile->total_followers }}</p>
+                    <p class="font-bold text-xl text-green-600 follower_count">{{ $profile->total_followers }}</p>
                 </a>
                 <div class="select-none h-full flex flex-col items-center justify-center px-3 box-border min-w-max"
                     style="border-bottom: 3px solid transparent">
