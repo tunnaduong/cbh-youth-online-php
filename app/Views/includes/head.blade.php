@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Thanh niên Chuyên Biên Hòa Online</title>
 <meta name="description" content="Mạng xã hội Thanh niên Chuyên Biên Hòa Online thuộc Trường THPT Chuyên Hà Nam">
 <meta name="author" content="Đội ngũ CBH Youth Online">
