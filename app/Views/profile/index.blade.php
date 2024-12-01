@@ -1,5 +1,6 @@
 @php
     use Carbon\Carbon;
+    use Michelf\Markdown;
 
     // Define a truncation function using mb_substr for multibyte encoding support
     function truncateText($text, $length = 500)
