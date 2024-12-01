@@ -23,7 +23,7 @@ class Forum extends BaseModel
     // Lấy danh sách tất cả danh mục
     public function getCategories()
     {
-        $this->setQuery("SELECT * FROM cyo_forum_main_categories");
+        $this->setQuery("SELECT * FROM cyo_forum_main_categories ORDER BY arrange ASC");
         return $this->loadAllRows();
     }
 
