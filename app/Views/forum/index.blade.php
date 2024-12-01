@@ -47,12 +47,12 @@
                                 </div>
                                 <div class="flex items-center mt-1 text-[#319528]">
                                     <a href="/{{ $subforum->latest_post->username }}"
-                                        class="hover:text-[#319528] hover:underline">{{ $subforum->latest_post->profile_name }}</a>
+                                        class="hover:text-[#319528] hover:underline truncate">{{ $subforum->latest_post->profile_name }}</a>
                                     @if ($subforum->latest_post->verified == 1)
                                         <ion-icon name="checkmark-circle"
-                                            class="text-[15px] leading-5 ml-0.5"></ion-icon>
+                                            class="text-[15px] leading-5 ml-0.5 shrink-0"></ion-icon>
                                     @endif
-                                    <span class="text-black">, {{ $date->diffForHumans() }}</span>
+                                    <span class="text-black shrink-0">, {{ $date->diffForHumans() }}</span>
 
                                 </div>
                             </div>

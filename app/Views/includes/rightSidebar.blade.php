@@ -17,7 +17,7 @@
         @endif
     </button>
     <div class="bg-white text-sm p-3 mt-4 rounded-xl long-shadow">
-        <span class="font-bold text-[#6B6B6B] block text-base">Top thành viên tháng</span>
+        <span class="font-bold text-[#6B6B6B] block text-base">Top thành viên</span>
         @foreach ($top_users as $user)
             <div class="flex flex-row items-center mt-2">
                 <a href="/{{ $user->username }}">
@@ -65,7 +65,7 @@
 <div class="hidden max-md:block !px-3 pt-0 pb-6 mt-3" id="bottom-sidebar">
     <center>
         <div class="bg-white text-sm p-3 rounded-xl long-shadow" id="top-users">
-            <span class="font-bold text-[#6B6B6B] block text-base text-left">Top thành viên tháng</span>
+            <span class="font-bold text-[#6B6B6B] block text-base text-left">Top thành viên</span>
             @foreach ($top_users as $user)
                 <div class="flex flex-row items-center mt-2">
                     <a href="/{{ $user->username }}">
