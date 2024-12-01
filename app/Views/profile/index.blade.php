@@ -115,12 +115,12 @@
                         hồ sơ</a>
                 @else
                     @if ($profile->followed == 0)
-                        <button type="button" id="followBtn" onclick="toggleFollow({{ $profile->uid }}, true)"
-                            class="btn btn-outline-success rounded-full px-4 hover:bg-green-600 border-green-600 hover:border-green-600 text-green-600">Theo
+                        <button type="button" onclick="toggleFollow({{ $profile->uid }}, true)"
+                            class="followBtn btn btn-outline-success rounded-full px-4 hover:bg-green-600 border-green-600 hover:border-green-600 text-green-600">Theo
                             dõi</button>
                     @else
-                        <button type="button" id="followBtn" onclick="toggleFollow({{ $profile->uid }}, false)"
-                            class="btn btn-success rounded-full px-4 bg-green-600 border-green-600 hover:border-green-600">Đang
+                        <button type="button" onclick="toggleFollow({{ $profile->uid }}, false)"
+                            class="followBtn btn btn-success rounded-full px-4 bg-green-600 border-green-600 hover:border-green-600">Đang
                             theo
                             dõi</button>
                     @endif
@@ -174,12 +174,12 @@
                         hồ sơ</a>
                 @else
                     @if ($profile->followed == 0)
-                        <button type="button" id="followBtn" onclick="toggleFollow({{ $profile->uid }}, true)"
-                            class="btn btn-outline-success rounded-full px-4 hover:bg-green-600 border-green-600 hover:border-green-600 text-green-600">Theo
+                        <button type="button" onclick="toggleFollow({{ $profile->uid }}, true)"
+                            class="followBtn btn btn-outline-success rounded-full px-4 hover:bg-green-600 border-green-600 hover:border-green-600 text-green-600">Theo
                             dõi</button>
                     @else
-                        <button type="button" id="followBtn" onclick="toggleFollow({{ $profile->uid }}, false)"
-                            class="btn btn-success rounded-full px-4 bg-green-600 border-green-600 hover:border-green-600">Đang
+                        <button type="button" onclick="toggleFollow({{ $profile->uid }}, false)"
+                            class="followBtn btn btn-success rounded-full px-4 bg-green-600 border-green-600 hover:border-green-600">Đang
                             theo
                             dõi</button>
                     @endif

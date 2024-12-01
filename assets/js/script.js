@@ -486,39 +486,38 @@ function toggleFollow(userId) {
   fetch(`/api/toggle-follow?followed_id=${userId}`)
     .then((response) => response.json())
     .then((result) => {
-      if (result.status === "followed") {
-        // change the button class
-        document
-          .getElementById("followBtn")
-          .classList.remove("btn-outline-success");
-        document
-          .getElementById("followBtn")
-          .classList.remove("hover:bg-green-600");
-        document.getElementById("followBtn").classList.remove("text-green-600");
-        document.getElementById("followBtn").classList.add("btn-success");
-        document.getElementById("followBtn").classList.add("bg-green-600");
-        // change the button text
-        document.getElementById("followBtn").textContent = "Đang theo dõi";
-        document.querySelectorAll(".follower_count").forEach((element) => {
-          element.textContent = parseInt(element.textContent) + 1;
-        });
-      } else {
-        // change the button class
-        document.getElementById("followBtn").classList.remove("btn-success");
-        document.getElementById("followBtn").classList.remove("bg-green-600");
-        document
-          .getElementById("followBtn")
-          .classList.add("btn-outline-success");
-        document
-          .getElementById("followBtn")
-          .classList.add("hover:bg-green-600");
-        document.getElementById("followBtn").classList.add("text-green-600");
-        // change the button text
-        document.getElementById("followBtn").textContent = "Theo dõi";
-        document.querySelectorAll(".follower_count").forEach((element) => {
-          element.textContent = parseInt(element.textContent) - 1;
-        });
-      }
+      const followButtons = document.getElementsByClassName("followBtn");
+      const followerCounts = document.getElementsByClassName("follower_count");
+
+      Array.from(followButtons).forEach((button) => {
+        if (result.status === "followed") {
+          // change the button class
+          button.classList.remove("btn-outline-success");
+          button.classList.remove("hover:bg-green-600");
+          button.classList.remove("text-green-600");
+          button.classList.add("btn-success");
+          button.classList.add("bg-green-600");
+          // change the button text
+          button.textContent = "Đang theo dõi";
+        } else {
+          // change the button class
+          button.classList.remove("btn-success");
+          button.classList.remove("bg-green-600");
+          button.classList.add("btn-outline-success");
+          button.classList.add("hover:bg-green-600");
+          button.classList.add("text-green-600");
+          // change the button text
+          button.textContent = "Theo dõi";
+        }
+      });
+
+      Array.from(followerCounts).forEach((countElement) => {
+        if (result.status === "followed") {
+          countElement.textContent = parseInt(countElement.textContent) + 1;
+        } else {
+          countElement.textContent = parseInt(countElement.textContent) - 1;
+        }
+      });
     })
     .catch((error) => {
       console.error("Error following user:", error);
