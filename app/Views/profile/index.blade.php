@@ -129,7 +129,7 @@
             </div>
         </div>
     </div>
-    <div class="lg:bg-white w-full h-16 lg:shadow-md">
+    <div class="lg:bg-white h-16 lg:shadow-md">
         <div class="mx-auto max-w-[959px] h-full lg:flex hidden">
             <a
                 href="{{ !empty($profile->oauth_profile_picture) ? $profile->oauth_profile_picture : (!empty($profile->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $profile->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}">
