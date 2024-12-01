@@ -33,7 +33,7 @@
         // Set the locale to Vietnamese (for "1 tuần trước")
         Carbon::setLocale('vi');
     @endphp
-    <div class="relative h-min max-h-[500px] lg:h-56 overflow-hidden px-2.5 py-8">
+    <div class="relative h-min lg:h-56 overflow-hidden px-2.5 py-8">
         <div style="background-image: url({{ !empty($profile->oauth_profile_picture) ? $profile->oauth_profile_picture : (!empty($profile->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $profile->username . '/avatar' : '/assets/images/placeholder-user.jpg') }})"
             class="bg-gray-300 w-full h-[450px] lg:h-56 blur-effect"></div>
         <div class="lg:hidden flex flex-col items-center gap-y-2">
@@ -61,24 +61,23 @@
                 </h1>
                 <p class="text-sm text-gray-500"><span>@</span>{{ $profile->username }}</p>
             </div>
-            <div class="flex flex-col items-center gap-y-1">
-                <div class="flex">
-                    <div class="border-right px-3">
+            <div class="flex flex-col items-center gap-y-1 !px-6">
+                <div class="flex flex-wrap justify-center gap-y-1 px-3">
+                    <div class="px-3">
                         <span class="text-gray-500">Bài đã đăng: </span>
                         <span class="font-bold">{{ $profile->posts_count }}</span>
                     </div>
-
                     <div class="px-3">
                         <span class="text-gray-500">Điểm: </span>
                         <span class="font-bold">{{ $profile->total_points }}</span>
                     </div>
                 </div>
-                <div class="flex">
-                    <div class="border-right px-3">
+                <div class="flex flex-wrap justify-center gap-y-1">
+                    <div class="px-3">
                         <span class="text-gray-500">Đang theo dõi: </span>
                         <span class="font-bold">{{ $profile->total_following }}</span>
                     </div>
-                    <div class="border-right px-3">
+                    <div class="px-3">
                         <span class="text-gray-500">Người theo dõi: </span>
                         <span class="font-bold">{{ $profile->total_followers }}</span>
                     </div>
