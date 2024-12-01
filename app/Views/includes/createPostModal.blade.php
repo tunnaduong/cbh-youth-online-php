@@ -47,7 +47,14 @@
                     name="content" placeholder="Nội dung bài viết"></textarea>
                 <uk-select id="subforumId" name="subforumId" uk-cloak placeholder="Chọn chuyên mục phù hợp">
                     @php
-                        $categories = (new \App\Models\Forum())->getCategories();
+                        // nếu người dùng hiện tại là admin thì lấy tất cả các chuyên mục
+                        if ($_SESSION['user']->role == 'admin') {
+                            $categories = (new \App\Models\Forum())->getCategories();
+                        }
+                        // ngược lại thì lấy tất cả các chuyên mục trừ chuyên mục admin
+                        else {
+                            $categories = (new \App\Models\Forum())->getCategoriesExceptAdmin();
+                        }
                         foreach ($categories as $category) {
                             $category->subforums = (new \App\Models\Forum())->getSubforumsByMainCategoryId(
                                 $category->id,

@@ -13,6 +13,13 @@ class Forum extends BaseModel
         return $this->loadRow([$slug]);
     }
 
+    // Lấy danh sách tất cả danh mục trừ role_restriction khác 'admin'
+    public function getCategoriesExceptAdmin()
+    {
+        $this->setQuery("SELECT * FROM cyo_forum_main_categories WHERE role_restriction != 'admin'");
+        return $this->loadAllRows();
+    }
+
     // Lấy danh sách tất cả danh mục
     public function getCategories()
     {
