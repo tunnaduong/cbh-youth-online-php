@@ -260,26 +260,55 @@
                                 </div>
                             @endif
                         </div>
-                        <div class="flex-1 overflow-hidden break-words"><a
-                                href="/{{ $post->username }}/posts/{{ $post->post_id }}">
-                                <h1 class="text-xl font-semibold mb-1 break-words">{{ $post->title }}</h1>
-                            </a>
-                            <div class="text-base max-w-[600px] overflow-wrap">
-                                <div id="truncated{{ $post->post_id }}" style="display: block;">
-                                    <span>{!! nl2br(htmlspecialchars(truncateText($post->description, 330))) !!}</span>
-                                    @if (strlen($post->description) > 330)
-                                        <a class="text-black cursor-pointer hover:underline font-medium"
-                                            onclick="toggleText{{ $post->post_id }}()">Xem
-                                            thêm</a>
-                                    @endif
-                                </div>
-                                <div id="fullText{{ $post->post_id }}" style="display: none;">
-                                    <span>{!! nl2br(htmlspecialchars($post->description)) !!} </span>
-                                    <a class="text-black cursor-pointer hover:underline font-medium"
-                                        onclick="toggleText{{ $post->post_id }}()">Thu
-                                        gọn</a>
-                                </div>
-                            </div>
+                        <style>
+                    .prose h1 {
+                        font-size: 1.8rem;
+                        font-weight: 700;
+                    }
+
+                    .prose h2 {
+                        font-size: 1.5rem;
+                        font-weight: 700;
+                    }
+
+                    .prose h3 {
+                        font-size: 1.2rem;
+                        font-weight: 700;
+                    }
+
+                    .prose h4 {
+                        font-size: 1rem;
+                        font-weight: 700;
+                    }
+
+                    .prose h5 {
+                        font-size: 0.8rem;
+                        font-weight: 700;
+                    }
+
+                    .prose h6 {
+                        font-size: 0.5rem;
+                        font-weight: 700;
+                    }
+                </style>
+                <div class="flex-1 overflow-hidden break-words">
+                    <h1 class="text-xl font-semibold mb-1">{{ $post->title }}</h1>
+                    <div class="text-base max-w-[600px] overflow-wrap">
+                        <div id="truncated{{ $post->post_id }}" style="display: block;">
+                            <span class="prose">{!! Markdown::defaultTransform(nl2br(truncateText($post->description, 330))) !!}</span>
+                            @if (strlen($post->description) > 330)
+                                <a class="text-black cursor-pointer hover:underline font-medium"
+                                    onclick="toggleText{{ $post->post_id }}()">Xem
+                                    thêm</a>
+                            @endif
+                        </div>
+                        <div id="fullText{{ $post->post_id }}" style="display: none;">
+                            <span class="prose">{!! Markdown::defaultTransform(nl2br($post->description)) !!} </span>
+                            <a class="text-black cursor-pointer hover:underline font-medium"
+                                onclick="toggleText{{ $post->post_id }}()">Thu
+                                gọn</a>
+                        </div>
+                    </div>
                             <script>
                                 function toggleText{{ $post->post_id }}() {
                                     const truncated = document.getElementById('truncated{{ $post->post_id }}');
