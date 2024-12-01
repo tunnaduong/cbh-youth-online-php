@@ -36,7 +36,7 @@
     <div class="relative h-min lg:h-56 overflow-hidden px-2.5 py-8">
         <div style="background-image: url({{ !empty($profile->oauth_profile_picture) ? $profile->oauth_profile_picture : (!empty($profile->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $profile->username . '/avatar' : '/assets/images/placeholder-user.jpg') }})"
             class="bg-gray-300 w-full h-[450px] lg:h-56 blur-effect"></div>
-        <div class="lg:hidden flex flex-col items-center gap-y-2">
+        <div class="lg:hidden flex flex-col items-center gap-y-2 relative z-10">
             <a
                 href="{{ !empty($profile->oauth_profile_picture) ? $profile->oauth_profile_picture : (!empty($profile->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $profile->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}">
                 <img class="w-32 h-32 rounded-full" style="border: 4px solid #eeeeee;"
