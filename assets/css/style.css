@@ -208,3 +208,7 @@ hr {
 .prose h1 {
   font-size: larger !important;
 }
+
+.border-right {
+  border-right: 1px solid #aaaaaa;
+}

@@ -46,11 +46,17 @@
                     <textarea id="postDescription"
                         class="-ml-[1px] -mt-[1px] !mb-1 flex w-full rounded-md border-input bg-white px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 min-h-[120px] border focus-visible:ring-0"
                         name="content" placeholder="Nội dung bài viết" style="width: calc(100% + 2px);"></textarea>
-                    <a href="#" class="-mt-1.5 text-xs font-bold px-3">
-                        <i class="fa-brands fa-markdown mr-1"></i>
-                        Hỗ trợ
-                        Markdown
-                    </a>
+                    <div class="px-3 flex items-center gap-x-2 mt-3">
+                        <a href="#" class="-mt-1.5 text-xs font-bold block border-right pr-2">
+                            <i class="fa-brands fa-markdown mr-1"></i>
+                            Hỗ trợ
+                            Markdown
+                        </a>
+                        <a href="/Admin/posts/213054" class="-mt-1.5 text-xs font-bold block">
+                            <i class="fa-solid fa-file-lines mr-1"></i>
+                            Quy tắc
+                        </a>
+                    </div>
                 </div>
                 <uk-select id="subforumId" name="subforumId" uk-cloak placeholder="Chọn chuyên mục phù hợp">
                     @php
