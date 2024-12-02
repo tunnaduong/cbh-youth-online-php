@@ -1,4 +1,7 @@
-@extends('layouts.default')
+@extends('layouts.default', [
+    'description' => 'Đăng nhập tài khoản của bạn để sử dụng các dịch vụ của Thanh niên Chuyên Biên Hòa Online.',
+    'title' => 'Đăng nhập',
+])
 
 @section('content')
     <div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">

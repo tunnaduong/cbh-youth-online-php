@@ -2,6 +2,16 @@
     use Carbon\Carbon;
     use Michelf\MarkdownExtra;
 
+    // Define a truncation function using mb_substr for multibyte encoding support
+    function truncateText($text, $length = 500)
+    {
+        // Ensure UTF-8 encoding is used for the substr operation
+        if (strlen($text) <= $length) {
+            return $text;
+        }
+        return mb_substr($text, 0, $length, 'UTF-8') . '...';
+    }
+
     function roundToNearestFive($count)
     {
         if ($count <= 5) {
@@ -14,7 +24,11 @@
     }
 @endphp
 
-@extends('layouts.home')
+@extends('layouts.home', [
+    'title' => $post->title,
+    'description' => truncateText(preg_replace('/\r|\n/', ' ', $post->description), 160),
+    'author' => $post->profile_name,
+])
 
 @section('content')
     @include('includes.topBar')

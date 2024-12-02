@@ -1,4 +1,7 @@
-@extends('layouts.default')
+@extends('layouts.default', [
+    'description' => 'Quên mật khẩu của bạn? Nhập địa chỉ email của bạn và chúng tôi sẽ gửi cho bạn một liên kết để thiết lập lại mật khẩu.',
+    'title' => 'Quên mật khẩu',
+])
 
 @section('content')
     <div class="min-h-screen flex items-center bg-gray-100 justify-center px-4">

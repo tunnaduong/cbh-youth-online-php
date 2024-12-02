@@ -2,7 +2,12 @@
 <html>
 
 <head>
-    @include('includes.head')
+    @include('includes.head', [
+        'description' => $description ?? null,
+        'title' => $title ?? null,
+        'keywords' => $keywords ?? null,
+        'image' => $image ?? null,
+    ])
 </head>
 
 <body>

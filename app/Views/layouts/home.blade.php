@@ -6,6 +6,8 @@
         'description' => $description ?? null,
         'title' => $title ?? null,
         'keywords' => $keywords ?? null,
+        'image' => $image ?? null,
+        'author' => $author ?? null,
     ])
 </head>
 

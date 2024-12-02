@@ -1,4 +1,7 @@
-@extends('layouts.default')
+@extends('layouts.default', [
+    'title' => 'Thiết lập lại mật khẩu',
+    'description' => 'Thiết lập lại mật khẩu của bạn để tiếp tục sử dụng dịch vụ của Thanh niên Chuyên Biên Hòa Online.',
+])
 
 @section('content')
     <div class="min-h-screen flex items-center bg-gray-100 justify-center px-4">
