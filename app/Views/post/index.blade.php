@@ -28,6 +28,7 @@
     'title' => $post->title,
     'description' => truncateText(preg_replace('/\r|\n/', ' ', $post->description), 160),
     'author' => $post->profile_name,
+    'image' => isset($post->cdn_image_id) ? 'https://api.chuyenbienhoa.com/storage/' . $post->file_path : null,
 ])
 
 @section('content')
