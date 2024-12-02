@@ -205,10 +205,45 @@ hr {
   background-size: cover;
 }
 
-.prose h1 {
-  font-size: larger !important;
-}
-
 .border-right {
   border-right: 1px solid #aaaaaa;
+}
+
+.prose code::before {
+  content: "";
+}
+
+.prose code::after {
+  content: "";
+}
+
+code {
+  display: inline-block;
+  background-color: #f7f7f8; /* Light gray background */
+  color: #d63384; /* Soft pinkish-purple text color */
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace; /* Monospaced font */
+  font-size: 0.95em; /* Slightly smaller font size */
+  padding: 2px 4px; /* Add a little padding for inline code */
+  border-radius: 4px; /* Rounded corners */
+  white-space: pre-wrap; /* Wrap content if needed */
+}
+
+.prose > ul > li > :first-child {
+  margin-top: 0;
+}
+
+blockquote {
+  background-color: #f7f7f8; /* Light gray background */
+  border-left: 4px solid #d0d7de; /* Left border to indicate blockquote */
+  color: #2d2d2d; /* Dark gray text for readability */
+  margin: 1em 0; /* Vertical spacing around the blockquote */
+  padding: 0.5em 1em; /* Inner padding for spacing */
+  font-style: italic; /* Slightly italicize the text */
+  font-size: 1em; /* Standard font size */
+  border-radius: 4px; /* Optional: rounded corners for modern look */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for depth */
+}
+
+blockquote p {
+  margin: 0; /* Remove default margins from paragraphs inside blockquote */
 }

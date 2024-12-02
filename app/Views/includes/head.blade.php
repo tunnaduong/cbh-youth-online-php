@@ -17,9 +17,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
 </script>
-<!-- Bộ mã riêng cho giao diện trang web -->
-<link href="/assets/css/reset.css" rel="stylesheet">
-<link href="/assets/css/style.css" rel="stylesheet">
 <!-- Bộ mã TailwindCSS -->
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.5.0/dist/typography.min.css" rel="stylesheet">
@@ -46,3 +43,6 @@
 <link rel="stylesheet" href="https://unpkg.com/franken-ui@1.1.0/dist/css/core.min.css" />
 <script src="https://unpkg.com/franken-ui@1.1.0/dist/js/core.iife.js" type="module"></script>
 <script src="https://unpkg.com/franken-ui@1.1.0/dist/js/icon.iife.js" type="module"></script>
+<!-- Bộ mã riêng cho giao diện trang web -->
+<link href="/assets/css/reset.css" rel="stylesheet">
+<link href="/assets/css/style.css" rel="stylesheet">

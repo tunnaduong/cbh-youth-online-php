@@ -1,16 +1,6 @@
 @php
     use Carbon\Carbon;
-    use Michelf\Markdown;
-
-    // Define a truncation function using mb_substr for multibyte encoding support
-    function truncateText($text, $length = 500)
-    {
-        // Ensure UTF-8 encoding is used for the substr operation
-        if (strlen($text) <= $length) {
-            return $text;
-        }
-        return mb_substr($text, 0, $length, 'UTF-8') . '...';
-    }
+    use Michelf\MarkdownExtra;
 
     function roundToNearestFive($count)
     {
@@ -59,69 +49,11 @@
                         </div>
                     @endif
                 </div>
-                <style>
-                    .prose h1 {
-                        font-size: 1.8rem;
-                        font-weight: 700;
-                    }
-
-                    .prose h2 {
-                        font-size: 1.5rem;
-                        font-weight: 700;
-                    }
-
-                    .prose h3 {
-                        font-size: 1.2rem;
-                        font-weight: 700;
-                    }
-
-                    .prose h4 {
-                        font-size: 1rem;
-                        font-weight: 700;
-                    }
-
-                    .prose h5 {
-                        font-size: 0.8rem;
-                        font-weight: 700;
-                    }
-
-                    .prose h6 {
-                        font-size: 0.5rem;
-                        font-weight: 700;
-                    }
-                </style>
                 <div class="flex-1 overflow-hidden break-words">
                     <h1 class="text-xl font-semibold mb-1">{{ $post->title }}</h1>
                     <div class="text-base max-w-[600px] overflow-wrap">
-                        <div id="truncated{{ $post->post_id }}" style="display: block;">
-                            <span class="prose">{!! Markdown::defaultTransform(truncateText($post->description, 330)) !!}</span>
-                            @if (strlen($post->description) > 330)
-                                <a class="text-black cursor-pointer hover:underline font-medium"
-                                    onclick="toggleText{{ $post->post_id }}()">Xem
-                                    thêm</a>
-                            @endif
-                        </div>
-                        <div id="fullText{{ $post->post_id }}" style="display: none;">
-                            <span class="prose">{!! Markdown::defaultTransform($post->description) !!} </span>
-                            <a class="text-black cursor-pointer hover:underline font-medium"
-                                onclick="toggleText{{ $post->post_id }}()">Thu
-                                gọn</a>
-                        </div>
+                        <span class="prose">{!! MarkdownExtra::defaultTransform($post->description) !!} </span>
                     </div>
-                    <script>
-                        function toggleText{{ $post->post_id }}() {
-                            const truncated = document.getElementById('truncated{{ $post->post_id }}');
-                            const fullText = document.getElementById('fullText{{ $post->post_id }}');
-
-                            if (truncated.style.display === "none") {
-                                truncated.style.display = "block";
-                                fullText.style.display = "none";
-                            } else {
-                                truncated.style.display = "none";
-                                fullText.style.display = "block";
-                            }
-                        }
-                    </script>
                     @unless (!isset($post->cdn_image_id))
                         <div
                             class="rounded-md bg-[#E4EEE3] border overflow-hidden !mt-4 max-h-[34rem] flex items-center justify-center">
