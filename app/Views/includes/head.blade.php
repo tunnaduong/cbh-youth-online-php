@@ -1,8 +1,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Thanh niên Chuyên Biên Hòa Online</title>
-<meta name="description" content="Mạng xã hội Thanh niên Chuyên Biên Hòa Online thuộc Trường THPT Chuyên Hà Nam">
+<title>{!! !empty($title) ? $title . ' - ' : '' !!}Thanh niên Chuyên Biên Hòa Online</title>
+<meta name="description" content="{!! $description ?? 'Mạng xã hội Thanh niên Chuyên Biên Hòa Online thuộc Trường THPT Chuyên Hà Nam' !!}">
 <meta name="author" content="Đội ngũ CBH Youth Online">
+<!-- Meta tags for SEO -->
+<meta name="keywords" content="{!! $keywords ??
+    'thpt chuyen ha nam, thanh nien chuyen bien hoa, thanh nien chuyen bien hoa online, thpt chuyen bien hoa, chuyen bien hoa, chuyen ha nam, cyo, cbh youth online' !!}">
 <link rel="icon" href="/assets/images/logo.png" type="image/png" sizes="32x32" />
 <!-- Bộ mã jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"

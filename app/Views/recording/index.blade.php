@@ -1,4 +1,4 @@
-@extends('layouts.recording')
+@extends('layouts.home', ['title' => 'Loa lớn', 'recordings' => true])
 
 @section('content')
     <div class="flex flex-1 !p-6 !px-2.5 pt-2 items-center flex-col">

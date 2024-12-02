@@ -1,4 +1,4 @@
-@extends('layouts.report')
+@extends('layouts.home', ['title' => 'Báo cáo vi phạm tập thể lớp', 'reports' => true, 'class' => true])
 
 @section('content')
     <div class="flex flex-1 pt-4 px-2.5 -mb-3 items-center flex-col">

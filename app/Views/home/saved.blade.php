@@ -24,7 +24,7 @@
     }
 @endphp
 
-@extends('layouts.saved')
+@extends('layouts.home', ['title' => 'Đã lưu', 'saved' => true])
 
 @section('menu-label', 'Đã lưu')
 

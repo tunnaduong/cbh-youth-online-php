@@ -24,7 +24,7 @@
     }
 @endphp
 
-@extends('layouts.home')
+@extends('layouts.home', ['title' => 'Bảng tin', 'feed' => true])
 
 @section('content')
     @include('includes.topBar')

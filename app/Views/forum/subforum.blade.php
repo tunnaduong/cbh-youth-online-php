@@ -2,7 +2,7 @@
     use Carbon\Carbon;
 @endphp
 
-@extends('layouts.forum')
+@extends('layouts.home', ['title' => $subforum->name, 'description' => $subforum->description, 'forum' => true])
 
 @section('content')
 @section('menu-label', 'Diễn đàn')
