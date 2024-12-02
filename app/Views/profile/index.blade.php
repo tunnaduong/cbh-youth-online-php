@@ -262,7 +262,9 @@
                             @endif
                         </div>
                         <div class="flex-1 overflow-hidden break-words">
-                            <h1 class="text-xl font-semibold mb-1">{{ $post->title }}</h1>
+                            <h1 class="text-xl font-semibold mb-1"><a
+                                    href="/{{ $post->username }}/posts/{{ $post->post_id }}">{{ $post->title }}</a>
+                            </h1>
                             <div class="text-base max-w-[600px] overflow-wrap">
                                 <div id="truncated{{ $post->post_id }}" style="display: block;">
                                     <span class="prose">{!! MarkdownExtra::defaultTransform(truncateText($post->description, 330)) !!}</span>
