@@ -17,7 +17,7 @@
                 class="text-lg font-semibold px-4 uppercase">{{ $mainCategory->name }}</a>
             <div class="bg-white long-shadow rounded-lg mt-2">
                 @foreach ($mainCategory->subforums as $subforum)
-                    <div class="flex flex-row items-center min-h-[78px]">
+                    <div class="flex flex-row items-center min-h-[78px] pr-2">
                         <ion-icon name="chatbubbles" class="text-[#319528] text-3xl p-4"></ion-icon>
                         <div class="flex flex-col flex-1">
                             <a href="/forum/{{ $mainCategory->slug }}/{{ $subforum->slug }}"
@@ -39,7 +39,7 @@
                                 Carbon::setLocale('vi');
                             @endphp
                             <div style="max-width: calc(42%);"
-                                class="flex-1 bg-[#E7FFE4] text-[13px] p-2 px-2 mr-2 rounded-md flex-col hidden sm:flex">
+                                class="flex-1 bg-[#E7FFE4] text-[13px] p-2 px-2 rounded-md flex-col hidden sm:flex">
                                 <div class="flex">
                                     <span class="whitespace-nowrap mr-1">Mới nhất:</span>
                                     <a href="/{{ $subforum->latest_post->username }}/posts/{{ $subforum->latest_post->post_id }}"
