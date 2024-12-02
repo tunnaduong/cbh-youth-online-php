@@ -20,6 +20,12 @@ class HomeController extends BaseController
         return $this->render('home.index', compact('posts'));
     }
 
+    public function saved()
+    {
+        $posts = $this->post->saved();
+        return $this->render('home.saved', compact('posts'));
+    }
+
     public function report()
     {
         return $this->render('report.index');

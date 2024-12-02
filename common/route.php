@@ -44,6 +44,7 @@ try {
     $router->get('/report/student', [HomeController::class, 'report']);
     $router->get('/lookup', [HomeController::class, 'lookup']);
     $router->get('/explore', [HomeController::class, 'explore']);
+    $router->get('/saved', [HomeController::class, 'saved']);
     $router->get('/api/vote', [PostVoteController::class, 'handleVote']);
     $router->get('/api/comment/vote', [CommentVoteController::class, 'handleVote']);
     $router->get('/api/posts/{postId}/toggle-save', [SavePostController::class, 'toggleSavePost']);
