@@ -127,16 +127,49 @@
                 <nav>
                     <a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
                         href="/">
-                        <span class="mr-3">👥</span>Cộng đồng </a>
+                        <i class="fa-solid fa-user-group mr-3"></i>Cộng đồng </a>
+                    <ul class="pl-8">
+                        <li><a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
+                                href="/">
+                                <ion-icon name="home" class="mr-3"></ion-icon>Bảng tin </a></li>
+                        <li><a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
+                                href="/forum">
+                                <ion-icon name="chatbox-ellipses" class="mr-3"></ion-icon>Diễn đàn </a></li>
+                        <li><a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
+                                href="/recordings">
+                                <ion-icon name="megaphone" class="mr-3"></ion-icon>Loa lớn </a></li>
+                        <li><a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
+                                href="/youth-news">
+                                <ion-icon name="newspaper" class="mr-3"></ion-icon>Tin tức Đoàn </a></li>
+                        <li><a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
+                                href="/saved">
+                                <ion-icon name="bookmark" class="mr-3"></ion-icon>Đã lưu </a></li>
+                    </ul>
                     <a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
                         href="/report">
-                        <span class="mr-3">📊</span>Báo cáo </a>
+                        <i class="fa-solid fa-flag mr-3"></i>Báo cáo </a>
+                    <ul class="pl-8">
+                        <li><a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
+                                href="/report/class">
+                                <ion-icon name="people" class="mr-3"></ion-icon>Báo cáo tập thể lớp</a></li>
+                        <li><a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
+                                href="/report/student">
+                                <ion-icon name="person" class="mr-3"></ion-icon>Báo cáo học sinh</a></li>
+                    </ul>
                     <a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
                         href="/lookup">
-                        <span class="mr-3">🔍</span>Tra cứu </a>
+                        <i class="fa-solid fa-magnifying-glass mr-3"></i>Tra cứu </a>
+                    <ul class="pl-8">
+                        <li><a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
+                                href="/lookup/timetable">
+                                <ion-icon name="calendar" class="mr-3"></ion-icon>Thời khóa biểu</a></li>
+                        <li><a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
+                                href="/lookup/class-ranking">
+                                <ion-icon name="trophy" class="mr-3"></ion-icon>Xếp hạng thi đua lớp</a></li>
+                    </ul>
                     <a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
                         href="/explore">
-                        <span class="mr-3">🌟</span>Khám phá </a>
+                        <ion-icon name="apps" class="mr-3"></ion-icon>Khám phá </a>
                 </nav>
             </div>
         </div>
