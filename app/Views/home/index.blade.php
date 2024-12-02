@@ -65,7 +65,7 @@
                     </h1>
                     <div class="text-base max-w-[600px] overflow-wrap">
                         <div id="truncated{{ $post->post_id }}" style="display: block;">
-                            <span class="prose">{!! MarkdownExtra::defaultTransform(truncateText($post->description, 330)) !!}</span>
+                            <span class="prose">{!! MarkdownExtra::defaultTransform(strip_tags(truncateText($post->description, 330), '<iframe>')) !!}</span>
                             @if (strlen($post->description) > 330)
                                 <a class="text-black cursor-pointer hover:underline font-medium"
                                     onclick="toggleText{{ $post->post_id }}()">Xem
@@ -73,7 +73,7 @@
                             @endif
                         </div>
                         <div id="fullText{{ $post->post_id }}" style="display: none;">
-                            <span class="prose">{!! MarkdownExtra::defaultTransform($post->description) !!} </span>
+                            <span class="prose">{!! MarkdownExtra::defaultTransform(strip_tags($post->description, '<iframe>')) !!} </span>
                             <a class="text-black cursor-pointer hover:underline font-medium"
                                 onclick="toggleText{{ $post->post_id }}()">Thu
                                 gọn</a>
