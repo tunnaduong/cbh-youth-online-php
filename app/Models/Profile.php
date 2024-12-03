@@ -14,7 +14,8 @@ class Profile extends BaseModel
 
     public function getTop8ActiveUsers()
     {
-        $this->setQuery("SELECT ca.id AS uid, ca.username, cu.profile_name, cuc.file_path AS profile_picture, cu.oauth_profile_picture, (SELECT COUNT(*) FROM cyo_topics WHERE user_id = ca.id) AS posts_count, (SELECT COUNT(*) FROM cyo_topic_votes WHERE topic_id IN (SELECT id FROM cyo_topics WHERE user_id = ca.id)) AS total_likes, (SELECT COUNT(*) FROM cyo_topic_comments WHERE user_id = ca.id) AS comments_count, ( (SELECT COUNT(*) FROM cyo_topics WHERE user_id = ca.id) * 10 + (SELECT COUNT(*) FROM cyo_topic_votes WHERE topic_id IN (SELECT id FROM cyo_topics WHERE user_id = ca.id)) * 5 + (SELECT COUNT(*) FROM cyo_topic_comments WHERE user_id = ca.id) * 2 ) AS total_points FROM cyo_auth_accounts ca INNER JOIN cyo_user_profiles cu ON ca.username = cu.profile_username LEFT JOIN cyo_cdn_user_content cuc ON cu.profile_picture = cuc.id ORDER BY total_points DESC LIMIT 8");
+        // get top 8 active users other than admin
+        $this->setQuery("SELECT ca.id AS uid, ca.username, cu.profile_name, cuc.file_path AS profile_picture, cu.oauth_profile_picture, (SELECT COUNT(*) FROM cyo_topics WHERE user_id = ca.id) AS posts_count, (SELECT COUNT(*) FROM cyo_topic_votes WHERE topic_id IN (SELECT id FROM cyo_topics WHERE user_id = ca.id)) AS total_likes, (SELECT COUNT(*) FROM cyo_topic_comments WHERE user_id = ca.id) AS comments_count, ( (SELECT COUNT(*) FROM cyo_topics WHERE user_id = ca.id) * 10 + (SELECT COUNT(*) FROM cyo_topic_votes WHERE topic_id IN (SELECT id FROM cyo_topics WHERE user_id = ca.id)) * 5 + (SELECT COUNT(*) FROM cyo_topic_comments WHERE user_id = ca.id) * 2 ) AS total_points FROM cyo_auth_accounts ca INNER JOIN cyo_user_profiles cu ON ca.username = cu.profile_username LEFT JOIN cyo_cdn_user_content cuc ON cu.profile_picture = cuc.id WHERE ca.role != 'admin' ORDER BY total_points DESC LIMIT 8");
         return $this->loadAllRows();
     }
 
