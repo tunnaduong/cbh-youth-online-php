@@ -26,6 +26,11 @@ class ProfileController extends BaseController
     public function edit($username)
     {
         $profile = $this->profileModel->getProfile($username);
+
+        if ($username !== $_SESSION['user']->username) {
+            header("Location: /$username");
+        }
+
         return $this->render('profile.edit', compact('profile'));
     }
 }

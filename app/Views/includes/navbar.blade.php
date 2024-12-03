@@ -103,8 +103,10 @@
                     <li><a class="dropdown-item" href="/{{ $_SESSION['user']->username }}"><i
                                 class="bi bi-person mr-1"></i>
                             Trang cá nhân</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear mr-1"></i> Cài đặt</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle mr-1"></i> Trợ
+                    <li><a class="dropdown-item" href="/{{ $_SESSION['user']->username }}/edit"><i
+                                class="bi bi-gear mr-1"></i> Cài đặt</a></li>
+                    <li><a class="dropdown-item" href="https://facebook.com/cbhyouthonline"><i
+                                class="bi bi-question-circle mr-1"></i> Trợ
                             giúp</a>
                     </li>
                     <li>
