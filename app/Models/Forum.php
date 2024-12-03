@@ -16,7 +16,7 @@ class Forum extends BaseModel
     // Lấy danh sách tất cả danh mục trừ role_restriction khác 'admin'
     public function getCategoriesExceptAdmin()
     {
-        $this->setQuery("SELECT * FROM cyo_forum_main_categories WHERE role_restriction != 'admin'");
+        $this->setQuery("SELECT * FROM cyo_forum_main_categories WHERE role_restriction != 'admin' ORDER BY arrange ASC");
         return $this->loadAllRows();
     }
 
