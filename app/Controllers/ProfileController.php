@@ -22,4 +22,10 @@ class ProfileController extends BaseController
         $posts = $this->postModel->getPostsByUser($profile->uid ?? null);
         return $this->render('profile.index', compact('profile', 'posts'));
     }
+
+    public function edit($username)
+    {
+        $profile = $this->profileModel->getProfile($username);
+        return $this->render('profile.edit', compact('profile'));
+    }
 }

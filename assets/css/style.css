@@ -9,6 +9,51 @@
 }
 
 :root {
+  --background: 115 100% 95%;
+  --foreground: 115 5% 0%;
+  --card: 115 50% 90%;
+  --card-foreground: 115 5% 10%;
+  --popover: 115 100% 95%;
+  --popover-foreground: 115 100% 0%;
+  --primary: 115 58.5% 36.9%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 115 30% 70%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 77 30% 85%;
+  --muted-foreground: 115 5% 35%;
+  --accent: 77 30% 80%;
+  --accent-foreground: 115 5% 10%;
+  --destructive: 0 100% 30%;
+  --destructive-foreground: 115 5% 90%;
+  --border: 115 30% 50%;
+  --input: 115 30% 18%;
+  /* --ring: 115 58.5% 36.9%; */
+  --radius: 0.5rem;
+}
+.dark {
+  --background: 115 50% 5%;
+  --foreground: 115 5% 90%;
+  --card: 115 50% 0%;
+  --card-foreground: 115 5% 90%;
+  --popover: 115 50% 5%;
+  --popover-foreground: 115 5% 90%;
+  --primary: 115 58.5% 36.9%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 115 30% 10%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 77 30% 15%;
+  --muted-foreground: 115 5% 60%;
+  --accent: 77 30% 15%;
+  --accent-foreground: 115 5% 90%;
+  --destructive: 0 100% 30%;
+  --destructive-foreground: 115 5% 90%;
+  --border: 115 30% 18%;
+  --input: 115 30% 18%;
+  /* --ring: 115 58.5% 36.9%; */
+  --radius: 0.5rem;
+}
+
+:root {
   --popover: 0 0% 100%;
   --popover-foreground: 222.2 47.4% 11.2%;
   --input: 210 14% 89%;
@@ -246,4 +291,12 @@ blockquote {
 
 blockquote p {
   margin: 0; /* Remove default margins from paragraphs inside blockquote */
+}
+
+.border-top {
+  border-top: 1px solid #aaaaaa;
+}
+
+.border-all {
+  border: 1px solid hsl(var(--card));
 }

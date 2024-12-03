@@ -98,7 +98,7 @@
                 @else
                     <img id="imagePreview" alt="Preview" class="border rounded-md hidden"
                         style="width: 100px; height: 100px; object-fit: cover" />
-                    <div class="flex flex-row items-center rounded-lg border bg-card text-card-foreground p-3">
+                    <div class="flex flex-row items-center rounded-lg border p-3">
                         <p class="text-sm font-medium flex-1">Thêm ảnh vào bài viết của bạn</p>
                         <input id="fileInput" accept="image/*" type="file" style="display: none;">
                         <div class="flex gap-1">

@@ -39,7 +39,7 @@
                                 Carbon::setLocale('vi');
                             @endphp
                             <div style="max-width: calc(42%);"
-                                class="flex-1 bg-[#E7FFE4] text-[13px] p-2 px-2 rounded-md flex-col hidden sm:flex">
+                                class="flex-1 bg-[#E7FFE4] text-[13px] p-2 px-2 rounded-md flex-col hidden sm:flex border-all">
                                 <div class="flex">
                                     <span class="whitespace-nowrap mr-1">Mới nhất:</span>
                                     <a href="/{{ $subforum->latest_post->username }}/posts/{{ $subforum->latest_post->post_id }}"
