@@ -35,7 +35,7 @@ class ProfileController extends BaseController
             header("Location: /$username");
         }
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['type'] == "profile_edit") {
             // if username is empty
             if (empty($_POST['username'])) {
                 $_SESSION['error']['username'] = 'Tên người dùng không được để trống.';

@@ -19,8 +19,8 @@
             <div class="my-6 border-top"></div>
             <div class="flex flex-col lg:flex-row gap-x-12">
                 <aside class="w-full lg:w-1/5 mb-4">
-                    <ul class="uk-nav uk-nav-primary" uk-switcher="connect: #component-nav; animation: uk-animation-fade"
-                        uk-nav>
+                    <ul class="uk-nav uk-nav-primary"
+                        uk-switcher="connect: #component-nav; animation: uk-animation-fade; active: 1" uk-nav>
                         <li class="uk-active">
                             <a href="#" class="mx-0">Trang cá nhân</a>
                         </li>
@@ -34,7 +34,7 @@
                 </aside>
                 <div class="flex-1">
                     <ul id="component-nav" class="uk-switcher max-w-2xl">
-                        <li class="uk-active space-y-6">
+                        <li class="uk-active space-y-6 ">
                             <div>
                                 <h3 class="text-lg font-medium">Trang cá nhân</h3>
                                 <p class="text-sm text-muted-foreground"> Đây là cách người khác sẽ nhìn thấy bạn trên trang
@@ -119,39 +119,45 @@
                                     và múi giờ ưa thích của bạn. </p>
                             </div>
                             <div class="border-t border-border"></div>
-                            <div class="space-y-2">
-                                <label class="uk-form-label" for="name">Họ và tên</label>
-                                <input class="uk-input" id="name" type="text" placeholder="Tên của bạn"
-                                    value="{{ $profile->profile_name }}">
-                                <div class="uk-form-help text-muted-foreground">Đây là tên sẽ được hiển thị công khai trên
-                                    hồ sơ của
-                                    bạn, bảng tin và diễn đàn.</div>
-                            </div>
-                            <div class="space-y-2">
-                                <label class="uk-form-label block" for="date_of_birth">Ngày tháng năm sinh</label>
-                                <input class="uk-input w-[240px]" id="date_of_birth" type="date"
-                                    placeholder="Chọn một ngày" value="{{ $profile->birthday }}" min="1900-01-01"
-                                    max="{{ date('Y-m-d') }}">
-                                <div class="uk-form-help text-muted-foreground">Ngày sinh của bạn được sử dụng để tính toán
-                                    tuổi của bạn.
+                            <form action="" method="POST" class="space-y-6">
+                                @csrf
+                                <input type="hidden" name="type" value="account_edit">
+                                <div class="space-y-2">
+                                    <label class="uk-form-label" for="name">Họ và tên</label>
+                                    <input class="uk-input" id="name" name="profile_name" type="text"
+                                        placeholder="Tên của bạn" value="{{ $profile->profile_name }}">
+                                    <div class="uk-form-help text-muted-foreground">Đây là tên sẽ được hiển thị công khai
+                                        trên
+                                        hồ sơ của
+                                        bạn, bảng tin và diễn đàn.</div>
                                 </div>
-                            </div>
-                            <div class="space-y-2">
-                                <label class="uk-form-label block" for="language">Ngôn ngữ</label>
-                                <div class="h-9">
-                                    <uk-select name="language" uk-cloak="true">
-                                        <option value="" disabled> Chọn một ngôn ngữ </option>
-                                        <option selected>Tiếng Việt</option>
-                                    </uk-select>
+                                <div class="space-y-2">
+                                    <label class="uk-form-label block" for="date_of_birth">Ngày tháng năm sinh</label>
+                                    <input class="uk-input w-[240px]" name="birthday" id="date_of_birth" type="date"
+                                        placeholder="Chọn một ngày" value="{{ $profile->birthday }}" min="1900-01-01"
+                                        max="{{ date('Y-m-d') }}">
+                                    <div class="uk-form-help text-muted-foreground">Ngày sinh của bạn được sử dụng để tính
+                                        toán
+                                        tuổi của bạn.
+                                    </div>
                                 </div>
-                                <div class="uk-form-help text-muted-foreground">Đây là ngôn ngữ sẽ được sử dụng trên
-                                    website
+                                <div class="space-y-2">
+                                    <label class="uk-form-label block" for="language">Ngôn ngữ</label>
+                                    <div class="h-9">
+                                        <uk-select name="language" uk-cloak="true">
+                                            <option value="" disabled> Chọn một ngôn ngữ </option>
+                                            <option selected>Tiếng Việt</option>
+                                        </uk-select>
+                                    </div>
+                                    <div class="uk-form-help text-muted-foreground">Đây là ngôn ngữ sẽ được sử dụng trên
+                                        website
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
-                                <button class="uk-button uk-button-primary">Cập nhật hồ
-                                    sơ</button>
-                            </div>
+                                <div>
+                                    <button type="submit" class="uk-button uk-button-primary">Cập nhật hồ
+                                        sơ</button>
+                                </div>
+                            </form>
                         </li>
                         <li class="space-y-6">
                             <div>

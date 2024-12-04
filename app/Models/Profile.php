@@ -58,8 +58,8 @@ class Profile extends BaseModel
                 ]);
                 break;
             case "account_edit":
-                $this->setQuery("UPDATE cyo_user_profiles SET profile_name = ?, birthday = ? WHERE profile_username = ?");
-                $this->execute([$data['profile_name'], $data['birthday'] ?? null, $_SESSION['user']->username]);
+                $this->setQuery("UPDATE cyo_user_profiles SET profile_name = ?, birthday = ?, updated_at = ? WHERE profile_username = ?");
+                $this->execute([$data['profile_name'], $data['birthday'] ?? null, date('Y-m-d H:i:s'), $_SESSION['user']->username]);
                 break;
         }
     }
