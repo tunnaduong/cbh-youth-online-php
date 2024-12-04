@@ -10,8 +10,8 @@
             <button type="button" class="btn-close text-[9px] !top-[2px]" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endunless
-    <div class="p-6">
-        <div class="bg-white p-6 rounded-2xl border shadow-md">
+    <div class="!p-4 sm:!p-6">
+        <div class="bg-white !p-4 sm:!p-6 rounded-2xl border shadow-md">
             <div class="space-y-0.5">
                 <h2 class="text-2xl font-bold tracking-tight">Cài đặt</h2>
                 <p class="text-muted-foreground">Quản lý cài đặt tài khoản và thiết lập thông báo email.</p>
