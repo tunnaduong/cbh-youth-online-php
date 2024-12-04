@@ -300,3 +300,7 @@ blockquote p {
 .border-all {
   border: 1px solid hsl(var(--card));
 }
+
+input[type="radio"] {
+  accent-color: #319527;
+}
