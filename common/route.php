@@ -50,6 +50,7 @@ try {
     $router->get('/api/posts/{postId}/toggle-save', [SavePostController::class, 'toggleSavePost']);
     $router->get('/api/posts/{postId}/increment-view', [PostController::class, 'incrementView']);
     $router->get('/api/toggle-follow', [FollowController::class, 'handleToggleFollowAndUnfollow']);
+    // $router->post('/api/update-profile', [ProfileController::class, 'updateProfile']);
     $router->get('/email/verify/{token}', [AuthController::class, 'verifyEmail']);
     // $router->get('/email/resend', [AuthController::class, 'resendVerificationEmail']);
     $router->any('/password/reset', [AuthController::class, 'forgotPassword']);
@@ -65,7 +66,7 @@ try {
     $router->get("/admin", [AdminController::class, 'index']);
 
     // username should be the last route
-    $router->get('/{username}/edit', [ProfileController::class, 'edit']);
+    $router->any('/{username}/edit', [ProfileController::class, 'edit']);
     $router->get('/{username}', [ProfileController::class, 'index']);
     // $router->get('/test/{email}/{token}', [AuthController::class, 'sendVerificationEmail']);
     # NB. You can cache the return value from $router->getData() so you don't have to create the routes each request - massive speed gains

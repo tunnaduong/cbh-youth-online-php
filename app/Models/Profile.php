@@ -24,4 +24,10 @@ class Profile extends BaseModel
         $this->setQuery("SELECT user_points.id, user_points.username, total_points, ( SELECT COUNT(*) + 1 FROM cyo_auth_accounts AS ca2 WHERE ( (SELECT COUNT(*) FROM cyo_topics WHERE user_id = ca2.id) * 10 + (SELECT COUNT(*) FROM cyo_topic_votes WHERE topic_id IN (SELECT id FROM cyo_topics WHERE user_id = ca2.id)) * 5 + (SELECT COUNT(*) FROM cyo_topic_comments WHERE user_id = ca2.id) * 2 ) > total_points ) AS current_rank FROM ( SELECT ca.id, ca.username, ( (SELECT COUNT(*) FROM cyo_topics WHERE user_id = ca.id) * 10 + (SELECT COUNT(*) FROM cyo_topic_votes WHERE topic_id IN (SELECT id FROM cyo_topics WHERE user_id = ca.id)) * 5 + (SELECT COUNT(*) FROM cyo_topic_comments WHERE user_id = ca.id) * 2 ) AS total_points FROM cyo_auth_accounts ca ) AS user_points WHERE user_points.id = ?");
         return $this->loadRow([$_SESSION['user']->id ?? null]);
     }
+
+    public function updateProfile($data)
+    {
+        $this->setQuery("UPDATE cyo_user_profiles SET profile_name = ?, bio = ?, birthday = ?, gender = ?, location = ? WHERE profile_username = ?");
+        $this->execute([$data['profile_name'], $data['profile_bio'] ?? null, $data['birthday'] ?? null, $data['gender'] ?? null, $data['location'] ?? null, $_SESSION['user']->username]);
+    }
 }

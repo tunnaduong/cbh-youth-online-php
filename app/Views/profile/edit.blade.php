@@ -50,9 +50,20 @@
                                 @unless ($profile->email_verified_at)
                                     <div class="uk-form-help text-muted-foreground">Bạn chưa xác minh email. <a
                                             href="/{{ $profile->username }}/email/verify"
-                                            class="underline underline-offset-[3.2px]">Xác minh ngay.</a>
+                                            class="underline underline-offset-[3.2px]">Xác minh ngay</a>.
                                     </div>
                                 @endunless
+                            </div>
+                            <div class="space-y-2">
+                                <span class="uk-form-label">Giới tính</span>
+                                <div class="uk-form-controls flex gap-x-3">
+                                    <label class="flex items-center text-sm" for="notification_0">
+                                        <input id="notification_0" class="mr-2" name="notification" type="radio"
+                                            checked="true" value="Male">Nam</label>
+                                    <label class="flex items-center text-sm" for="notification_1">
+                                        <input id="notification_1" class="mr-2" name="notification" type="radio"
+                                            value="Female">Nữ</label>
+                                </div>
                             </div>
                             <div class="space-y-2">
                                 <label class="uk-form-label" for="bio">Tiểu sử</label>
@@ -65,8 +76,9 @@
                                     </div>
                                 @endunless
                             </div>
-                            <div class="">
-                                <button class="uk-button uk-button-primary">Cập nhật hồ sơ</button>
+                            <div>
+                                <button class="uk-button uk-button-primary">Cập nhật hồ
+                                    sơ</button>
                             </div>
                         </li>
                         <li class="space-y-6">
@@ -101,11 +113,13 @@
                                         <option selected>Tiếng Việt</option>
                                     </uk-select>
                                 </div>
-                                <div class="uk-form-help text-muted-foreground">Đây là ngôn ngữ sẽ được sử dụng trên website
+                                <div class="uk-form-help text-muted-foreground">Đây là ngôn ngữ sẽ được sử dụng trên
+                                    website
                                 </div>
                             </div>
-                            <div class="">
-                                <button class="uk-button uk-button-primary">Cập nhật hồ sơ</button>
+                            <div>
+                                <button class="uk-button uk-button-primary">Cập nhật hồ
+                                    sơ</button>
                             </div>
                         </li>
                         <li class="space-y-6">
@@ -178,7 +192,7 @@
                             </div>
                             <div>
                                 <button class="uk-button uk-button-primary"> Cập nhật thông báo
-                                </button>
+                                    </button2>
                             </div>
                         </li>
                     </ul>

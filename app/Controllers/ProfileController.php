@@ -31,6 +31,11 @@ class ProfileController extends BaseController
             header("Location: /$username");
         }
 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->profileModel->updateProfile($_POST);
+            return;
+        }
+
         return $this->render('profile.edit', compact('profile'));
     }
 }

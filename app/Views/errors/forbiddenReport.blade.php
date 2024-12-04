@@ -1,3 +1,7 @@
+@php
+    http_response_code(403);
+@endphp
+
 @extends('layouts.error')
 
 @section('content')
