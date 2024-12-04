@@ -111,7 +111,7 @@
             </div>
             <div class="flex-1 flex justify-end items-center mt-3">
                 @if (($_SESSION['user']->username ?? null) == $profile->username)
-                    <a href="/{{ $profile->username }}/edit" class="btn btn-outline-secondary rounded-full px-4"><i
+                    <a href="/{{ $profile->username }}/settings" class="btn btn-outline-secondary rounded-full px-4"><i
                             class="bi bi-gear-fill"></i> Sửa
                         hồ sơ</a>
                 @else
@@ -170,7 +170,7 @@
             </div>
             <div class="flex-1 flex justify-end items-center">
                 @if (($_SESSION['user']->username ?? null) == $profile->username)
-                    <a href="/{{ $profile->username }}/edit" class="btn btn-outline-secondary rounded-full px-4"><i
+                    <a href="/{{ $profile->username }}/settings" class="btn btn-outline-secondary rounded-full px-4"><i
                             class="bi bi-gear-fill"></i> Sửa
                         hồ sơ</a>
                 @else

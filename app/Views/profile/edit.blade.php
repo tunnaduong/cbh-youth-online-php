@@ -4,6 +4,12 @@
 ])
 
 @section('content')
+    @unless (empty($success))
+        <div class="alert alert-success alert-dismissible fade show rounded-none mb-0 text-sm" role="alert">
+            {!! $success !!}
+            <button type="button" class="btn-close text-[9px] !top-[2px]" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endunless
     <div class="p-6">
         <div class="bg-white p-6 rounded-2xl border shadow-md">
             <div class="space-y-0.5">
@@ -35,51 +41,76 @@
                                     web. </p>
                             </div>
                             <div class="border-t border-border"></div>
-                            <div class="space-y-2">
-                                <label class="uk-form-label" for="username">Tên đăng nhập</label>
-                                <input class="uk-input" id="username" type="text" value="{{ $profile->username }}">
-                                <div class="uk-form-help text-muted-foreground">Đây là tên hiển thị công khai của bạn. Nó
-                                    có thể là tên thật hoặc biệt danh của bạn. Bạn chỉ có thể thay đổi tên đăng nhập mỗi
-                                    30
-                                    ngày một lần. </div>
-                            </div>
-                            <div class="space-y-2">
-                                <label class="uk-form-label" for="email">Email đăng ký</label>
-                                <input class="uk-input" id="email" {{ $profile->email_verified_at ? 'disabled' : '' }}
-                                    type="text" value="{{ $profile->email }}">
-                                @unless ($profile->email_verified_at)
-                                    <div class="uk-form-help text-muted-foreground">Bạn chưa xác minh email. <a
-                                            href="/{{ $profile->username }}/email/verify"
-                                            class="underline underline-offset-[3.2px]">Xác minh ngay</a>.
-                                    </div>
-                                @endunless
-                            </div>
-                            <div class="space-y-2">
-                                <span class="uk-form-label">Giới tính</span>
-                                <div class="uk-form-controls flex gap-x-3">
-                                    <label class="flex items-center text-sm" for="notification_0">
-                                        <input id="notification_0" class="mr-2" name="notification" type="radio"
-                                            checked="true" value="Male">Nam</label>
-                                    <label class="flex items-center text-sm" for="notification_1">
-                                        <input id="notification_1" class="mr-2" name="notification" type="radio"
-                                            value="Female">Nữ</label>
+                            <form action="" method="POST" class="space-y-6">
+                                @csrf
+                                <input type="hidden" name="type" value="profile_edit">
+                                <div class="space-y-2">
+                                    <label class="uk-form-label" for="username">Tên đăng nhập</label>
+                                    <input class="uk-input" id="username" name="username" type="text"
+                                        value="{{ $profile->username }}">
+                                    <div class="uk-form-help text-muted-foreground">Đây là tên hiển thị công khai của bạn.
+                                        Nó
+                                        có thể là tên thật hoặc biệt danh của bạn. Bạn chỉ có thể thay đổi tên đăng nhập mỗi
+                                        30
+                                        ngày một lần. </div>
+                                    @unless (empty($error['username']))
+                                        <div class="uk-form-help text-destructive">
+                                            {{ $error['username'] }}
+                                        </div>
+                                    @endunless
                                 </div>
-                            </div>
-                            <div class="space-y-2">
-                                <label class="uk-form-label" for="bio">Tiểu sử</label>
-                                <textarea class="uk-textarea" id="bio" placeholder="Hãy cho chúng tôi biết một chút về bản thân bạn"
-                                    value="{{ $profile->bio }}"></textarea>
-                                @unless (empty($error))
-                                    {{-- String must contain at least 4 character(s) --}}
-                                    <div class="uk-form-help text-destructive">
-                                        {{ $error }}
+                                <div class="space-y-2">
+                                    <label class="uk-form-label" for="email">Email đăng ký</label>
+                                    <input class="uk-input" id="email" name="email"
+                                        {{ $profile->email_verified_at ? 'readonly' : '' }} type="text"
+                                        value="{{ $profile->email }}">
+                                    @unless ($profile->email_verified_at)
+                                        <div class="uk-form-help text-muted-foreground">Bạn chưa xác minh email. <a
+                                                href="/{{ $profile->username }}/email/verify"
+                                                class="underline underline-offset-[3.2px]">Xác minh ngay</a>.
+                                        </div>
+                                    @else
+                                        <div class="uk-form-help text-muted-foreground">Bạn không thể đổi địa chỉ email sau khi
+                                            đã xác minh.</div>
+                                    @endunless
+                                    @unless (empty($error['email']))
+                                        <div class="uk-form-help text-destructive">
+                                            {{ $error['email'] }}
+                                        </div>
+                                    @endunless
+                                </div>
+                                <div class="space-y-2">
+                                    <span class="uk-form-label">Giới tính</span>
+                                    <div class="uk-form-controls flex gap-x-3">
+                                        <label class="flex items-center text-sm" for="gender_0">
+                                            <input id="gender_0" class="mr-2" name="gender" type="radio"
+                                                {{ $profile->gender == 'Male' ? 'checked' : '' }} value="Male">Nam</label>
+                                        <label class="flex items-center text-sm" for="gender_1">
+                                            <input id="gender_1" class="mr-2"
+                                                {{ $profile->gender == 'Female' ? 'checked' : '' }} name="gender"
+                                                type="radio" value="Female">Nữ</label>
                                     </div>
-                                @endunless
-                            </div>
-                            <div>
-                                <button class="uk-button uk-button-primary">Cập nhật hồ
-                                    sơ</button>
-                            </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="uk-form-label" for="location">Quê quán</label>
+                                    <input class="uk-input" placeholder="Nhập nơi bạn sinh sống" id="location"
+                                        name="location" type="text" value="{{ $profile->location }}">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="uk-form-label" for="bio">Tiểu sử</label>
+                                    <textarea class="uk-textarea" id="bio" name="bio"
+                                        placeholder="Hãy cho chúng tôi biết một chút về bản thân bạn">{{ $profile->bio }}</textarea>
+                                    @unless (empty($error['bio']))
+                                        <div class="uk-form-help text-destructive">
+                                            {{ $error['bio'] }}
+                                        </div>
+                                    @endunless
+                                </div>
+                                <div>
+                                    <button type="submit" class="uk-button uk-button-primary">Cập nhật hồ
+                                        sơ</button>
+                                </div>
+                            </form>
                         </li>
                         <li class="space-y-6">
                             <div>

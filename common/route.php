@@ -66,7 +66,7 @@ try {
     $router->get("/admin", [AdminController::class, 'index']);
 
     // username should be the last route
-    $router->any('/{username}/edit', [ProfileController::class, 'edit']);
+    $router->any('/{username}/settings', [ProfileController::class, 'edit']);
     $router->get('/{username}', [ProfileController::class, 'index']);
     // $router->get('/test/{email}/{token}', [AuthController::class, 'sendVerificationEmail']);
     # NB. You can cache the return value from $router->getData() so you don't have to create the routes each request - massive speed gains

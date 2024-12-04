@@ -54,7 +54,7 @@
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->title }}</td>
                                 <td>
-                                    <a href="/administrator/posts/edit/{{ $post->id }}"
+                                    <a href="/administrator/posts/settings/{{ $post->id }}"
                                         class="btn btn-warning btn-sm">Sửa</a>
                                     <form action="/administrator/posts/delete/{{ $post->id }}" method="POST"
                                         class="d-inline">
@@ -92,7 +92,7 @@
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->role }}</td>
                                 <td>
-                                    <a href="/administrator/posts/edit/{{ $user->id }}"
+                                    <a href="/administrator/posts/settings/{{ $user->id }}"
                                         class="btn btn-warning btn-sm">Sửa</a>
                                     <form action="/administrator/posts/delete/{{ $user->id }}" method="POST"
                                         class="d-inline">

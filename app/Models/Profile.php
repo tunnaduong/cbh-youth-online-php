@@ -27,7 +27,46 @@ class Profile extends BaseModel
 
     public function updateProfile($data)
     {
-        $this->setQuery("UPDATE cyo_user_profiles SET profile_name = ?, bio = ?, birthday = ?, gender = ?, location = ? WHERE profile_username = ?");
-        $this->execute([$data['profile_name'], $data['profile_bio'] ?? null, $data['birthday'] ?? null, $data['gender'] ?? null, $data['location'] ?? null, $_SESSION['user']->username]);
+        // die(var_dump($data));
+        switch ($data['type']) {
+            case "profile_edit":
+                $this->setQuery("
+                    UPDATE cyo_user_profiles p
+                    INNER JOIN cyo_auth_accounts a ON p.auth_account_id = a.id
+                    SET 
+                        p.profile_username = ?, 
+                        p.bio = ?, 
+                        p.gender = ?, 
+                        p.location = ?, 
+                        a.username = ?, 
+                        p.updated_at = ?, 
+                        a.updated_at = ?, 
+                        p.last_username_change = CASE WHEN ? THEN ? ELSE p.last_username_change END
+                    WHERE profile_username = ?
+                ");
+                $this->execute([
+                    $data['username'],
+                    $data['bio'] ?? null,
+                    $data['gender'] ?? null,
+                    $data['location'] ?? null,
+                    $data['username'],
+                    date('Y-m-d H:i:s'),
+                    date('Y-m-d H:i:s'),
+                    $data['username'] !== $_SESSION['user']->username,
+                    date('Y-m-d H:i:s'),
+                    $_SESSION['user']->username
+                ]);
+                break;
+            case "account_edit":
+                $this->setQuery("UPDATE cyo_user_profiles SET profile_name = ?, birthday = ? WHERE profile_username = ?");
+                $this->execute([$data['profile_name'], $data['birthday'] ?? null, $_SESSION['user']->username]);
+                break;
+        }
+    }
+
+    public function getLastUsernameChange($username)
+    {
+        $this->setQuery("SELECT last_username_change FROM cyo_user_profiles WHERE profile_username = ?");
+        return $this->loadRow([$username]);
     }
 }
