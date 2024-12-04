@@ -1,7 +1,7 @@
 <nav class="fixed w-[100%] top-0 bg-white shadow-md leading-[0] flex justify-between">
     <div class="flex flex-row px-6 py-3.5">
         <button
-            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 w-9 lg:hidden mr-3 min-w-[36px]"
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input shadow-sm h-9 w-9 lg:hidden mr-3 min-w-[36px]"
             type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -47,9 +47,8 @@
         @if (!isset($_SESSION['user']))
             <div class="flex flex-row items-center gap-x-5 mr-4">
                 <a href="/login" class="hover:text-black">
-                    <span class="relative flex h-10 w-10 shrink-0 overflow-hidden border rounded-full" type="button"
-                        id="radix-:R1qbtb:" aria-haspopup="menu" aria-expanded="false" data-state="closed">
-                        <span class="flex h-full w-full items-center justify-center rounded-full bg-muted">
+                    <span class="relative flex h-10 w-10 shrink-0 overflow-hidden border rounded-full">
+                        <span class="flex h-full w-full items-center justify-center rounded-full">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-user">
@@ -92,9 +91,7 @@
                     </svg>
                 </div>
                 <div role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full cursor-pointer"
-                        type="button" id="radix-:rc:" aria-haspopup="menu" aria-expanded="false"
-                        data-state="closed">
+                    <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full cursor-pointer">
                         <img class="aspect-square h-full w-full border rounded-full" alt="User"
                             src="{{ isset($_SESSION['user']->additional_info->oauth_profile_picture) ? $_SESSION['user']->additional_info->oauth_profile_picture : (!empty($_SESSION['user']->additional_info->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $_SESSION['user']->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}">
                     </span>
