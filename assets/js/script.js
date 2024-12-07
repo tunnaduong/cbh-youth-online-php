@@ -53,6 +53,44 @@ $(document).ready(function () {
 
   // Attach input event listeners to title and description fields
   $("#postTitle, #postDescription").on("input", toggleCreateButton);
+
+  document.querySelectorAll(".followBtns").forEach((button) => {
+    button.addEventListener("click", function (event) {
+      if (!isLoggedIn) {
+        window.location.href = "/login";
+        return;
+      }
+
+      // Get the element that was clicked
+      const clickedElement = event.target;
+
+      // Get the data-follow-uid attribute from the clicked element
+      const followUid = clickedElement.getAttribute("data-follow-uid");
+
+      fetch(`/api/toggle-follow?followed_id=${followUid}`)
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.status === "followed") {
+            // change the button class
+            clickedElement.classList.remove("btn-outline-success");
+            clickedElement.classList.remove("hover:bg-green-600");
+            clickedElement.classList.remove("text-green-600");
+            clickedElement.classList.add("btn-success");
+            clickedElement.classList.add("bg-green-600");
+            // change the button text
+            clickedElement.textContent = "Đang theo dõi";
+          } else {
+            // change the button class
+            clickedElement.classList.remove("btn-success");
+            clickedElement.classList.remove("bg-green-600");
+            clickedElement.classList.add("btn-outline-success");
+            clickedElement.classList.add("hover:bg-green-600");
+            clickedElement.classList.add("text-green-600");
+            clickedElement.textContent = "Theo dõi";
+          }
+        });
+    });
+  });
 });
 
 // Select all upvote and downvote buttons

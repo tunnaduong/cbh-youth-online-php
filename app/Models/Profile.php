@@ -73,6 +73,36 @@ class Profile extends BaseModel
         }
     }
 
+    public function getFollowing($userId)
+    {
+        $this->setQuery("SELECT 
+                            ca.id AS uid, 
+                            ca.username, 
+                            p.*, 
+                            u.file_path AS avatar, 
+                            (SELECT COUNT(*) FROM cyo_user_followers f WHERE f.followed_id = ca.id) AS total_followers, 
+                            (SELECT COUNT(*) FROM cyo_user_followers f WHERE f.follower_id = ca.id) AS total_following, 
+                            CASE 
+                                WHEN EXISTS (
+                                    SELECT 1 
+                                    FROM cyo_user_followers 
+                                    WHERE follower_id = ? AND followed_id = ca.id
+                                ) THEN 1 
+                                ELSE 0 
+                            END AS followed
+                        FROM 
+                            cyo_auth_accounts ca
+                        INNER JOIN 
+                            cyo_user_followers f ON ca.id = f.followed_id
+                        LEFT JOIN 
+                            cyo_user_profiles p ON ca.id = p.auth_account_id
+                        LEFT JOIN 
+                            cyo_cdn_user_content u ON p.profile_picture = u.id
+                        WHERE 
+                            f.follower_id = ?");
+        return $this->loadAllRows([$_SESSION['user']->id ?? 0, $userId]);
+    }
+
     public function getLastUsernameChange($username)
     {
         $this->setQuery("SELECT last_username_change FROM cyo_user_profiles WHERE profile_username = ?");
