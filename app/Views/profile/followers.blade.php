@@ -148,13 +148,13 @@
                 </a>
                 <a href="/{{ $profile->username }}/following"
                     class="select-none h-full flex flex-col items-center justify-center px-3 box-border min-w-max"
-                    style="border-bottom: 3px solid #319527">
+                    style="border-bottom: 3px solid transparent">
                     <p class="font-semibold text-sm text-slate-600">Đang theo dõi</p>
                     <p class="font-bold text-xl text-green-600">{{ $profile->total_following }}</p>
                 </a>
                 <a href="/{{ $profile->username }}/followers"
                     class="select-none h-full flex flex-col items-center justify-center px-3 box-border min-w-max"
-                    style="border-bottom: 3px solid transparent">
+                    style="border-bottom: 3px solid #319527">
                     <p class="font-semibold text-sm text-slate-600">Người theo dõi</p>
                     <p class="font-bold text-xl text-green-600 follower_count">{{ $profile->total_followers }}</p>
                 </a>
@@ -232,7 +232,7 @@
                 </div>
             </div>
             <div class="flex-1 !my-6 !px-3 md:!px-0 flex flex-col bg-white rounded-xl max-h-fit">
-                @foreach ($following as $follow)
+                @foreach ($followers as $follow)
                     <div class="px-3 py-2">
                         <div class="flex items-center gap-x-3">
                             <a class="flex-1 flex items-center gap-x-3" href="/{{ $follow->username }}">

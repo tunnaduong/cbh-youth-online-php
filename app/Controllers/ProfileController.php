@@ -214,4 +214,11 @@ class ProfileController extends BaseController
         $following = $this->profileModel->getFollowing($profile->uid ?? null);
         return $this->render('profile.following', compact('profile', 'following'));
     }
+
+    public function followers($username)
+    {
+        $profile = $this->profileModel->getProfile($username);
+        $followers = $this->profileModel->getFollowers($profile->uid ?? null);
+        return $this->render('profile.followers', compact('profile', 'followers'));
+    }
 }
