@@ -35,6 +35,37 @@ class ProfileController extends BaseController
             header("Location: /$username");
         }
 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['type'] == "notification_edit") {
+            $_SESSION['active'] = 2;
+
+            $this->profileModel->updateProfile($_POST);
+            $_SESSION['success'] = 'Cập nhật cài đặt thông báo thành công.';
+            // Redirect to same page
+            header("Location: /" . $profile->username . "/settings");
+            exit();
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['type'] == "account_edit") {
+            $_SESSION['active'] = 1;
+            // if profile_name is empty
+            if (empty($_POST['profile_name'])) {
+                $_SESSION['error']['profile_name'] = 'Tên hồ sơ không được để trống.';
+                header("Location: /$username/settings");
+                exit();
+            }
+
+            $this->profileModel->updateProfile($_POST);
+            $profile = $this->profileModel->getProfile($_SESSION['user']->username);
+            $_SESSION['success'] = 'Cập nhật trang cá nhân thành công — <a href="/' . $_SESSION['user']->username . '"
+                class="underline underline-offset-[3.2px]">Xem trang cá nhân
+                của bạn</a>.';
+            // Redirect to same page
+            $_SESSION['user'] = $this->authModel->getUserData($profile->profile_username);
+            $_SESSION['user']->additional_info = $profile;
+            header("Location: /" . $profile->username . "/settings");
+            exit();
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['type'] == "profile_edit") {
             // if username is empty
             if (empty($_POST['username'])) {
@@ -59,6 +90,14 @@ class ProfileController extends BaseController
                     exit();
                 }
 
+                // if email is already taken
+                $existEmail = $this->authModel->checkExistEmail($_POST['email']);
+                if ($existEmail) {
+                    $_SESSION['error']['email'] = 'Email đã tồn tại.';
+                    header("Location: /$username/settings");
+                    exit();
+                }
+
                 // if last username change is less than 30 days
                 $lastUsernameChange = $this->profileModel->getLastUsernameChange($username);
                 if ($lastUsernameChange->last_username_change) {
@@ -74,6 +113,8 @@ class ProfileController extends BaseController
                         exit();
                     }
                 }
+
+                $_SESSION['active'] = 0;
             }
 
             // if bio is less than 4 characters
@@ -98,13 +139,15 @@ class ProfileController extends BaseController
         // Get any flash messages
         $error = $_SESSION['error'] ?? null;
         $success = $_SESSION['success'] ?? null;
+        $active = $_SESSION['active'] ?? null;
 
         // Clear flash messages
         unset($_SESSION['error']);
         unset($_SESSION['success']);
+        unset($_SESSION['active']);
 
         // Get profile and render view
         $profile = $this->profileModel->getProfile($username);
-        return $this->render('profile.edit', compact('profile', 'error', 'success'));
+        return $this->render('profile.edit', compact('profile', 'error', 'success', 'active'));
     }
 }

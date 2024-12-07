@@ -8,7 +8,7 @@ class Profile extends BaseModel
     {
         $uid = $_SESSION['user']->id ?? 0;
 
-        $this->setQuery("SELECT ca.created_at AS joined_from, ca.id AS uid, ca.*, cu.*, cuc.*, (SELECT COUNT(*) FROM cyo_topics WHERE user_id = ca.id) AS posts_count, (SELECT COUNT(*) FROM cyo_topic_votes WHERE topic_id IN (SELECT id FROM cyo_topics WHERE user_id = ca.id)) AS total_likes, (SELECT COUNT(*) FROM cyo_topic_comments WHERE user_id = ca.id) AS comments_count, ( (SELECT COUNT(*) FROM cyo_topics WHERE user_id = ca.id) * 10 + (SELECT COUNT(*) FROM cyo_topic_votes WHERE topic_id IN (SELECT id FROM cyo_topics WHERE user_id = ca.id)) * 5 + (SELECT COUNT(*) FROM cyo_topic_comments WHERE user_id = ca.id) * 2 ) AS total_points, (SELECT COUNT(*) FROM cyo_user_followers f WHERE f.followed_id = ca.id) AS total_followers, (SELECT COUNT(*) FROM cyo_user_followers f WHERE f.follower_id = ca.id) AS total_following, ( SELECT COUNT(*) FROM cyo_user_followers f WHERE f.followed_id = ca.id AND f.follower_id = $uid ) AS followed FROM cyo_auth_accounts ca INNER JOIN cyo_user_profiles cu ON ca.username = cu.profile_username LEFT JOIN cyo_cdn_user_content cuc ON cu.profile_picture = cuc.id WHERE ca.username = ?");
+        $this->setQuery("SELECT ca.created_at AS joined_from, ca.id AS uid, ca.*, cu.*, cuc.*, cns.*, (SELECT COUNT(*) FROM cyo_topics WHERE user_id = ca.id) AS posts_count, (SELECT COUNT(*) FROM cyo_topic_votes WHERE topic_id IN (SELECT id FROM cyo_topics WHERE user_id = ca.id)) AS total_likes, (SELECT COUNT(*) FROM cyo_topic_comments WHERE user_id = ca.id) AS comments_count, ( (SELECT COUNT(*) FROM cyo_topics WHERE user_id = ca.id) * 10 + (SELECT COUNT(*) FROM cyo_topic_votes WHERE topic_id IN (SELECT id FROM cyo_topics WHERE user_id = ca.id)) * 5 + (SELECT COUNT(*) FROM cyo_topic_comments WHERE user_id = ca.id) * 2 ) AS total_points, (SELECT COUNT(*) FROM cyo_user_followers f WHERE f.followed_id = ca.id) AS total_followers, (SELECT COUNT(*) FROM cyo_user_followers f WHERE f.follower_id = ca.id) AS total_following, ( SELECT COUNT(*) FROM cyo_user_followers f WHERE f.followed_id = ca.id AND f.follower_id = $uid ) AS followed FROM cyo_auth_accounts ca INNER JOIN cyo_user_profiles cu ON ca.username = cu.profile_username LEFT JOIN cyo_cdn_user_content cuc ON cu.profile_picture = cuc.id LEFT JOIN cyo_notification_settings cns ON cns.user_id = ca.id WHERE ca.username = ?");
         return $this->loadRow([$username]);
     }
 
@@ -38,7 +38,8 @@ class Profile extends BaseModel
                         p.bio = ?, 
                         p.gender = ?, 
                         p.location = ?, 
-                        a.username = ?, 
+                        a.username = ?,
+                        a.email = ?, 
                         p.updated_at = ?, 
                         a.updated_at = ?, 
                         p.last_username_change = CASE WHEN ? THEN ? ELSE p.last_username_change END
@@ -50,6 +51,7 @@ class Profile extends BaseModel
                     $data['gender'] ?? null,
                     $data['location'] ?? null,
                     $data['username'],
+                    $data['email'],
                     date('Y-m-d H:i:s'),
                     date('Y-m-d H:i:s'),
                     $data['username'] !== $_SESSION['user']->username,
@@ -59,8 +61,11 @@ class Profile extends BaseModel
                 break;
             case "account_edit":
                 $this->setQuery("UPDATE cyo_user_profiles SET profile_name = ?, birthday = ?, updated_at = ? WHERE profile_username = ?");
-                $this->execute([$data['profile_name'], $data['birthday'] ?? null, date('Y-m-d H:i:s'), $_SESSION['user']->username]);
+                $this->execute([$data['profile_name'], empty($data['birthday']) ? null : $data['birthday'], date('Y-m-d H:i:s'), $_SESSION['user']->username]);
                 break;
+            case "notification_edit":
+                $this->setQuery("UPDATE cyo_notification_settings SET notify_type = ?, notify_email_contact = ?, notify_email_marketing = ?, notify_email_social = ?, notify_email_security = ?, updated_at = ? WHERE user_id = ?");
+                $this->execute([$data['notify_type'] ?? "all", $data['notify_email_contact'], $data['notify_email_marketing'] ?? 0, $data['notify_email_social'], $data['notify_email_security'] ?? 1, date('Y-m-d H:i:s'), $_SESSION['user']->id]);
         }
     }
 

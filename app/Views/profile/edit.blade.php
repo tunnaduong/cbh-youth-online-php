@@ -20,8 +20,9 @@
             <div class="flex flex-col lg:flex-row gap-x-12">
                 <aside class="w-full lg:w-1/5 mb-4">
                     <ul class="uk-nav uk-nav-primary"
-                        uk-switcher="connect: #component-nav; animation: uk-animation-fade; active: 1" uk-nav>
-                        <li class="uk-active">
+                        uk-switcher="connect: #component-nav; animation: uk-animation-fade; active: {{ $active ?? 0 }}"
+                        uk-nav>
+                        <li>
                             <a href="#" class="mx-0">Trang cá nhân</a>
                         </li>
                         <li>
@@ -34,7 +35,7 @@
                 </aside>
                 <div class="flex-1">
                     <ul id="component-nav" class="uk-switcher max-w-2xl">
-                        <li class="uk-active space-y-6 ">
+                        <li class="space-y-6 ">
                             <div>
                                 <h3 class="text-lg font-medium">Trang cá nhân</h3>
                                 <p class="text-sm text-muted-foreground"> Đây là cách người khác sẽ nhìn thấy bạn trên trang
@@ -62,7 +63,7 @@
                                 <div class="space-y-2">
                                     <label class="uk-form-label" for="email">Email đăng ký</label>
                                     <input class="uk-input" id="email" name="email"
-                                        {{ $profile->email_verified_at ? 'readonly' : '' }} type="text"
+                                        {{ $profile->email_verified_at ? 'disabled' : '' }} type="text"
                                         value="{{ $profile->email }}">
                                     @unless ($profile->email_verified_at)
                                         <div class="uk-form-help text-muted-foreground">Bạn chưa xác minh email. <a
@@ -70,6 +71,7 @@
                                                 class="underline underline-offset-[3.2px]">Xác minh ngay</a>.
                                         </div>
                                     @else
+                                        <input type="hidden" name="email" value="{{ $profile->email }}" />
                                         <div class="uk-form-help text-muted-foreground">Bạn không thể đổi địa chỉ email sau khi
                                             đã xác minh.</div>
                                     @endunless
@@ -130,6 +132,11 @@
                                         trên
                                         hồ sơ của
                                         bạn, bảng tin và diễn đàn.</div>
+                                    @unless (empty($error['profile_name']))
+                                        <div class="uk-form-help text-destructive">
+                                            {{ $error['profile_name'] }}
+                                        </div>
+                                    @endunless
                                 </div>
                                 <div class="space-y-2">
                                     <label class="uk-form-label block" for="date_of_birth">Ngày tháng năm sinh</label>
@@ -165,72 +172,94 @@
                                 <p class="text-sm text-muted-foreground">Cấu hình cách bạn nhận thông báo.</p>
                             </div>
                             <div class="border-t border-border"></div>
-                            <div class="space-y-2">
-                                <span class="uk-form-label">Thông báo cho tôi về</span>
-                                <div class="uk-form-controls">
-                                    <label class="flex items-center text-sm" for="notification_0">
-                                        <input id="notification_0" class="mr-2" name="notification" type="radio"
-                                            checked="true">Tất
-                                        cả thông báo</label>
-                                    <label class="flex items-center text-sm" for="notification_1">
-                                        <input id="notification_1" class="mr-2" name="notification" type="radio">Tin
-                                        nhắn trực tiếp và đề cập</label>
-                                    <label class="flex items-center text-sm" for="notification_2">
-                                        <input id="notification_2" class="mr-2" name="notification"
-                                            type="radio">Không có thông báo</label>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="mb-4 text-lg font-medium">Thông báo qua email</h3>
-                                <div class="space-y-4">
-                                    <div class="flex items-center justify-between rounded-lg border border-border p-4">
-                                        <div class="space-y-0.5">
-                                            <label class="text-base font-medium" for="email_notification_0"> Email liên
-                                                lạc
-                                            </label>
-                                            <div class="uk-form-help text-muted-foreground"> Nhận email về hoạt động tài
-                                                khoản của bạn. </div>
-                                        </div>
-                                        <input class="uk-toggle-switch uk-toggle-switch-primary shrink-0 ml-2"
-                                            id="email_notification_0" type="checkbox" checked="true">
-                                    </div>
-                                    <div class="flex items-center justify-between rounded-lg border border-border p-4">
-                                        <div class="space-y-0.5">
-                                            <label class="text-base font-medium" for="email_notification_1">Email
-                                                marketing
-                                            </label>
-                                            <div class="uk-form-help text-muted-foreground"> Nhận email về sản phẩm mới,
-                                                tính năng, và nhiều hơn nữa. </div>
-                                        </div>
-                                        <input class="uk-toggle-switch uk-toggle-switch-primary shrink-0 ml-2"
-                                            id="email_notification_1" type="checkbox">
-                                    </div>
-                                    <div class="flex items-center justify-between rounded-lg border border-border p-4">
-                                        <div class="space-y-0.5">
-                                            <label class="text-base font-medium" for="email_notification_2"> Email xã hội
-                                            </label>
-                                            <div class="uk-form-help text-muted-foreground"> Nhận email về yêu cầu kết bạn,
-                                                theo dõi, và nhiều hơn nữa. </div>
-                                        </div>
-                                        <input class="uk-toggle-switch uk-toggle-switch-primary shrink-0 ml-2"
-                                            id="email_notification_2" type="checkbox" checked="true">
-                                    </div>
-                                    <div class="flex items-center justify-between rounded-lg border border-border p-4">
-                                        <div class="space-y-0.5">
-                                            <label class="text-base font-medium" for="email_notification_3"> Email bảo mật
-                                            </label>
-                                            <div class="uk-form-help text-muted-foreground"> Nhận email về hoạt động và bảo
-                                                mật tài khoản của bạn. </div>
-                                        </div>
-                                        <input class="uk-toggle-switch uk-toggle-switch-primary shrink-0 ml-2"
-                                            id="email_notification_3" type="checkbox" checked="true" disabled>
+                            <form action="" method="POST" class="space-y-6">
+                                @csrf
+                                <input type="hidden" name="type" value="notification_edit">
+                                <div class="space-y-2">
+                                    <span class="uk-form-label">Thông báo cho tôi về</span>
+                                    <div class="uk-form-controls">
+                                        <label class="flex items-center text-sm" for="notification_0">
+                                            <input id="notification_0" class="mr-2" name="notify_type" type="radio"
+                                                {{ $profile->notify_type == 'all' ? 'checked' : '' }} value="all">Tất
+                                            cả thông báo</label>
+                                        <label class="flex items-center text-sm" for="notification_1">
+                                            <input id="notification_1" class="mr-2" name="notify_type" type="radio"
+                                                {{ $profile->notify_type == 'direct_mentions' ? 'checked' : '' }}
+                                                value="direct_mentions">Tin
+                                            nhắn trực tiếp và đề cập</label>
+                                        <label class="flex items-center text-sm" for="notification_2">
+                                            <input id="notification_2" class="mr-2" name="notify_type" type="radio"
+                                                {{ $profile->notify_type == 'none' ? 'checked' : '' }}
+                                                value="none">Không có thông báo</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <button class="uk-button uk-button-primary"> Cập nhật thông báo
-                                    </button2>
-                            </div>
+                                <div>
+                                    <h3 class="mb-4 text-lg font-medium">Thông báo qua email</h3>
+                                    <div class="space-y-4">
+                                        <div class="flex items-center justify-between rounded-lg border border-border p-4">
+                                            <div class="space-y-0.5">
+                                                <label class="text-base font-medium" for="email_notification_0"> Email
+                                                    liên
+                                                    lạc
+                                                </label>
+                                                <div class="uk-form-help text-muted-foreground"> Nhận email về hoạt động
+                                                    tài
+                                                    khoản của bạn. </div>
+                                            </div>
+                                            <input class="uk-toggle-switch uk-toggle-switch-primary shrink-0 ml-2"
+                                                id="email_notification_0" type="checkbox"
+                                                {{ $profile->notify_email_contact == '1' ? 'checked' : '' }}
+                                                name="notify_email_contact" value="1">
+                                        </div>
+                                        <div class="flex items-center justify-between rounded-lg border border-border p-4">
+                                            <div class="space-y-0.5">
+                                                <label class="text-base font-medium" for="email_notification_1">Email
+                                                    marketing
+                                                </label>
+                                                <div class="uk-form-help text-muted-foreground"> Nhận email về sản phẩm
+                                                    mới,
+                                                    tính năng, và nhiều hơn nữa. </div>
+                                            </div>
+                                            <input class="uk-toggle-switch uk-toggle-switch-primary shrink-0 ml-2"
+                                                id="email_notification_1" type="checkbox" name="notify_email_marketing"
+                                                value="1"
+                                                {{ $profile->notify_email_marketing == '1' ? 'checked' : '' }}>
+                                        </div>
+                                        <div class="flex items-center justify-between rounded-lg border border-border p-4">
+                                            <div class="space-y-0.5">
+                                                <label class="text-base font-medium" for="email_notification_2"> Email xã
+                                                    hội
+                                                </label>
+                                                <div class="uk-form-help text-muted-foreground"> Nhận email về yêu cầu kết
+                                                    bạn,
+                                                    theo dõi, và nhiều hơn nữa. </div>
+                                            </div>
+                                            <input class="uk-toggle-switch uk-toggle-switch-primary shrink-0 ml-2"
+                                                id="email_notification_2" type="checkbox" name="notify_email_social"
+                                                value="1"
+                                                {{ $profile->notify_email_social == '1' ? 'checked' : '' }}>
+                                        </div>
+                                        <div class="flex items-center justify-between rounded-lg border border-border p-4">
+                                            <div class="space-y-0.5">
+                                                <label class="text-base font-medium" for="email_notification_3"> Email bảo
+                                                    mật
+                                                </label>
+                                                <div class="uk-form-help text-muted-foreground"> Nhận email về hoạt động và
+                                                    bảo
+                                                    mật tài khoản của bạn. </div>
+                                            </div>
+                                            <input class="uk-toggle-switch uk-toggle-switch-primary shrink-0 ml-2"
+                                                id="email_notification_3" type="checkbox" checked="true" disabled
+                                                name="notify_email_security" value="1">
+                                            <input type="hidden" name="notify_email_security" value="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="submit" class="uk-button uk-button-primary"> Cập nhật thông báo
+                                        </button2>
+                                </div>
+                            </form>
                         </li>
                     </ul>
                 </div>
