@@ -247,6 +247,27 @@ fileInput.addEventListener("change", function (e) {
   }
 });
 
+function handleUploadAvatar() {
+  // Lấy các phần tử
+  const fileInput2 = document.getElementById("fileInput2");
+
+  fileInput2.click();
+
+  // Thêm sự kiện để xử lý khi người dùng chọn tệp
+  fileInput2.addEventListener("change", function (e) {
+    console.log("File selected:", e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+      // Generate image preview
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        document.getElementById("previewAvatar").src = reader.result;
+      }; // Set preview URL to file reader result
+      reader.readAsDataURL(file); // Read file as a data URL
+    }
+  });
+}
+
 // Function to get the selected value or ID from uk-select
 function getSelectedIdFromUkSelect() {
   // Select the placeholder button showing the current selection

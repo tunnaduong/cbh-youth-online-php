@@ -43,7 +43,8 @@
                                     web. </p>
                             </div>
                             <div class="flex gap-x-8 flex-col-reverse xl:flex-row">
-                                <form action="" method="POST" class="space-y-6 max-w-xl">
+                                <form action="" method="POST" class="space-y-6 max-w-xl"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="type" value="profile_edit">
                                     <div class="space-y-2">
@@ -113,6 +114,8 @@
                                             </div>
                                         @endunless
                                     </div>
+                                    <input id="fileInput2" name="avatar" accept="image/*" type="file"
+                                        style="display: none;">
                                     <div>
                                         <button type="submit" class="uk-button uk-button-primary">Cập nhật hồ
                                             sơ</button>
@@ -123,13 +126,35 @@
                                     <label class="uk-form-label" for="avatar">Ảnh đại diện</label>
                                     <div class="relative">
                                         <img src="{{ isset($_SESSION['user']->additional_info->oauth_profile_picture) ? $_SESSION['user']->additional_info->oauth_profile_picture : (!empty($_SESSION['user']->additional_info->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $_SESSION['user']->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
-                                            class="border w-52 h-52 rounded-full">
-                                        <button type="button"
-                                            class="uk-button uk-button-default absolute left-0 bottom-0 ml-2 mb-2 !px-3 text-[12.5px]">
+                                            class="border w-52 h-52 rounded-full object-cover" id="previewAvatar">
+                                        <button type="button" id="dropdownAvatar"
+                                            class="uk-button uk-button-default absolute left-0 bottom-0 ml-2 mb-2 !px-3 text-[12.5px]"
+                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="fa-solid fa-pen mr-2"></i>Sửa</button>
-                                        <div class="uk-drop uk-dropdown" uk-dropdown="mode: click">
+                                        <ul class="dropdown-menu rounded-lg text-sm" aria-labelledby="dropdownAvatar">
+                                            <li>
+                                                <a class="cursor-pointer dropdown-item !py-1 !px-3"
+                                                    onclick="handleUploadAvatar()">Upload ảnh
+                                                    đại diện
+                                                    mới</a>
+                                            </li>
+                                            <li><a class="dropdown-item !py-1 !px-3">
+                                                    <form action="" method="POST" class="w-full"
+                                                        onsubmit="return confirm('Bạn có chắc muốn xóa ảnh đại diện không?')">
+                                                        <button type="submit" name="type" value="remove_avatar"
+                                                            class="w-full text-left">Xóa ảnh đại diện</button>
+                                                    </form>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        {{-- <div class="uk-drop uk-dropdown" uk-dropdown="mode: click">
                                             <ul class="uk-dropdown-nav uk-nav">
-                                                <li><a class="cursor-pointer">Upload ảnh đại diện mới</a></li>
+                                                <li><a class="cursor-pointer" onclick="handleUploadAvatar()">Upload ảnh
+                                                        đại diện
+                                                        mới</a>
+                                                    <input id="fileInput2" accept="image/*" type="file"
+                                                        style="display: none;">
+                                                </li>
                                                 <li><a>
                                                         <form action="" method="POST" class="w-full"
                                                             onsubmit="return confirm('Bạn có chắc muốn xóa ảnh đại diện không?')">
@@ -139,7 +164,7 @@
                                                     </a>
                                                 </li>
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>

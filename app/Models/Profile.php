@@ -66,6 +66,10 @@ class Profile extends BaseModel
             case "notification_edit":
                 $this->setQuery("UPDATE cyo_notification_settings SET notify_type = ?, notify_email_contact = ?, notify_email_marketing = ?, notify_email_social = ?, notify_email_security = ?, updated_at = ? WHERE user_id = ?");
                 $this->execute([$data['notify_type'] ?? "all", $data['notify_email_contact'], $data['notify_email_marketing'] ?? 0, $data['notify_email_social'], $data['notify_email_security'] ?? 1, date('Y-m-d H:i:s'), $_SESSION['user']->id]);
+            case "remove_avatar":
+                $this->setQuery("UPDATE cyo_user_profiles SET profile_picture = NULL, oauth_profile_picture = NULL, updated_at = ? WHERE profile_username = ?");
+                $this->execute([date('Y-m-d H:i:s'), $_SESSION['user']->username]);
+                break;
         }
     }
 
