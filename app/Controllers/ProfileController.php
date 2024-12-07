@@ -91,16 +91,6 @@ class ProfileController extends BaseController
                     exit();
                 }
 
-                if ($_POST['email'] !== $_SESSION['user']->email) {
-                    // if email is already taken
-                    $existEmail = $this->authModel->checkExistEmail($_POST['email']);
-                    if ($existEmail) {
-                        $_SESSION['error']['email'] = 'Email đã tồn tại.';
-                        header("Location: /$username/settings");
-                        exit();
-                    }
-                }
-
                 // if last username change is less than 30 days
                 $lastUsernameChange = $this->profileModel->getLastUsernameChange($username);
                 if ($lastUsernameChange->last_username_change) {
@@ -116,8 +106,16 @@ class ProfileController extends BaseController
                         exit();
                     }
                 }
+            }
 
-                $_SESSION['active'] = 0;
+            if ($_POST['email'] !== $_SESSION['user']->email) {
+                // if email is already taken
+                $existEmail = $this->authModel->checkExistEmail($_POST['email']);
+                if ($existEmail) {
+                    $_SESSION['error']['email'] = 'Email đã tồn tại.';
+                    header("Location: /$username/settings");
+                    exit();
+                }
             }
 
             // if bio is less than 4 characters
