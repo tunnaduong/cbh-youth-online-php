@@ -90,12 +90,14 @@ class ProfileController extends BaseController
                     exit();
                 }
 
-                // if email is already taken
-                $existEmail = $this->authModel->checkExistEmail($_POST['email']);
-                if ($existEmail) {
-                    $_SESSION['error']['email'] = 'Email đã tồn tại.';
-                    header("Location: /$username/settings");
-                    exit();
+                if ($_POST['email'] !== $_SESSION['user']->email) {
+                    // if email is already taken
+                    $existEmail = $this->authModel->checkExistEmail($_POST['email']);
+                    if ($existEmail) {
+                        $_SESSION['error']['email'] = 'Email đã tồn tại.';
+                        header("Location: /$username/settings");
+                        exit();
+                    }
                 }
 
                 // if last username change is less than 30 days

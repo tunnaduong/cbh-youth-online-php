@@ -9,7 +9,7 @@
 }
 
 :root {
-  --background: 115 100% 95%;
+  --background: 0 0% 100%;
   --foreground: 115 5% 0%;
   --card: 115 50% 90%;
   --card-foreground: 115 5% 10%;
@@ -21,7 +21,7 @@
   --secondary-foreground: 0 0% 0%;
   --muted: 77 30% 85%;
   --muted-foreground: 115 5% 35%;
-  --accent: 77 30% 80%;
+  --accent: 210 40% 96.1%;
   --accent-foreground: 115 5% 10%;
   --destructive: 0 100% 30%;
   --destructive-foreground: 115 5% 90%;

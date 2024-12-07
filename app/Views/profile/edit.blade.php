@@ -34,85 +34,115 @@
                     </ul>
                 </aside>
                 <div class="flex-1">
-                    <ul id="component-nav" class="uk-switcher max-w-2xl">
-                        <li class="space-y-6 ">
+                    <ul id="component-nav" class="uk-switcher">
+                        <li>
                             <div>
                                 <h3 class="text-lg font-medium">Trang cá nhân</h3>
-                                <p class="text-sm text-muted-foreground"> Đây là cách người khác sẽ nhìn thấy bạn trên trang
+                                <p class="text-sm text-muted-foreground"> Đây là cách người khác sẽ nhìn thấy bạn trên
+                                    trang
                                     web. </p>
                             </div>
-                            <div class="border-t border-border"></div>
-                            <form action="" method="POST" class="space-y-6">
-                                @csrf
-                                <input type="hidden" name="type" value="profile_edit">
-                                <div class="space-y-2">
-                                    <label class="uk-form-label" for="username">Tên đăng nhập</label>
-                                    <input class="uk-input" id="username" name="username" type="text"
-                                        value="{{ $profile->username }}">
-                                    <div class="uk-form-help text-muted-foreground">Đây là tên hiển thị công khai của bạn.
-                                        Nó
-                                        có thể là tên thật hoặc biệt danh của bạn. Bạn chỉ có thể thay đổi tên đăng nhập mỗi
-                                        30
-                                        ngày một lần. </div>
-                                    @unless (empty($error['username']))
-                                        <div class="uk-form-help text-destructive">
-                                            {{ $error['username'] }}
+                            <div class="flex gap-x-8 flex-col-reverse xl:flex-row">
+                                <form action="" method="POST" class="space-y-6 max-w-xl">
+                                    @csrf
+                                    <input type="hidden" name="type" value="profile_edit">
+                                    <div class="space-y-2">
+                                        <label class="uk-form-label" for="username">Tên đăng nhập</label>
+                                        <input class="uk-input" id="username" name="username" type="text"
+                                            value="{{ $profile->username }}">
+                                        <div class="uk-form-help text-muted-foreground">Đây là tên hiển thị công khai của
+                                            bạn.
+                                            Nó
+                                            có thể là tên thật hoặc biệt danh của bạn. Bạn chỉ có thể thay đổi tên đăng nhập
+                                            mỗi
+                                            30
+                                            ngày một lần. </div>
+                                        @unless (empty($error['username']))
+                                            <div class="uk-form-help text-destructive">
+                                                {{ $error['username'] }}
+                                            </div>
+                                        @endunless
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="uk-form-label" for="email">Email đăng ký</label>
+                                        <input class="uk-input" id="email" name="email"
+                                            {{ $profile->email_verified_at ? 'disabled' : '' }} type="text"
+                                            value="{{ $profile->email }}">
+                                        @unless ($profile->email_verified_at)
+                                            <div class="uk-form-help text-muted-foreground">Bạn chưa xác minh email. <a
+                                                    href="/{{ $profile->username }}/email/verify"
+                                                    class="underline underline-offset-[3.2px]">Xác minh ngay</a>.
+                                            </div>
+                                        @else
+                                            <input type="hidden" name="email" value="{{ $profile->email }}" />
+                                            <div class="uk-form-help text-muted-foreground">Bạn không thể đổi địa chỉ email sau
+                                                khi
+                                                đã xác minh.</div>
+                                        @endunless
+                                        @unless (empty($error['email']))
+                                            <div class="uk-form-help text-destructive">
+                                                {{ $error['email'] }}
+                                            </div>
+                                        @endunless
+                                    </div>
+                                    <div class="space-y-2">
+                                        <span class="uk-form-label">Giới tính</span>
+                                        <div class="uk-form-controls flex gap-x-3">
+                                            <label class="flex items-center text-sm" for="gender_0">
+                                                <input id="gender_0" class="mr-2" name="gender" type="radio"
+                                                    {{ $profile->gender == 'Male' ? 'checked' : '' }}
+                                                    value="Male">Nam</label>
+                                            <label class="flex items-center text-sm" for="gender_1">
+                                                <input id="gender_1" class="mr-2"
+                                                    {{ $profile->gender == 'Female' ? 'checked' : '' }} name="gender"
+                                                    type="radio" value="Female">Nữ</label>
                                         </div>
-                                    @endunless
-                                </div>
-                                <div class="space-y-2">
-                                    <label class="uk-form-label" for="email">Email đăng ký</label>
-                                    <input class="uk-input" id="email" name="email"
-                                        {{ $profile->email_verified_at ? 'disabled' : '' }} type="text"
-                                        value="{{ $profile->email }}">
-                                    @unless ($profile->email_verified_at)
-                                        <div class="uk-form-help text-muted-foreground">Bạn chưa xác minh email. <a
-                                                href="/{{ $profile->username }}/email/verify"
-                                                class="underline underline-offset-[3.2px]">Xác minh ngay</a>.
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="uk-form-label" for="location">Quê quán</label>
+                                        <input class="uk-input" placeholder="Nhập nơi bạn sinh sống" id="location"
+                                            name="location" type="text" value="{{ $profile->location }}">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="uk-form-label" for="bio">Tiểu sử</label>
+                                        <textarea class="uk-textarea" id="bio" name="bio"
+                                            placeholder="Hãy cho chúng tôi biết một chút về bản thân bạn">{{ $profile->bio }}</textarea>
+                                        @unless (empty($error['bio']))
+                                            <div class="uk-form-help text-destructive">
+                                                {{ $error['bio'] }}
+                                            </div>
+                                        @endunless
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="uk-button uk-button-primary">Cập nhật hồ
+                                            sơ</button>
+                                    </div>
+                                </form>
+                                <div class="flex-1 space-y-2 !mt-5">
+                                    {{-- Change avatar --}}
+                                    <label class="uk-form-label" for="avatar">Ảnh đại diện</label>
+                                    <div class="relative">
+                                        <img src="{{ isset($_SESSION['user']->additional_info->oauth_profile_picture) ? $_SESSION['user']->additional_info->oauth_profile_picture : (!empty($_SESSION['user']->additional_info->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $_SESSION['user']->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
+                                            class="border w-52 h-52 rounded-full">
+                                        <button type="button"
+                                            class="uk-button uk-button-default absolute left-0 bottom-0 ml-2 mb-2 !px-3 text-[12.5px]">
+                                            <i class="fa-solid fa-pen mr-2"></i>Sửa</button>
+                                        <div class="uk-drop uk-dropdown" uk-dropdown="mode: click">
+                                            <ul class="uk-dropdown-nav uk-nav">
+                                                <li><a class="cursor-pointer">Upload ảnh đại diện mới</a></li>
+                                                <li><a>
+                                                        <form action="" method="POST" class="w-full"
+                                                            onsubmit="return confirm('Bạn có chắc muốn xóa ảnh đại diện không?')">
+                                                            <button type="submit" name="type" value="remove_avatar"
+                                                                class="w-full text-left">Xóa ảnh đại diện</button>
+                                                        </form>
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
-                                    @else
-                                        <input type="hidden" name="email" value="{{ $profile->email }}" />
-                                        <div class="uk-form-help text-muted-foreground">Bạn không thể đổi địa chỉ email sau khi
-                                            đã xác minh.</div>
-                                    @endunless
-                                    @unless (empty($error['email']))
-                                        <div class="uk-form-help text-destructive">
-                                            {{ $error['email'] }}
-                                        </div>
-                                    @endunless
-                                </div>
-                                <div class="space-y-2">
-                                    <span class="uk-form-label">Giới tính</span>
-                                    <div class="uk-form-controls flex gap-x-3">
-                                        <label class="flex items-center text-sm" for="gender_0">
-                                            <input id="gender_0" class="mr-2" name="gender" type="radio"
-                                                {{ $profile->gender == 'Male' ? 'checked' : '' }} value="Male">Nam</label>
-                                        <label class="flex items-center text-sm" for="gender_1">
-                                            <input id="gender_1" class="mr-2"
-                                                {{ $profile->gender == 'Female' ? 'checked' : '' }} name="gender"
-                                                type="radio" value="Female">Nữ</label>
                                     </div>
                                 </div>
-                                <div class="space-y-2">
-                                    <label class="uk-form-label" for="location">Quê quán</label>
-                                    <input class="uk-input" placeholder="Nhập nơi bạn sinh sống" id="location"
-                                        name="location" type="text" value="{{ $profile->location }}">
-                                </div>
-                                <div class="space-y-2">
-                                    <label class="uk-form-label" for="bio">Tiểu sử</label>
-                                    <textarea class="uk-textarea" id="bio" name="bio"
-                                        placeholder="Hãy cho chúng tôi biết một chút về bản thân bạn">{{ $profile->bio }}</textarea>
-                                    @unless (empty($error['bio']))
-                                        <div class="uk-form-help text-destructive">
-                                            {{ $error['bio'] }}
-                                        </div>
-                                    @endunless
-                                </div>
-                                <div>
-                                    <button type="submit" class="uk-button uk-button-primary">Cập nhật hồ
-                                        sơ</button>
-                                </div>
-                            </form>
+                            </div>
                         </li>
                         <li class="space-y-6">
                             <div>
@@ -121,7 +151,7 @@
                                     và múi giờ ưa thích của bạn. </p>
                             </div>
                             <div class="border-t border-border"></div>
-                            <form action="" method="POST" class="space-y-6">
+                            <form action="" method="POST" class="space-y-6 max-w-xl">
                                 @csrf
                                 <input type="hidden" name="type" value="account_edit">
                                 <div class="space-y-2">
@@ -172,7 +202,7 @@
                                 <p class="text-sm text-muted-foreground">Cấu hình cách bạn nhận thông báo.</p>
                             </div>
                             <div class="border-t border-border"></div>
-                            <form action="" method="POST" class="space-y-6">
+                            <form action="" method="POST" class="space-y-6 max-w-xl">
                                 @csrf
                                 <input type="hidden" name="type" value="notification_edit">
                                 <div class="space-y-2">
