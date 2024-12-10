@@ -127,6 +127,7 @@ class ProfileController extends BaseController
 
             // if isset file avatar
             if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
+                $this->profileModel->removeAvatar($username);
 
                 // Define the API endpoint
                 $url = "https://api.chuyenbienhoa.com/v1.0/users/$username/avatar";

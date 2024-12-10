@@ -73,6 +73,12 @@ class Profile extends BaseModel
         }
     }
 
+    public function removeAvatar($username)
+    {
+        $this->setQuery("UPDATE cyo_user_profiles SET profile_picture = NULL, oauth_profile_picture = NULL, updated_at = ? WHERE profile_username = ?");
+        $this->execute([date('Y-m-d H:i:s'), $username]);
+    }
+
     public function getFollowing($userId)
     {
         $this->setQuery("SELECT 
