@@ -45,4 +45,10 @@ class HomeController extends BaseController
     {
         return $this->render('errors.404', compact('error'));
     }
+
+    public function fetchFeed()
+    {
+        $posts = $this->post->newsfeed();
+        return $this->render('home.fetch-feed', compact('posts'));
+    }
 }

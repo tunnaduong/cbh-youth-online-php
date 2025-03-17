@@ -53,3 +53,5 @@
 <!-- Bộ mã riêng cho giao diện trang web -->
 <link href="/assets/css/reset.css" rel="stylesheet">
 <link href="/assets/css/style.css" rel="stylesheet">
+<!-- Bộ mã HTMX -->
+<script src="https://unpkg.com/htmx.org@1.9.2"></script>

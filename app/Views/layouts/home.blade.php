@@ -24,8 +24,8 @@
             'youth' => $youth ?? false,
             'saved' => $saved ?? false,
         ])
-        <div class="flex-1">
-            @yield('content')
+        <div id="main-content" hx-get="/feed/fetch" hx-trigger="load" hx-swap="innerHTML" class="flex-1">
+            <p class="text-center mt-4">Đang tải bài viết...</p>
         </div>
         @include('includes.rightSidebar', [
             'recordings' => $recordings ?? false,

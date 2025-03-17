@@ -64,6 +64,7 @@ try {
     $router->get('/forum/{mainCategorySlug}/{subforumSlug}', [ForumController::class, 'subforum']);
     $router->get('/recordings', [RecordingController::class, 'index']);
     $router->get("/admin", [AdminController::class, 'index']);
+    $router->get('/feed/fetch', [HomeController::class, 'fetchFeed']);
 
     // username should be the last route
     $router->any('/{username}/settings', [ProfileController::class, 'edit']);
