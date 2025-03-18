@@ -229,35 +229,37 @@ document.querySelectorAll(".save-post-button").forEach((button) => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const posts = document.querySelectorAll(".post-container");
+document.body.addEventListener("htmx:afterSwap", function (event) {
+  if (event.target.id === "main-content") {
+    const posts = document.querySelectorAll(".post-container");
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const postId = entry.target.getAttribute("data-post-id");
-          fetch(`/api/posts/${postId}/increment-view`)
-            .then((response) => {
-              if (!response.ok) {
-                console.error("Failed to increment post view");
-              }
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-            });
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.5,
-    }
-  );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const postId = entry.target.getAttribute("data-post-id");
+            fetch(`/api/posts/${postId}/increment-view`)
+              .then((response) => {
+                if (!response.ok) {
+                  console.error("Failed to increment post view");
+                }
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.5,
+      }
+    );
 
-  posts.forEach((post) => {
-    observer.observe(post);
-  });
+    posts.forEach((post) => {
+      observer.observe(post);
+    });
+  }
 });
 
 // Lấy các phần tử
