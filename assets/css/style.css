@@ -304,3 +304,12 @@ blockquote p {
 input[type="radio"] {
   accent-color: #319527;
 }
+
+.prose hr {
+    margin-top: 1em !important;
+    margin-bottom: 1em !important;
+}
+
+.prose > ul > li > :first-child {
+    margin-bottom: 0 !important;
+}
