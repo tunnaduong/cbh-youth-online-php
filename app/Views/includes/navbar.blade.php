@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-    <div class="flex items-center gap-x-5">
+    <div class="flex items-center">
         <div class="h-full items-center flex flex-row gap-x-3 relative nav-item">
             <a class="lg:flex px-3 py-2 mr-5 hidden h-full items-center min-w-max text-center text-sm font-medium transition-colors duration-200 @yield('communityActive')"
                 href="/">Cộng đồng</a>
@@ -45,18 +45,12 @@
                 href="/explore">Khám phá</a>
         </div>
         @if (!isset($_SESSION['user']))
-            <div class="flex flex-row items-center gap-x-5 mr-4">
-                <a href="/login" class="hover:text-black">
-                    <span class="relative flex h-10 w-10 shrink-0 overflow-hidden border rounded-full">
-                        <span class="flex h-full w-full items-center justify-center rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-user">
-                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
-                        </span>
-                    </span>
+            <div class="min-w-max mr-4">
+                <a href="/login"
+                    class="flex items-center gap-x-1 text-sm font-medium transition-colors duration-200 text-[#319527] hover:text-[#3dbb31]"
+                    style="border-bottom: 3px solid transparent;">
+                    <ion-icon name="log-in-outline" class="text-[20px] flex-shrink-0"></ion-icon>
+                    <span class="flex-shrink-0">Đăng nhập/Đăng ký</span>
                 </a>
             </div>
         @else
