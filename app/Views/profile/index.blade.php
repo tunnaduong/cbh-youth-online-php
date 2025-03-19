@@ -281,7 +281,7 @@
                                     @endif
                                 </div>
                                 <div id="fullText{{ $post->post_id }}" style="display: none;">
-                                    <span class="prose">{!! MarkdownExtra::defaultTransform(strip_tags(str_replace("\n", "  \n", autolink($post->description)), 330), '<iframe><a>') !!} </span>
+                                    <span class="prose">{!! MarkdownExtra::defaultTransform(strip_tags(str_replace("\n", "  \n", autolink($post->description)), '<iframe><a>')) !!} </span>
                                     <a class="text-black cursor-pointer hover:underline font-medium"
                                         onclick="toggleText{{ $post->post_id }}()">Thu
                                         gọn</a>
