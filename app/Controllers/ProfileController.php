@@ -21,6 +21,11 @@ class ProfileController extends BaseController
         $this->authModel = new AuthAccount();
     }
 
+    private function isValidUsername($username)
+    {
+        return preg_match("/^[a-zA-Z0-9_]{3,20}$/", $username);
+    }
+
     public function index($username)
     {
         $profile = $this->profileModel->getProfile($username);
@@ -68,6 +73,13 @@ class ProfileController extends BaseController
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['type'] == "profile_edit") {
+            // if username is invalid
+            if ($this->isValidUsername($_POST['username']) == 0) {
+                $_SESSION['error']['username'] = 'Tên người dùng không hợp lệ.';
+                header("Location: /$username/settings");
+                exit();
+            }
+
             // if username is empty
             if (empty($_POST['username'])) {
                 $_SESSION['error']['username'] = 'Tên người dùng không được để trống.';
