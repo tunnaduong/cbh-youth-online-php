@@ -100,11 +100,6 @@ const downvoteButtons = document.querySelectorAll(".downvote-button"); // Replac
 // Function to handle voting
 async function handleVote(postId, voteType, currentUserVote) {
   // Update UI immediately
-  //   if (voteType === "upvote") {
-  //     updateVoteUI(postId, 1, "upvote");
-  //   } else if (voteType === "downvote") {
-  //     updateVoteUI(postId, -1, "downvote");
-  //   }
   try {
     // If the user is clicking the same button they previously clicked, cancel the vote
     if (currentUserVote === voteType) {
@@ -179,54 +174,35 @@ function updateVoteUI(postId, newVoteCount, userVote) {
   });
 }
 
-// Add event listeners to upvote and downvote buttons
-upvoteButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const postId = button.closest("[data-post-id]").dataset.postId;
-    const currentUserVote = button.classList.contains("text-green-500")
-      ? "upvote"
-      : "none";
-    handleVote(postId, "upvote", currentUserVote);
-  });
-});
+document.body.addEventListener("click", async (event) => {
+  const button = event.target.closest(".save-post-button");
+  if (!button) return; // Ignore clicks outside the button
 
-downvoteButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const postId = button.closest("[data-post-id]").dataset.postId;
-    const currentUserVote = button.classList.contains("text-red-500")
-      ? "downvote"
-      : "none";
-    handleVote(postId, "downvote", currentUserVote);
-  });
-});
+  if (!isLoggedIn) {
+    window.location.href = "/login";
+    return;
+  }
 
-document.querySelectorAll(".save-post-button").forEach((button) => {
-  button.addEventListener("click", async () => {
-    if (!isLoggedIn) {
-      window.location.href = "/login";
+  const postId = button.closest("[data-post-id]").dataset.postId;
+
+  try {
+    const response = await fetch(`/api/posts/${postId}/toggle-save`);
+    const result = await response.json();
+
+    if (result.status === "saved") {
+      button.classList.add("bg-[#CDEBCA]");
+      button.querySelector("ion-icon").classList.add("text-green-500");
+      button.classList.remove("bg-[#EAEAEA]");
+      button.querySelector("ion-icon").classList.remove("text-gray-400");
+    } else {
+      button.classList.remove("bg-[#CDEBCA]");
+      button.querySelector("ion-icon").classList.remove("text-green-500");
+      button.classList.add("bg-[#EAEAEA]");
+      button.querySelector("ion-icon").classList.add("text-gray-400");
     }
-
-    const postId = button.closest("[data-post-id]").dataset.postId;
-
-    try {
-      const response = await fetch(`/api/posts/${postId}/toggle-save`);
-
-      const result = await response.json();
-      if (result.status === "saved") {
-        button.classList.add("bg-[#CDEBCA]");
-        button.querySelector("ion-icon").classList.add("text-green-500");
-        button.classList.remove("bg-[#EAEAEA]");
-        button.querySelector("ion-icon").classList.remove("text-gray-400");
-      } else {
-        button.classList.remove("bg-[#CDEBCA]");
-        button.querySelector("ion-icon").classList.remove("text-green-500");
-        button.classList.add("bg-[#EAEAEA]");
-        button.querySelector("ion-icon").classList.add("text-gray-400");
-      }
-    } catch (error) {
-      console.error("Error toggling save status:", error);
-    }
-  });
+  } catch (error) {
+    console.error("Error toggling save status:", error);
+  }
 });
 
 document.body.addEventListener("htmx:afterSwap", function (event) {
@@ -411,11 +387,6 @@ const commentDownvoteButtons = document.querySelectorAll(
 // Function to handle voting
 async function handleCommentVote(commentId, voteType, currentUserVote) {
   // Update UI immediately
-  //   if (voteType === "upvote") {
-  //     updateVoteUI(postId, 1, "upvote");
-  //   } else if (voteType === "downvote") {
-  //     updateVoteUI(postId, -1, "downvote");
-  //   }
   try {
     // If the user is clicking the same button they previously clicked, cancel the vote
     if (currentUserVote === voteType) {
@@ -603,3 +574,43 @@ adjustColspan();
 
 // Add event listener for screen resizing
 window.addEventListener("resize", adjustColspan);
+
+document.body.addEventListener("htmx:afterSwap", function (event) {
+  if (event.target.id === "main-content") {
+    console.log("HTMX content swapped, reinitializing event listeners...");
+
+    // Reinitialize event listeners for dynamically loaded elements
+    initializeEventListeners();
+  }
+});
+
+function initializeEventListeners() {
+  // Reattach modal event listeners
+  openModal();
+
+  // Reattach voting event listeners
+  document.querySelectorAll(".upvote-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const postId = button.closest("[data-post-id]").dataset.postId;
+      const currentUserVote = button.classList.contains("text-green-500")
+        ? "upvote"
+        : "none";
+      handleVote(postId, "upvote", currentUserVote);
+    });
+  });
+
+  document.querySelectorAll(".downvote-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const postId = button.closest("[data-post-id]").dataset.postId;
+      const currentUserVote = button.classList.contains("text-red-500")
+        ? "downvote"
+        : "none";
+      handleVote(postId, "downvote", currentUserVote);
+    });
+  });
+}
+
+// Initial event listener attachment
+document.addEventListener("DOMContentLoaded", () => {
+  initializeEventListeners();
+});
