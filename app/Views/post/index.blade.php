@@ -230,7 +230,7 @@
                                             <span>·</span>
                                             <span class="reply-comment cursor-pointer text-sm font-semibold">Trả lời</span>
                                         </div>
-                                        <form action="" method="POST" class="reply-box hidden mt-2">
+                                        <form action="" method="POST" class="reply-box hidden mt-2 space-y-4">
                                             <textarea
                                                 class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                                                 name="comment" required placeholder="Viết phản hồi của bạn..."></textarea>
