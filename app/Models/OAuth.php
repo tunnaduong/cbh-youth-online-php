@@ -31,4 +31,10 @@ class OAuth extends BaseModel
         $this->setQuery("SELECT * FROM cyo_auth_accounts WHERE email = ?");
         return $this->loadRow([$email]);
     }
+
+    public function updateAvatar($authAccountId, $profile_picture)
+    {
+        $this->setQuery("UPDATE cyo_user_profiles SET oauth_profile_picture = ? WHERE auth_account_id = ?");
+        $this->execute([$profile_picture, $authAccountId]);
+    }
 }

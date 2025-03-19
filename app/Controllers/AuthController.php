@@ -276,7 +276,7 @@ class AuthController extends BaseController
     public function logout()
     {
         unset($_SESSION['user']);
-        header("Location: /login");
+        header("Location: /");
         exit;
     }
 }

@@ -70,7 +70,12 @@ class FacebookController extends BaseController
         // Redirect or show appropriate response
         $user = $this->oauth->login('facebook', $userData['email'] ?? $userData['id']);
         if ($user) {
+            // if user exists, log them in and change avatar
+            // if oauth profile picture is different and the avatar is not uploaded, update it
             $user->additional_info = $this->authAccount->getByUsername($user->username);
+            if ($user->additional_info->oauth_profile_picture != $userData['picture_url'] && $user->additional_info->profile_picture == null) {
+                $this->oauth->updateAvatar($user->id, $userData['picture_url']);
+            }
             $_SESSION['user'] = $user;
             header('Location: /');
             exit;
