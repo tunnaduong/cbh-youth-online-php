@@ -23,8 +23,9 @@
         }
     }
 
-    function autolink($text) {
-        $pattern = '/(?<!\])(?<!\]\()(?<!href=["\'])\bhttps?:\/\/[^\s<]+/i';
+    function autolink($text)
+    {
+        $pattern = '/(?<!href=["\'])(?<!src=["\'])(?<!\]\()(?<!\])\bhttps?:\/\/[^\s<"]+/i';
         $replacement = '<a href="$0" target="_blank">$0</a>';
         return preg_replace($pattern, $replacement, $text);
     }
@@ -68,7 +69,9 @@
                 </h1>
                 <div class="text-base max-w-[600px] overflow-wrap">
                     <div id="truncated{{ $post->post_id }}" style="display: block;">
-                        <span class="prose">{!! MarkdownExtra::defaultTransform(strip_tags(truncateText(str_replace("\n", "  \n", autolink($post->description)), 330), '<iframe><a>')) !!}</span>
+                        <span class="prose">{!! MarkdownExtra::defaultTransform(
+                            strip_tags(truncateText(str_replace("\n", "  \n", autolink($post->description)), 330), '<iframe><a>'),
+                        ) !!}</span>
                         @if (strlen($post->description) > 330)
                             <a class="text-black cursor-pointer hover:underline font-medium"
                                 onclick="toggleText{{ $post->post_id }}()">Xem
@@ -76,7 +79,9 @@
                         @endif
                     </div>
                     <div id="fullText{{ $post->post_id }}" style="display: none;">
-                        <span class="prose">{!! MarkdownExtra::defaultTransform(strip_tags(str_replace("\n", "  \n", autolink($post->description)), '<iframe><a>')) !!} </span>
+                        <span class="prose">{!! MarkdownExtra::defaultTransform(
+                            strip_tags(str_replace("\n", "  \n", autolink($post->description)), '<iframe><a>'),
+                        ) !!} </span>
                         <a class="text-black cursor-pointer hover:underline font-medium"
                             onclick="toggleText{{ $post->post_id }}()">Thu
                             gọn</a>

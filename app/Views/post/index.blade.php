@@ -25,7 +25,7 @@
 
     function autolink($text)
     {
-        $pattern = '/(?<!\])(?<!\]\()(?<!href=["\'])\bhttps?:\/\/[^\s<]+/i';
+        $pattern = '/(?<!href=["\'])(?<!src=["\'])(?<!\]\()(?<!\])\bhttps?:\/\/[^\s<"]+/i';
         $replacement = '<a href="$0" target="_blank">$0</a>';
         return preg_replace($pattern, $replacement, $text);
     }
