@@ -73,7 +73,7 @@
                 <div class="flex-1 overflow-hidden break-words">
                     <h1 class="text-xl font-semibold mb-1">{{ $post->title }}</h1>
                     <div class="text-base max-w-[600px] overflow-wrap">
-                        <span class="prose">{!! MarkdownExtra::defaultTransform(strip_tags(str_replace("\n", "  \n", autolink($post->description)), '<iframe>')) !!} </span>
+                        <span class="prose">{!! MarkdownExtra::defaultTransform(strip_tags(str_replace("\n", "  \n", autolink($post->description)), '<iframe><a>')) !!} </span>
                     </div>
                     @unless (!isset($post->cdn_image_id))
                         <div
