@@ -22,6 +22,12 @@
             return str_pad(floor($count / 5) * 5, 2, '0', STR_PAD_LEFT);
         }
     }
+
+    function autolink($text) {
+        $pattern = '/(?<!\])(?<!\]\()(?<!href=["\'])\bhttps?:\/\/[^\s<]+/i';
+        $replacement = '<a href="$0" target="_blank">$0</a>';
+        return preg_replace($pattern, $replacement, $text);
+    }
 @endphp
 
 @extends('layouts.home', ['title' => 'Đã lưu', 'saved' => true])
@@ -67,7 +73,7 @@
                     </h1>
                     <div class="text-base max-w-[600px] overflow-wrap">
                         <div id="truncated{{ $post->post_id }}" style="display: block;">
-                            <span class="prose">{!! MarkdownExtra::defaultTransform(strip_tags(truncateText(str_replace("\n", "  \n", $post->description), 330), '<iframe>')) !!}</span>
+                            <span class="prose">{!! MarkdownExtra::defaultTransform(strip_tags(truncateText(str_replace("\n", "  \n", autolink($post->description)), 330), '<iframe>')) !!}</span>
                             @if (strlen($post->description) > 330)
                                 <a class="text-black cursor-pointer hover:underline font-medium"
                                     onclick="toggleText{{ $post->post_id }}()">Xem
@@ -75,7 +81,7 @@
                             @endif
                         </div>
                         <div id="fullText{{ $post->post_id }}" style="display: none;">
-                            <span class="prose">{!! MarkdownExtra::defaultTransform(strip_tags(str_replace("\n", "  \n", $post->description), '<iframe>')) !!} </span>
+                            <span class="prose">{!! MarkdownExtra::defaultTransform(strip_tags(str_replace("\n", "  \n", autolink($post->description)), '<iframe>')) !!} </span>
                             <a class="text-black cursor-pointer hover:underline font-medium"
                                 onclick="toggleText{{ $post->post_id }}()">Thu
                                 gọn</a>
