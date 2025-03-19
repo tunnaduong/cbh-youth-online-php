@@ -23,7 +23,8 @@
         }
     }
 
-    function autolink($text) {
+    function autolink($text)
+    {
         $pattern = '/(?<!\])(?<!\]\()(?<!href=["\'])\bhttps?:\/\/[^\s<]+/i';
         $replacement = '<a href="$0" target="_blank">$0</a>';
         return preg_replace($pattern, $replacement, $text);
@@ -73,7 +74,9 @@
                 <div class="flex-1 overflow-hidden break-words">
                     <h1 class="text-xl font-semibold mb-1">{{ $post->title }}</h1>
                     <div class="text-base max-w-[600px] overflow-wrap">
-                        <span class="prose">{!! MarkdownExtra::defaultTransform(strip_tags(str_replace("\n", "  \n", autolink($post->description)), '<iframe><a>')) !!} </span>
+                        <span class="prose">{!! MarkdownExtra::defaultTransform(
+                            strip_tags(str_replace("\n", "  \n", autolink($post->description)), '<iframe><a>'),
+                        ) !!} </span>
                     </div>
                     @unless (!isset($post->cdn_image_id))
                         <div
@@ -157,17 +160,20 @@
                             <textarea
                                 class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                                 name="comment" required placeholder="Viết bình luận của bạn..."></textarea>
-                            <button
-                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 text-primary-foreground shadow h-9 px-4 py-2 w-full bg-green-600 hover:bg-green-700 text-white"
-                                type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="lucide lucide-send mr-2 h-4 w-4">
-                                    <path
-                                        d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z">
-                                    </path>
-                                    <path d="m21.854 2.147-10.94 10.939"></path>
-                                </svg>Gửi bình luận</button>
+                            <div class="flex justify-end">
+                                <button
+                                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 text-primary-foreground shadow h-9 px-4 py-2 bg-green-600 hover:bg-green-700 text-white"
+                                    type="submit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-send mr-2 h-4 w-4">
+                                        <path
+                                            d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z">
+                                        </path>
+                                        <path d="m21.854 2.147-10.94 10.939"></path>
+                                    </svg>Gửi bình luận</button>
+                            </div>
                         </form>
                     @else
                         <div class="text-base !mb-8">
@@ -229,18 +235,20 @@
                                                 class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                                                 name="comment" required placeholder="Viết phản hồi của bạn..."></textarea>
                                             <input type="hidden" name="replyingTo" value="{{ $comment->comment_id }}">
-                                            <button
-                                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 text-primary-foreground shadow h-9 px-4 py-2 w-full bg-green-600 hover:bg-green-700 text-white mt-2"
-                                                type="submit">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="lucide lucide-send mr-2 h-4 w-4">
-                                                    <path
-                                                        d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z">
-                                                    </path>
-                                                    <path d="m21.854 2.147-10.94 10.939"></path>
-                                                </svg>Gửi phản hồi</button>
+                                            <div class="flex justify-end">
+                                                <button
+                                                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 text-primary-foreground shadow h-9 px-4 py-2 bg-green-600 hover:bg-green-700 text-white"
+                                                    type="submit">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-send mr-2 h-4 w-4">
+                                                        <path
+                                                            d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z">
+                                                        </path>
+                                                        <path d="m21.854 2.147-10.94 10.939"></path>
+                                                    </svg>Gửi phản hồi</button>
+                                            </div>
                                         </form>
                                         @if (count($comment->replies) > 0)
                                             <div class="mt-4 space-y-4 reply-container">
