@@ -1,7 +1,7 @@
 @extends('layouts.home', ['title' => 'Bảng tin', 'feed' => true])
 
 @section('content')
-    <div id="main-content" hx-get="/feed/fetch" hx-trigger="load" hx-swap="innerHTML" class="flex-1">
+    <div id="main-content" hx-get="/feed/fetch" hx-trigger="load" hx-swap="innerHTML" class="flex-1 min-h-[calc(100vh-100px)]">
         <p class="text-center mt-4">Đang tải bài viết...</p>
     </div>
 @endsection
