@@ -219,7 +219,8 @@
                                             </a>
                                             <span class="text-xs text-gray-500">{{ $date->diffForHumans() }}</span>
                                         </div>
-                                        <p class="mt-1 text-sm text-gray-700">{{ $comment->comment }}</p>
+                                        <p class="mt-1 text-sm text-gray-700">{!! nl2br(e($comment->comment)) !!}
+                                        </p>
                                         <div class="mt-2 flex items-center space-x-2 text-gray-400">
                                             <ion-icon name="arrow-up-outline"
                                                 class="comment-upvote-button cursor-pointer {{ $comment->user_vote === 'upvote' ? 'text-green-500' : '' }}"></ion-icon>
@@ -291,7 +292,8 @@
                                                                 <span
                                                                     class="text-xs text-gray-500">{{ $replyDate->diffForHumans() }}</span>
                                                             </div>
-                                                            <p class="mt-1 text-sm text-gray-700">{{ $reply->comment }}
+                                                            <p class="mt-1 text-sm text-gray-700">
+                                                                {!! nl2br(e($reply->comment)) !!}
                                                             </p>
                                                             <div class="mt-2 flex items-center space-x-2 text-gray-400">
                                                                 <ion-icon name="arrow-up-outline"
