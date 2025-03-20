@@ -1,3 +1,44 @@
+function initializeEventListeners() {
+  // Reattach modal event listeners
+  openModal();
+
+  // Reattach voting event listeners
+  document.querySelectorAll(".upvote-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const postId = button.closest("[data-post-id]").dataset.postId;
+      const currentUserVote = button.classList.contains("text-green-500")
+        ? "upvote"
+        : "none";
+      handleVote(postId, "upvote", currentUserVote);
+    });
+  });
+
+  document.querySelectorAll(".downvote-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const postId = button.closest("[data-post-id]").dataset.postId;
+      const currentUserVote = button.classList.contains("text-red-500")
+        ? "downvote"
+        : "none";
+      handleVote(postId, "downvote", currentUserVote);
+    });
+  });
+}
+
+document.body.addEventListener("htmx:afterSwap", function (event) {
+  if (event.target.id === "main-content") {
+    console.log("HTMX content swapped, reinitializing event listeners...");
+
+    // Reinitialize event listeners for dynamically loaded elements
+    initializeEventListeners();
+  }
+});
+
+// Initial event listener attachment
+$(document).ready(function () {
+  console.log("Document ready, initializing event listeners...");
+  initializeEventListeners();
+});
+
 function openModal() {
   var modal = $("#myModal");
   var btn = $("#openModalBtn");
@@ -483,23 +524,25 @@ function updateCommentVoteUI(commentId, newVoteCount, userVote) {
 var isProcessing = false;
 
 // Add event listeners to upvote and downvote buttons
-commentUpvoteButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const commentId = button.closest("[data-comment-id]").dataset.commentId;
-    const currentUserVote = button.classList.contains("text-green-500")
-      ? "upvote"
-      : "none";
-    handleCommentVote(commentId, "upvote", currentUserVote);
+$(document).ready(function () {
+  commentUpvoteButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const commentId = button.closest("[data-comment-id]").dataset.commentId;
+      const currentUserVote = button.classList.contains("text-green-500")
+        ? "upvote"
+        : "none";
+      handleCommentVote(commentId, "upvote", currentUserVote);
+    });
   });
-});
 
-commentDownvoteButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const commentId = button.closest("[data-comment-id]").dataset.commentId;
-    const currentUserVote = button.classList.contains("text-red-500")
-      ? "downvote"
-      : "none";
-    handleCommentVote(commentId, "downvote", currentUserVote);
+  commentDownvoteButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const commentId = button.closest("[data-comment-id]").dataset.commentId;
+      const currentUserVote = button.classList.contains("text-red-500")
+        ? "downvote"
+        : "none";
+      handleCommentVote(commentId, "downvote", currentUserVote);
+    });
   });
 });
 
@@ -605,43 +648,3 @@ adjustColspan();
 
 // Add event listener for screen resizing
 window.addEventListener("resize", adjustColspan);
-
-document.body.addEventListener("htmx:afterSwap", function (event) {
-  if (event.target.id === "main-content") {
-    console.log("HTMX content swapped, reinitializing event listeners...");
-
-    // Reinitialize event listeners for dynamically loaded elements
-    initializeEventListeners();
-  }
-});
-
-function initializeEventListeners() {
-  // Reattach modal event listeners
-  openModal();
-
-  // Reattach voting event listeners
-  document.querySelectorAll(".upvote-button").forEach((button) => {
-    button.addEventListener("click", () => {
-      const postId = button.closest("[data-post-id]").dataset.postId;
-      const currentUserVote = button.classList.contains("text-green-500")
-        ? "upvote"
-        : "none";
-      handleVote(postId, "upvote", currentUserVote);
-    });
-  });
-
-  document.querySelectorAll(".downvote-button").forEach((button) => {
-    button.addEventListener("click", () => {
-      const postId = button.closest("[data-post-id]").dataset.postId;
-      const currentUserVote = button.classList.contains("text-red-500")
-        ? "downvote"
-        : "none";
-      handleVote(postId, "downvote", currentUserVote);
-    });
-  });
-}
-
-// Initial event listener attachment
-document.addEventListener("DOMContentLoaded", () => {
-  initializeEventListeners();
-});
