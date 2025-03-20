@@ -3,15 +3,18 @@
 namespace App\Controllers;
 
 use App\Models\Post;
+use App\Models\AuthAccount;
 use App\Controllers\BaseController;
 
 class PostController extends BaseController
 {
     public $post;
+    public $authAccount;
 
     public function __construct()
     {
         $this->post = new Post();
+        $this->authAccount = new AuthAccount();
     }
 
     public function addNewPost()
@@ -35,8 +38,14 @@ class PostController extends BaseController
 
     public function postDetail($username, $postId)
     {
+        // if username not found, redirect to 404
+        $user = $this->authAccount->getByUsername($username);
+        if (!$user) {
+            return $this->render('errors.404');
+        }
         $post = $this->post->getPostDetail($postId);
         $cmt = $this->post->getComments($postId);
+        $this->post->incrementViewCount($postId);
         function organizeComments($comments, $maxDepth = 2)
         {
             // Step 1: Create a lookup array for direct access by comment ID

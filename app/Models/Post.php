@@ -32,7 +32,7 @@ class Post extends BaseModel
     {
         // Increment the view count for the specific post
         $this->setQuery("INSERT INTO cyo_topic_views (topic_id, user_id, created_at, updated_at) VALUES (?, ?, ?, ?)");
-        return $this->execute([$postId, $_SESSION['user']->id, date('Y-m-d H:i:s'), date('Y-m-d H:i:s')]);
+        return $this->execute([$postId, $_SESSION['user']->id ?? NULL, date('Y-m-d H:i:s'), date('Y-m-d H:i:s')]);
     }
 
     public function getPostDetail($postId)
