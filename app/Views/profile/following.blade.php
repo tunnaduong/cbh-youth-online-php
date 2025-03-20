@@ -74,14 +74,14 @@
                     </div>
                 </div>
                 <div class="flex flex-wrap justify-center gap-y-1">
-                    <div class="px-3">
+                    <a href="/{{ $profile->username }}/following" class="px-3">
                         <span class="text-gray-500">Đang theo dõi: </span>
                         <span class="font-bold">{{ $profile->total_following }}</span>
-                    </div>
-                    <div class="px-3">
+                    </a>
+                    <a href="/{{ $profile->username }}/followers" class="px-3">
                         <span class="text-gray-500">Người theo dõi: </span>
                         <span class="font-bold follower_count">{{ $profile->total_followers }}</span>
-                    </div>
+                    </a>
                     <div class="px-3">
                         <span class="text-gray-500">Lượt like: </span>
                         <span class="font-bold">{{ $profile->total_likes }}</span>
