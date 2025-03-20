@@ -26,7 +26,7 @@
     function autolink($text)
     {
         $pattern = '/(?<!href=["\'])(?<!src=["\'])(?<!\]\()(?<!\])\bhttps?:\/\/[^\s<"]+/i';
-        $replacement = '<a href="$0" target="_blank">$0</a>';
+        $replacement = '<a href="$0" target="_blank" class="break-all">$0</a>';
         return preg_replace($pattern, $replacement, $text);
     }
 @endphp
@@ -47,7 +47,7 @@
         <div class="lg:hidden flex flex-col items-center gap-y-2 relative z-10">
             <a
                 href="{{ !empty($profile->oauth_profile_picture) ? $profile->oauth_profile_picture : (!empty($profile->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $profile->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}">
-                <img class="w-32 h-32 rounded-full" style="border: 4px solid #eeeeee;"
+                <img class="w-32 h-32 rounded-full bg-white" style="border: 4px solid #eeeeee;"
                     src="{{ !empty($profile->oauth_profile_picture) ? $profile->oauth_profile_picture : (!empty($profile->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $profile->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
                     alt="avatar">
             </a>
@@ -140,7 +140,7 @@
         <div class="mx-auto max-w-[959px] h-full lg:flex hidden">
             <a
                 href="{{ !empty($profile->oauth_profile_picture) ? $profile->oauth_profile_picture : (!empty($profile->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $profile->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}">
-                <img class="w-[170px] h-[170px] rounded-full absolute"
+                <img class="w-[170px] h-[170px] rounded-full absolute bg-white"
                     style="border: 4px solid #eeeeee; transform: translateY(-45%);"
                     src="{{ !empty($profile->oauth_profile_picture) ? $profile->oauth_profile_picture : (!empty($profile->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $profile->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
                     alt="avatar">
