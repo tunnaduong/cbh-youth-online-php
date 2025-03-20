@@ -45,7 +45,7 @@ class PostController extends BaseController
         }
         $post = $this->post->getPostDetail($postId);
         $cmt = $this->post->getComments($postId);
-        $this->post->incrementViewCount($postId);
+
         function organizeComments($comments, $maxDepth = 2)
         {
             // Step 1: Create a lookup array for direct access by comment ID
