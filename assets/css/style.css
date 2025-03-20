@@ -306,20 +306,38 @@ input[type="radio"] {
 }
 
 .prose hr {
-    margin-top: 1em !important;
-    margin-bottom: 1em !important;
+  margin-top: 1em !important;
+  margin-bottom: 1em !important;
 }
 
 .prose > ul > li > :first-child {
-    margin-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .prose p {
-    margin-top: 0.75em !important;
-    margin-bottom: 0.75rem !important;
+  margin-top: 0.75em !important;
+  margin-bottom: 0.75rem !important;
 }
 
 .prose ul {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.dont-break-out {
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }

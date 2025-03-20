@@ -52,7 +52,7 @@
                     alt="avatar">
             </a>
             <div class="flex flex-col items-center">
-                <h1 class="font-bold text-xl mt-2">
+                <h1 class="font-bold text-xl mt-2 text-center">
                     <span>{{ $profile->profile_name }}
                         @if ($profile->verified == 1)
                             <span>
