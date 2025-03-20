@@ -22,6 +22,10 @@ class HomeController extends BaseController
 
     public function saved()
     {
+        if (!isset($_SESSION['user'])) {
+            header('Location: /login');
+            exit();
+        }
         $posts = $this->post->saved();
         return $this->render('home.saved', compact('posts'));
     }
