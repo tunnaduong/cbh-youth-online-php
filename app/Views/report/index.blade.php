@@ -1,3 +1,14 @@
+@php
+    $formatter = new IntlDateFormatter(
+        'vi_VN',
+        IntlDateFormatter::FULL,
+        IntlDateFormatter::SHORT,
+        'Asia/Ho_Chi_Minh',
+        IntlDateFormatter::GREGORIAN,
+        'HH:mm EEEE, dd/MM/yyyy',
+    );
+@endphp
+
 @extends('layouts.home', ['title' => 'Báo cáo vi phạm tập thể lớp', 'reports' => true, 'class' => true])
 
 @section('content')
@@ -64,16 +75,6 @@
                             <option value="10C4">10 Anh - 10C4</option>
                             <option value="10C5">10 Nga - 10C5</option>
                         </optgroup>
-                        <optgroup label="THCS">
-                            <option value="9A1">9A1</option>
-                            <option value="9A2">9A2</option>
-                            <option value="8A1">8A1</option>
-                            <option value="8A2">8A2</option>
-                            <option value="7A1">7A1</option>
-                            <option value="7A2">7A2</option>
-                            <option value="6A1">6A1</option>
-                            <option value="6A2">6A2</option>
-                        </optgroup>
                     </select>
                     <input type="hidden" id="classText" name="classText">
                 </div>
@@ -83,7 +84,7 @@
                     <input disabled name="time" id="time"
                         class="text-gray-500 mt-1 text-base rounded-md p-1 bg-gray-100"
                         style="background-color: rgb(243 244 246 / var(--tw-bg-opacity))"
-                        value="07:53 Thứ bảy, 30/11/2024"></input>
+                        value="{{ $formatter->format(new DateTime()) }}"></input>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-x-4">
                     <div class="flex flex-col flex-1 mb-2.5">
