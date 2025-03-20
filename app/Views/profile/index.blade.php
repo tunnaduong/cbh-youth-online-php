@@ -71,10 +71,10 @@
             </div>
             <div class="flex flex-col items-center gap-y-1 !px-6">
                 <div class="flex flex-wrap justify-center gap-y-1 px-3">
-                    <div class="px-3">
+                    <a href="/{{ $profile->username }}" class="px-3">
                         <span class="text-gray-500">Bài đã đăng: </span>
                         <span class="font-bold">{{ $profile->posts_count }}</span>
-                    </div>
+                    </a>
                     <div class="px-3">
                         <span class="text-gray-500">Điểm: </span>
                         <span class="font-bold">{{ $profile->total_points }}</span>
