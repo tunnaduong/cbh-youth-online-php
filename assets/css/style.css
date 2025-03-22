@@ -341,3 +341,13 @@ input[type="radio"] {
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+
+.container-footer {
+  margin: 0 auto;
+  max-width: 830px;
+}
+
+.container-main {
+  max-width: 750px;
+  margin: 0 auto;
+}

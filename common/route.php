@@ -12,6 +12,7 @@ use App\Controllers\FacebookController;
 use App\Controllers\FollowController;
 use App\Controllers\ForumController;
 use App\Controllers\GoogleController;
+use App\Controllers\HelpCenterController;
 use App\Controllers\ProfileController;
 use App\Controllers\RecordingController;
 use App\Controllers\ReportController;
@@ -65,6 +66,9 @@ try {
     $router->get('/recordings', [RecordingController::class, 'index']);
     $router->get("/admin", [AdminController::class, 'index']);
     $router->get('/feed/fetch', [HomeController::class, 'fetchFeed']);
+
+    // help center
+    $router->get('/help', [HelpCenterController::class, 'index']);
 
     // username should be the last route
     $router->any('/{username}/settings', [ProfileController::class, 'edit']);
