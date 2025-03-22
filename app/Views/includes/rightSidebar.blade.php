@@ -71,7 +71,12 @@
 <div class="hidden max-md:block !px-3 pt-0 pb-6 mt-3" id="bottom-sidebar">
     <center>
         <div class="bg-white text-sm p-3 rounded-xl long-shadow" id="top-users">
-            <span class="font-bold text-[#6B6B6B] block text-base text-left">Xếp hạng thành viên</span>
+            <div class="flex flex-row items-center justify-between">
+                <span class="font-bold text-[#6B6B6B] block text-base text-left">Xếp hạng thành viên</span>
+                <a href="https://chuyenbienhoa.com/Admin/posts/213101">
+                    <ion-icon name="help-circle-outline" class="text-[20px] text-gray-500"></ion-icon>
+                </a>
+            </div>
             @foreach ($top_users as $user)
                 <div class="flex flex-row items-center mt-2">
                     <a href="/{{ $user->username }}">
