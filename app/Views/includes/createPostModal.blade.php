@@ -20,8 +20,8 @@
                     alt="{{ $_SESSION['user']->username }}'s avatar" class="border w-11 h-11 rounded-full">
                 <div class="flex flex-col ml-2">
                     <span
-                        class="text-base font-semibold mb-0.5 flex items-center">{{ $_SESSION['user']->additional_info->profile_name }}
-                        @if ($_SESSION['user']->additional_info->verified == 1)
+                        class="text-base font-semibold mb-0.5 flex items-center">{{ $_SESSION['user']->additional_info->profile_name ?? '' }}
+                        @if ($_SESSION['user']->additional_info->verified ?? 0 == 1)
                             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20"
                                 aria-hidden="true" class="text-base ml-0.5 text-green-600 mt-0.5" height="1em"
                                 width="1em" xmlns="http://www.w3.org/2000/svg">
