@@ -37,11 +37,12 @@
         @if (isset($_SESSION['user']))
             <hr class="my-2" />
             <div class="flex flex-row items-center">
-                <a href="/{{ $user->username }}">
+                <a href="/{{ $_SESSION['user']->username }}">
                     <img src="{{ isset($_SESSION['user']->additional_info->oauth_profile_picture) ? $_SESSION['user']->additional_info->oauth_profile_picture : (!empty($_SESSION['user']->additional_info->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $_SESSION['user']->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
                         class="w-8 h-8 bg-gray-300 rounded-full border" alt="User avatar"></img>
                 </a>
-                <span class="ml-1.5 font-semibold flex-1 truncate text-left">Bạn</span>
+                <a href="/{{ $_SESSION['user']->username }}"
+                    class="ml-1.5 font-semibold flex-1 truncate text-left">Bạn</a>
                 <span class="mr-1.5 text-[#C1C1C1]">{{ $current_user->total_points }} điểm</span>
                 <span class="text-green-500 font-bold">#{{ $current_user->current_rank }}</span>
             </div>
