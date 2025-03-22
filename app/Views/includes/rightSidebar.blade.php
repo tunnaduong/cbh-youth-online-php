@@ -17,7 +17,12 @@
         @endif
     </button>
     <div class="bg-white text-sm p-3 mt-4 rounded-xl long-shadow">
-        <span class="font-bold text-[#6B6B6B] block text-base">Xếp hạng thành viên</span>
+        <div class="flex flex-row items-center justify-between">
+            <span class="font-bold text-[#6B6B6B] block text-base">Xếp hạng thành viên</span>
+            <a href="https://cbh-youth-online-php.net/Admin/posts/213101">
+                <ion-icon name="help-circle-outline" class="text-[20px] text-gray-500"></ion-icon>
+            </a>
+        </div>
         @foreach ($top_users as $user)
             <div class="flex flex-row items-center mt-2">
                 <a href="/{{ $user->username }}">
