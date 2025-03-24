@@ -62,7 +62,7 @@
                 <uk-select id="subforumId" name="subforumId" uk-cloak placeholder="Chọn chuyên mục phù hợp">
                     @php
                         // nếu người dùng hiện tại là admin thì lấy tất cả các chuyên mục
-                        if ($_SESSION['user']->role ?? '' == 'admin') {
+                        if (($_SESSION['user']->role ?? null) === 'admin') {
                             $categories = (new \App\Models\Forum())->getCategories();
                         }
                         // ngược lại thì lấy tất cả các chuyên mục trừ chuyên mục admin
