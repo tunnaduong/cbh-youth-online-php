@@ -10,7 +10,7 @@
 <meta name="author" content="{{ $author ?? 'Đội ngũ CBH Youth Online' }}">
 <meta name="keywords"
     content="{{ $keywords ??
-        'thpt chuyen ha nam, thanh nien chuyen bien hoa, thanh nien chuyen bien hoa online, thpt chuyen bien hoa, chuyen bien hoa, chuyen ha nam, cyo, cbh youth online' }}">
+        'thpt chuyen ha nam, thanh nien chuyen bien hoa, thanh nien chuyen bien hoa online, thpt chuyen bien hoa, chuyen bien hoa, chuyen ha nam, cyo, cbh youth online, chuyen bien hoa online, chuyên biên hòa online' }}">
 <link rel="icon" href="/assets/images/logo.png" type="image/png" sizes="32x32" />
 <meta property="og:image" content="{{ $image ?? 'https://chuyenbienhoa.com/assets/images/cyo_thumbnail.png' }}" />
 <link rel='canonical' href='{{ 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] }}' />
