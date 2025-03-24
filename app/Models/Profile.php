@@ -30,8 +30,8 @@ class Profile extends BaseModel
         // die(var_dump($data));
         switch ($data['type']) {
             case "profile_edit":
-                $this->setQuery("
-                    UPDATE cyo_user_profiles p
+                $this->setQuery(
+                    "UPDATE cyo_user_profiles p
                     INNER JOIN cyo_auth_accounts a ON p.auth_account_id = a.id
                     SET 
                         p.profile_username = ?, 
@@ -43,8 +43,8 @@ class Profile extends BaseModel
                         p.updated_at = ?, 
                         a.updated_at = ?, 
                         p.last_username_change = CASE WHEN ? THEN ? ELSE p.last_username_change END
-                    WHERE profile_username = ?
-                ");
+                    WHERE profile_username = ?"
+                );
                 $this->execute([
                     $data['username'],
                     $data['bio'] ?? null,
@@ -69,6 +69,7 @@ class Profile extends BaseModel
             case "remove_avatar":
                 $this->setQuery("UPDATE cyo_user_profiles SET profile_picture = NULL, oauth_profile_picture = NULL, updated_at = ? WHERE profile_username = ?");
                 $this->execute([date('Y-m-d H:i:s'), $_SESSION['user']->username]);
+            default:
                 break;
         }
     }
