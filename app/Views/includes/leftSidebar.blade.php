@@ -1,5 +1,5 @@
 <!-- Left side bar -->
-<div class="w-[340px] hidden xl:block !p-6 h-min sticky top-[69px]" id="left-sidebar">
+<div class="w-[260px] hidden xl:block !p-6 h-min sticky top-[69px]" id="left-sidebar">
     <p class="text-sm font-semibold text-[#6b6b6b] pb-3 ml-2.5">
         MENU
     </p>

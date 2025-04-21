@@ -55,6 +55,32 @@
         var uid = {{ isset($_SESSION['user']) ? $_SESSION['user']->id : 'null' }};
     </script>
     <script src="/assets/js/script.js"></script>
+    <script id="cid0020000406220973300" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js"
+        style="width: 200px;height: 300px;">
+        {
+            "handle": "chuyenbienhoa",
+            "arch": "js",
+            "styles": {
+                "a": "319527",
+                "b": 100,
+                "c": "FFFFFF",
+                "d": "FFFFFF",
+                "k": "319527",
+                "l": "319527",
+                "m": "319527",
+                "n": "FFFFFF",
+                "p": "10",
+                "q": "319527",
+                "r": 100,
+                "pos": "br",
+                "cv": 1,
+                "cvbg": "319527",
+                "cvw": 200,
+                "cvh": 30,
+                "ticker": 1
+            }
+        }
+    </script>
 </body>
 
 </html>
