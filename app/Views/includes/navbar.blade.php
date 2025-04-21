@@ -124,10 +124,10 @@
                     <ul class="pl-8">
                         <li><a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
                                 href="/">
-                                <ion-icon name="home" class="mr-3"></ion-icon>Bảng tin </a></li>
-                        <li><a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
-                                href="/forum">
                                 <ion-icon name="chatbox-ellipses" class="mr-3"></ion-icon>Diễn đàn </a></li>
+                        <li><a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
+                                href="/feed">
+                                <ion-icon name="telescope" class="mr-3"></ion-icon>Bảng tin </a></li>
                         <li><a class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 text-base active:bg-green-600 active:text-white"
                                 href="/recordings">
                                 <ion-icon name="megaphone" class="mr-3"></ion-icon>Loa lớn </a></li>
