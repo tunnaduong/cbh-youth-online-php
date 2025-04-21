@@ -15,8 +15,8 @@
             <div class="flex gap-x-1 items-center min-w-max"><img src="/assets/images/logo.png" alt="CYO's Logo"
                     class="w-10 h-10">
                 <div class="text-[14.5px] font-light text-[#319527] leading-4 hidden lg:block">
-                    <h1>Thanh niên</h1>
-                    <h1 class="font-bold">Chuyên Biên Hòa Online</h1>
+                    <h1 class="text-[14.2px]">Diễn đàn Học sinh</h1>
+                    <h1 class="font-bold">Chuyên Biên Hòa</h1>
                 </div>
             </div>
         </a>

@@ -41,23 +41,6 @@
     @else
         <a href="/" @class([
             'mb-3 text-base font-semibold flex items-center w-[100%] text-left rounded-xl p-2.5',
-            'hover:text-[#319527] text-[#319527] bg-[#E4EEE3]' => $feed ?? false,
-            'text-[#CACACA] hover:text-[#CACACA]' => !($feed ?? false),
-        ])>
-            <div @class([
-                'text-lg rounded-lg w-[30px] h-[30px] mr-3 menu-border flex items-center justify-center',
-                '!border-[#BFE5BB] bg-[#CDEBCA]' => $feed ?? false,
-                'border-[#ECECEC]' => !($feed ?? false),
-            ])>
-                <ion-icon name="home"></ion-icon>
-            </div>
-            <div @class([
-                'text-[#319527]' => $feed ?? false,
-                'text-[#6B6B6B]' => !($feed ?? false),
-            ])>Bảng tin</div>
-        </a>
-        <a href="/forum" @class([
-            'mb-3 text-base font-semibold flex items-center w-[100%] text-left rounded-xl p-2.5',
             'hover:text-[#319527] text-[#319527] bg-[#E4EEE3]' => $forum ?? false,
             'text-[#CACACA] hover:text-[#CACACA]' => !($forum ?? false),
         ])>
@@ -72,6 +55,23 @@
                 'text-[#319527]' => $forum ?? false,
                 'text-[#6B6B6B]' => !($forum ?? false),
             ])>Diễn đàn</div>
+        </a>
+        <a href="/feed" @class([
+            'mb-3 text-base font-semibold flex items-center w-[100%] text-left rounded-xl p-2.5',
+            'hover:text-[#319527] text-[#319527] bg-[#E4EEE3]' => $feed ?? false,
+            'text-[#CACACA] hover:text-[#CACACA]' => !($feed ?? false),
+        ])>
+            <div @class([
+                'text-lg rounded-lg w-[30px] h-[30px] mr-3 menu-border flex items-center justify-center',
+                '!border-[#BFE5BB] bg-[#CDEBCA]' => $feed ?? false,
+                'border-[#ECECEC]' => !($feed ?? false),
+            ])>
+                <ion-icon name="telescope"></ion-icon>
+            </div>
+            <div @class([
+                'text-[#319527]' => $feed ?? false,
+                'text-[#6B6B6B]' => !($feed ?? false),
+            ])>Bảng tin</div>
         </a>
         <a href="/recordings" @class([
             'mb-3 text-base font-semibold flex items-center w-[100%] text-left rounded-xl p-2.5',

@@ -34,7 +34,7 @@ try {
     $router->any('/login', [AuthController::class, 'login']);
     $router->any('/register', [AuthController::class, 'register']);
     $router->get('/logout', [AuthController::class, 'logout']);
-    $router->get('/', [HomeController::class, 'index']);
+    $router->get('/feed', [HomeController::class, 'index']);
     $router->get('/{username}/posts/{postId}', [PostController::class, 'postDetail']);
     $router->post('/{username}/posts/{postId}', [PostController::class, 'addNewComment']);
     $router->post('/', [PostController::class, 'addNewPost']);
@@ -60,7 +60,7 @@ try {
     $router->get('/login/google/callback', [GoogleController::class, 'handleProviderCallback']);
     $router->get('/login/facebook', [FacebookController::class, 'redirectToProvider']);
     $router->get('/login/facebook/callback', [FacebookController::class, 'handleProviderCallback']);
-    $router->get('/forum', [ForumController::class, 'index']);
+    $router->get('/', [ForumController::class, 'index']);
     $router->get('/forum/{mainCategorySlug}', [ForumController::class, 'category']);
     $router->get('/forum/{mainCategorySlug}/{subforumSlug}', [ForumController::class, 'subforum']);
     $router->get('/recordings', [RecordingController::class, 'index']);
