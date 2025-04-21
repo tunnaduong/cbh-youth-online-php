@@ -42,32 +42,34 @@
             Carbon::setLocale('vi');
         @endphp
         <div data-post-id="{{ $post->post_id }}"
-            class="post-container w-full mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row md:max-w-[679px]">
-            <div
-                class="min-w-[84px] items-center mt-1 flex-col hidden md:flex ml-[-20px] text-[13px] font-semibold text-gray-400">
-                <ion-icon name="arrow-up-outline"
-                    class="upvote-button text-2xl cursor-pointer {{ $post->user_vote === 'upvote' ? 'text-green-500' : '' }}"></ion-icon>
-                <span
-                    class="select-none text-lg vote-count {{ $post->user_vote == 'upvote' ? 'text-green-500' : ($post->user_vote == 'downvote' ? 'text-red-500' : '') }}">{{ $post->post_votes }}</span>
-                <ion-icon name="arrow-down-outline"
-                    class="downvote-button text-2xl cursor-pointer {{ $post->user_vote === 'downvote' ? 'text-red-500' : '' }}"></ion-icon>
-                @if ($post->is_saved)
-                    <div
-                        class="save-post-button bg-[#CDEBCA] cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
-                        <ion-icon name="bookmark" class="text-[#319527] text-xl"></ion-icon>
-                    </div>
-                @else
-                    <div
-                        class="save-post-button bg-[#EAEAEA] cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
-                        <ion-icon name="bookmark" class="text-gray-400 text-xl"></ion-icon>
-                    </div>
-                @endif
+            class="post-container w-full mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row">
+            <div class="min-w-[84px]">
+                <div
+                    class="sticky-reaction-bar items-center mt-1 flex-col hidden md:flex ml-[-20px] text-[13px] font-semibold text-gray-400">
+                    <ion-icon name="arrow-up-outline"
+                        class="upvote-button text-2xl cursor-pointer {{ $post->user_vote === 'upvote' ? 'text-green-500' : '' }}"></ion-icon>
+                    <span
+                        class="select-none text-lg vote-count {{ $post->user_vote == 'upvote' ? 'text-green-500' : ($post->user_vote == 'downvote' ? 'text-red-500' : '') }}">{{ $post->post_votes }}</span>
+                    <ion-icon name="arrow-down-outline"
+                        class="downvote-button text-2xl cursor-pointer {{ $post->user_vote === 'downvote' ? 'text-red-500' : '' }}"></ion-icon>
+                    @if ($post->is_saved)
+                        <div
+                            class="save-post-button bg-[#CDEBCA] cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
+                            <ion-icon name="bookmark" class="text-[#319527] text-xl"></ion-icon>
+                        </div>
+                    @else
+                        <div
+                            class="save-post-button bg-[#EAEAEA] cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
+                            <ion-icon name="bookmark" class="text-gray-400 text-xl"></ion-icon>
+                        </div>
+                    @endif
+                </div>
             </div>
             <div class="flex-1 overflow-hidden break-words">
                 <h1 class="text-xl font-semibold mb-1">
                     <a href="/{{ $post->username }}/posts/{{ $post->post_id }}">{{ $post->title }}</a>
                 </h1>
-                <div class="text-base max-w-[600px] overflow-wrap">
+                <div class="text-base overflow-wrap">
                     <div id="truncated{{ $post->post_id }}" style="display: block;">
                         <span class="prose">{!! MarkdownExtra::defaultTransform(
                             strip_tags(truncateText(str_replace("\n", "  \n", autolink($post->description)), 330), '<iframe><a>'),

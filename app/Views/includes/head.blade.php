@@ -1,13 +1,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>{{ !empty($title) && $title != 'Diễn đàn' ? $title . ' - ' : '' }}Diễn đàn Học sinh Chuyên Biên Hòa</title>
+<title>{{ !empty($title) && $title != 'Diễn đàn' ? $title . ' - ' : '' }}Diễn đàn học sinh Chuyên Biên Hòa</title>
 <!-- Meta tag dành cho SEO -->
 <meta property="og:title"
-    content="{{ $title ?? 'Diễn đàn Học sinh Chuyên Biên Hòa' == 'Diễn đàn' ? 'Diễn đàn Học sinh Chuyên Biên Hòa' : $title }}" />
+    content="{{ $title ?? 'Diễn đàn học sinh Chuyên Biên Hòa' == 'Diễn đàn' ? 'Diễn đàn Học sinh Chuyên Biên Hòa' : $title }}" />
 <meta name="description"
-    content="{{ $description ?? 'Diễn đàn Học sinh Chuyên Biên Hòa thuộc Trường THPT Chuyên Hà Nam' }}">
+    content="{{ $description ?? 'Diễn đàn học sinh Chuyên Biên Hòa thuộc Trường THPT Chuyên Hà Nam' }}">
 <meta property='og:description'
-    content='{{ $description ?? 'Diễn đàn Học sinh Chuyên Biên Hòa thuộc Trường THPT Chuyên Hà Nam' }}' />
+    content='{{ $description ?? 'Diễn đàn học sinh Chuyên Biên Hòa thuộc Trường THPT Chuyên Hà Nam' }}' />
 <meta name="author" content="{{ $author ?? 'Đội ngũ CBH Youth Online' }}">
 <meta name="keywords"
     content="{{ $keywords ??

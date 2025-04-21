@@ -351,3 +351,8 @@ input[type="radio"] {
   max-width: 750px;
   margin: 0 auto;
 }
+
+.sticky-reaction-bar {
+  position: sticky;
+  top: 80px;
+}
