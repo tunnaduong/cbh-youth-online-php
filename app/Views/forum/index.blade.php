@@ -10,10 +10,59 @@
 
     @include('includes.topBar')
 
+    <div class="mx-auto max-w-[775px] pt-4 hidden">
+
+        <div class="border rounded bg-white">
+            <div class="flex flex-wrap items-stretch">
+                <a href="#" class="px-4 text-sm flex items-center hover:bg-gray-100 tab-button-active">
+                    <span class="py-2">Bài mới</span>
+                </a>
+                <a href="#" class="px-4 text-sm flex items-center bor-right bor-left hover:bg-gray-100 tab-button">
+                    <span class="py-2">Chủ đề xem nhiều</span>
+                </a>
+                <div class="ml-auto flex">
+                    <button class="h-9 w-9 border-l flex items-center justify-center tab-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-refresh-cw-icon lucide-refresh-cw h-4 w-4">
+                            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+                            <path d="M21 3v5h-5" />
+                            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+                            <path d="M8 16H3v5" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <table class="w-full">
+                <tbody>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="py-3 pl-3 pr-2 align-top text-center w-8">
+                            <span
+                                class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-red-600 text-white text-xs font-medium">
+                                1
+                            </span>
+                        </td>
+                        <td class="py-3 pr-2">
+                            <a href="#" class="text-blue-600 hover:underline">
+                                Thông tư 24/2024: Những cập nhật quan trọng kế toán HCSN cần nắm vững
+                            </a>
+                        </td>
+                        <td class="py-3 pr-2 text-right text-gray-500 text-sm whitespace-nowrap">57 phút trước</td>
+                        <td class="py-3 pr-3 text-right text-sm whitespace-nowrap">
+                            <a href="#" class="text-blue-600 hover:underline">
+                                Tổ chức giáo dục NOTE EDU
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <div class="flex flex-1 !p-6 !px-2.5 items-center flex-col -mb-8">
         @foreach ($mainCategories as $mainCategory)
-            <!-- Section 1 -->
-            <div class="max-w-[679px] w-[100%] mb-6">
+            <!-- Section -->
+            <div class="max-w-[775px] w-[100%] mb-6">
                 <a href="/forum/{{ $mainCategory->slug }}"
                     class="text-lg font-semibold px-4 uppercase">{{ $mainCategory->name }}</a>
                 <div class="bg-white long-shadow rounded-lg mt-2">

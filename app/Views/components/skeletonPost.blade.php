@@ -1,5 +1,5 @@
 @foreach (range(1, $count ?? 4) as $index)
-    <div class="w-full md:max-w-[679px] mb-4 !p-6 long-shadow h-min flex flex-row rounded-lg bg-white animate-pulse">
+    <div class="w-full md:max-w-[775px] mb-4 !p-6 long-shadow h-min flex flex-row rounded-lg bg-white animate-pulse">
         <div
             class="min-w-[80px] items-center mt-1 flex-col md:flex ml-[-15px] text-[13px] font-semibold text-gray-400 hidden">
             <div class="h-16 w-6 bg-gray-200 rounded mb-3"></div>

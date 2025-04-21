@@ -356,3 +356,26 @@ input[type="radio"] {
   position: sticky;
   top: 80px;
 }
+
+.tab-button {
+  background-color: #f7f7f8; /* Light gray background */
+  /* Light gray background */
+}
+
+.tab-button-active {
+  /* Soft pinkish-purple text color */
+  color: #319527;
+  background-color: white;
+}
+
+.bor-bottom {
+  border-bottom: 1px solid #d0d7de;
+}
+
+.bor-right {
+  border-right: 1px solid #d0d7de;
+}
+
+.bor-left {
+  border-left: 1px solid #d0d7de;
+}

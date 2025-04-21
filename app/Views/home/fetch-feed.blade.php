@@ -42,7 +42,7 @@
             Carbon::setLocale('vi');
         @endphp
         <div data-post-id="{{ $post->post_id }}"
-            class="post-container w-full mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row">
+            class="post-container w-full mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row max-w-[775px]">
             <div class="min-w-[84px]">
                 <div
                     class="sticky-reaction-bar items-center mt-1 flex-col hidden md:flex ml-[-20px] text-[13px] font-semibold text-gray-400">
