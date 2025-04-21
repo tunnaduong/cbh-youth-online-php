@@ -43,9 +43,9 @@
         @endphp
         <div data-post-id="{{ $post->post_id }}"
             class="post-container w-full mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row max-w-[775px]">
-            <div class="min-w-[84px]">
+            <div class="min-w-[84px] hidden md:block">
                 <div
-                    class="sticky-reaction-bar items-center mt-1 flex-col hidden md:flex ml-[-20px] text-[13px] font-semibold text-gray-400">
+                    class="sticky-reaction-bar items-center mt-1 flex flex-col ml-[-20px] text-[13px] font-semibold text-gray-400">
                     <ion-icon name="arrow-up-outline"
                         class="upvote-button text-2xl cursor-pointer {{ $post->user_vote === 'upvote' ? 'text-green-500' : '' }}"></ion-icon>
                     <span
