@@ -185,8 +185,8 @@
                 {{-- New user --}}
                 <p class="text-gray-600">
                     Chúng ta cùng chào mừng thành viên mới nhất đã tham gia diễn đàn:
-                    <span class="font-bold text-green-600">
-                        {{ $stats['latestUser']->profile_name }}</span>
+                    <a href="/{{ $stats['latestUser']->username }}" class="hover:underline font-bold text-green-600">
+                        {{ $stats['latestUser']->profile_name }}</a>
                 </p>
 
                 <p class="text-gray-600 my-2">
