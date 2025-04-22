@@ -15,15 +15,20 @@
             <div class="border rounded bg-white">
                 <div class="flex flex-wrap items-stretch">
                     <a href="?sort=latest"
-                        class="px-4 text-sm flex items-center hover:bg-gray-50 tab-button @if ($_GET['sort'] ?? ('' == 'latest' || !$_GET['sort'] ?? false)) tab-button-active @endif">
+                        class="px-4 text-sm flex items-center hover:bg-gray-50 tab-button
+                        @if (!isset($_GET['sort']) || $_GET['sort'] === 'latest') tab-button-active @endif">
                         <span class="py-2">Bài mới</span>
                     </a>
+
                     <a href="?sort=most_viewed"
-                        class="hidden sm:flex px-4 text-sm items-center bor-left hover:bg-gray-50 tab-button  @if ($_GET['sort'] == 'most_viewed') tab-button-active @endif">
+                        class="hidden sm:flex px-4 text-sm items-center bor-left hover:bg-gray-50 tab-button
+                        @if (($_GET['sort'] ?? '') === 'most_viewed') tab-button-active @endif">
                         <span class="py-2">Chủ đề xem nhiều</span>
                     </a>
+
                     <a href="?sort=most_engaged"
-                        class="px-4 text-sm hidden sm:flex items-center bor-right bor-left hover:bg-gray-50 tab-button @if ($_GET['sort'] == 'most_engaged') tab-button-active @endif">
+                        class="px-4 text-sm hidden sm:flex items-center bor-right bor-left hover:bg-gray-50 tab-button
+                        @if (($_GET['sort'] ?? '') === 'most_engaged') tab-button-active @endif">
                         <span class="py-2">Tương tác nhiều</span>
                     </a>
                     <div>
