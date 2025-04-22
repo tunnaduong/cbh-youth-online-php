@@ -18,8 +18,20 @@
                     <h1 class="text-[14.2px]">Diễn đàn học sinh</h1>
                     <h1 class="font-bold">Chuyên Biên Hòa</h1>
                 </div>
+                {{-- Beta Badge --}}
+                <div class="bg-yellow-400 text-black text-[14px] font-semibold rounded-full !px-3 !py-3 ml-2 hidden lg:block"
+                    data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    title="Diễn đàn đang trong giai đoạn thử nghiệm">
+                    <span>Beta</span>
+                </div>
             </div>
         </a>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+                [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
+            });
+        </script>
         <div class="max-w-52 lg:flex flex-row items-center bg-[#F7F7F7] rounded-lg pr-1 ml-7 pl-1 hidden">
             <input type="text" placeholder="Tìm kiếm" class="w-full bg-[#F7F7F7] text-[13px] p-2 rounded-lg pr-1">
             <div
