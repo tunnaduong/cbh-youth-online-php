@@ -15,7 +15,7 @@
             <div class="border rounded bg-white">
                 <div class="flex flex-wrap items-stretch">
                     <a href="?sort=latest"
-                        class="px-4 text-sm flex items-center hover:bg-gray-50 tab-button @if ($_GET['sort'] ?? '' == 'latest' || !$_GET['sort']) tab-button-active @endif">
+                        class="px-4 text-sm flex items-center hover:bg-gray-50 tab-button @if ($_GET['sort'] ?? ('' == 'latest' || !$_GET['sort'] ?? false)) tab-button-active @endif">
                         <span class="py-2">Bài mới</span>
                     </a>
                     <a href="?sort=most_viewed"
