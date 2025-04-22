@@ -34,6 +34,7 @@
     @include('includes.createPostModal', [
         'recordings' => $recordings ?? false,
     ])
+    @include('components.bottomCTA')
     <script>
         var isLoggedIn = {{ isset($_SESSION['user']) ? 'true' : 'false' }};
         var uid = {{ isset($_SESSION['user']) ? $_SESSION['user']->id : 'null' }};
@@ -59,9 +60,8 @@
                 "pos": "br",
                 "cv": 1,
                 "cvbg": "319527",
-                "cvw": 200,
-                "cvh": 30,
-                "ticker": 1
+                "cvw": 75,
+                "cvh": 30
             }
         }
     </script>

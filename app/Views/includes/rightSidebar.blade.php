@@ -63,7 +63,7 @@
         </div>
     </div>
     <p class="text-[12px] text-center text-[#BCBCBC]">
-        Fatties Software © 2022
+        <a href="https://fatties.vn">Fatties Software</a> © 2022
     </p>
 </div>
 
@@ -119,6 +119,6 @@
         </div>
     </center>
     <p class="text-[12px] text-center text-[#BCBCBC]">
-        Fatties Software © 2022
+        <a href="https://fatties.vn">Fatties Software</a> © 2022
     </p>
 </div>

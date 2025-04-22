@@ -379,3 +379,16 @@ input[type="radio"] {
 .bor-left {
   border-left: 1px solid rgb(229, 231, 235);
 }
+
+.container-cta {
+  max-width: 835px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (max-width: 638px) {
+  .zoom-btn {
+    zoom: 0.75;
+  }
+}

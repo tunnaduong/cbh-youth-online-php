@@ -75,9 +75,8 @@
                 "pos": "br",
                 "cv": 1,
                 "cvbg": "319527",
-                "cvw": 200,
-                "cvh": 30,
-                "ticker": 1
+                "cvw": 75,
+                "cvh": 30
             }
         }
     </script>
