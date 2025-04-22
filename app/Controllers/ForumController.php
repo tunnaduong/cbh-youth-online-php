@@ -3,14 +3,17 @@
 namespace App\Controllers;
 
 use App\Models\Forum;
+use App\Models\OnlineUser;
 
 class ForumController extends BaseController
 {
     protected $forumModel;
+    protected $onlineModel;
 
     public function __construct()
     {
         $this->forumModel = new Forum();
+        $this->onlineModel = new OnlineUser();
     }
 
     //Hiển thị danh sách các danh mục chính.
@@ -45,10 +48,26 @@ class ForumController extends BaseController
                 break;
         }
 
+        $userCount = $this->forumModel->getUserCount();
+        $postCount = $this->forumModel->getPostCountTotal();
+        $commentCount = $this->forumModel->getCommentCountTotal();
+
+        // Lấy thống kê
+        $stats = $this->onlineModel->getStats();
+        $record = $this->onlineModel->getMaxOnline();
+
         // Gửi dữ liệu qua view
         return $this->render('forum.index', [
             'mainCategories' => $mainCategories,
-            'latestPosts' => $latestPosts
+            'latestPosts' => $latestPosts,
+            'stats' => [
+                'userCount' => $userCount,
+                'postCount' => $postCount,
+                'commentCount' => $commentCount,
+                'record' => $record,
+                'stats' => $stats,
+                'latestUser' => $this->forumModel->getLatestUser(),
+            ],
         ]);
     }
 

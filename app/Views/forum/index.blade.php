@@ -158,7 +158,66 @@
         @endforeach
     </div>
 
+    <div class="px-2.5 relative z-10 mb-4 mt-2">
+        {{-- Forum stats --}}
+        <div class="max-w-[775px] mx-auto bg-white p-6 rounded-lg long-shadow">
+            <div class="flex flex-row items-center justify-between mb-4">
+                <h2 class="text-lg font-semibold uppercase">Thống kê diễn đàn</h2>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-[#E7FFE4] hover:bg-green-100 shadow-md rounded-lg p-4 text-center">
+                    <ion-icon name="newspaper-outline" class="text-[30px] text-green-600"></ion-icon>
+                    <h3 class="text-xl font-semibold">{{ $stats['postCount'] }}</h3>
+                    <p class="text-gray-500">Bài viết</p>
+                </div>
+                <div class="bg-[#E7FFE4] hover:bg-green-100 shadow-md rounded-lg p-4 text-center">
+                    <ion-icon name="chatbox-ellipses-outline" class="text-[30px] text-green-600"></ion-icon>
+                    <h3 class="text-xl font-semibold">{{ $stats['commentCount'] }}</h3>
+                    <p class="text-gray-500">Bình luận</p>
+                </div>
+                <div class="bg-[#E7FFE4] hover:bg-green-100 shadow-md rounded-lg p-4 text-center">
+                    <ion-icon name="person-outline" class="text-[30px] text-green-600"></ion-icon>
+                    <h3 class="text-xl font-semibold">{{ $stats['userCount'] }}</h3>
+                    <p class="text-gray-500">Người dùng</p>
+                </div>
+            </div>
+            <div class="mt-6">
+                {{-- New user --}}
+                <p class="text-gray-600">
+                    Chúng ta cùng chào mừng thành viên mới nhất đã tham gia diễn đàn:
+                    <span class="font-bold text-green-600">
+                        {{ $stats['latestUser']->profile_name }}</span>
+                </p>
 
+                <p class="text-gray-600 my-2">
+                    Tổng cộng có
+                    <span class="font-bold text-green-600">{{ $stats['stats']->total }}</span> người dùng trực tuyến:
+                    <span class="font-semibold">{{ $stats['stats']->registered }}</span> đã đăng ký,
+                    <span class="font-semibold">{{ $stats['stats']->hidden }}</span> ẩn và
+                    <span class="font-semibold">{{ $stats['stats']->guests }}</span> khách
+                </p>
+
+                <p class="text-gray-500">
+                    Số người dùng trực tuyến nhiều nhất là
+                    <span class="font-semibold text-green-600">{{ $stats['record']->max_online ?? 0 }}</span>
+                    vào
+                    @php
+                        $formatter = new \IntlDateFormatter(
+                            'vi_VN',
+                            \IntlDateFormatter::FULL,
+                            \IntlDateFormatter::SHORT,
+                            'Asia/Ho_Chi_Minh',
+                            \IntlDateFormatter::GREGORIAN,
+                            "EEEE, 'ngày' d 'tháng' M 'năm' y, hh:mm a",
+                        );
+
+                        $formattedDate = $formatter->format(strtotime($stats['record']->recorded_at));
+                    @endphp
+                    <span>{{ $formattedDate }}</span>
+                </p>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('communityActive', 'nav-active')
