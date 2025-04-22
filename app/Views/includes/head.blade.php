@@ -63,5 +63,3 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/2.0.4/htmx.min.js"
     integrity="sha512-2kIcAizYXhIn8TzUvqzEDZNuDZ+aW7yE/+f1HJHXFjQcGNfv1kqzJSTBRBSlOgp6B/KZsz1K0a3ZTqP9dnxioQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- Bộ mã Lucide Icon -->
-<script src="https://cdn.jsdelivr.net/npm/lucide-static@0.503.0/dist/cjs/lucide-static.min.js"></script>

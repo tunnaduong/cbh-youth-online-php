@@ -279,7 +279,7 @@ code {
 
 blockquote {
   background-color: #f7f7f8; /* Light gray background */
-  border-left: 4px solid #d0d7de; /* Left border to indicate blockquote */
+  border-left: 4px solid rgb(229, 231, 235); /* Left border to indicate blockquote */
   color: #2d2d2d; /* Dark gray text for readability */
   margin: 1em 0; /* Vertical spacing around the blockquote */
   padding: 0.5em 1em; /* Inner padding for spacing */
@@ -369,13 +369,13 @@ input[type="radio"] {
 }
 
 .bor-bottom {
-  border-bottom: 1px solid #d0d7de;
+  border-bottom: 1px solid rgb(229, 231, 235);
 }
 
 .bor-right {
-  border-right: 1px solid #d0d7de;
+  border-right: 1px solid rgb(229, 231, 235);
 }
 
 .bor-left {
-  border-left: 1px solid #d0d7de;
+  border-left: 1px solid rgb(229, 231, 235);
 }

@@ -17,12 +17,23 @@
                     <a href="#" class="px-4 text-sm flex items-center hover:bg-gray-50 tab-button-active">
                         <span class="py-2">Bài mới</span>
                     </a>
-                    <a href="#" class="px-4 text-sm flex items-center bor-left hover:bg-gray-50 tab-button">
+                    <a href="#" class="hidden sm:flex px-4 text-sm items-center bor-left hover:bg-gray-50 tab-button">
                         <span class="py-2">Chủ đề xem nhiều</span>
                     </a>
-                    <a href="#" class="px-4 text-sm flex items-center bor-right bor-left hover:bg-gray-50 tab-button">
+                    <a href="#"
+                        class="px-4 text-sm hidden sm:flex items-center bor-right bor-left hover:bg-gray-50 tab-button">
                         <span class="py-2">Tương tác nhiều</span>
                     </a>
+                    <div>
+                        <button class="h-9 w-9 border-l items-center justify-center tab-button bor-right flex sm:hidden"
+                            id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                            <ion-icon name="menu-outline" class="text-xl"></ion-icon>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                            <li><a class="dropdown-item" href="#">Chủ đề xem nhiều</a></li>
+                            <li><a class="dropdown-item" href="#">Tương tác nhiều</a></li>
+                        </ul>
+                    </div>
                     <div class="ml-auto flex">
                         <button class="h-9 w-9 border-l flex items-center justify-center tab-button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
