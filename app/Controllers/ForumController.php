@@ -29,9 +29,12 @@ class ForumController extends BaseController
             }
         }
 
+        $latestPosts = $this->forumModel->getLatestPosts();
+
         // Gửi dữ liệu qua view
         return $this->render('forum.index', [
             'mainCategories' => $mainCategories,
+            'latestPosts' => $latestPosts
         ]);
     }
 

@@ -48,28 +48,30 @@
             // Set the locale to Vietnamese (for "1 tuần trước")
             Carbon::setLocale('vi');
         @endphp
-        <div class="px-1.5 md:px-0 md:max-w-[679px] w-full">
+        <div class="px-1.5 md:px-0 md:max-w-[775px] w-full">
             <div data-post-id="{{ $post->post_id }}"
                 class="post-container-post post-container mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row">
-                <div
-                    class="min-w-[84px] items-center mt-1 flex-col hidden md:flex ml-[-20px] text-[13px] font-semibold text-gray-400">
-                    <ion-icon name="arrow-up-outline"
-                        class="upvote-button text-2xl cursor-pointer {{ $post->user_vote === 'upvote' ? 'text-green-500' : '' }}"></ion-icon>
-                    <span
-                        class="select-none text-lg vote-count {{ $post->user_vote == 'upvote' ? 'text-green-500' : ($post->user_vote == 'downvote' ? 'text-red-500' : '') }}">{{ $post->post_votes }}</span>
-                    <ion-icon name="arrow-down-outline"
-                        class="downvote-button text-2xl cursor-pointer {{ $post->user_vote === 'downvote' ? 'text-red-500' : '' }}"></ion-icon>
-                    @if ($post->is_saved)
-                        <div
-                            class="save-post-button bg-[#CDEBCA] cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
-                            <ion-icon name="bookmark" class="text-[#319527] text-xl"></ion-icon>
-                        </div>
-                    @else
-                        <div
-                            class="save-post-button bg-[#EAEAEA] cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
-                            <ion-icon name="bookmark" class="text-gray-400 text-xl"></ion-icon>
-                        </div>
-                    @endif
+                <div class="min-w-[84px] hidden md:block">
+                    <div
+                        class="sticky-reaction-bar items-center mt-1 flex flex-col ml-[-20px] text-[13px] font-semibold text-gray-400">
+                        <ion-icon name="arrow-up-outline"
+                            class="upvote-button text-2xl cursor-pointer {{ $post->user_vote === 'upvote' ? 'text-green-500' : '' }}"></ion-icon>
+                        <span
+                            class="select-none text-lg vote-count {{ $post->user_vote == 'upvote' ? 'text-green-500' : ($post->user_vote == 'downvote' ? 'text-red-500' : '') }}">{{ $post->post_votes }}</span>
+                        <ion-icon name="arrow-down-outline"
+                            class="downvote-button text-2xl cursor-pointer {{ $post->user_vote === 'downvote' ? 'text-red-500' : '' }}"></ion-icon>
+                        @if ($post->is_saved)
+                            <div
+                                class="save-post-button bg-[#CDEBCA] cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
+                                <ion-icon name="bookmark" class="text-[#319527] text-xl"></ion-icon>
+                            </div>
+                        @else
+                            <div
+                                class="save-post-button bg-[#EAEAEA] cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
+                                <ion-icon name="bookmark" class="text-gray-400 text-xl"></ion-icon>
+                            </div>
+                        @endif
+                    </div>
                 </div>
                 <div class="flex-1 overflow-hidden break-words">
                     <h1 class="text-xl font-semibold mb-1">{{ $post->title }}</h1>
@@ -149,7 +151,7 @@
                 </div>
             </div>
         </div>
-        <div class="px-1.5 md:!px-0 md:max-w-[679px] w-[100%] -mb-5">
+        <div class="px-1.5 md:!px-0 md:max-w-[775px] w-[100%] -mb-5">
             <div class="shadow !mb-4 long-shadow h-min rounded-lg bg-white">
                 <div
                     class="flex flex-col space-y-1.5 p-6 text-xl -mb-4 font-semibold max-w-sm overflow-hidden whitespace-nowrap overflow-ellipsis">

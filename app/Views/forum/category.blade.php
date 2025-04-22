@@ -10,7 +10,7 @@
 @include('includes.topBar')
 
 <div class="flex flex-1 !p-6 !px-2.5 items-center flex-col -mb-8">
-    <div class="max-w-[679px] w-[100%] mb-6">
+    <div class="max-w-[775px] w-[100%] mb-6">
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb px-1.5">
@@ -46,19 +46,20 @@
                             Carbon::setLocale('vi');
                         @endphp
                         <div style="max-width: calc(42%);"
-                            class="flex-1 bg-[#E7FFE4] text-[13px] p-2 px-2 mr-2 rounded-md flex-col hidden sm:flex">
+                            class="flex-1 bg-[#E7FFE4] text-[13px] p-2 px-2 mr-2 rounded-md flex-col hidden sm:flex border-all">
                             <div class="flex">
                                 <span class="whitespace-nowrap mr-1">Mới nhất:</span>
                                 <a href="/{{ $subforum->latest_post->username }}/posts/{{ $subforum->latest_post->post_id }}"
                                     class="text-[#319528] hover:text-[#319528] hover:underline inline-block text-ellipsis whitespace-nowrap overflow-hidden">{{ $subforum->latest_post->title }}</a>
                             </div>
-                            <div class="flex items center mt-1 text-[#319528]">
+                            <div class="flex items-center mt-1 text-[#319528]">
                                 <a href="/{{ $subforum->latest_post->username }}"
-                                    class="hover:text-[#319528] hover:underline">{{ $subforum->latest_post->profile_name }}</a>
+                                    class="hover:text-[#319528] hover:underline truncate">{{ $subforum->latest_post->profile_name }}</a>
                                 @if ($subforum->latest_post->verified == 1)
-                                    <ion-icon name="checkmark-circle" class="text-[15px] leading-5 ml-0.5"></ion-icon>
+                                    <ion-icon name="checkmark-circle"
+                                        class="text-[15px] leading-5 ml-0.5 shrink-0"></ion-icon>
                                 @endif
-                                <span class="text-black">, {{ $date->diffForHumans() }}</span>
+                                <span class="text-black shrink-0">, {{ $date->diffForHumans() }}</span>
                             </div>
                         </div>
                     @endif

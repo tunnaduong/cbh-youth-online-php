@@ -103,4 +103,11 @@ class Forum extends BaseModel
         $this->setQuery("SELECT *, ctc.created_at AS comment_created_at FROM cyo_topic_comments ctc LEFT JOIN cyo_auth_accounts ca ON ctc.user_id = ca.id LEFT JOIN cyo_user_profiles cu ON ca.username = cu.profile_username WHERE topic_id = ? ORDER BY ctc.created_at DESC LIMIT 1");
         return $this->loadRow([$topicId]);
     }
+
+    // Lấy tất cả bài viết mới nhất trong tất cả các danh mục
+    public function getLatestPosts()
+    {
+        $this->setQuery("SELECT *, ct.created_at AS post_created_at, ct.id AS post_id FROM cyo_topics ct LEFT JOIN cyo_auth_accounts ca ON ct.user_id = ca.id LEFT JOIN cyo_user_profiles cu ON ca.username = cu.profile_username ORDER BY ct.created_at DESC LIMIT 10");
+        return $this->loadAllRows();
+    }
 }

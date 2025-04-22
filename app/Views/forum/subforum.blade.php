@@ -10,7 +10,7 @@
 @include('includes.topBar')
 
 <div class="flex flex-1 !p-6 !px-2.5 items-center flex-col -mb-4">
-    <div class="max-w-[679px] w-full">
+    <div class="max-w-[775px] w-full">
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb px-1.5">
@@ -22,7 +22,7 @@
         </nav>
 
         <!-- Forum Header -->
-        <div class="max-w-[679px] w-full mb-6">
+        <div class="w-full mb-6">
             <div class="bg-white long-shadow rounded-lg mt-2 p-4">
                 <a href="/forum/{{ $mainCategory->slug }}/{{ $subforum->slug }}"
                     class="text-lg font-semibold uppercase">{{ $subforum->name }}</a>
