@@ -392,3 +392,19 @@ input[type="radio"] {
     zoom: 0.75;
   }
 }
+
+.fade-to-left {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  z-index: -10;
+  background: rgba(255, 255, 255, 0)
+    linear-gradient(
+      to left,
+      rgba(255, 255, 255, 0) -100%,
+      rgba(255, 255, 255, 1) 80%
+    )
+    repeat scroll 0 0;
+}

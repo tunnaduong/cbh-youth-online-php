@@ -14,13 +14,19 @@
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb px-1.5">
-                <li class="breadcrumb-item"><a href="/forum" class=" flex items-center">Diễn đàn</a></li>
+                <li class="breadcrumb-item"><a href="/" class=" flex items-center">Diễn đàn</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a
                         href="/forum/{{ $mainCategory->slug }}">{{ $mainCategory->name }}</a>
                 </li>
             </ol>
         </nav>
-        <div class="bg-white long-shadow rounded-lg mt-2 p-4">
+        <div class="bg-white long-shadow rounded-lg mt-2 p-4 relative z-10 overflow-hidden">
+            <div>
+                <div class="w-[50%] absolute h-full mb-4 top-0 right-0 -z-10"
+                    style="background-image: url('/assets/images/megaphone.avif'); background-size: cover; background-position: center;">
+                </div>
+                <div class="fade-to-left"></div>
+            </div>
             <a href="/forum/{{ $mainCategory->slug }}"
                 class="text-lg font-semibold uppercase">{{ $mainCategory->name }}</a>
             <p class="!mt-3 text-base">{{ $mainCategory->description }}</p>

@@ -14,7 +14,7 @@
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb px-1.5">
-                <li class="breadcrumb-item"><a href="/forum" class=" flex items-center">Diễn đàn</a></li>
+                <li class="breadcrumb-item"><a href="/" class=" flex items-center">Diễn đàn</a></li>
                 <li class="breadcrumb-item"><a href="/forum/{{ $mainCategory->slug }}">{{ $mainCategory->name }}</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">{{ $subforum->name }}</li>
