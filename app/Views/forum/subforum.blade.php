@@ -23,7 +23,13 @@
 
         <!-- Forum Header -->
         <div class="w-full mb-6">
-            <div class="bg-white long-shadow rounded-lg mt-2 p-4">
+            <div class="bg-white long-shadow rounded-lg mt-2 p-4 relative z-10 overflow-hidden">
+                <div>
+                    <div class="w-[50%] absolute h-full mb-4 top-0 right-0 -z-10"
+                        style="background-image: url('/assets/images/{{ $subforum->background_image }}'); background-size: cover; background-position: center;">
+                    </div>
+                    <div class="fade-to-left"></div>
+                </div>
                 <a href="/forum/{{ $mainCategory->slug }}/{{ $subforum->slug }}"
                     class="text-lg font-semibold uppercase">{{ $subforum->name }}</a>
                 <p class="!mt-3 text-base">{{ $subforum->description }}</p>
@@ -71,7 +77,8 @@
                 <tbody class="divide-y divide-gray-200">
                     @if (count($posts) == 0)
                         <tr>
-                            <td class="!p-3 text-center" colspan="4">Không có bài viết nào trong diễn đàn này.</td>
+                            <td class="!p-3 text-center" colspan="4">Không có bài viết nào trong diễn đàn này.
+                            </td>
                         </tr>
                     @endif
                     @foreach ($posts as $post)

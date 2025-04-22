@@ -23,7 +23,7 @@
         <div class="bg-white long-shadow rounded-lg mt-2 p-4 relative z-10 overflow-hidden">
             <div>
                 <div class="w-[50%] absolute h-full mb-4 top-0 right-0 -z-10"
-                    style="background-image: url('/assets/images/megaphone.avif'); background-size: cover; background-position: center;">
+                    style="background-image: url('/assets/images/{{ $mainCategory->background_image }}'); background-size: cover; background-position: center;">
                 </div>
                 <div class="fade-to-left"></div>
             </div>
