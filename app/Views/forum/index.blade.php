@@ -197,7 +197,7 @@
                     <span class="font-semibold">{{ $stats['stats']->guests }}</span> khách
                 </p>
 
-                <p class="text-gray-500">
+                <p class="text-gray-600">
                     Số người dùng trực tuyến nhiều nhất là
                     <span class="font-semibold text-green-600">{{ $stats['record']->max_online ?? 0 }}</span>
                     vào
