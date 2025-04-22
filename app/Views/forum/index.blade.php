@@ -14,28 +14,32 @@
         <div class="max-w-[775px] mx-auto">
             <div class="border rounded bg-white">
                 <div class="flex flex-wrap items-stretch">
-                    <a href="#" class="px-4 text-sm flex items-center hover:bg-gray-50 tab-button-active">
+                    <a href="?sort=latest"
+                        class="px-4 text-sm flex items-center hover:bg-gray-50 tab-button @if ($_GET['sort'] == 'latest' || !$_GET['sort']) tab-button-active @endif">
                         <span class="py-2">Bài mới</span>
                     </a>
-                    <a href="#" class="hidden sm:flex px-4 text-sm items-center bor-left hover:bg-gray-50 tab-button">
+                    <a href="?sort=most_viewed"
+                        class="hidden sm:flex px-4 text-sm items-center bor-left hover:bg-gray-50 tab-button  @if ($_GET['sort'] == 'most_viewed') tab-button-active @endif">
                         <span class="py-2">Chủ đề xem nhiều</span>
                     </a>
-                    <a href="#"
-                        class="px-4 text-sm hidden sm:flex items-center bor-right bor-left hover:bg-gray-50 tab-button">
+                    <a href="?sort=most_engaged"
+                        class="px-4 text-sm hidden sm:flex items-center bor-right bor-left hover:bg-gray-50 tab-button @if ($_GET['sort'] == 'most_engaged') tab-button-active @endif">
                         <span class="py-2">Tương tác nhiều</span>
                     </a>
                     <div>
-                        <button class="h-9 w-9 border-l items-center justify-center tab-button bor-right flex sm:hidden"
+                        <button
+                            class="h-9 w-9 border-l items-center justify-center tab-button bor-right flex sm:hidden hover:bg-gray-50"
                             id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
                             <ion-icon name="menu-outline" class="text-xl"></ion-icon>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                            <li><a class="dropdown-item" href="#">Chủ đề xem nhiều</a></li>
-                            <li><a class="dropdown-item" href="#">Tương tác nhiều</a></li>
+                            <li><a class="dropdown-item" href="?sort=most_viewed">Chủ đề xem nhiều</a></li>
+                            <li><a class="dropdown-item" href="?sort=most_engaged">Tương tác nhiều</a></li>
                         </ul>
                     </div>
                     <div class="ml-auto flex">
-                        <button class="h-9 w-9 border-l flex items-center justify-center tab-button">
+                        <button class="h-9 w-9 border-l flex items-center justify-center tab-button hover:bg-gray-50"
+                            onclick="location.reload()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-refresh-cw-icon lucide-refresh-cw h-4 w-4">

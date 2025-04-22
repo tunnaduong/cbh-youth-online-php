@@ -110,4 +110,18 @@ class Forum extends BaseModel
         $this->setQuery("SELECT *, ct.created_at AS post_created_at, ct.id AS post_id FROM cyo_topics ct LEFT JOIN cyo_auth_accounts ca ON ct.user_id = ca.id LEFT JOIN cyo_user_profiles cu ON ca.username = cu.profile_username ORDER BY ct.created_at DESC LIMIT 10");
         return $this->loadAllRows();
     }
+
+    // Lấy các bài viết có lượt xem nhiều nhất
+    public function getMostViewedPosts()
+    {
+        $this->setQuery("SELECT *, ct.created_at AS post_created_at, ct.id AS post_id FROM cyo_topics ct LEFT JOIN cyo_auth_accounts ca ON ct.user_id = ca.id LEFT JOIN cyo_user_profiles cu ON ca.username = cu.profile_username ORDER BY (SELECT COUNT(*) FROM cyo_topic_views WHERE topic_id = ct.id) DESC LIMIT 10");
+        return $this->loadAllRows();
+    }
+
+    // Lấy các bài viết có lượt xem và lượt tương tác (bình luận, like) nhiều nhất
+    public function getMostEngagedPosts()
+    {
+        $this->setQuery("SELECT *, ct.created_at AS post_created_at, ct.id AS post_id FROM cyo_topics ct LEFT JOIN cyo_auth_accounts ca ON ct.user_id = ca.id LEFT JOIN cyo_user_profiles cu ON ca.username = cu.profile_username ORDER BY (SELECT COUNT(*) FROM cyo_topic_comments WHERE topic_id = ct.id) + (SELECT COUNT(*) FROM cyo_topic_votes WHERE topic_id = ct.id) DESC LIMIT 10");
+        return $this->loadAllRows();
+    }
 }

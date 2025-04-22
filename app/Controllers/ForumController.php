@@ -31,6 +31,20 @@ class ForumController extends BaseController
 
         $latestPosts = $this->forumModel->getLatestPosts();
 
+        switch ($_GET['sort'] ?? '') {
+            case 'latest':
+                $latestPosts = $this->forumModel->getLatestPosts();
+                break;
+            case 'most_viewed':
+                $latestPosts = $this->forumModel->getMostViewedPosts();
+                break;
+            case 'most_engaged':
+                $latestPosts = $this->forumModel->getMostEngagedPosts();
+                break;
+            default:
+                break;
+        }
+
         // Gửi dữ liệu qua view
         return $this->render('forum.index', [
             'mainCategories' => $mainCategories,
