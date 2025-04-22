@@ -14,21 +14,26 @@
         <div class="max-w-[775px] mx-auto">
             <div class="border rounded bg-white">
                 <div class="flex flex-wrap items-stretch">
+                    @php
+                        $validSorts = ['latest', 'most_viewed', 'most_engaged'];
+                        $currentSort = $_GET['sort'] ?? 'latest';
+                    @endphp
+
                     <a href="?sort=latest"
                         class="px-4 text-sm flex items-center hover:bg-gray-50 tab-button
-                        @if (!isset($_GET['sort']) || $_GET['sort'] === 'latest') tab-button-active @endif">
+                        @if (!in_array($currentSort, ['most_viewed', 'most_engaged'])) tab-button-active @endif">
                         <span class="py-2">Bài mới</span>
                     </a>
 
                     <a href="?sort=most_viewed"
                         class="hidden sm:flex px-4 text-sm items-center bor-left hover:bg-gray-50 tab-button
-                        @if (($_GET['sort'] ?? '') === 'most_viewed') tab-button-active @endif">
+                        @if ($currentSort === 'most_viewed') tab-button-active @endif">
                         <span class="py-2">Chủ đề xem nhiều</span>
                     </a>
 
                     <a href="?sort=most_engaged"
                         class="px-4 text-sm hidden sm:flex items-center bor-right bor-left hover:bg-gray-50 tab-button
-                        @if (($_GET['sort'] ?? '') === 'most_engaged') tab-button-active @endif">
+                        @if ($currentSort === 'most_engaged') tab-button-active @endif">
                         <span class="py-2">Tương tác nhiều</span>
                     </a>
                     <div>
