@@ -1,5 +1,5 @@
 <!-- Left side bar -->
-<div class="w-[260px] hidden xl:flex flex-col !p-6 sticky top-[69px] h-[calc(100vh-69px)]" id="left-sidebar">
+<div class="w-[260px] hidden xl:flex flex-col !p-6 sticky top-[69px] h-min" id="left-sidebar">
     <p class="text-sm font-semibold text-[#6b6b6b] pb-3 ml-2.5">
         MENU
     </p>
