@@ -4,8 +4,8 @@
         <!-- Menu -->
         <div class="container">
             <ul class="flex justify-start items-center py-3 text-white text-[14px] gap-6">
-                <li><a href="/">Trang chủ</a></li>
-                <li><a href="/help">Trợ giúp</a></li>
+                <li class="hidden md:block"><a href="/">Trang chủ</a></li>
+                <li class="hidden md:block"><a href="/help">Trợ giúp</a></li>
                 <li><a href="/">Điều khoản & Quy định</a></li>
                 <li><a href="/">Chính sách quyền riêng tư</a></li>
             </ul>
