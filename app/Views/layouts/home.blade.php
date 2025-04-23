@@ -31,6 +31,7 @@
             'recordings' => $recordings ?? false,
         ])
     </div>
+    @include('includes.footer')
     @include('includes.createPostModal', [
         'recordings' => $recordings ?? false,
     ])
