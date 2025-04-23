@@ -101,23 +101,4 @@
             @endif
         </div>
     </center>
-    <center>
-        <div class="flex flex-row text-sm font-semibold p-3 text-[#BCBCBC] max-w-[290px] text-left">
-            <div class="flex flex-1 flex-col gap-y-0.5">
-                <a href="/help" class="w-fit">Hỗ trợ</a>
-                <a href="/contact" class="w-fit">Liên hệ</a>
-                <a href="https://stats.uptimerobot.com/i7pA9rBmTC/798634874" class="w-fit">Trạng thái</a>
-                <a href="/ads" class="w-fit">Quảng cáo</a>
-            </div>
-            <div class="flex flex-1 flex-col ml-5 gap-y-0.5">
-                <a href="/about" class="w-fit">Giới thiệu</a>
-                <a href="/careers" class="w-fit">Việc làm</a>
-                <a href="/terms" class="w-fit">Điều khoản</a>
-                <a href="/privacy" class="w-fit">Quyền riêng tư</a>
-            </div>
-        </div>
-    </center>
-    <p class="text-[12px] text-center text-[#BCBCBC]">
-        <a href="https://fatties.vn">Fatties Software</a> © 2022
-    </p>
 </div>
