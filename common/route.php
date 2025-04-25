@@ -67,6 +67,7 @@ try {
     $router->get('/recordings', [RecordingController::class, 'index']);
     $router->get("/admin", [AdminController::class, 'index']);
     $router->get('/feed/fetch', [HomeController::class, 'fetchFeed']);
+    $router->get('/youth-newsfeed/fetch', [HomeController::class, 'fetchYouthNews']);
 
     // help center
     $router->get('/help', [HelpCenterController::class, 'index']);
