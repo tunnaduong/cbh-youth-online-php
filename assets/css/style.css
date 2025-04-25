@@ -9,6 +9,8 @@
 }
 
 :root {
+  --white: #fff;
+  --main-white: #fff;
   --background: 0 0% 100%;
   --foreground: 115 5% 0%;
   --card: 115 50% 90%;
@@ -31,6 +33,8 @@
   --radius: 0.5rem;
 }
 .dark {
+  --white: #2c2f2e;
+  --main-white: #3c3c3c;
   --background: 115 50% 5%;
   --foreground: 115 5% 90%;
   --card: 115 50% 0%;

@@ -17,7 +17,8 @@ use App\Controllers\ProfileController;
 use App\Controllers\RecordingController;
 use App\Controllers\ReportController;
 
-$url = !isset($_GET['url']) ? "/" : $_GET['url'];
+$url = $_GET['url'] ?? trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+
 try {
     $router = new RouteCollector();
 

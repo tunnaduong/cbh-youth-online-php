@@ -1,4 +1,4 @@
-<nav class="fixed w-[100%] top-0 bg-white shadow-md leading-[0] flex justify-between">
+<nav class="fixed w-[100%] top-0 bg-white dark:!bg-neutral-700 shadow-md leading-[0] flex justify-between">
     <div class="flex flex-row px-6 py-3.5">
         <button
             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input shadow-sm h-9 w-9 lg:hidden mr-3 min-w-[36px]"
@@ -27,7 +27,7 @@
             </div>
         </a>
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
                 [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
             });
@@ -55,6 +55,7 @@
                 href="/lookup">Tra cứu</a>
             <a class="lg:flex px-3 py-2 mr-5 hidden h-full items-center min-w-max text-center text-sm font-medium transition-colors duration-200 @yield('exploreActive')"
                 href="/explore">Khám phá</a>
+            @include('components.darkmodeToggle')
         </div>
         @if (!isset($_SESSION['user']))
             <div class="min-w-max mr-4">
@@ -82,8 +83,7 @@
                             d="M87.49 380c1.19-4.38-1.44-10.47-3.95-14.86a44.86 44.86 0 0 0-2.54-3.8 199.81 199.81 0 0 1-33-110C47.65 139.09 140.73 48 255.83 48 356.21 48 440 117.54 459.58 209.85a199 199 0 0 1 4.42 41.64c0 112.41-89.49 204.93-204.59 204.93-18.3 0-43-4.6-56.47-8.37s-26.92-8.77-30.39-10.11a31.09 31.09 0 0 0-11.12-2.07 30.71 30.71 0 0 0-12.09 2.43l-67.83 24.48a16 16 0 0 1-4.67 1.22 9.6 9.6 0 0 1-9.57-9.74 15.85 15.85 0 0 1 .6-3.29z">
                         </path>
                     </svg><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                        class="paw text-[#6B6B6B] text-[23px]" height="1em" width="1em"
-                        xmlns="http://www.w3.org/2000/svg">
+                        class="paw text-[#6B6B6B] text-[23px]" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M194.82 496a18.36 18.36 0 0 1-18.1-21.53v-.11L204.83 320H96a16 16 0 0 1-12.44-26.06L302.73 23a18.45 18.45 0 0 1 32.8 13.71c0 .3-.08.59-.13.89L307.19 192H416a16 16 0 0 1 12.44 26.06L209.24 489a18.45 18.45 0 0 1-14.42 7z">
                         </path>
@@ -103,8 +103,7 @@
                     </span>
                 </div>
                 <ul class="dropdown-menu rounded-lg" aria-labelledby="dropdownMenuLink">
-                    <li><a class="dropdown-item" href="/{{ $_SESSION['user']->username }}"><i
-                                class="bi bi-person mr-1"></i>
+                    <li><a class="dropdown-item" href="/{{ $_SESSION['user']->username }}"><i class="bi bi-person mr-1"></i>
                             Trang cá nhân</a></li>
                     <li><a class="dropdown-item" href="/{{ $_SESSION['user']->username }}/settings"><i
                                 class="bi bi-gear mr-1"></i> Cài đặt</a></li>

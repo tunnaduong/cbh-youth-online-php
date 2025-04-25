@@ -648,3 +648,46 @@ adjustColspan();
 
 // Add event listener for screen resizing
 window.addEventListener("resize", adjustColspan);
+
+// Initialize Lucide icons
+lucide.createIcons();
+
+// Theme toggle functionality
+document.addEventListener("DOMContentLoaded", () => {
+  const themeToggle = document.getElementById("theme-toggle");
+  const sunIcon = document.getElementById("sun-icon");
+  const moonIcon = document.getElementById("moon-icon");
+
+  // Check for saved theme preference or use system preference
+  const savedTheme = localStorage.getItem("theme");
+  const systemPrefersDark = window.matchMedia(
+    "(prefers-color-scheme: dark)"
+  ).matches;
+
+  // Set initial theme
+  if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
+    document.body.classList.add("dark");
+    sunIcon.classList.add("hidden");
+    moonIcon.classList.remove("hidden");
+  }
+
+  // Toggle theme function
+  function toggleTheme() {
+    const isDark = document.body.classList.contains("dark");
+
+    if (isDark) {
+      document.body.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      sunIcon.classList.remove("hidden");
+      moonIcon.classList.add("hidden");
+    } else {
+      document.body.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      sunIcon.classList.add("hidden");
+      moonIcon.classList.remove("hidden");
+    }
+  }
+
+  // Add click event listener to toggle
+  themeToggle.addEventListener("click", toggleTheme);
+});
