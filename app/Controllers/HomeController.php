@@ -55,4 +55,10 @@ class HomeController extends BaseController
         $posts = $this->post->newsfeed();
         return $this->render('home.fetch-feed', compact('posts'));
     }
+
+    public function youthNews()
+    {
+        $posts = $this->post->youthNews();
+        return $this->render('youth-news.index', compact('posts'));
+    }
 }

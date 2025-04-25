@@ -35,6 +35,7 @@ try {
     $router->any('/register', [AuthController::class, 'register']);
     $router->get('/logout', [AuthController::class, 'logout']);
     $router->get('/feed', [HomeController::class, 'index']);
+    $router->get('/youth-news', [HomeController::class, 'youthNews']);
     $router->get('/{username}/posts/{postId}', [PostController::class, 'postDetail']);
     $router->post('/{username}/posts/{postId}', [PostController::class, 'addNewComment']);
     $router->post('/', [PostController::class, 'addNewPost']);
