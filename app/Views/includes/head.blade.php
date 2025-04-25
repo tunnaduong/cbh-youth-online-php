@@ -3,7 +3,7 @@
 <title>{{ !empty($title) && $title != 'Diễn đàn' ? $title . ' - ' : '' }}Diễn đàn học sinh Chuyên Biên Hòa</title>
 <!-- Meta tag dành cho SEO -->
 <meta property="og:title"
-    content="{{ $title ?? 'Diễn đàn học sinh Chuyên Biên Hòa' == 'Diễn đàn' ? 'Diễn đàn Học sinh Chuyên Biên Hòa' : $title }}" />
+    content="{{ $title ?? 'Diễn đàn học sinh Chuyên Biên Hòa' == 'Diễn đàn' ? 'Diễn đàn học sinh Chuyên Biên Hòa' : $title }}" />
 <meta name="description"
     content="{{ $description ?? 'Diễn đàn học sinh Chuyên Biên Hòa thuộc Trường THPT Chuyên Hà Nam' }}">
 <meta property='og:description'
@@ -11,7 +11,7 @@
 <meta name="author" content="{{ $author ?? 'Đội ngũ CBH Youth Online' }}">
 <meta name="keywords"
     content="{{ $keywords ??
-        'thpt chuyen ha nam, thanh nien chuyen bien hoa, thanh nien chuyen bien hoa online, thpt chuyen bien hoa, chuyen bien hoa, chuyen ha nam, cyo, cbh youth online, chuyen bien hoa online, chuyên biên hòa online' }}">
+    'thpt chuyen ha nam, thanh nien chuyen bien hoa, thanh nien chuyen bien hoa online, thpt chuyen bien hoa, chuyen bien hoa, chuyen ha nam, cyo, cbh youth online, chuyen bien hoa online, chuyên biên hòa online' }}">
 <link rel="icon" href="/assets/images/logo.png" type="image/png" sizes="32x32" />
 <meta property="og:image" content="{{ $image ?? 'https://chuyenbienhoa.com/assets/images/cyo_thumbnail.png' }}" />
 <link rel='canonical' href='{{ 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] }}' />
@@ -26,10 +26,10 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
     integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous">
-</script>
+    </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
-</script>
+    </script>
 <!-- Bộ mã TailwindCSS -->
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.5.0/dist/typography.min.css" rel="stylesheet">
