@@ -16,8 +16,7 @@ class HomeController extends BaseController
 
     public function index()
     {
-        $posts = $this->post->newsfeed();
-        return $this->render('home.index', compact('posts'));
+        return $this->render('home.index');
     }
 
     public function saved()
@@ -54,5 +53,16 @@ class HomeController extends BaseController
     {
         $posts = $this->post->newsfeed();
         return $this->render('home.fetch-feed', compact('posts'));
+    }
+
+    public function youthNews()
+    {
+        return $this->render('youth-news.index');
+    }
+
+    public function fetchYouthNews()
+    {
+        $posts = $this->post->youthNews();
+        return $this->render('youth-news.fetch-feed', compact('posts'));
     }
 }

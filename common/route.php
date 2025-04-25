@@ -35,6 +35,7 @@ try {
     $router->any('/register', [AuthController::class, 'register']);
     $router->get('/logout', [AuthController::class, 'logout']);
     $router->get('/feed', [HomeController::class, 'index']);
+    $router->get('/youth-news', [HomeController::class, 'youthNews']);
     $router->get('/{username}/posts/{postId}', [PostController::class, 'postDetail']);
     $router->post('/{username}/posts/{postId}', [PostController::class, 'addNewComment']);
     $router->post('/', [PostController::class, 'addNewPost']);
@@ -66,6 +67,7 @@ try {
     $router->get('/recordings', [RecordingController::class, 'index']);
     $router->get("/admin", [AdminController::class, 'index']);
     $router->get('/feed/fetch', [HomeController::class, 'fetchFeed']);
+    $router->get('/youth-newsfeed/fetch', [HomeController::class, 'fetchYouthNews']);
 
     // help center
     $router->get('/help', [HelpCenterController::class, 'index']);
