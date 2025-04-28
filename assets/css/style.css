@@ -483,6 +483,10 @@ input[type="radio"] {
   color: rgb(209 213 219); /* text-gray-300 */
 }
 
+.dark .prose blockquote {
+  background-color: #525252 !important;
+}
+
 .dark .prose {
   color: rgb(209 213 219); /* text-gray-300 */
 }
