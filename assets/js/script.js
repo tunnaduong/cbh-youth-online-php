@@ -662,9 +662,9 @@ lucide.createIcons();
 
 // Theme toggle functionality
 document.addEventListener("DOMContentLoaded", () => {
-  const themeToggle = document.getElementById("theme-toggle");
-  const sunIcon = document.getElementById("sun-icon");
-  const moonIcon = document.getElementById("moon-icon");
+  const themeToggle = document.querySelectorAll(".theme-toggle");
+  const sunIcon = document.querySelectorAll(".sun-icon");
+  const moonIcon = document.querySelectorAll(".moon-icon");
 
   // Check for saved theme preference or use system preference
   const savedTheme = localStorage.getItem("theme");
@@ -675,8 +675,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Set initial theme
   if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
     document.body.classList.add("dark");
-    sunIcon.classList.add("hidden");
-    moonIcon.classList.remove("hidden");
+    sunIcon.forEach((icon) => icon.classList.add("hidden"));
+    moonIcon.forEach((icon) => icon.classList.remove("hidden"));
   }
 
   // Toggle theme function
@@ -686,16 +686,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isDark) {
       document.body.classList.remove("dark");
       localStorage.setItem("theme", "light");
-      sunIcon.classList.remove("hidden");
-      moonIcon.classList.add("hidden");
+      sunIcon.forEach((icon) => icon.classList.remove("hidden"));
+      moonIcon.forEach((icon) => icon.classList.add("hidden"));
     } else {
       document.body.classList.add("dark");
       localStorage.setItem("theme", "dark");
-      sunIcon.classList.add("hidden");
-      moonIcon.classList.remove("hidden");
+      sunIcon.forEach((icon) => icon.classList.add("hidden"));
+      moonIcon.forEach((icon) => icon.classList.remove("hidden"));
     }
   }
 
   // Add click event listener to toggle
-  themeToggle.addEventListener("click", toggleTheme);
+  themeToggle.forEach((toggle) =>
+    toggle.addEventListener("click", toggleTheme)
+  );
 });

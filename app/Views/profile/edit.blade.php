@@ -11,12 +11,12 @@
         </div>
     @endunless
     <div class="!p-4 sm:!p-6">
-        <div class="bg-white !p-4 sm:!p-6 rounded-2xl border shadow-md">
+        <div class="bg-white dark:!bg-[var(--main-white)] !p-4 sm:!p-6 rounded-2xl border dark:!border-neutral-500 shadow-md">
             <div class="space-y-0.5">
                 <h2 class="text-2xl font-bold tracking-tight">Cài đặt</h2>
                 <p class="text-muted-foreground">Quản lý cài đặt tài khoản và thiết lập thông báo email.</p>
             </div>
-            <div class="my-6 border-top"></div>
+            <div class="my-6 border-top dark:!border-neutral-500"></div>
             <div class="flex flex-col lg:flex-row gap-x-12">
                 <aside class="w-full lg:w-1/5 mb-4">
                     <ul class="uk-nav uk-nav-primary"
@@ -49,7 +49,7 @@
                                     <input type="hidden" name="type" value="profile_edit">
                                     <div class="space-y-2">
                                         <label class="uk-form-label" for="username">Tên đăng nhập</label>
-                                        <input class="uk-input" id="username" name="username" type="text"
+                                        <input class="uk-input dark:!border-neutral-500" id="username" name="username" type="text"
                                             value="{{ $profile->username }}">
                                         <div class="uk-form-help text-muted-foreground">Đây là tên hiển thị công khai của
                                             bạn.
@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="space-y-2">
                                         <label class="uk-form-label" for="email">Email đăng ký</label>
-                                        <input class="uk-input" id="email" name="email"
+                                        <input class="uk-input dark:!border-neutral-500 text-[#818181]" id="email" name="email"
                                             {{ $profile->email_verified_at ? 'disabled' : '' }} type="text"
                                             value="{{ $profile->email }}">
                                         @unless ($profile->email_verified_at)
@@ -90,23 +90,23 @@
                                         <span class="uk-form-label">Giới tính</span>
                                         <div class="uk-form-controls flex gap-x-3">
                                             <label class="flex items-center text-sm" for="gender_0">
-                                                <input id="gender_0" class="mr-2" name="gender" type="radio"
+                                                <input id="gender_0" class="mr-2 dark:[color-scheme:dark]" name="gender" type="radio"
                                                     {{ $profile->gender == 'Male' ? 'checked' : '' }}
                                                     value="Male">Nam</label>
                                             <label class="flex items-center text-sm" for="gender_1">
-                                                <input id="gender_1" class="mr-2"
+                                                <input id="gender_1" class="mr-2 dark:[color-scheme:dark]"
                                                     {{ $profile->gender == 'Female' ? 'checked' : '' }} name="gender"
                                                     type="radio" value="Female">Nữ</label>
                                         </div>
                                     </div>
                                     <div class="space-y-2">
                                         <label class="uk-form-label" for="location">Quê quán</label>
-                                        <input class="uk-input" placeholder="Nhập nơi bạn sinh sống" id="location"
+                                        <input class="uk-input dark:!border-neutral-500" placeholder="Nhập nơi bạn sinh sống" id="location"
                                             name="location" type="text" value="{{ $profile->location }}">
                                     </div>
                                     <div class="space-y-2">
                                         <label class="uk-form-label" for="bio">Tiểu sử</label>
-                                        <textarea class="uk-textarea" id="bio" name="bio"
+                                        <textarea class="uk-textarea dark:!border-neutral-500" id="bio" name="bio"
                                             placeholder="Hãy cho chúng tôi biết một chút về bản thân bạn">{{ $profile->bio }}</textarea>
                                         @unless (empty($error['bio']))
                                             <div class="uk-form-help text-destructive">
@@ -195,7 +195,7 @@
                                 </div>
                                 <div class="space-y-2">
                                     <label class="uk-form-label block" for="date_of_birth">Ngày tháng năm sinh</label>
-                                    <input class="uk-input w-[240px]" name="birthday" id="date_of_birth" type="date"
+                                    <input class="uk-input w-[240px] dark:[color-scheme:dark]" name="birthday" id="date_of_birth" type="date"
                                         placeholder="Chọn một ngày" value="{{ $profile->birthday }}" min="1900-01-01"
                                         max="{{ date('Y-m-d') }}">
                                     <div class="uk-form-help text-muted-foreground">Ngày sinh của bạn được sử dụng để tính
@@ -234,16 +234,16 @@
                                     <span class="uk-form-label">Thông báo cho tôi về</span>
                                     <div class="uk-form-controls">
                                         <label class="flex items-center text-sm" for="notification_0">
-                                            <input id="notification_0" class="mr-2" name="notify_type" type="radio"
+                                            <input id="notification_0" class="mr-2 dark:[color-scheme:dark]" name="notify_type" type="radio"
                                                 {{ $profile->notify_type == 'all' ? 'checked' : '' }} value="all">Tất
                                             cả thông báo</label>
                                         <label class="flex items-center text-sm" for="notification_1">
-                                            <input id="notification_1" class="mr-2" name="notify_type" type="radio"
+                                            <input id="notification_1" class="mr-2 dark:[color-scheme:dark]" name="notify_type" type="radio"
                                                 {{ $profile->notify_type == 'direct_mentions' ? 'checked' : '' }}
                                                 value="direct_mentions">Tin
                                             nhắn trực tiếp và đề cập</label>
                                         <label class="flex items-center text-sm" for="notification_2">
-                                            <input id="notification_2" class="mr-2" name="notify_type" type="radio"
+                                            <input id="notification_2" class="mr-2 dark:[color-scheme:dark]" name="notify_type" type="radio"
                                                 {{ $profile->notify_type == 'none' ? 'checked' : '' }}
                                                 value="none">Không có thông báo</label>
                                     </div>
@@ -251,7 +251,7 @@
                                 <div>
                                     <h3 class="mb-4 text-lg font-medium">Thông báo qua email</h3>
                                     <div class="space-y-4">
-                                        <div class="flex items-center justify-between rounded-lg border border-border p-4">
+                                        <div class="flex items-center justify-between rounded-lg border border-border dark:!border-neutral-500 p-4">
                                             <div class="space-y-0.5">
                                                 <label class="text-base font-medium" for="email_notification_0"> Email
                                                     liên
@@ -266,7 +266,7 @@
                                                 {{ $profile->notify_email_contact == '1' ? 'checked' : '' }}
                                                 name="notify_email_contact" value="1">
                                         </div>
-                                        <div class="flex items-center justify-between rounded-lg border border-border p-4">
+                                        <div class="flex items-center justify-between rounded-lg border border-border dark:!border-neutral-500 p-4">
                                             <div class="space-y-0.5">
                                                 <label class="text-base font-medium" for="email_notification_1">Email
                                                     marketing
@@ -280,7 +280,7 @@
                                                 value="1"
                                                 {{ $profile->notify_email_marketing == '1' ? 'checked' : '' }}>
                                         </div>
-                                        <div class="flex items-center justify-between rounded-lg border border-border p-4">
+                                        <div class="flex items-center justify-between rounded-lg border border-border dark:!border-neutral-500 p-4">
                                             <div class="space-y-0.5">
                                                 <label class="text-base font-medium" for="email_notification_2"> Email xã
                                                     hội
@@ -294,7 +294,7 @@
                                                 value="1"
                                                 {{ $profile->notify_email_social == '1' ? 'checked' : '' }}>
                                         </div>
-                                        <div class="flex items-center justify-between rounded-lg border border-border p-4">
+                                        <div class="flex items-center justify-between rounded-lg border border-border dark:!border-neutral-500 p-4">
                                             <div class="space-y-0.5">
                                                 <label class="text-base font-medium" for="email_notification_3"> Email bảo
                                                     mật

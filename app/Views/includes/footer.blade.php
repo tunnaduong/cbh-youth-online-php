@@ -73,7 +73,7 @@
         </div>
         <div class="row text-[12px] py-3">
             <div class="col-md-12 text-center">
-                <p>&copy; {{ date('Y') }} Công ty TNHH Công nghệ Giáo dục <a href="https://fatties.vn">Fatties
+                <p>&copy; {{ date('Y') }} Công ty Cổ phần Giải pháp Giáo dục <a href="https://fatties.vn">Fatties
                         Software</a> - Được phát
                     triển bởi học sinh, dành cho học sinh.</p>
             </div>

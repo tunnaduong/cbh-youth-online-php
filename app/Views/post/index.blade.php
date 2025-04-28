@@ -62,12 +62,12 @@
                             class="downvote-button text-2xl cursor-pointer {{ $post->user_vote === 'downvote' ? 'text-red-500' : '' }}"></ion-icon>
                         @if ($post->is_saved)
                             <div
-                                class="save-post-button bg-[#CDEBCA] cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
-                                <ion-icon name="bookmark" class="text-[#319527] text-xl"></ion-icon>
+                                class="save-post-button bg-[#CDEBCA] dark:bg-neutral-500 cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
+                                <ion-icon name="bookmark" class="text-green-500 text-xl"></ion-icon>
                             </div>
                         @else
                             <div
-                                class="save-post-button bg-[#EAEAEA] cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
+                                class="save-post-button bg-[#EAEAEA] dark:bg-neutral-500 cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
                                 <ion-icon name="bookmark" class="text-gray-400 text-xl"></ion-icon>
                             </div>
                         @endif
@@ -81,12 +81,15 @@
                         ) !!} </span>
                     </div>
                     @unless (!isset($post->cdn_image_id))
-                        <div
-                            class="rounded-md bg-[#E4EEE3] border overflow-hidden !mt-4 max-h-[34rem] flex items-center justify-center">
-                            <img alt="Ảnh bài viết" width="700" height="700" decoding="async" data-nimg="1"
-                                class="object-contain max-h-[34rem] text-[11px]"
-                                src="https://api.chuyenbienhoa.com/storage/{{ $post->file_path }}" style="color: transparent;">
-                        </div>
+                        <a href="/{{ $post->username }}/posts/{{ $post->post_id }}">
+                            <div
+                                class="rounded-md bg-[#E4EEE3] dark:bg-[#4a5648] dark:!border-neutral-500 border overflow-hidden !mt-4 max-h-[34rem] flex items-center justify-center">
+                                <img alt="Ảnh bài viết" width="700" height="700" loading="lazy"
+                                    class="object-contain max-h-[34rem] text-[11px]"
+                                    src="https://api.chuyenbienhoa.com/storage/{{ $post->file_path }}"
+                                    style="color: transparent;">
+                            </div>
+                        </a>
                     @endunless
                     <hr class="!my-5 border-t-2">
                     <div class="flex-row flex-wrap flex text-[13px] items-center"><a href="/{{ $post->username }}"><span
@@ -152,7 +155,7 @@
             </div>
         </div>
         <div class="px-1.5 md:!px-0 md:max-w-[775px] w-[100%] -mb-5">
-            <div class="shadow !mb-4 long-shadow h-min rounded-lg bg-white">
+            <div class="shadow !mb-4 long-shadow h-min rounded-lg bg-white post-comment-container">
                 <div
                     class="flex flex-col space-y-1.5 p-6 text-xl -mb-4 font-semibold max-w-sm overflow-hidden whitespace-nowrap overflow-ellipsis">
                     Bình luận</div>
@@ -160,7 +163,7 @@
                     @if (isset($_SESSION['user']))
                         <form action="" method="POST" class="space-y-4 mb-7">
                             <textarea
-                                class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                                class="flex min-h-[60px] w-full rounded-md border dark:!border-neutral-500 border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                                 name="comment" required placeholder="Viết bình luận của bạn..."></textarea>
                             <div class="flex justify-end">
                                 <button
@@ -227,7 +230,7 @@
                                             <span
                                                 class="text-xs text-gray-500 flex-shrink-0">{{ $date->diffForHumans() }}</span>
                                         </div>
-                                        <p class="mt-1 text-sm text-gray-700">{!! nl2br(e($comment->comment)) !!}
+                                        <p class="mt-1 text-sm text-gray-700 dark:text-gray-300">{!! nl2br(e($comment->comment)) !!}
                                         </p>
                                         <div class="mt-2 flex items-center space-x-2 text-gray-400">
                                             <ion-icon name="arrow-up-outline"
@@ -241,7 +244,7 @@
                                         </div>
                                         <form action="" method="POST" class="reply-box hidden mt-2 space-y-4">
                                             <textarea
-                                                class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                                                class="flex dark:!border-neutral-500 min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                                                 name="comment" required placeholder="Viết phản hồi của bạn..."></textarea>
                                             <input type="hidden" name="replyingTo" value="{{ $comment->comment_id }}">
                                             <div class="flex justify-end">
@@ -260,7 +263,7 @@
                                             </div>
                                         </form>
                                         @if (count($comment->replies) > 0)
-                                            <div class="mt-4 space-y-4 reply-container">
+                                            <div class="mt-4 space-y-4 reply-container dark:border-neutral-500">
                                                 @foreach ($comment->replies as $reply)
                                                     @php
                                                         $replyDate = Carbon::createFromFormat(
@@ -306,7 +309,7 @@
                                                                 <span
                                                                     class="text-xs text-gray-500 flex-shrink-0">{{ $replyDate->diffForHumans() }}</span>
                                                             </div>
-                                                            <p class="mt-1 text-sm text-gray-700">
+                                                            <p class="mt-1 text-sm text-gray-700 dark:text-gray-300">
                                                                 {!! nl2br(e($reply->comment)) !!}
                                                             </p>
                                                             <div class="mt-2 flex items-center space-x-2 text-gray-400">

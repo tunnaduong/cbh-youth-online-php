@@ -9,8 +9,10 @@
         style="display:block;position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%)">
         <center>
             <img src="/assets/images/404.svg" alt="404" class="w-[120px] h-[120px] mb-2" id="error-404">
-            <h4 class="font-bold text-gray-500 text-lg">Bạn hiện không xem được nội dung này</h4>
-            <p class="text-base text-gray-500 max-w-[450px]">Lỗi này thường do chủ sở hữu chỉ chia sẻ nội dung với một nhóm
+            <h4 class="font-bold text-gray-500 dark:text-neutral-300 text-lg">Bạn hiện không xem được nội dung này</h4>
+            <p class="text-base text-gray-500 dark:text-neutral-300 max-w-[450px]">Lỗi này thường do chủ sở hữu chỉ chia sẻ
+                nội
+                dung với một nhóm
                 nhỏ,
                 thay
                 đổi người được xem hoặc đã xóa nội dung.</p>

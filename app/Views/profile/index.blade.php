@@ -269,8 +269,8 @@
                                         class="downvote-button text-2xl cursor-pointer {{ $post->user_vote === 'downvote' ? 'text-red-500' : '' }}"></ion-icon>
                                     @if ($post->is_saved)
                                         <div
-                                            class="save-post-button bg-[#CDEBCA] cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
-                                            <ion-icon name="bookmark" class="text-[#319527] text-xl"></ion-icon>
+                                            class="save-post-button bg-[#CDEBCA] dark:bg-neutral-500 cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
+                                            <ion-icon name="bookmark" class="text-green-500 text-xl"></ion-icon>
                                         </div>
                                     @else
                                         <div
@@ -320,7 +320,7 @@
                                     @unless (!isset($post->cdn_image_id))
                                         <a href="/{{ $post->username }}/posts/{{ $post->post_id }}">
                                             <div
-                                                class="rounded-md bg-[#E4EEE3] border overflow-hidden !mt-4 max-h-[34rem] flex items-center justify-center">
+                                                class="rounded-md bg-[#E4EEE3] dark:bg-[#4a5648] dark:!border-neutral-500 border overflow-hidden !mt-4 max-h-[34rem] flex items-center justify-center">
                                                 <img alt="Ảnh bài viết" width="700" height="700" loading="lazy"
                                                     class="object-contain max-h-[34rem] text-[11px]"
                                                     src="https://api.chuyenbienhoa.com/storage/{{ $post->file_path }}"
