@@ -12,6 +12,11 @@
 
 <body>
     @yield('content')
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        };
+    </script>
     <script src="/assets/js/script.js"></script>
 </body>
 

@@ -47,7 +47,7 @@
                 Carbon::setLocale('vi');
             @endphp
             <div data-post-id="{{ $post->post_id }}"
-                class="post-container w-full mb-4 shadow-lg rounded-xl !p-6 bg-white flex flex-row max-w-[775px]">
+                class="post-container w-full mb-4 shadow-lg rounded-xl !p-6 bg-white dark:!bg-[var(--main-white)] flex flex-row max-w-[775px]">
                 <div class="min-w-[84px] hidden md:block">
                     <div
                         class="sticky-reaction-bar items-center mt-1 flex flex-col ml-[-20px] text-[13px] font-semibold text-gray-400">
@@ -59,12 +59,12 @@
                             class="downvote-button text-2xl cursor-pointer {{ $post->user_vote === 'downvote' ? 'text-red-500' : '' }}"></ion-icon>
                         @if ($post->is_saved)
                             <div
-                                class="save-post-button bg-[#CDEBCA] cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
-                                <ion-icon name="bookmark" class="text-[#319527] text-xl"></ion-icon>
+                                class="save-post-button bg-[#CDEBCA] dark:bg-neutral-500 cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
+                                <ion-icon name="bookmark" class="text-green-500 text-xl"></ion-icon>
                             </div>
                         @else
                             <div
-                                class="save-post-button bg-[#EAEAEA] cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
+                                class="save-post-button bg-[#EAEAEA] dark:bg-neutral-500 cursor-pointer rounded-lg w-[33.6px] h-[33.6px] mt-3 flex items-center justify-center">
                                 <ion-icon name="bookmark" class="text-gray-400 text-xl"></ion-icon>
                             </div>
                         @endif
@@ -76,20 +76,20 @@
                     </h1>
                     <div class="text-base overflow-wrap">
                         <div id="truncated{{ $post->post_id }}" style="display: block;">
-                            <span class="prose">{!! MarkdownExtra::defaultTransform(
-                                strip_tags(truncateText(str_replace("\n", "  \n", autolink($post->description)), 330), '<iframe><a>'),
-                            ) !!}</span>
+                            <span class="prose dark:text-neutral-200">{!! MarkdownExtra::defaultTransform(
+                strip_tags(truncateText(str_replace("\n", "  \n", autolink($post->description)), 330), '<iframe><a>'),
+            ) !!}</span>
                             @if (strlen($post->description) > 330)
-                                <a class="text-black cursor-pointer hover:underline font-medium"
+                                <a class="text-black dark:!text-white cursor-pointer hover:underline font-medium"
                                     onclick="toggleText{{ $post->post_id }}()">Xem
                                     thêm</a>
                             @endif
                         </div>
                         <div id="fullText{{ $post->post_id }}" style="display: none;">
-                            <span class="prose">{!! MarkdownExtra::defaultTransform(
-                                strip_tags(str_replace("\n", "  \n", autolink($post->description)), '<iframe><a>'),
-                            ) !!} </span>
-                            <a class="text-black cursor-pointer hover:underline font-medium"
+                            <span class="prose dark:text-neutral-200">{!! MarkdownExtra::defaultTransform(
+                strip_tags(str_replace("\n", "  \n", autolink($post->description)), '<iframe><a>'),
+            ) !!} </span>
+                            <a class="text-black dark:!text-white cursor-pointer hover:underline font-medium"
                                 onclick="toggleText{{ $post->post_id }}()">Thu
                                 gọn</a>
                         </div>
@@ -111,11 +111,10 @@
                     @unless (!isset($post->cdn_image_id))
                         <a href="/{{ $post->username }}/posts/{{ $post->post_id }}">
                             <div
-                                class="rounded-md bg-[#E4EEE3] border overflow-hidden !mt-4 max-h-[34rem] flex items-center justify-center">
+                                class="rounded-md bg-[#E4EEE3] dark:bg-[#4a5648] dark:!border-neutral-500 border overflow-hidden !mt-4 max-h-[34rem] flex items-center justify-center">
                                 <img alt="Ảnh bài viết" width="700" height="700" loading="lazy"
                                     class="object-contain max-h-[34rem] text-[11px]"
-                                    src="https://api.chuyenbienhoa.com/storage/{{ $post->file_path }}"
-                                    style="color: transparent;">
+                                    src="https://api.chuyenbienhoa.com/storage/{{ $post->file_path }}" style="color: transparent;">
                             </div>
                         </a>
                     @endunless

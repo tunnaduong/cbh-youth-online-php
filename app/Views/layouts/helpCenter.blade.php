@@ -54,6 +54,11 @@
         var isLoggedIn = {{ isset($_SESSION['user']) ? 'true' : 'false' }};
         var uid = {{ isset($_SESSION['user']) ? $_SESSION['user']->id : 'null' }};
     </script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        };
+    </script>
     <script src="/assets/js/script.js"></script>
     <script id="cid0020000406220973300" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js"
         style="width: 200px;height: 300px;">

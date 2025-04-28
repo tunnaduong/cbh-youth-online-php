@@ -16,9 +16,9 @@
             Tạo bài viết mới
         @endif
     </button>
-    <div class="bg-white text-sm p-3 mt-4 rounded-xl long-shadow">
+    <div class="bg-white dark:!bg-[var(--main-white)] text-sm p-3 mt-4 rounded-xl long-shadow">
         <div class="flex flex-row items-center justify-between">
-            <span class="font-bold text-[#6B6B6B] block text-base">Xếp hạng thành viên</span>
+            <span class="font-bold text-[#6B6B6B] dark:text-neutral-300 block text-base">Xếp hạng thành viên</span>
             <a href="https://chuyenbienhoa.com/Admin/posts/213101">
                 <ion-icon name="help-circle-outline" class="text-[20px] text-gray-500"></ion-icon>
             </a>
@@ -41,7 +41,8 @@
                     <img src="{{ isset($_SESSION['user']->additional_info->oauth_profile_picture) ? $_SESSION['user']->additional_info->oauth_profile_picture : (!empty($_SESSION['user']->additional_info->profile_picture) ? 'https://api.chuyenbienhoa.com/v1.0/users/' . $_SESSION['user']->username . '/avatar' : '/assets/images/placeholder-user.jpg') }}"
                         class="w-8 h-8 bg-gray-300 rounded-full border" alt="User avatar"></img>
                 </a>
-                <a href="/{{ $_SESSION['user']->username }}" class="ml-1.5 font-semibold flex-1 truncate text-left">Bạn</a>
+                <a href="/{{ $_SESSION['user']->username }}"
+                    class="ml-1.5 font-semibold flex-1 truncate text-left">Bạn</a>
                 <span class="mr-1.5 text-[#C1C1C1]">{{ $current_user->total_points }} điểm</span>
                 <span class="text-green-500 font-bold">#{{ $current_user->current_rank }}</span>
             </div>
@@ -69,9 +70,10 @@
 <!-- Bottom bar for smaller screens -->
 <div class="hidden max-md:block !px-3 pt-0 pb-6 mt-3" id="bottom-sidebar">
     <center>
-        <div class="bg-white text-sm p-3 rounded-xl long-shadow" id="top-users">
+        <div class="bg-white dark:!bg-[var(--main-white)] text-sm p-3 rounded-xl long-shadow" id="top-users">
             <div class="flex flex-row items-center justify-between">
-                <span class="font-bold text-[#6B6B6B] block text-base text-left">Xếp hạng thành viên</span>
+                <span class="font-bold text-[#6B6B6B] dark:text-neutral-300 block text-base text-left">Xếp hạng thành
+                    viên</span>
                 <a href="https://chuyenbienhoa.com/Admin/posts/213101">
                     <ion-icon name="help-circle-outline" class="text-[20px] text-gray-500"></ion-icon>
                 </a>

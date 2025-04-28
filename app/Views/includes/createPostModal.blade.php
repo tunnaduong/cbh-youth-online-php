@@ -10,7 +10,7 @@
             </div>
             <div class="relative">
                 <span
-                    class="close w-8 h-8 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center absolute right-[13px] -top-[44px]"><ion-icon
+                    class="close w-8 h-8 rounded-full bg-gray-200 dark:bg-neutral-500 text-gray-600 dark:text-white flex items-center justify-center absolute right-[13px] -top-[44px]"><ion-icon
                         name="close-outline" class="text-2xl"></ion-icon>
                 </span>
             </div>
@@ -31,7 +31,7 @@
                             </svg>
                         @endif
                     </span>
-                    <button class="flex items-center bg-gray-200 rounded-md px-1.5 py-0.5 cursor-pointer w-max">
+                    <button class="flex items-center bg-gray-200 dark:bg-neutral-500 rounded-md px-1.5 py-0.5 cursor-pointer w-max">
                         <ion-icon name="earth" class="text-base mt-[1px] mr-0.5"></ion-icon>
                         <span class="text-sm font-semibold">Công khai</span>
                         <ion-icon name="caret-down-outline" class="text-[9px] mt-[1px] ml-0.5"></ion-icon>
@@ -42,9 +42,9 @@
                 <input id="postTitle"
                     class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 focus-visible:ring-0"
                     placeholder="Tiêu đề bài viết" name="title" type="text" value="">
-                <div class="rounded-md border shadow-sm pb-2 bg-gray-100">
+                <div class="rounded-md border shadow-sm pb-2 bg-gray-100 dark:bg-neutral-600 dark:!border-neutral-500">
                     <textarea id="postDescription"
-                        class="-ml-[1px] -mt-[1px] !mb-1 flex w-full rounded-md border-input bg-white px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 min-h-[120px] border focus-visible:ring-0"
+                        class="-ml-[1px] -mt-[1px] !mb-1 flex w-full rounded-md border-input dark:!border-neutral-500 bg-white dark:!bg-[var(--main-white)] px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 min-h-[120px] border focus-visible:ring-0"
                         name="content" placeholder="Nội dung bài viết" style="width: calc(100% + 2px);"></textarea>
                     <div class="px-3 flex items-center gap-x-2 mt-3">
                         <a href="/Admin/posts/213057" class="-mt-1.5 text-xs font-bold block border-right pr-2"
@@ -84,7 +84,7 @@
                     @endforeach
                 </uk-select>
                 @if ($recordings ?? false)
-                    <div class="flex flex-row items-center rounded-lg border bg-card text-card-foreground p-3">
+                    <div class="flex flex-row items-center rounded-lg border dark:!border-neutral-500 bg-card text-card-foreground p-3">
                         <p class="text-sm font-medium flex-1">Thêm file âm thanh vào bài viết của bạn</p>
                         <input id="fileInput" accept="audio/*" type="file" style="display: none;">
                         <div class="flex gap-1">
@@ -96,14 +96,14 @@
                         </div>
                     </div>
                 @else
-                    <img id="imagePreview" alt="Preview" class="border rounded-md hidden"
+                    <img id="imagePreview" alt="Preview" class="border rounded-md hidden dark:!border-neutral-500"
                         style="width: 100px; height: 100px; object-fit: cover" />
-                    <div class="flex flex-row items-center rounded-lg border p-3">
+                    <div class="flex flex-row items-center rounded-lg border dark:!border-neutral-500 p-3">
                         <p class="text-sm font-medium flex-1">Thêm ảnh vào bài viết của bạn</p>
                         <input id="fileInput" accept="image/*" type="file" style="display: none;">
                         <div class="flex gap-1">
                             <button
-                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-slate-100 hover:text-accent-foreground h-9 w-9 shrink-0 rounded-full"
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-slate-100 dark:hover:bg-neutral-500 hover:text-accent-foreground h-9 w-9 shrink-0 rounded-full"
                                 type="button" id="selectImage">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

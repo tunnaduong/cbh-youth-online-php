@@ -4,7 +4,8 @@
     <div class="flex flex-1 !p-6 !px-2.5 pt-2 items-center flex-col">
         <!-- Recordings -->
         @foreach ($recordings as $recording)
-            <div class="max-w-[679px] w-full long-shadow mb-4 flex flex-row rounded-lg overflow-hidden bg-white">
+            <div
+                class="max-w-[775px] w-full long-shadow mb-4 flex flex-row rounded-lg overflow-hidden bg-white dark:!bg-[var(--main-white)]">
                 <a href="/recordings/{{ $recording->id }}" class="flex items-center justify-center mr-3 shrink-0">
                     <img src="{{ isset($recording->preview_path) ? 'https://api.chuyenbienhoa.com/storage/' . $recording->preview_path : '/assets/images/soundwaves.png' }}"
                         alt="{{ $recording->title }}" class="w-24 h-24">
