@@ -1,5 +1,5 @@
 @if (!($_SESSION['user'] ?? false))
-    <div class="dark:!bg-[#31463C] dark:!text-[#f3f4f6] !p-6 !px-2.5 bg-white fixed bottom-0 z-50 w-full shadow-lg rounded-t-xl"
+    <div class="dark:!bg-neutral-700 dark:!text-[#f3f4f6] !p-6 !px-2.5 bg-white fixed bottom-0 z-50 w-full shadow-lg rounded-t-xl"
         id="bottom-cta">
         <div class="container-cta relative">
             {{-- Close button --}}

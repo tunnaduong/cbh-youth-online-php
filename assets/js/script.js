@@ -314,26 +314,30 @@ document.body.addEventListener("htmx:afterSwap", function (event) {
 const customDiv = document.getElementById("selectImage");
 const fileInput = document.getElementById("fileInput");
 
-// Thêm sự kiện click vào div
-customDiv.addEventListener("click", function () {
-  // Kích hoạt sự kiện click của input file
-  fileInput.click();
-});
+try {
+  // Thêm sự kiện click vào div
+  customDiv.addEventListener("click", function () {
+    // Kích hoạt sự kiện click của input file
+    fileInput.click();
+  });
 
-// Thêm sự kiện để xử lý khi người dùng chọn tệp
-fileInput.addEventListener("change", function (e) {
-  console.log("File selected:", e.target.files[0]);
-  const file = e.target.files[0];
-  if (file) {
-    // Generate image preview
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      document.getElementById("imagePreview").src = reader.result;
-      document.getElementById("imagePreview").classList.remove("hidden");
-    }; // Set preview URL to file reader result
-    reader.readAsDataURL(file); // Read file as a data URL
-  }
-});
+  // Thêm sự kiện để xử lý khi người dùng chọn tệp
+  fileInput.addEventListener("change", function (e) {
+    console.log("File selected:", e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+      // Generate image preview
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        document.getElementById("imagePreview").src = reader.result;
+        document.getElementById("imagePreview").classList.remove("hidden");
+      }; // Set preview URL to file reader result
+      reader.readAsDataURL(file); // Read file as a data URL
+    }
+  });
+} catch (error) {
+  console.error("Error:", error);
+}
 
 function handleUploadAvatar() {
   // Lấy các phần tử
@@ -379,34 +383,38 @@ function getSelectedIdFromUkSelect() {
   }
 }
 
-document
-  .getElementById("createPostForm")
-  .addEventListener("submit", async function (event) {
-    event.preventDefault(); // Prevent the form from submitting normally
+try {
+  document
+    .getElementById("createPostForm")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault(); // Prevent the form from submitting normally
 
-    const title = document.getElementById("postTitle").value;
-    const content = document.getElementById("postDescription").value;
-    const subforumId = getSelectedIdFromUkSelect(); // Get the selected subforum ID
-    const imageFile = document.getElementById("fileInput").files[0];
+      const title = document.getElementById("postTitle").value;
+      const content = document.getElementById("postDescription").value;
+      const subforumId = getSelectedIdFromUkSelect(); // Get the selected subforum ID
+      const imageFile = document.getElementById("fileInput").files[0];
 
-    try {
-      createButton.prop("disabled", true);
-      createButton.text("Đang đăng bài viết...");
+      try {
+        createButton.prop("disabled", true);
+        createButton.text("Đang đăng bài viết...");
 
-      // Step 1: Upload the image and get the image path
-      // check if image file is selected
-      if (imageFile) {
-        var imageId = await uploadImage(imageFile);
-      } else {
-        imageId = null;
+        // Step 1: Upload the image and get the image path
+        // check if image file is selected
+        if (imageFile) {
+          var imageId = await uploadImage(imageFile);
+        } else {
+          imageId = null;
+        }
+
+        // Step 2: Create the post with the uploaded image's path
+        await createPost(title, content, imageId, subforumId);
+      } catch (error) {
+        console.log(error);
       }
-
-      // Step 2: Create the post with the uploaded image's path
-      await createPost(title, content, imageId, subforumId);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+    });
+} catch (error) {
+  console.error("Error:", error);
+}
 
 async function uploadImage(imageFile) {
   const formData = new FormData();

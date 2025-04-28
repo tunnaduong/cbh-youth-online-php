@@ -39,10 +39,8 @@
     </div>
     <span class="sr-only">Toggle theme</span>
 </button>
-@push('scripts')
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-        };
-    </script>
-@endpush
+<script>
+    tailwind.config = {
+        darkMode: 'class',
+    };
+</script>

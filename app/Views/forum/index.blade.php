@@ -12,7 +12,7 @@
 
     <div class="pt-4 !px-2.5">
         <div class="max-w-[775px] mx-auto">
-            <div class="border rounded bg-white">
+            <div class="border dark:!border-[#585857] rounded bg-white dark:!bg-[var(--main-white)]">
                 <div class="flex flex-wrap items-stretch">
                     @php
                         $validSorts = ['latest', 'most_viewed', 'most_engaged'];
@@ -20,25 +20,25 @@
                     @endphp
 
                     <a href="?sort=latest"
-                        class="px-4 text-sm flex items-center hover:bg-gray-50 tab-button
-                                                                            @if (!in_array($currentSort, ['most_viewed', 'most_engaged'])) tab-button-active @endif">
+                        class="px-4 text-sm flex items-center hover:bg-gray-50 tab-button dark:hover:bg-neutral-500
+                                                                                                                                                                                                                                                                                                                                        @if (!in_array($currentSort, ['most_viewed', 'most_engaged'])) tab-button-active @endif">
                         <span class="py-2">Bài mới</span>
                     </a>
 
                     <a href="?sort=most_viewed"
-                        class="hidden sm:flex px-4 text-sm items-center bor-left hover:bg-gray-50 tab-button
-                                                                            @if ($currentSort === 'most_viewed') tab-button-active @endif">
+                        class="hidden sm:flex px-4 text-sm items-center bor-left hover:bg-gray-50 tab-button dark:border-[#585857] dark:hover:bg-neutral-500
+                                                                                                                                                                                                                                                                                                                                        @if ($currentSort === 'most_viewed') tab-button-active @endif">
                         <span class="py-2">Chủ đề xem nhiều</span>
                     </a>
 
                     <a href="?sort=most_engaged"
-                        class="px-4 text-sm hidden sm:flex items-center bor-right bor-left hover:bg-gray-50 tab-button
-                                                                            @if ($currentSort === 'most_engaged') tab-button-active @endif">
+                        class="px-4 text-sm hidden sm:flex items-center bor-right bor-left hover:bg-gray-50 tab-button dark:border-[#585857] dark:hover:bg-neutral-500
+                                                                                                                                                                                                                                                                                                                                        @if ($currentSort === 'most_engaged') tab-button-active @endif">
                         <span class="py-2">Tương tác nhiều</span>
                     </a>
                     <div>
                         <button
-                            class="h-9 w-9 border-l items-center justify-center tab-button bor-right flex sm:hidden hover:bg-gray-50"
+                            class="h-9 w-9 border-l items-center justify-center tab-button bor-right flex sm:hidden hover:bg-gray-50 dark:border-neutral-500 dark:hover:bg-neutral-500"
                             id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
                             <ion-icon name="menu-outline" class="text-xl"></ion-icon>
                         </button>
@@ -48,7 +48,8 @@
                         </ul>
                     </div>
                     <div class="ml-auto flex">
-                        <button class="h-9 w-9 border-l flex items-center justify-center tab-button hover:bg-gray-50"
+                        <button
+                            class="h-9 w-9 border-l dark:border-[#585857] flex items-center justify-center tab-button hover:bg-gray-50 dark:hover:bg-neutral-500"
                             onclick="location.reload()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -70,14 +71,15 @@
                                         // Set the locale to Vietnamese (for "1 tuần trước")
                                         Carbon::setLocale('vi');
                                     @endphp
-                                    <div class="bor-bottom hover:bg-gray-50 flex py-1 px-2">
+                                    <div
+                                        class="bor-bottom dark:!border-b-[#585857] hover:bg-gray-50 flex py-1 px-2 dark:hover:bg-neutral-600">
                                         <div class="pr-2 align-top text-center w-8 flex items-center">
                                             @php
-                                                $rankBg = ['bg-red-600', 'bg-red-400', 'bg-red-200'];
+                                                $rankBg = ['bg-red-600', 'bg-red-400 dark:bg-[#b04848]', 'bg-red-200 dark:bg-[#683f3f]'];
                                                 $rankText = $loop->index <= 2 ? 'text-white' : 'text-green-600';
                                             @endphp
                                             <span
-                                                class="inline-flex items-center justify-center h-5 w-5 rounded-full {{ $rankBg[$loop->index] ?? 'bg-gray-200' }} {{ $rankText }} text-[11px] font-medium">
+                                                class="inline-flex items-center justify-center h-5 w-5 rounded-full {{ $rankBg[$loop->index] ?? 'bg-gray-200 dark:bg-[#282828]' }} {{ $rankText }} text-[11px] font-medium">
                                                 {{ $loop->index + 1 }}
                                             </span>
                                         </div>

@@ -16,9 +16,9 @@
             Tạo bài viết mới
         @endif
     </button>
-    <div class="bg-white text-sm p-3 mt-4 rounded-xl long-shadow">
+    <div class="bg-white dark:!bg-[var(--main-white)] text-sm p-3 mt-4 rounded-xl long-shadow">
         <div class="flex flex-row items-center justify-between">
-            <span class="font-bold text-[#6B6B6B] block text-base">Xếp hạng thành viên</span>
+            <span class="font-bold text-[#6B6B6B] dark:text-neutral-300 block text-base">Xếp hạng thành viên</span>
             <a href="https://chuyenbienhoa.com/Admin/posts/213101">
                 <ion-icon name="help-circle-outline" class="text-[20px] text-gray-500"></ion-icon>
             </a>

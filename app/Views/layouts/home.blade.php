@@ -9,6 +9,7 @@
         'image' => $image ?? null,
         'author' => $author ?? null,
     ])
+    @stack('styles')
 </head>
 
 <body class="bg-[#F8F8F8] mt-[4.3rem] {{ $isDarkMode ?? false ? 'dark' : '' }}">

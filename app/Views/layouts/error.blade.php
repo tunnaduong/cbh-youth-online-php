@@ -21,6 +21,11 @@
         var isLoggedIn = {{ isset($_SESSION['user']) ? 'true' : 'false' }};
         var uid = {{ isset($_SESSION['user']) ? $_SESSION['user']->id : 'null' }};
     </script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        };
+    </script>
     <script src="/assets/js/script.js"></script>
 </body>
 
