@@ -107,7 +107,7 @@ class Forum extends BaseModel
     // Lấy tất cả bài viết mới nhất trong tất cả các danh mục
     public function getLatestPosts()
     {
-        $this->setQuery("SELECT *, ct.created_at AS post_created_at, ct.id AS post_id FROM cyo_topics ct LEFT JOIN cyo_auth_accounts ca ON ct.user_id = ca.id LEFT JOIN cyo_user_profiles cu ON ca.username = cu.profile_username ORDER BY ct.created_at DESC LIMIT 10");
+        $this->setQuery("SELECT *, ct.created_at AS post_created_at, ct.id AS post_id FROM cyo_topics ct LEFT JOIN cyo_auth_accounts ca ON ct.user_id = ca.id LEFT JOIN cyo_user_profiles cu ON ca.username = cu.profile_username WHERE hidden = 0 ORDER BY ct.created_at DESC LIMIT 10");
         return $this->loadAllRows();
     }
 
