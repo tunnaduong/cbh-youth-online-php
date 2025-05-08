@@ -3,7 +3,7 @@
 <title>{{ !empty($title) && $title != 'Diễn đàn' ? $title . ' - ' : '' }}Diễn đàn học sinh Chuyên Biên Hòa</title>
 <!-- Meta tag dành cho SEO -->
 <meta property="og:title"
-    content="{{ ($title ?? 'Diễn đàn học sinh Chuyên Biên Hòa') == 'Diễn đàn' ? 'Diễn đàn học sinh Chuyên Biên Hòa' : $title }}" />
+    content="{{ ($title ?? 'Diễn đàn học sinh Chuyên Biên Hòa') == 'Diễn đàn' ? 'Diễn đàn học sinh Chuyên Biên Hòa' : $title . ' - Diễn đàn học sinh Chuyên Biên Hòa' }}" />
 <meta name="description"
     content="{{ $description ?? 'Diễn đàn học sinh Chuyên Biên Hòa thuộc Trường THPT Chuyên Hà Nam' }}">
 <meta property='og:description'
