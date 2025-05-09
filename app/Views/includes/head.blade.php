@@ -65,3 +65,6 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- Bộ mã Lucide Icons -->
 <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Bộ mã Google Adsense để chèn quảng cáo (sorry guys, tôi cần tiền :))) -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3425905751761094"
+     crossorigin="anonymous"></script>
