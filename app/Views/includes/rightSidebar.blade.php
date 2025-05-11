@@ -48,6 +48,7 @@
             </div>
         @endif
     </div>
+
     <div class="flex flex-row text-sm font-semibold p-3 text-[#BCBCBC]">
         <div class="flex flex-1 flex-col gap-y-0.5">
             <a href="/help" class="w-fit">Hỗ trợ</a>
@@ -65,6 +66,17 @@
     <p class="text-[12px] text-center text-[#BCBCBC]">
         <a href="https://fatties.vn">Fatties Software</a> © {{ date('Y') }}
     </p>
+
+    <div class="mt-4 sticky top-[69px]">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3425905751761094"
+            crossorigin="anonymous"></script>
+        <!-- ads_sidebar -->
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3425905751761094"
+            data-ad-slot="7833656311" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 </div>
 
 <!-- Bottom bar for smaller screens -->

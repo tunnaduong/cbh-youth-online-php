@@ -75,10 +75,33 @@
                 </div>
                 <div class="flex-1 overflow-hidden break-words">
                     <h1 class="text-xl font-semibold mb-1">{{ $post->title }}</h1>
-                    <div class="text-base max-w-[600px] overflow-wrap">
-                        <span class="prose">{!! MarkdownExtra::defaultTransform(
-                            strip_tags(str_replace("\n", "  \n", autolink($post->description)), '<iframe><a>'),
-                        ) !!} </span>
+                    <div class="text-base max-w-[600px] overflow-wrap prose">
+                        @php
+                            $content = strip_tags(
+                                str_replace("\n", "  \n", autolink($post->description)),
+                                '<iframe><a>',
+                            );
+                            $paragraphs = explode("  \n", $content);
+                            $middle = ceil(count($paragraphs) / 2);
+                        @endphp
+                        @foreach ($paragraphs as $index => $para)
+                            {!! MarkdownExtra::defaultTransform($para) !!}
+
+                            @if ($index === 1)
+                                <!-- 👇 AdSense Manual Ad Inserted in Middle -->
+                                <div class="my-6 text-center">
+                                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3425905751761094"
+                                        crossorigin="anonymous"></script>
+                                    <ins class="adsbygoogle" style="display:block; text-align:center;"
+                                        data-ad-layout="in-article" data-ad-format="fluid"
+                                        data-ad-client="ca-pub-3425905751761094" data-ad-slot="3539188087"></ins>
+                                    <script>
+                                        (adsbygoogle = window.adsbygoogle || [])
+                                        .push({});
+                                    </script>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                     @unless (!isset($post->cdn_image_id))
                         <a href="/{{ $post->username }}/posts/{{ $post->post_id }}">
@@ -155,6 +178,15 @@
             </div>
         </div>
         <div class="px-1.5 md:!px-0 md:max-w-[775px] w-[100%] -mb-5">
+            <div class="my-3">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3425905751761094"
+                    crossorigin="anonymous"></script>
+                <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed"
+                    data-ad-client="ca-pub-3425905751761094" data-ad-slot="3605495057"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
             <div class="shadow !mb-4 long-shadow h-min rounded-lg bg-white post-comment-container">
                 <div
                     class="flex flex-col space-y-1.5 p-6 text-xl -mb-4 font-semibold max-w-sm overflow-hidden whitespace-nowrap overflow-ellipsis">
@@ -197,6 +229,19 @@
                                     // Set the locale to Vietnamese (for "1 tuần trước")
                                     Carbon::setLocale('vi');
                                 @endphp
+
+                                @if ($loop->index == count($comments) / 2 - 1)
+                                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3425905751761094"
+                                        crossorigin="anonymous"></script>
+                                    <ins class="adsbygoogle" style="display:block" data-ad-format="fluid"
+                                        data-ad-layout-key="-h6-7+1j-3k+3s" data-ad-client="ca-pub-3425905751761094"
+                                        data-ad-slot="7721141526"></ins>
+                                    <script>
+                                        (adsbygoogle = window.adsbygoogle || [])
+                                        .push({});
+                                    </script>
+                                @endif
+
                                 <div data-comment-id="{{ $comment->comment_id }}" class="flex space-x-4">
                                     <a href="/{{ $comment->username }}">
                                         <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
@@ -230,7 +275,8 @@
                                             <span
                                                 class="text-xs text-gray-500 flex-shrink-0">{{ $date->diffForHumans() }}</span>
                                         </div>
-                                        <p class="mt-1 text-sm text-gray-700 dark:text-gray-300">{!! nl2br(e($comment->comment)) !!}
+                                        <p class="mt-1 text-sm text-gray-700 dark:text-gray-300">
+                                            {!! nl2br(e($comment->comment)) !!}
                                         </p>
                                         <div class="mt-2 flex items-center space-x-2 text-gray-400">
                                             <ion-icon name="arrow-up-outline"
@@ -240,7 +286,8 @@
                                             <ion-icon name="arrow-down-outline"
                                                 class="comment-downvote-button cursor-pointer {{ $comment->user_vote === 'downvote' ? 'text-red-500' : '' }}"></ion-icon>
                                             <span>·</span>
-                                            <span class="reply-comment cursor-pointer text-sm font-semibold">Trả lời</span>
+                                            <span class="reply-comment cursor-pointer text-sm font-semibold">Trả
+                                                lời</span>
                                         </div>
                                         <form action="" method="POST" class="reply-box hidden mt-2 space-y-4">
                                             <textarea

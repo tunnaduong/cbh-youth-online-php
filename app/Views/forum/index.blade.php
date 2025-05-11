@@ -12,6 +12,16 @@
 
     <div class="pt-4 !px-2.5">
         <div class="max-w-[775px] mx-auto">
+            <div class="mb-4">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3425905751761094"
+                    crossorigin="anonymous"></script>
+                <!-- ads_top_below_navbar -->
+                <ins class="adsbygoogle" style="display:inline-block;height:90px" data-ad-client="ca-pub-3425905751761094"
+                    data-ad-slot="6534092486"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
             <div class="border dark:!border-[#585857] rounded bg-white dark:!bg-[var(--main-white)]">
                 <div class="flex flex-wrap items-stretch">
                     @php
@@ -51,9 +61,9 @@
                         <button
                             class="h-9 w-9 border-l dark:border-[#585857] flex items-center justify-center tab-button hover:bg-gray-50 dark:hover:bg-neutral-500"
                             onclick="location.reload()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="lucide lucide-refresh-cw-icon lucide-refresh-cw h-4 w-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-refresh-cw-icon lucide-refresh-cw h-4 w-4">
                                 <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
                                 <path d="M21 3v5h-5" />
                                 <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
@@ -64,46 +74,50 @@
                 </div>
                 <div>
                     @foreach ($latestPosts as $post)
-                                    @php
-                                        // Create a Carbon instance from the given datetime
-                                        $date = Carbon::createFromFormat('Y-m-d H:i:s', $post->post_created_at);
+                        @php
+                            // Create a Carbon instance from the given datetime
+                            $date = Carbon::createFromFormat('Y-m-d H:i:s', $post->post_created_at);
 
-                                        // Set the locale to Vietnamese (for "1 tuần trước")
-                                        Carbon::setLocale('vi');
-                                    @endphp
-                                    <div
-                                        class="bor-bottom dark:!border-b-[#585857] hover:bg-gray-50 flex py-1 px-2 dark:hover:bg-neutral-600">
-                                        <div class="pr-2 align-top text-center w-8 flex items-center">
-                                            @php
-                                                $rankBg = ['bg-red-600', 'bg-red-400 dark:bg-[#b04848]', 'bg-red-200 dark:bg-[#683f3f]'];
-                                                $rankText = $loop->index <= 2 ? 'text-white' : 'text-green-600';
-                                            @endphp
-                                            <span
-                                                class="inline-flex items-center justify-center h-5 w-5 rounded-full {{ $rankBg[$loop->index] ?? 'bg-gray-200 dark:bg-[#282828]' }} {{ $rankText }} text-[11px] font-medium">
-                                                {{ $loop->index + 1 }}
-                                            </span>
-                                        </div>
-                                        <div class="flex items-center flex-1 max-w-[90%] overflow-hidden">
-                                            <a href="/{{ $post->username }}/posts/{{ $post->post_id }}"
-                                                class="truncate block w-full text-[12.7px] text-[#319528] hover:underline">
-                                                {{ $post->title }}
-                                            </a>
-                                        </div>
+                            // Set the locale to Vietnamese (for "1 tuần trước")
+                            Carbon::setLocale('vi');
+                        @endphp
+                        <div
+                            class="bor-bottom dark:!border-b-[#585857] hover:bg-gray-50 flex py-1 px-2 dark:hover:bg-neutral-600">
+                            <div class="pr-2 align-top text-center w-8 flex items-center">
+                                @php
+                                    $rankBg = [
+                                        'bg-red-600',
+                                        'bg-red-400 dark:bg-[#b04848]',
+                                        'bg-red-200 dark:bg-[#683f3f]',
+                                    ];
+                                    $rankText = $loop->index <= 2 ? 'text-white' : 'text-green-600';
+                                @endphp
+                                <span
+                                    class="inline-flex items-center justify-center h-5 w-5 rounded-full {{ $rankBg[$loop->index] ?? 'bg-gray-200 dark:bg-[#282828]' }} {{ $rankText }} text-[11px] font-medium">
+                                    {{ $loop->index + 1 }}
+                                </span>
+                            </div>
+                            <div class="flex items-center flex-1 max-w-[90%] overflow-hidden">
+                                <a href="/{{ $post->username }}/posts/{{ $post->post_id }}"
+                                    class="truncate block w-full text-[12.7px] text-[#319528] hover:underline">
+                                    {{ $post->title }}
+                                </a>
+                            </div>
 
-                                        <div
-                                            class="sm:flex items-center justify-end hidden text-right text-gray-500 text-[11px] whitespace-nowrap w-[100px] max-w-[100px]">
-                                            {{ $date->diffForHumans() }}
-                                        </div>
-                                        <div
-                                            class="sm:flex items-center pl-2 hidden text-right text-[11px] whitespace-nowrap w-[150px] max-w-[150px]">
-                                            <div class="flex items-center justify-end">
-                                                <a href="/{{ $post->username }}"
-                                                    class="text-[#319528] hover:underline truncate inline-block max-w-[150px]">
-                                                    {{ $post->profile_name }}
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div
+                                class="sm:flex items-center justify-end hidden text-right text-gray-500 text-[11px] whitespace-nowrap w-[100px] max-w-[100px]">
+                                {{ $date->diffForHumans() }}
+                            </div>
+                            <div
+                                class="sm:flex items-center pl-2 hidden text-right text-[11px] whitespace-nowrap w-[150px] max-w-[150px]">
+                                <div class="flex items-center justify-end">
+                                    <a href="/{{ $post->username }}"
+                                        class="text-[#319528] hover:underline truncate inline-block max-w-[150px]">
+                                        {{ $post->profile_name }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -130,34 +144,53 @@
                                 </span>
                             </div>
                             @if ($subforum->latest_post)
-                                    @php
-                                        // Create a Carbon instance from the given datetime
-                                        $date = Carbon::createFromFormat(
-                                            'Y-m-d H:i:s',
-                                            $subforum->latest_post->post_created_at,
-                                        );
+                                @php
+                                    // Create a Carbon instance from the given datetime
+                                    $date = Carbon::createFromFormat(
+                                        'Y-m-d H:i:s',
+                                        $subforum->latest_post->post_created_at,
+                                    );
 
-                                        // Set the locale to Vietnamese (for "1 tuần trước")
-                                        Carbon::setLocale('vi');
-                                    @endphp
-                                    <div style="max-width: calc(42%);"
-                                        class="flex-1 bg-[#E7FFE4] dark:!bg-[#2b2d2c] dark:!border-[#545454] text-[13px] p-2 px-2 rounded-md flex-col hidden sm:flex border-all">
-                                        <div class="flex">
-                                            <span class="whitespace-nowrap mr-1">Mới nhất:</span>
-                                            <a href="/{{ $subforum->latest_post->username }}/posts/{{ $subforum->latest_post->post_id }}"
-                                                class="text-[#319528] hover:text-[#319528] hover:underline inline-block text-ellipsis whitespace-nowrap overflow-hidden">{{ $subforum->latest_post->title }}</a>
-                                        </div>
-                                        <div class="flex items-center mt-1 text-[#319528]">
-                                            <a href="/{{ $subforum->latest_post->username }}"
-                                                class="hover:text-[#319528] hover:underline truncate">{{ $subforum->latest_post->profile_name }}</a>
-                                            @if ($subforum->latest_post->verified == 1)
-                                                <ion-icon name="checkmark-circle" class="text-[15px] leading-5 ml-0.5 shrink-0"></ion-icon>
-                                            @endif
-                                            <span class="text-black shrink-0 dark:!text-[#f3f4f6]">, {{ $date->diffForHumans() }}</span>
-                                        </div>
+                                    // Set the locale to Vietnamese (for "1 tuần trước")
+                                    Carbon::setLocale('vi');
+                                @endphp
+                                <div style="max-width: calc(42%);"
+                                    class="flex-1 bg-[#E7FFE4] dark:!bg-[#2b2d2c] dark:!border-[#545454] text-[13px] p-2 px-2 rounded-md flex-col hidden sm:flex border-all">
+                                    <div class="flex">
+                                        <span class="whitespace-nowrap mr-1">Mới nhất:</span>
+                                        <a href="/{{ $subforum->latest_post->username }}/posts/{{ $subforum->latest_post->post_id }}"
+                                            class="text-[#319528] hover:text-[#319528] hover:underline inline-block text-ellipsis whitespace-nowrap overflow-hidden">{{ $subforum->latest_post->title }}</a>
                                     </div>
+                                    <div class="flex items-center mt-1 text-[#319528]">
+                                        <a href="/{{ $subforum->latest_post->username }}"
+                                            class="hover:text-[#319528] hover:underline truncate">{{ $subforum->latest_post->profile_name }}</a>
+                                        @if ($subforum->latest_post->verified == 1)
+                                            <ion-icon name="checkmark-circle"
+                                                class="text-[15px] leading-5 ml-0.5 shrink-0"></ion-icon>
+                                        @endif
+                                        <span class="text-black shrink-0 dark:!text-[#f3f4f6]">,
+                                            {{ $date->diffForHumans() }}</span>
+                                    </div>
+                                </div>
                             @endif
                         </div>
+
+                        {{-- Insert AdSense ad after 2nd item --}}
+                        @if ($loop->iteration === 2)
+                            <div class="w-full flex justify-center">
+                                <!-- AdSense manual ad code -->
+                                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3425905751761094"
+                                    crossorigin="anonymous"></script>
+                                <ins class="adsbygoogle" style="display:block" data-ad-format="fluid"
+                                    data-ad-layout-key="-hl+a-w-1e+66" data-ad-client="ca-pub-3425905751761094"
+                                    data-ad-slot="6807515102"></ins>
+                                <script>
+                                    (adsbygoogle = window.adsbygoogle || [])
+                                    .push({});
+                                </script>
+                            </div>
+                        @endif
+
                         @if (!$loop->last)
                             <hr>
                         @endif
