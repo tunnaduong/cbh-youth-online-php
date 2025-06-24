@@ -6,6 +6,39 @@
             @include('components.skeletonPost', ['count' => 5])
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+        const posts = document.querySelectorAll(".post-container");
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                const postId = entry.target.getAttribute("data-post-id");
+                fetch(`/api/posts/${postId}/increment-view`)
+                    .then((response) => {
+                    if (!response.ok) {
+                        console.error("Failed to increment post view");
+                    }
+                    })
+                    .catch((error) => {
+                    console.error("Error:", error);
+                    });
+                observer.unobserve(entry.target);
+                }
+            });
+            },
+            {
+            threshold: 0.5,
+            }
+        );
+
+        posts.forEach((post) => {
+            observer.observe(post);
+        });
+        });
+    </script>
 @endsection
 
 @section('communityActive', 'nav-active')
