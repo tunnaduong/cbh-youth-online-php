@@ -12,16 +12,6 @@
 
     <div class="pt-4 !px-2.5">
         <div class="max-w-[775px] mx-auto">
-            <div class="mb-4">
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3425905751761094"
-                    crossorigin="anonymous"></script>
-                <!-- ads_top_below_navbar -->
-                <ins class="adsbygoogle" style="display:inline-block;height:90px" data-ad-client="ca-pub-3425905751761094"
-                    data-ad-slot="6534092486"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
             <div class="border dark:!border-[#585857] rounded bg-white dark:!bg-[var(--main-white)]">
                 <div class="flex flex-wrap items-stretch">
                     @php
