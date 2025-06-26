@@ -11,7 +11,7 @@
         <div class="alert alert-success alert-dismissible fade show rounded-none mb-0 text-sm" role="alert">
 CBH Youth Online Beta đã sẵn sàng!<br>
 Trải nghiệm giao diện mới – tính năng mới – tốc độ mới.<br>
-<a href="https://beta.chuyenbienhoa.com" target="_blank">👉 Dùng thử ngay tại đây</a> và gửi góp ý để cùng phát triển CYO!
+<a class="underline underline-offset-[3.2px]" href="https://beta.chuyenbienhoa.com" target="_blank">👉 Dùng thử ngay tại đây</a> và gửi góp ý để cùng phát triển CYO!
             <button type="button" class="btn-close text-[9px] !top-[2px]" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 
