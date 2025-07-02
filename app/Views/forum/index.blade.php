@@ -8,12 +8,17 @@
 
 @section('content')
 
-        <div class="alert alert-success alert-dismissible fade show rounded-none mb-0 text-sm" role="alert">
-CBH Youth Online Beta đã sẵn sàng!<br>
-Trải nghiệm giao diện mới – tính năng mới – tốc độ mới.<br>
-<a class="underline underline-offset-[3.2px]" href="https://beta.chuyenbienhoa.com" target="_blank">👉 Dùng thử ngay tại đây</a> và gửi góp ý để cùng phát triển CYO!
-            <button type="button" class="btn-close text-[9px] !top-[2px]" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+    <div class="alert alert-success alert-dismissible fade show mb-0 text-sm max-w-[775px] mx-auto" role="alert">
+        Bắt đầu từ ngày 05/07/2025, Diễn đàn học sinh Chuyên Biên Hòa sẽ được nâng cấp lên phiên bản CYO Beta với giao diện
+        mới, tốc
+        độ nhanh hơn và nhiều tính năng thú vị.<br>
+        <br>
+        🔁 Bạn sẽ được chuyển sang bản mới để trải nghiệm sớm và đóng góp ý kiến hoàn thiện sản phẩm!<br>
+        <br>
+        <b>👉 <a class="underline underline-offset-[3.2px]" href="https://beta.chuyenbienhoa.com" target="_blank">Dùng thử
+                ngay</a> và trở thành một trong những người đầu tiên khám phá!</b><br>
+        <button type="button" class="btn-close text-[9px] !top-[2px]" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 
     @include('includes.topBar')
 
